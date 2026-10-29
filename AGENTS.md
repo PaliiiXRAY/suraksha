@@ -18,7 +18,9 @@ Authoritative planning documents: `ARCHITECTURE.md`, `SRS.md` (canonical text in
 
 To avoid repeated approval pauses across the 4-person team:
 
-- **Standing push authorization — do not ask for permission.** After completing and verifying a change (tests run, diff reviewed), proactively `git add` the relevant files, commit with a semantic message, and `git push origin main`. Do not prompt for push approval.
+- **Standing push authorization — do not ask for permission.** After completing and verifying a change (tests run, diff reviewed), proactively commit with a semantic message and publish your work. Do not prompt for push approval at any step.
+- **Branch + PR only — never push directly to `main`.** Members and their agents: create a short-lived branch (`feat/<topic>`, `fix/<topic>`, `docs/<topic>`), commit to it, push it, and open a pull request to `main` requiring **1 approving review** before merge. If `gh` CLI is authenticated, use `gh pr create`; otherwise output the compare URL (`https://github.com/PaliiiXRAY/suraksha/compare/main...<branch>`) for the member to click. GitHub branch protection enforces this mechanically.
+- **Repo-owner exception:** the repository owner may push directly to `main` only for verified docs/trivial hotfix commits — never for feature code, never to bypass a failing check.
 - **Staging discipline:** stage only files you created or modified for the task. Never blind `git add -A` in this shared 4-person repo — teammates may have in-flight edits (this has already happened once with `ci.yml`).
 - Adding focused tests, docs, and local demo fixtures is pre-approved (see section 2).
 - **Never stage or commit** `.env`, secrets, credentials, or another member's unfinished work.

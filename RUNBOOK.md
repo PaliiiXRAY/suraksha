@@ -114,6 +114,6 @@ Track: AI for Defence, Aerospace & National Security · Zinnovatio 4.0 · Oct 30
 
 ## 8. Definition of Done (per feature)
 
-A feature is done only when: (1) code merged to `suraksha-cyclone`, (2) acceptance test from SRS passes, (3) provenance/interlock behavior verified manually, (4) no new files in repo root outside the agreed structure. Slides/docs are M4's "code" — same rules.
+A feature is done only when: (1) code merged to `main` via an approved PR (1 approving review — never a direct push to `main`), (2) acceptance test from SRS passes, (3) provenance/interlock behavior verified manually, (4) no new files in repo root outside the agreed structure. Slides/docs are M4's "code" — same rules.
 
 **Final word:** the differentiator is not the map. It's that a defence judge can ask "why?" about any pixel on that screen and get a traceable, honest answer — and that the system refuses to lie when its data is bad. Everything else is packaging.
