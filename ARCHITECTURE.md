@@ -160,7 +160,7 @@ Scope wall (do NOT cross): no convoy scheduling, no vehicle/fuel optimization, n
 
 ---
 
-## 6. Database Schema (summary — full DDL in `db/migrations/`)
+## 6. Database Schema (summary — full DDL in `backend/app/db/migrations/` [alembic])
 
 | Table | Purpose |
 |---|---|
@@ -174,6 +174,8 @@ Scope wall (do NOT cross): no convoy scheduling, no vehicle/fuel optimization, n
 | `asset_exposure`, `route_status` | engine output for logistics layer |
 | `response_tasks` | simulated dispatch queue; `is_simulated = true` always |
 | `incident_log` | append-only audit trail of state transitions & actions |
+
+Cyclone-domain tables are **additive** alembic migrations extending the existing `backend/app/db/migrations/` chain. Existing FireSense tables are never dropped or altered destructively.
 
 ---
 
@@ -193,35 +195,38 @@ MONITORING → WARNING → EVAC_ORDERED → DEPLOYED → RESOLVED
 
 ```
 suraksha/
-├── README.md                    ← badges, one-paragraph pitch, quickstart, benchmark table, disclaimers
-├── ARCHITECTURE.md              ← this file
-├── DECISIONS.md                 ← 8–10 "why we chose X over Y" entries
+├── AGENTS.md                   ← agent operating rules (all team AI sessions read this)
+├── README.md                   ← badges, one-paragraph pitch, quickstart, benchmark table, disclaimers
+├── ARCHITECTURE.md             ← this file
+├── DECISIONS.md                ← 10 "why we chose X over Y" entries
+├── RUNBOOK.md                  ← 24-hour team runbook
+├── SRS.md                      ← pointer → docs/SRS.md (canonical)
 ├── docs/
-│   ├── SRS.md
-│   ├── JUDGE_QA.md              ← hostile questions + answers
-│   └── DEMO_SCRIPT.md           ← 5-minute timed walkthrough
+│   ├── SRS.md                  ← software requirements specification
+│   ├── JUDGE_QA.md             ← hostile questions + answers
+│   └── DEMO_SCRIPT.md          ← 5-minute timed walkthrough
 ├── backend/
-│   ├── app/                     ← FastAPI application layer
+│   ├── app/                     ← FastAPI application layer (authoritative)
 │   │   ├── api/                 ← routers: hazard_events, area_risk, assets, routes, tasks, briefing
 │   │   ├── services/
 │   │   │   ├── risk/            ← area_engine.py, interlocks.py, exposure.py
 │   │   │   └── ingest/          ← imd_adapter.py, cap_adapter.py, firms_adapter.py, cascade.py
 │   │   ├── models/              ← SQLAlchemy models
 │   │   └── core/                ← auth, RBAC, config
+│   ├── app/db/migrations/       ← alembic (existing chain; cyclone tables = additive migrations)
 │   └── workers/                 ← scheduled pollers
 ├── db/
-│   ├── migrations/              ← Alembic
 │   └── seed/                    ← Fani 2019 replay pack + Odisha blocks + assets CSV
 ├── frontend/
-│   ├── index.html               ← command dashboard (CDN Tailwind + MapLibre, ES modules)
-│   └── js/                      ← map.js, slider.js, api.js, reasons.js
+│   └── js/ + index.html         ← command dashboard (CDN Tailwind + MapLibre, ES modules)
 ├── data/                        ← pre-downloaded GeoJSON/CSV (gitignored where large)
-├── scripts/                     ← setup.sh, seed_demo.py
+├── legacy/                      ← frozen FireSense presentation artifacts (not part of the build)
+├── seed_demo.py                 ← scenario seeder (imported by tests — keep at root)
 ├── docker-compose.yml           ← db + api (+frontend static served by FastAPI)
 └── tests/                       ← pytest
 ```
 
-**Deliberate exclusions:** no `node_modules`/Vite, no JSX dirs, no decks/screenshots in root, no duplicate backends, no dead scripts.
+**Deliberate exclusions:** no `node_modules`/Vite, no JSX build chains, no decks/screenshots in root (they live in `legacy/`), no duplicate backends, no dead scripts.
 
 ---
 
