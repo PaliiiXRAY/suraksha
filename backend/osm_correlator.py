@@ -120,7 +120,10 @@ class OSMCorrelator:
             if "landuse" in tags or "natural" in tags:
                 landuse = tags.get("landuse") or tags.get("natural") or landuse
                 osm_tag = f"{'landuse' if 'landuse' in tags else 'natural'}={landuse}"
-            if el_lat is not None and el_lon is not None and tags.get("industrial") or tags.get("man_made"):
+            # Precedence fix: without parentheses, `... and tags.get("industrial")
+            # or tags.get("man_made")` binds as `(A and B and C) or D`, letting
+            # man_made elements with missing coordinates reach haversine (TypeError).
+            if el_lat is not None and el_lon is not None and (tags.get("industrial") or tags.get("man_made")):
                 d = OSMCorrelator.haversine_distance(lat, lon, el_lat, el_lon)
                 if d < best_dist:
                     best_dist = d
