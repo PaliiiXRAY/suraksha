@@ -7,12 +7,36 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgis/postgis:15-3.3
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: firesense
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt -r requirements-ml.txt pytest
-      - run: python -m pytest -q
+      - name: Run database migrations and seed
+        run: |
+          alembic upgrade head
+          python seed_demo.py --scenario all
+        env:
+          DATABASE_URL: postgresql+psycopg://postgres:postgres@localhost:5432/firesense
+      - name: Run test suite
+        run: python -m pytest -q
+        env:
+          DATABASE_URL: postgresql+psycopg://postgres:postgres@localhost:5432/firesense
       - run: node --check static/app.js && node --check static/portal-modules.js
         if: always()
