@@ -10,6 +10,9 @@ import sys
 import time
 import subprocess
 import threading
+import pytest
+
+pytest.importorskip("playwright")
 from playwright.sync_api import sync_playwright
 
 # Ensure utf-8 stdout on Windows
