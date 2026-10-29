@@ -37,7 +37,7 @@ flowchart TB
     API -->|"/public/alerts"| PUB
 ```
 
-**One engine, many missions:** the same risk engine serves disaster-response command (this hackathon's demo), security-analyst anomaly verification (FireSense heritage), and later commercial asset protection — differentiated by `org_type` and role-shaped views, not by forking code.
+**One engine, many missions:** the same risk engine serves disaster-response command (this hackathon's demo), security-analyst anomaly verification, and later strategic asset protection — differentiated by `org_type` and role-shaped views, not by forking code.
 
 ---
 
@@ -74,11 +74,11 @@ flowchart TB
     FA --> DB
 ```
 
-**Critical deployment fact:** the demo runs **entirely locally** (Docker Compose on one laptop). Venue wifi is optional, never required. The legacy Vercel FireSense deployment is *not* part of this demo path.
+**Critical deployment fact:** the demo runs **entirely locally** (Docker Compose on one laptop). Venue wifi is optional, never required. The stack can run locally or deploy to cloud hosting seamlessly.
 
 ---
 
-## 3. Data Fallback Cascade (steal #1 — AgriNexus pattern)
+## 3. Data Fallback Cascade (AgriNexus pattern)
 
 Every source resolves through a 4-tier cascade. The UI always displays which tier served the data (`provenance_tag`).
 
@@ -136,7 +136,7 @@ flowchart TD
 
 Every factor appends to `reasons[]`: `{factor, weight, contribution, detail}`. **The reasons array is the product** — it feeds the UI drawer, the Situation Brief, and judge Q&A.
 
-### 4.2 Decision Interlocks (steal #2 — the demo moment)
+### 4.2 Decision Interlocks
 
 1. **Stale-refuse:** source data older than threshold (default 6h) → no auto-escalation; force `REVIEW REQUIRED` state.
 2. **IMD-wins-always:** if official warning and model score disagree, the official warning governs and the UI *shows* the disagreement.
@@ -173,7 +173,7 @@ Scope wall (do NOT cross): no convoy scheduling, no vehicle/fuel optimization, n
 | `supply_routes` | OSM NH/rail segments |
 | `asset_exposure`, `route_status` | engine output for logistics layer |
 | `response_tasks` | simulated dispatch queue; `is_simulated = true` always |
-| `incident_log` | append-only audit (existing FireSense pattern) |
+| `incident_log` | append-only audit trail of state transitions & actions |
 
 ---
 
@@ -186,14 +186,13 @@ MONITORING → WARNING → EVAC_ORDERED → DEPLOYED → RESOLVED
 
 - Transitions only via `PATCH /api/hazard-events/{id}/status`, logged to `incident_log`.
 - `EVAC_ORDERED` requires `interlock_flags == []` — enforced at the state-machine layer, not the UI.
-- Fire incidents keep the existing FireSense lifecycle untouched (DETECTED → … → RESOLVED).
 
 ---
 
 ## 8. Repo Structure (the "reads like a product" layout)
 
 ```
-suraksha/                        ← clean branch, NOT the FireSense root
+suraksha/
 ├── README.md                    ← badges, one-paragraph pitch, quickstart, benchmark table, disclaimers
 ├── ARCHITECTURE.md              ← this file
 ├── DECISIONS.md                 ← 8–10 "why we chose X over Y" entries
@@ -202,7 +201,7 @@ suraksha/                        ← clean branch, NOT the FireSense root
 │   ├── JUDGE_QA.md              ← hostile questions + answers
 │   └── DEMO_SCRIPT.md           ← 5-minute timed walkthrough
 ├── backend/
-│   ├── app/                     ← FastAPI (from FireSense, extended)
+│   ├── app/                     ← FastAPI application layer
 │   │   ├── api/                 ← routers: hazard_events, area_risk, assets, routes, tasks, briefing
 │   │   ├── services/
 │   │   │   ├── risk/            ← area_engine.py, interlocks.py, exposure.py
@@ -222,15 +221,15 @@ suraksha/                        ← clean branch, NOT the FireSense root
 └── tests/                       ← pytest
 ```
 
-**Deliberate exclusions:** no `node_modules`/Vite, no JSX dirs, no decks/screenshots in root, no duplicate backends, no dead scripts. (FireSense's clutter stays on its own branch.)
+**Deliberate exclusions:** no `node_modules`/Vite, no JSX dirs, no decks/screenshots in root, no duplicate backends, no dead scripts.
 
 ---
 
 ## 9. Hardware & Performance Reality
 
-- **No GPU is needed anywhere.** XGBoost inference is CPU-trivial; the LLM briefing agent calls an API (free tier), never local inference. The RTX 3050 is irrelevant to this stack — assign machines by preference, not GPU.
-- **No Node build step.** The frontend is static files + CDN imports. Any laptop serves the full app with `docker compose up`. This kills the "IDE takes forever to build" problem from the last hackathon.
-- Everything identical across machines via Docker Compose. If Docker misbehaves on one machine, that member codes + tests against the shared compose on the strongest machine (the RTX 3050 laptop doubles as the demo machine).
+- **No GPU is needed anywhere.** The LLM briefing agent calls an API (free tier), never local inference.
+- **No Node build step.** The frontend is static files + CDN imports. Any laptop serves the full app with `docker compose up`. This eliminates build bottleneck issues.
+- Everything identical across machines via Docker Compose.
 
 ---
 

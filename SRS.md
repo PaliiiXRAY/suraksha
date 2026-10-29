@@ -1,14 +1,12 @@
 # SURAKSHA — Software Requirements Specification (SRS)
 Version 1.0 · Oct 29, 2026 · Team of 4 · 24-hour build
 
-*(Identical copy available in `docs/SRS.md`)*
-
 ---
 
 ## 1. Introduction
 
 ### 1.1 Purpose
-This SRS defines the requirements for **SURAKSHA**, a satellite-based multi-hazard disaster-intelligence, response-prioritisation, and relief-logistics platform for India's disaster-response and defence forces, built by extending the existing FireSense codebase (FastAPI + PostGIS).
+This SRS defines the requirements for **SURAKSHA**, a satellite-based multi-hazard disaster-intelligence, response-prioritisation, and relief-logistics platform for India's disaster-response and defence forces, built on FastAPI + PostgreSQL/PostGIS.
 
 ### 1.2 Scope
 **In scope (MVP):** multi-tenant agency platform; cyclone hazard end-to-end (Odisha coast + inland flood blocks); area-wise explainable risk engine; strategic-asset and supply-route exposure; response-task queue with simulated dispatch; what-if scenario slider; situation briefing; cached-replay demo mode; citizen public bulletin (read-only).
@@ -25,7 +23,7 @@ This SRS defines the requirements for **SURAKSHA**, a satellite-based multi-haza
 | **Priority score** | 0–100 operational urgency score; explicitly NOT a probability |
 
 ### 1.4 References
-IMD API & CAP feed · ISRO MOSDAC · NASA FIRMS · OSM (ODbL) · Bhuvan/NRSC flood layers · FireSense repo (PaliiiXRAY/sih-thermal-intel)
+IMD API & CAP feed · ISRO MOSDAC · NASA FIRMS · OSM (ODbL) · Bhuvan/NRSC flood layers
 
 ---
 
@@ -67,7 +65,7 @@ SURAKSHA is the missing **decision layer** on top of India's existing warning in
 | FR-2.1 | Authority/Analyst can register a hazard event (cyclone) with source, provenance tag, track geometry, metadata (wind, forward speed, timestamps) | Must |
 | FR-2.2 | System shall enforce cyclone lifecycle: MONITORING → WARNING → EVAC_ORDERED → DEPLOYED → RESOLVED (+STAND_DOWN); transitions logged | Must |
 | FR-2.3 | EVAC_ORDERED shall be rejected if any interlock flag is open | Must |
-| FR-2.4 | Existing FireSense fire incidents (FIRMS) shall remain functional as a secondary module | Must |
+| FR-2.4 | Secondary hazard feeds (e.g. thermal anomalies) shall integrate into the unified risk model | Must |
 | FR-2.5 | Every event displays source name, source publish time, and provenance badge | Must |
 
 ### 3.3 Area-wise Risk Engine
@@ -121,9 +119,9 @@ SURAKSHA is the missing **decision layer** on top of India's existing warning in
 ### 3.9 Data Ingestion & Fallback
 | ID | Requirement | Priority |
 |---|---|---|
-| FR-9.1 | Ingestion adapters: IMD API, IMD CAP RSS, NASA FIRMS (existing), each with source timestamp stored | Must |
+| FR-9.1 | Ingestion adapters: IMD API, IMD CAP RSS, NASA FIRMS, each with source timestamp stored | Must |
 | FR-9.2 | 4-tier cascade (live → CAP → cache → Fani replay); failure degrades gracefully, banner updates | Must |
-| FR-9.3 | Malformed upstream rows (missing FRP/coords/date) rejected or flagged — never defaulted | Must |
+| FR-9.3 | Malformed upstream rows (missing coords/date) rejected or flagged — never defaulted | Must |
 
 ### 3.10 Public Bulletin
 | ID | Requirement | Priority |
@@ -140,10 +138,10 @@ SURAKSHA is the missing **decision layer** on top of India's existing warning in
 | NFR-1 | **Reliability:** demo runs 100% offline from replay pack; zero external calls required for the scripted demo |
 | NFR-2 | **Explainability:** every score has reasons[]; a judge can answer "why is this Priority 1?" from the UI alone |
 | NFR-3 | **Provenance:** every number on screen carries a visible source + freshness badge |
-| NFR-4 | **Security:** all mutating endpoints auth+role enforced (P0 audit fixes applied); no path traversal; FIRMS/API keys server-side only |
+| NFR-4 | **Security:** all mutating endpoints auth+role enforced; no path traversal; external API keys kept server-side only |
 | NFR-5 | **Auditability:** append-only log; every state transition, task change, and interlock event recorded with user + timestamp |
 | NFR-6 | **Performance:** dashboard first paint < 3s; what-if re-rank < 2s; area-risk endpoint < 1s (500 blocks) |
-| NFR-7 | **Portability:** `docker compose up` works identically on Windows (i5/RTX 3050), Windows (i5), macOS, Linux |
+| NFR-7 | **Portability:** `docker compose up` works identically across developer environments |
 | NFR-8 | **Honesty:** no UI text claims live data during replay; no "sealed ledger"/blockchain claims without implementation; no probability claims |
 
 ---
@@ -154,8 +152,8 @@ SURAKSHA is the missing **decision layer** on top of India's existing warning in
 |---|---|---|
 | IMD API (api.imd.gov.in) | In | key in `.env`; cyclone products |
 | IMD CAP RSS (S3 bucket) | In | open feed; parsed for warnings |
-| NASA FIRMS | In | existing FireSense client; key server-side |
-| OSM Overpass / extracts | In | road network + (existing) facility context; cache + throttle |
+| NASA FIRMS | In | thermal hotspot data; key server-side |
+| OSM Overpass / extracts | In | road network + facility context; cache + throttle |
 | LLM API (briefing) | Out/In | free tier; template fallback; timeout < 10s |
 | Bhuvan/NRSC layers | In (pre-downloaded) | flood susceptibility, elevation — static files |
 

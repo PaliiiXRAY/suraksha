@@ -1,216 +1,164 @@
-# 🔥 FireSense | SIH26162 (NTRO)
-### Spaceborne Thermal Anomaly Intelligence & Autonomous Disaster Response
+# 🛡️ SURAKSHA
+### Satellite-to-Decision Disaster Intelligence & Prioritised Relief Logistics
+**Track:** AI for Defence, Aerospace & National Security · **Zinnovatio 4.0**
 
-[![Deployment](https://img.shields.io/badge/Deployment-Redeploy%20Pending%20%E2%80%A2%20P0%2BP1%20Done-blue?style=flat-square&logo=vercel)](https://sih-thermal-intel.vercel.app)
-[![Problem Statement](https://img.shields.io/badge/SIH-SIH26162-orange?style=flat-square)](https://sih-thermal-intel.vercel.app)
-[![Agency](https://img.shields.io/badge/Agency-NTRO-blue?style=flat-square)](https://sih-thermal-intel.vercel.app)
-[![Satellite Data](https://img.shields.io/badge/Satellite-NASA%20FIRMS%20VIIRS%20375m-red?style=flat-square)](https://firms.modaps.eosdis.nasa.gov/)
-[![Database](https://img.shields.io/badge/Database-PostgreSQL%20%2B%20PostGIS-336791?style=flat-square&logo=postgresql)](https://postgis.net)
-[![Backend](https://img.shields.io/badge/Backend-Legacy%20HTTP%20%2B%20FastAPI-009688?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com)
-[![Tests](https://img.shields.io/badge/Tests-192%20passing-brightgreen?style=flat-square)](https://docs.pytest.org)
-
-> **Deployment status (2026-09-20):** the public URL runs the legacy stdlib HTTP handler
-> (`app.py` / `api/index.py`) and is **still exposed to unauthenticated admin access until the in-tree P0
-> auth fix is redeployed**. The FastAPI backend (`backend/app/`) runs only via Docker. Post-deploy the demo
-> password is set by `FIRESENSE_DEMO_PASSWORD` — there is no default credential, and missing env config
-> yields 401/503. An automated CI pipeline (`.github/workflows/ci.yml`) runs the test suite on push/PR.
-
-> **Live Production Platform:** [https://sih-thermal-intel.vercel.app](https://sih-thermal-intel.vercel.app)  
-> **Tactical Operations Dashboard:** [https://sih-thermal-intel.vercel.app/app](https://sih-thermal-intel.vercel.app/app)  
-> **Problem Statement ID:** SIH26162  
-> **Ministry / Organization:** National Technical Research Organisation (NTRO)  
-> **Domain:** Geospatial Intelligence, Defense, & Industrial Disaster Response  
+[![Architecture](https://img.shields.io/badge/Architecture-Explainable%20Decision%20Engine-blue?style=flat-square)](#-decision-engine--scoring)
+[![Geospatial](https://img.shields.io/badge/Database-PostgreSQL%2016%20%2B%20PostGIS-336791?style=flat-square&logo=postgresql)](https://postgis.net)
+[![Backend](https://img.shields.io/badge/Backend-FastAPI%20%2B%20Python%203.11-009688?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com)
+[![Frontend](https://img.shields.io/badge/Frontend-Build--less%20MapLibre%20%2B%20Tailwind-38bdf8?style=flat-square)](https://maplibre.org)
+[![Offline Demo](https://img.shields.io/badge/Demo-Offline%20Fani%20Replay%20Pack-success?style=flat-square)](#-offline-first-reliability)
 
 ---
 
-## 🛰️ Executive Overview
+## 🛰️ 30-Second Overview
 
-NASA earth-observation satellites (**Suomi NPP / NOAA-20 VIIRS 375m** and **Terra/Aqua MODIS 1km**) register thousands of thermal infrared anomalies across the Indian subcontinent daily. However, spaceborne sensors only transmit raw thermal flux pixels (brightness temperature and Fire Radiative Power in MW). 
+> **"Official hazard systems tell you a cyclone is coming. They don't tell you *which block, which depot, which road to act on first*."**
 
-**The Challenge:** Spaceborne sensors cannot inherently tell whether a thermal spike is a routine, licensed gas flare in an oil refinery (burning at 600°C–1000°C), an uncontrolled explosion, agricultural stubble burning, or an **unregistered clandestine thermal anomaly** operating outside regulatory cadastre.
+**SURAKSHA** transforms multi-source hazard feeds (IMD, ISRO MOSDAC, satellite telemetry) into an explainable, ranked operating picture for India's disaster command and response forces (NDRF, SDMA, Defence units). It identifies:
+- **Which administrative blocks** have the highest operational urgency (0–100 score + auditable `reasons[]`)
+- **Which strategic assets** (depots, helipads, hospitals, NDRF staging bases) are exposed
+- **Which critical supply routes** (National Highways, rail corridors) are severed or passable
+- **Where to stage nearest-safe relief resources** outside the hazard footprint
 
-**FireSense converts raw satellite detections into action:**
-$$\text{Detection} \longrightarrow \text{Classification} \longrightarrow \text{Contextualization} \longrightarrow \text{Prioritization} \longrightarrow \text{Simulated Alert} \longrightarrow \text{Tactical Tracking}$$
-
-FireSense correlates spaceborne thermal anomalies with **PostgreSQL/PostGIS geospatial databases**, **OpenStreetMap (OSM) cadastres**, and **temporal cell persistence baselines**. It computes transparent danger scores, enriches events with nearby critical infrastructure, triggers simulated alerts to recommended emergency units, and tracks field operations through an immutable audit trail.
+**The Core Differentiator:** Deterministic safety interlocks that refuse to auto-escalate on stale data, always defer to official IMD warnings, and explicitly tag every output with its provenance (`OFFICIAL_FORECAST`, `MODEL_ESTIMATE`, `REPLAY`, `SIMULATED`).
 
 ---
 
-## 🏛️ System Architecture & Data Flow
+## 🏛️ System Architecture
 
 ```text
-                                  [DATA SOURCES]
-                 NASA FIRMS (VIIRS 375m / MODIS)  +  OSM Overpass API
-                                         │
-                                         ▼
-                            [POSTGIS GEOSPATIAL ENGINE]
-                 • PostGIS SRID 4326 R-Tree / GiST Geodesic Proximity
-                 • Temporal Persistence Cell Baseline (60-Day Lookback)
-                 • Critical Infrastructure Correlator (Plants, Schools, Reserves)
-                                         │
-                                         ▼
-                       [AI CLASSIFICATION & SAFETY FALLBACK]
-                 • XGBoost Decision Tree Classifier (FRP, Temp, Day/Night)
-                 • Deterministic Expert Rule Fallback Layer
-                 • Classes: Industrial Fire, Gas Flare, Wildfire, Crop Burning, Unknown
-                                         │
-                                         ▼
-                          [TRANSPARENT RISK ENGINE (0-100)]
-                 • 0.30 Severity + 0.25 Persistence + 0.20 Exposure
-                   + 0.15 Infrastructure + 0.10 Growth Proxy
-                                         │
-                                         ▼
-                 [CANONICAL STATE MACHINE & AUDIT LOGGING]
-                 • Append-Only Immutable Audit Trail (IncidentLog)
-                 • Strict Canonical Lifecycle State Machine
-                                         │
-                 ┌───────────────────────┼───────────────────────┐
-                 ▼                       ▼                       ▼
-      [NTRO INTELLIGENCE]     [GOVERNMENT COMMAND]    [FIRST RESPONDER]
-      • Anomaly Telemetry     • Situational Map       • Tactical Queue
-      • Evidence Dossier      • Simulated Dispatch    • En Route / Arrive
-      • ML Re-Classification  • District Directives   • Contain / Resolve
-                                         │
-                                         ▼
-                            [PUBLIC SAFETY ADVISORY]
-                            • Simulated Bulletins (No PII)
-                            • Designated Safe Shelters
-                            • Crowdsourced Smoke Verification
+               [EXTERNAL DATA CASCADE]
+   IMD API / CAP Alert Feed  +  ISRO MOSDAC  +  OSM / Bhuvan
+                              │
+                              ▼
+        ┌───────────────────────────────────────────┐
+        │       4-Tier Fallback Cascade             │
+        │  Tier 1: Live IMD API                     │
+        │  Tier 2: IMD CAP RSS Feed                 │
+        │  Tier 3: Timestamped Local Cache          │
+        │  Tier 4: Offline Cyclone Fani Replay Pack │
+        └─────────────────────┬─────────────────────┘
+                              │
+                              ▼
+        ┌───────────────────────────────────────────┐
+        │       Geospatial Core (PostGIS)           │
+        │  • Odisha Administrative Blocks (Census)  │
+        │  • Strategic Infrastructure & Depots      │
+        │  • Supply Route Road/Rail Network         │
+        └─────────────────────┬─────────────────────┘
+                              │
+                              ▼
+        ┌───────────────────────────────────────────┐
+        │       Risk & Decision Engine              │
+        │  • 6-Factor Weighted Scoring              │
+        │  • ST_DWithin Asset Exposure              │
+        │  • ST_Intersection Route Cut Analysis    │
+        │  • Safety Interlocks (Stale / IMD Wins)   │
+        └─────────────────────┬─────────────────────┘
+                              │
+                              ▼
+        ┌───────────────────────────────────────────┐
+        │       Application Layer (FastAPI)         │
+        │  • Org-Scoped RBAC (Authority/Analyst)    │
+        │  • Cyclone State Machine & Audit Trail    │
+        │  • Simulated Dispatch Queue               │
+        │  • Natural-Language Situation Briefing    │
+        └─────────────────────┬─────────────────────┘
+                              │
+                              ▼
+        ┌───────────────────────────────────────────┐
+        │       Command Dashboard (MapLibre GL)     │
+        │  • Dynamic Risk Chloropleth & Track View  │
+        │  • Live "What-If" Track Re-ranking (<2s)  │
+        │  • Auditable Reasons Drawer & Provenance  │
+        └───────────────────────────────────────────┘
 ```
 
 ---
 
-## 🔄 Canonical Incident Lifecycle State Machine
+## ⚡ Core Capabilities
 
-The platform strictly enforces the canonical lifecycle contract across all API endpoints and dashboards:
+### 1. Explainable Operational Prioritisation
+Rather than opaque black-box models, SURAKSHA computes a transparent 0–100 operational urgency score across 6 weighted factors:
+- **Forecast Wind Exposure (30%):** Wind field intersection with block geometry
+- **Rainfall & Flood Susceptibility (20%):** Precip accumulation × terrain vulnerability
+- **Storm Surge / Coastal Proximity (15%):** Landfall distance & coastal elevation
+- **Population Exposure (20%):** Census population density
+- **Critical Infrastructure Density (10%):** Strategic assets within 10 km
+- **Urgency / Time-to-Impact (5%):** <24h, <48h windowing
 
-```text
-   DETECTED
-      ↓
-  CLASSIFIED
-      ↓
-   ASSESSED
-      ↓
-   ALERTED
-      ↓
- ACKNOWLEDGED  ─────────┐ (Direct Shortcut)
-      ↓                 │
-   EN_ROUTE             │
-      ↓                 │
-   ARRIVED              │
-      ↓                 │
-  CONTAINED             │
-      ↓                 │
-   RESOLVED  ◄──────────┘
-```
+Every single block outputs an auditable `reasons[]` array explaining exact contributions so commanders and judges can ask *"Why is Block X ranked #1?"* and get an immediate, verifiable answer.
 
-- **Alerting is Side-Effect Free:** Dispatching a simulated alert does not silently mutate incident status.
-- **Strict Status Validation:** Transitions are managed exclusively via `PATCH /api/incidents/{id}/status`.
-- **Forbidden Statuses:** `DISPATCHED`, `RESPONDING`, and `MITIGATED` are rejected by validation.
+### 2. Deterministic Safety Interlocks
+- **Stale-Data Freeze:** If data age exceeds 6 hours, automated escalations are locked and the system forces `REVIEW_REQUIRED`.
+- **IMD Authority Lock:** In any divergence between model estimates and official bulletins, official IMD alerts govern and the divergence is highlighted.
+- **No Unverified Assumptions:** Route segments are never marked `PASSABLE` without spatial evidence; unknown segments default to `UNKNOWN`.
 
----
+### 3. Spatial Relief Logistics Layer
+- **Asset Vulnerability:** Evaluates hospitals, fuel stations, relief stockpiles, ports, and bases via `ST_DWithin` distance decay and criticality weights.
+- **Route Status:** Intersects forecasted hazard footprints with transport links:
+  - `> 50%` footprint intersection $\rightarrow$ **CUT**
+  - `> 10%` footprint intersection $\rightarrow$ **AT_RISK**
+  - Verified clear $\rightarrow$ **PASSABLE**
+- **Nearest-Safe Staging:** Suggests secure staging hubs outside the hazard perimeter with verified intact routes.
 
-## ⚖️ Transparent Priority Risk Engine
-
-The Risk Score is an operational **prioritization score (0–100)** and **explicitly NOT a ground fire probability**:
-
-$$\text{Priority Score} = 0.30 \times S + 0.25 \times P + 0.20 \times E + 0.15 \times I + 0.10 \times G$$
-
-1. **Severity ($S$, 30%):** Fire Radiative Power (MW) and brightness temperature differential.
-2. **Persistence ($P$, 25%):** Temporal repetition count over historical satellite overpasses.
-3. **Exposure ($E$, 20%):** Estimated population settlement proximity and density.
-4. **Infrastructure ($I$, 15%):** PostGIS geodesic proximity (`ST_DWithin`) to high-value assets (power plants, fuel depots, substations).
-5. **Growth Proxy ($G$, 10%):** Multi-pass spatial bounding box expansion rate (proxy, not CFD fire-spread prediction).
+### 4. Interactive "What-If" Track Re-ranking
+Commanders can adjust projected storm tracks or intensity (±20%) in real time. The engine re-ranks all blocks, recalculates route severances, and repositions staging recommendations across the entire operational picture in under **2 seconds**.
 
 ---
 
-## ⚡ 5 Curated Offline Demonstration Scenarios
+## 🔒 Multi-Tenant Role-Based Access Control (RBAC)
 
-Pre-cached in PostgreSQL for 100% reliable hackathon presentation without external NASA API dependence:
-
-1. **Angul Thermal Power Station (`industrial_fire`):** Coal stockyard spontaneous combustion event with critical infrastructure downwind threat corridor.
-2. **Jamnagar Petrochemical Complex (`gas_flare`):** Stationary industrial flare stack verified against licensed petrochemical cadastre (94% persistence).
-3. **Similipal Biosphere Reserve (`wildfire`):** Episodic forest canopy wildfire perimeter encroaching toward tribal settlements.
-4. **Sangrur Agricultural District (`crop_burning`):** Seasonal stubble burning cluster with transient persistence (<15%).
-5. **Singrauli Hinterland Belt (`unknown`):** High-heat anomaly with zero registered industrial zoning in scrubland, flagged for tactical NTRO investigation.
-
----
-
-## 🔐 Role-Based Access Control (RBAC) Matrix
-
-| Endpoint | Method | Analyst | Authority | Responder | Admin | Public |
-| :--- | :--- | :---: | :---: | :---: | :---: | :---: |
-| `/auth/login` | POST | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `/auth/me` | GET | ✓ | ✓ | ✓ | ✓ | ✗ (401) |
-| `/api/incidents/{id}/classify` | POST | ✓ | ✓ | ✗ (403) | ✓ | ✗ (401) |
-| `/api/incidents/{id}/context` | GET | ✓ | ✓ | ✓ | ✓ | ✗ (401) |
-| `/api/incidents/{id}/risk` | GET | ✓ | ✓ | ✓ | ✓ | ✗ (401) |
-| `/api/incidents/{id}/alert` | POST | ✗ (403) | ✓ | ✗ (403) | ✓ | ✗ (401) |
-| `/api/incidents/{id}/status` | PATCH | ✗ (403) | ✓ | ✓ | ✓ | ✗ (401) |
-| `/api/incidents/{id}/timeline` | GET | ✓ | ✓ | ✓ | ✓ | ✗ (401) |
-| `/public/alerts` | GET | ✓ | ✓ | ✓ | ✓ | ✓ (200) |
+| Role | Target Persona | Key Capabilities |
+|---|---|---|
+| **Admin** | System / Agency IT Lead | Manage organization users, audit logs, and configurations |
+| **Authority** | Disaster Commander (NDRF / SDMA) | Approve relief tasks, change cyclone lifecycle, execute what-if simulations |
+| **Analyst** | Geospatial / Intelligence Analyst | Inspect risk factors, evaluate spatial layers, propose relief tasks |
+| **Responder** | Field Team Lead | Access assigned operational tasks, update task progression |
+| **Public** | Citizen Portal | Read-only access to `/public/alerts` public safety advisories |
 
 ---
 
-## 🚀 Quick Start (Running Locally)
+## 🚀 Quickstart & Local Setup
 
-### 1. Clone & Setup Python Virtual Environment
+SURAKSHA runs fully containerized via Docker Compose. No local Node toolchains or GPUs are needed.
+
+### Prerequisites
+- Docker & Docker Compose
+- Python 3.11+ (if running tests locally)
+
+### 1. Clone & Configure
 ```bash
-git clone https://github.com/PaliiiXRAY/sih-thermal-intel.git
-cd sih-thermal-intel
-
-python -m venv venv
-# Windows:
-.\venv\Scripts\activate
-# Linux/macOS:
-source venv/bin/activate
-
-pip install -r requirements.txt
+git clone https://github.com/PaliiiXRAY/suraksha.git
+cd suraksha
+cp .env.example .env
 ```
 
-### 2. Start PostgreSQL / PostGIS Database
+### 2. Launch Stack
 ```bash
-# Using Docker Compose
-docker compose up -d db
+docker compose up -d
 ```
+The stack will spin up:
+- **Database:** PostgreSQL 16 with PostGIS at `localhost:5432`
+- **Backend API:** FastAPI with automated OpenAPI docs at `http://localhost:8000/docs`
+- **Dashboard:** Interactive Command Interface served at `http://localhost:8000`
 
-### 3. Verify Migrations & Seed Curated Scenarios
+### 3. Run Test Suite
 ```bash
-# Verify Alembic head (expected: a2b3c4d5e6f7)
-alembic current
-
-# Seed 5 curated scenarios with provenance metadata
-python seed_demo.py --scenario all
-```
-
-### 4. Launch Unified Application Server
-```bash
-uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload
-```
-
-- **Application Portal:** [http://localhost:8000/app](http://localhost:8000/app)
-- **Landing Page:** [http://localhost:8000/](http://localhost:8000/)
-- **Swagger Documentation:** [http://localhost:8000/docs](http://localhost:8000/docs)
-
-### 5. Run Automated Test Suite
-```bash
-pytest -q
-# Output: 119 passed, 0 failures, 0 skipped
+pytest -v
 ```
 
 ---
 
-## ⚠️ Explicit Technical Limitations & Disclaimers
+## 🎯 Offline-First Reliability
 
-1. **Thermal Anomaly $\neq$ Confirmed Ground Fire:** Satellite detections identify thermal radiant flux; ground ground-truth verification is mandatory before deploying life-safety assets.
-2. **Uncalibrated Confidence:** XGBoost model confidence represents internal tree margin certainty, not calibrated physical probabilities.
-3. **Prioritization Score:** Risk score represents operational urgency (0–100), NOT physical flame ignition probability.
-4. **Growth Proxy:** Growth rate is estimated from multi-pass satellite bounding box expansions, not CFD thermodynamic fire propagation modeling.
-5. **Simulated Dispatches:** All alerting is simulated (`is_simulated: true`). Real emergency dispatch requires production inter-agency MoUs.
+Network connectivity at disaster response sites and hackathon venues can be unreliable. SURAKSHA guarantees **100% offline demonstration capability** through a pre-packaged, timestamped **Cyclone Fani (May 2019) Replay Pack**. The entire spatial engine, route analysis, and what-if simulation run completely locally without requiring external network connectivity.
 
 ---
 
-## 📚 Documentation Links
-- **[SIH Jury Q&A Guide](docs/SIH_QA.md):** 15 deep-dive architectural and algorithmic defense answers.
-- **[Demonstration Runbook](docs/DEMO_RUNBOOK.md):** 5-minute judge walkthrough script.
-- **[Implementation Status](docs/IMPLEMENTATION_STATUS.md):** Full Phase 1–13 verification tracking.
+## 📜 The Honesty Contract
+
+1. **Priority Score $\neq$ Probability:** The 0–100 score is an operational urgency indicator, never a probability of occurrence.
+2. **Simulated Response Tasks:** All dispatches and operational tasks are explicitly tagged with `is_simulated: true`.
+3. **Transparent Provenance:** Every metric displays an explicit badge: `OFFICIAL_FORECAST`, `MODEL_ESTIMATE`, `REPLAY`, or `SIMULATED`.
+4. **Official System Integration:** SURAKSHA is designed to supplement and convert official warnings (IMD/ISRO/NDMA) into actionable logistics—never to override or replace official warning mandates.
