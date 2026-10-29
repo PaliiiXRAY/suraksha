@@ -18,8 +18,10 @@ Authoritative planning documents: `ARCHITECTURE.md`, `SRS.md` (canonical text in
 
 To avoid repeated approval pauses across the 4-person team:
 
-- Members may push to `main` and feature branches on this repository.
+- **Standing push authorization — do not ask for permission.** After completing and verifying a change (tests run, diff reviewed), proactively `git add` the relevant files, commit with a semantic message, and `git push origin main`. Do not prompt for push approval.
+- **Staging discipline:** stage only files you created or modified for the task. Never blind `git add -A` in this shared 4-person repo — teammates may have in-flight edits (this has already happened once with `ci.yml`).
 - Adding focused tests, docs, and local demo fixtures is pre-approved (see section 2).
+- **Never stage or commit** `.env`, secrets, credentials, or another member's unfinished work.
 - **Still requires explicit authorization:** deploying/publishing to production (e.g. Vercel), pushing tags, running destructive migrations, modifying production services, incurring costs, calling paid APIs, or any other external action.
 
 Team ownership boundaries (who edits what) are defined in `RUNBOOK.md` section 2. Do not edit files owned by another member's area without coordination.
@@ -33,6 +35,16 @@ Team ownership boundaries (who edits what) are defined in `RUNBOOK.md` section 2
 - Follow existing design documentation, including `design.md` if present, rather than inventing a competing visual system.
 - Do not drop, rename, or destructively alter existing FireSense tables or existing user data.
 - Ask before broad refactors, destructive operations, production-facing changes, or changing security/authentication behavior.
+
+### Pre-execution audit (before any non-trivial edit or tool call)
+
+Think through these five questions and be able to answer each briefly before acting:
+
+1. **System impact:** which tables, API contracts, or downstream flows does this touch? What breaks downstream if this change fails?
+2. **Security & hackability:** are inputs validated at the system boundary? Can this endpoint mutate state outside its role/org scope (`org_id`, RBAC)? Are spatial/coordinate parameters safe against malformed or injected values? Can anything leak secrets into logs or responses?
+3. **Determinism & safety gates:** can any non-deterministic component (the LLM situation briefing) bypass a deterministic interlock? Safety gates — stale-refuse, IMD-wins, clamps — must live in deterministic code outside the LLM path; LLM output is advisory, grounded only in structured system output, with template fallback.
+4. **Resilience:** malformed coordinates (NaN/None), missing or stale data, network loss — does this degrade *visibly* (`REVIEW_REQUIRED` / `INSUFFICIENT_DATA`) instead of crashing or silently succeeding? (The `osm_correlator` precedence bug fixed on 2026-10-30 is the cautionary example.)
+5. **Documentation & sync:** does this change require an `ARCHITECTURE.md`, `DECISIONS.md`, or `README.md` update? (See section 12 — Definition of Done.)
 
 ### Pre-approved for this hackathon
 
@@ -159,6 +171,10 @@ A task is complete only when:
 - the final diff has been reviewed;
 - provenance and simulated-action labels remain correct;
 - stale or conflicting data cannot silently trigger automatic escalation;
+- **documentation synchronized** (mandatory, whenever applicable):
+  - `ARCHITECTURE.md` updated in the same session as any change to system design, data flows, API contracts, sequence of operations, or security boundaries;
+  - `DECISIONS.md` given a new numbered ADR entry for any **architectural, security-relevant, or scope-affecting** decision, using the established entry format (Title · Choice · Why/rationale · Rejected alternatives). Routine bugfixes, refactors that change no design, and typo fixes need no ADR — the semantic commit message is the record;
+  - `README.md` updated when user-facing features, benchmarks, or workflows materially change (not for internal changes);
 - unresolved limitations and assumptions are stated honestly.
 
 If a requirement conflicts with these rules or the existing implementation, explain the conflict and ask before a high-impact decision.
