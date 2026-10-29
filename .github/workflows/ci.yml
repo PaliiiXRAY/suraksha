@@ -34,6 +34,9 @@ jobs:
           python seed_demo.py --scenario all
         env:
           DATABASE_URL: postgresql+psycopg://postgres:postgres@localhost:5432/firesense
+          # config._require() refuses to import without this; CI has no .env file.
+          # CI-only value — matches the conftest.py convention, never used in production.
+          JWT_SECRET_KEY: ci-only-test-secret-not-for-production
       - name: Run test suite
         run: python -m pytest -q
         env:
