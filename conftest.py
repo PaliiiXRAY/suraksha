@@ -8,6 +8,11 @@ os.environ.setdefault(
     "DATABASE_URL",
     "postgresql+psycopg://postgres:postgres@localhost:5432/firesense",
 )
+# Force-clear the FIRMS key: config.load_dotenv() pulls the local .env (which must
+# hold a placeholder for docker compose) into the process env, which would turn the
+# "live endpoint without key -> 400" contract into a live-fetch attempt -> 502.
+# CI has no .env, so empty here matches CI's effective environment exactly.
+os.environ["FIRMS_MAP_KEY"] = ""
 os.environ.setdefault(
     "JWT_SECRET_KEY",
     "test-only-firesense-jwt-secret-not-for-production",

@@ -71,6 +71,8 @@ Do not guess commands. First inspect the README, package manifests, scripts, Mak
 
 Use the documented/project-defined commands. If a command is missing or unclear, state that and choose the safest verified alternative. Do not invent a replay loader or imply it exists before finding it.
 
+**Known pitfall — Windows port 5432 shadowing:** a natively installed PostgreSQL *Windows service* (e.g. `postgresql-x64-18`, StartType Automatic) re-grabs host port 5432 after every reboot. Docker PostGIS still runs healthy, and in-container commands (`docker compose exec backend alembic ...`) still work, but host-side `pytest` fails everywhere with `FATAL: password authentication failed for user "postgres"` — 60+ errors that look like code bugs but are environmental. Fix once per machine (admin shell): `Stop-Service postgresql-x64-18 -Force; Set-Service postgresql-x64-18 -StartupType Disabled` (adapt the service name), then rerun pytest. Also note: host tests require the ML deps (`pip install -r requirements-ml.txt`, same as CI) or the phase7 XGBoost tests fail, and `conftest.py` deliberately force-clears `FIRMS_MAP_KEY` so a local `.env` placeholder cannot leak into tests.
+
 For the final report, list the exact commands run and their results. Distinguish PASS, FAIL, NOT RUN, and BLOCKED.
 
 ## 4. Data provenance and uncertainty
