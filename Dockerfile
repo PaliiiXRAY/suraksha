@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Install Python dependencies
 COPY requirements.txt requirements-ml.txt ./
-RUN pip install --no-cache-dir -r requirements.txt -r requirements-ml.txt
+RUN pip install --no-cache-dir -r requirements.txt -r requirements-ml.txt pytest
 
 # Copy application source code and assets
 COPY . .

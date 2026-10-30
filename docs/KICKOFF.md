@@ -28,6 +28,18 @@
 
 ## 1. Everyone's first 30 minutes (before any code)
 
+**⚡ Fast path (recommended):** after `git pull`, run the setup script — it does everything in this section
+automatically (`.env`, Apple Silicon pin, stack, migrations, seed, in-container green check):
+
+| OS | Command |
+|---|---|
+| Windows (PowerShell) | `.\setup.ps1` |
+| macOS / Linux | `bash setup.sh` |
+
+Ends with `== GREEN: 194 passed` (you're ready) or `== RED` (copy the output to the team chat).
+No pip, no host Python packages, no network needed beyond Docker's image pull. The manual steps
+below are the fallback if the script fails on your machine.
+
 ```bash
 git clone https://github.com/PaliiiXRAY/suraksha.git && cd suraksha
 ```
@@ -55,7 +67,8 @@ FIRMS_MAP_KEY=placeholder_firms_map_key
 
 > `POSTGRES_PASSWORD` must be exactly `postgres` — `conftest.py`, CI, and every member's stack share this
 > local-demo-only convention. A generated random password turns the suite red with auth errors.
-> Apple Silicon note: add `platform: linux/amd64` under the `db:` service (PostGIS ships amd64-only) via PR.
+> Apple Silicon: `setup.sh` writes a local `docker-compose.override.yml` pinning `db` to `linux/amd64`
+> automatically (PostGIS ships amd64-only) — the file is gitignored, never commit it.
 
 **Step 2 — stack + green check:**
 
