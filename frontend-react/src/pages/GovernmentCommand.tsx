@@ -153,7 +153,7 @@ export default function GovernmentCommand({ onShowToast }: Props) {
           <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
             Government Portal
           </h1>
-          <p className="text-xs font-bold text-slate-800 dark:text-slate-200 mt-0.5">
+          <p className="text-xs font-medium text-slate-700 dark:text-slate-300 mt-0.5">
             Command authorization, what-if simulation, logistics routing & response coordination.
           </p>
         </div>
@@ -236,7 +236,7 @@ export default function GovernmentCommand({ onShowToast }: Props) {
                         </span>
                         <span className="text-base font-black text-slate-900 dark:text-white">{area.name}</span>
                       </div>
-                      <div className="text-xs font-bold text-slate-800 dark:text-slate-200 mt-0.5">
+                      <div className="text-xs font-medium text-slate-700 dark:text-slate-300 mt-0.5">
                         {area.district} · {area.exposed}
                       </div>
                     </div>
@@ -277,7 +277,7 @@ export default function GovernmentCommand({ onShowToast }: Props) {
                 onChange={e => setWindSlider(Number(e.target.value))}
                 className="w-full accent-amber-500 cursor-pointer h-2 bg-slate-200 dark:bg-slate-700 rounded-lg"
               />
-              <div className="flex justify-between text-[10px] font-mono text-slate-400 dark:text-white/30">
+              <div className="flex justify-between text-xs font-mono font-semibold text-slate-600 dark:text-slate-300">
                 <span>180 km/h (Weakened)</span>
                 <span>215 km/h (Official Peak)</span>
               </div>
@@ -295,7 +295,7 @@ export default function GovernmentCommand({ onShowToast }: Props) {
             {/* Header of Selected Zone */}
             <div className="flex items-start justify-between flex-wrap gap-4 border-b border-slate-200 dark:border-white/10 pb-4">
               <div>
-                <div className="text-[10px] font-mono text-blue-600 dark:text-cyan-400 font-bold uppercase tracking-wider mb-1">
+                <div className="text-xs font-mono font-bold text-blue-700 dark:text-cyan-400 uppercase tracking-wider mb-1">
                   SELECTED OPERATIONAL ZONE DOSSIER
                 </div>
                 <h2 className="text-2xl font-black text-slate-900 dark:text-white">
@@ -307,11 +307,11 @@ export default function GovernmentCommand({ onShowToast }: Props) {
               </div>
 
               <div className="text-right">
-                <div className="text-[10px] font-mono text-slate-700 dark:text-white/60 uppercase">
+                <div className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300 uppercase">
                   ACTIVE PRIORITY SCORE
                 </div>
                 <div className="text-3xl font-black font-mono text-red-600 dark:text-red-400">
-                  {selectedAreaScore} <span className="text-xs font-normal text-slate-400">/ 100</span>
+                  {selectedAreaScore} <span className="text-sm font-semibold text-slate-600 dark:text-slate-300">/ 100</span>
                 </div>
               </div>
             </div>
@@ -353,7 +353,7 @@ export default function GovernmentCommand({ onShowToast }: Props) {
                     className="p-3 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/5 text-xs flex flex-col justify-between"
                   >
                     <span className="font-bold text-slate-900 dark:text-white truncate">{asset}</span>
-                    <span className="text-[10px] font-mono text-amber-600 dark:text-amber-400 mt-2 font-semibold">
+                    <span className="text-xs font-mono text-amber-700 dark:text-amber-300 mt-2 font-bold">
                       Vulnerability: HIGH
                     </span>
                   </div>
@@ -472,7 +472,7 @@ export default function GovernmentCommand({ onShowToast }: Props) {
                 <span>INCIDENT LIFECYCLE STATE TRACKER</span>
                 <span className="text-blue-600 dark:text-blue-400">STATE: {dispatched ? 'MOBILIZED' : 'ANALYZED'}</span>
               </div>
-              <div className="grid grid-cols-5 gap-1.5 text-center font-mono text-[10px]">
+              <div className="grid grid-cols-5 gap-1.5 text-center font-mono text-xs font-bold">
                 <div className="p-2 rounded-lg bg-blue-600 text-white font-bold flex items-center justify-center gap-1">
                   <Check size={12} /> DETECTED
                 </div>

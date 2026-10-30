@@ -184,7 +184,7 @@ export default function CitizenServices({ onShowToast }: Props) {
           <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
             {t.title}
           </h1>
-          <p className="text-xs text-slate-700 dark:text-white/60 mt-0.5">
+          <p className="text-sm font-medium text-slate-700 dark:text-slate-300 mt-1">
             {t.subtitle}
           </p>
         </div>
@@ -243,13 +243,13 @@ export default function CitizenServices({ onShowToast }: Props) {
 
       {/* Search Bar */}
       <div className="relative">
-        <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-white/40" />
+        <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 dark:text-white/40" />
         <input
           type="text"
           value={search}
           onChange={e => setSearch(e.target.value)}
           placeholder={t.searchPlaceholder}
-          className="w-full bg-white dark:bg-[#121622] border border-slate-200/90 dark:border-white/10 rounded-2xl pl-12 pr-4 py-3.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-blue-500 font-mono shadow-sm"
+          className="w-full bg-white dark:bg-[#121622] border border-slate-200/90 dark:border-white/10 rounded-2xl pl-12 pr-4 py-3.5 text-sm text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-blue-500 font-mono shadow-sm"
         />
       </div>
 
@@ -323,7 +323,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               Capacity: 450 / 600 · Generator Active · Potable Water
             </div>
             <div className="flex justify-between items-center pt-1 border-t border-slate-100 dark:border-white/5">
-              <span className="text-[10px] font-mono text-slate-400">GEO: 19.805, 85.830</span>
+              <span className="text-[10px] font-mono text-slate-500">GEO: 19.805, 85.830</span>
               <span className="text-xs font-bold text-blue-600 dark:text-blue-400 cursor-pointer hover:underline flex items-center gap-1">
                 Navigate &rarr;
               </span>
@@ -345,7 +345,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               Trauma ICU 24/7 · 2 Ambulances Stationed · Blood Bank OK
             </div>
             <div className="flex justify-between items-center pt-1 border-t border-slate-100 dark:border-white/5">
-              <span className="text-[10px] font-mono text-slate-400">HOTLINE: 06752-222044</span>
+              <span className="text-[10px] font-mono text-slate-500">HOTLINE: 06752-222044</span>
               <span className="text-xs font-bold text-blue-600 dark:text-blue-400 cursor-pointer hover:underline flex items-center gap-1">
                 Call Hospital &rarr;
               </span>
@@ -367,7 +367,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               6 Water Tankers · 8,000 Dry Ration Packets Available
             </div>
             <div className="flex justify-between items-center pt-1 border-t border-slate-100 dark:border-white/5">
-              <span className="text-[10px] font-mono text-slate-400">STOCK: ADEQUATE</span>
+              <span className="text-[10px] font-mono text-slate-500">STOCK: ADEQUATE</span>
               <span className="text-xs font-bold text-blue-600 dark:text-blue-400 cursor-pointer hover:underline flex items-center gap-1">
                 Request Supply &rarr;
               </span>
@@ -389,7 +389,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               OSRTC Evacuation Buses Depart Every 15 Mins
             </div>
             <div className="flex justify-between items-center pt-1 border-t border-slate-100 dark:border-white/5">
-              <span className="text-[10px] font-mono text-slate-400">FARES: 100% FREE</span>
+              <span className="text-[10px] font-mono text-slate-500">FARES: 100% FREE</span>
               <span className="text-xs font-bold text-blue-600 dark:text-blue-400 cursor-pointer hover:underline flex items-center gap-1">
                 View Schedule &rarr;
               </span>
@@ -411,7 +411,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               Reserved for Emergency Vehicles & Hospital Generators
             </div>
             <div className="flex justify-between items-center pt-1 border-t border-slate-100 dark:border-white/5">
-              <span className="text-[10px] font-mono text-slate-400">DIESEL: 18,000L</span>
+              <span className="text-[10px] font-mono text-slate-500">DIESEL: 18,000L</span>
               <span className="text-xs font-bold text-blue-600 dark:text-blue-400 cursor-pointer hover:underline flex items-center gap-1">
                 Fuel Pass &rarr;
               </span>
@@ -433,7 +433,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               Toll-Free Police, Medical Ambulance & OSDMA Desk
             </div>
             <div className="flex justify-between items-center pt-1 border-t border-slate-100 dark:border-white/5">
-              <span className="text-[10px] font-mono text-slate-400">TOLL-FREE 24/7</span>
+              <span className="text-[10px] font-mono text-slate-500">TOLL-FREE 24/7</span>
               <a href="tel:112" className="text-xs font-bold text-emerald-600 dark:text-emerald-400 cursor-pointer hover:underline flex items-center gap-1">
                 Dial 112 Now &rarr;
               </a>
@@ -491,7 +491,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               Official Emergency Contact Numbers
             </h3>
           </div>
-          <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-950/30 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">
+          <span className="text-xs font-mono font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/60 px-2.5 py-0.5 rounded border border-emerald-300 dark:border-emerald-700">
             TOLL-FREE 24/7 ACTIVE
           </span>
         </div>
@@ -543,7 +543,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               value={reportText}
               onChange={e => setReportText(e.target.value)}
               placeholder="E.g., Fallen banyan tree blocking SH-13 near Brahmagiri block office..."
-              className="w-full bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/10 rounded-xl p-3 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-blue-500 font-mono shadow-sm"
+              className="w-full bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/10 rounded-xl p-3 text-xs text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-white/40 focus:outline-none focus:border-blue-500 font-mono shadow-sm"
             />
             <button
               onClick={handleCitizenReport}
@@ -573,14 +573,14 @@ export default function CitizenServices({ onShowToast }: Props) {
             </div>
           </div>
 
-          <div className="text-[10px] font-mono text-slate-400">
+          <div className="text-[10px] font-mono text-slate-500">
             COMPLIANT WITH ITU DISASTER TELECOM PROTOCOLS
           </div>
         </div>
       </div>
 
       {/* Official Guidance Note */}
-      <div className="text-[11px] text-slate-500 dark:text-white/40 italic text-center pb-2">
+      <div className="text-xs font-medium text-slate-600 dark:text-slate-300 italic text-center pb-2">
         {t.footer}
       </div>
 
@@ -601,7 +601,7 @@ export default function CitizenServices({ onShowToast }: Props) {
                 Broadcast Emergency SOS Beacon?
               </h3>
             </div>
-            <p className="text-xs text-slate-600 dark:text-white/70 leading-relaxed">
+            <p className="text-xs font-medium text-slate-700 dark:text-slate-300 leading-relaxed">
               This will broadcast an immutable distress beacon with your coordinates (<strong>19.8135°N, 85.8312°E</strong>)
               directly to the SURAKSHA Command HQ and nearby mesh nodes.
             </p>

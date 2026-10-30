@@ -120,7 +120,7 @@ export default function ResponderOperations({ onShowToast }: Props) {
           <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
             Responder Operations
           </h1>
-          <p className="text-xs text-slate-700 dark:text-white/60 mt-0.5">
+          <p className="text-sm font-medium text-slate-700 dark:text-slate-300 mt-1">
             Field execution, mission progression, safe routing & ground condition telemetry.
           </p>
         </div>
@@ -173,14 +173,14 @@ export default function ResponderOperations({ onShowToast }: Props) {
       <div className="bg-white dark:bg-[#121622] border border-slate-200/90 dark:border-white/10 rounded-2xl p-6 shadow-sm space-y-5">
         <div className="flex items-start justify-between flex-wrap gap-4 border-b border-slate-200 dark:border-white/10 pb-4">
           <div>
-            <div className="text-[10px] font-mono text-amber-600 dark:text-amber-400 font-bold uppercase tracking-wider mb-1 flex items-center gap-1.5">
+            <div className="text-xs font-mono text-amber-700 dark:text-amber-400 font-bold uppercase tracking-wider mb-1 flex items-center gap-1.5">
               <AlertTriangle size={13} />
               <span>ASSIGNED MISSION · OP-2019-042</span>
             </div>
             <h2 className="text-xl font-black text-slate-900 dark:text-white">
               TASK-2019-FANI-084: Brahmagiri Relief Pre-positioning
             </h2>
-            <div className="text-xs text-slate-700 dark:text-white/60 font-mono mt-0.5">
+            <div className="text-xs font-medium text-slate-700 dark:text-slate-300 font-mono mt-1">
               Puri Coastal District · Target Coordinates: 19.7991° N, 85.8239° E
             </div>
           </div>
@@ -247,7 +247,7 @@ export default function ResponderOperations({ onShowToast }: Props) {
                   RECOMMENDED · PASSABLE
                 </span>
               </div>
-              <p className="text-xs text-slate-700 dark:text-white/70 mt-1.5 leading-relaxed">
+              <p className="text-xs font-medium text-slate-700 dark:text-slate-300 mt-1.5 leading-relaxed">
                 Distance: 54 km · Tree falls cleared by NHAI team at km 28 · Bridges structurally intact · Safe for heavy rescue vehicles.
               </p>
             </div>
@@ -269,7 +269,7 @@ export default function ResponderOperations({ onShowToast }: Props) {
                   IMPASSABLE · SURGE 1.8M
                 </span>
               </div>
-              <p className="text-xs text-slate-700 dark:text-white/70 mt-1.5 leading-relaxed">
+              <p className="text-xs font-medium text-slate-700 dark:text-slate-300 mt-1.5 leading-relaxed">
                 Hazard: High storm surge breach at Culvert 14. Roadway washed out. Inaccessible to wheeled transport.
               </p>
             </div>
@@ -281,14 +281,14 @@ export default function ResponderOperations({ onShowToast }: Props) {
       <div className="bg-white dark:bg-[#121622] border border-slate-200/90 dark:border-white/10 rounded-2xl p-6 shadow-sm space-y-5">
         <div className="flex items-center justify-between flex-wrap gap-2">
           <div>
-            <div className="text-[10px] font-mono text-blue-600 dark:text-blue-400 font-bold uppercase tracking-wider mb-1">
+            <div className="text-xs font-mono text-blue-700 dark:text-blue-400 font-bold uppercase tracking-wider mb-1">
               FIELD STAGE MACHINE
             </div>
             <h3 className="text-lg font-black text-slate-900 dark:text-white">
               Mission Lifecycle Progression
             </h3>
           </div>
-          <span className="text-xs font-mono text-slate-500 dark:text-white/40">
+          <span className="text-xs font-mono font-semibold text-slate-700 dark:text-slate-300">
             CURRENT PHASE: <strong className="text-blue-600 dark:text-blue-400 font-bold">{currentStep}</strong>
           </span>
         </div>
@@ -309,7 +309,7 @@ export default function ResponderOperations({ onShowToast }: Props) {
                     : 'bg-slate-50 dark:bg-[#181d2a] text-slate-700 dark:text-white/50 border-slate-200/90 dark:border-white/5'
                 }`}
               >
-                <div className="text-[9px] opacity-70">STAGE 0{idx + 1}</div>
+                <div className="text-[11px] font-mono font-bold opacity-80">STAGE 0{idx + 1}</div>
                 <div className="mt-1 flex items-center justify-center gap-1">
                   {isCompleted && <Check size={12} />}
                   <span>{step}</span>
@@ -336,14 +336,14 @@ export default function ResponderOperations({ onShowToast }: Props) {
       <div className="bg-white dark:bg-[#121622] border border-slate-200/90 dark:border-white/10 rounded-2xl p-6 shadow-sm space-y-5">
         <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4">
           <div>
-            <div className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold uppercase tracking-wider mb-1">
+            <div className="text-xs font-mono text-emerald-700 dark:text-emerald-400 font-bold uppercase tracking-wider mb-1">
               GROUND TELEMETRY & LOGS
             </div>
             <h3 className="text-lg font-black text-slate-900 dark:text-white">
               Field Situation Report (SitRep)
             </h3>
           </div>
-          <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-950/30 px-2.5 py-1 rounded-full border border-emerald-200 dark:border-emerald-800">
+          <span className="text-xs font-mono text-emerald-800 dark:text-emerald-300 font-bold bg-emerald-50 dark:bg-emerald-950/50 px-3 py-1 rounded-full border border-emerald-300 dark:border-emerald-700">
             ENCRYPTED RELAY ACTIVE
           </span>
         </div>
@@ -370,7 +370,7 @@ export default function ResponderOperations({ onShowToast }: Props) {
 
         {/* Previous Sitreps Log */}
         <div className="space-y-2.5 pt-2 border-t border-slate-100 dark:border-white/5">
-          <div className="text-[10px] font-mono uppercase text-slate-400 font-bold">
+          <div className="text-xs font-mono uppercase text-slate-700 dark:text-slate-300 font-bold">
             Recent Field Transmissions Feed
           </div>
           <div className="space-y-2.5 max-h-48 overflow-y-auto">
@@ -379,7 +379,7 @@ export default function ResponderOperations({ onShowToast }: Props) {
                 key={idx}
                 className="p-3 rounded-xl bg-slate-50 dark:bg-[#181d2a] text-xs font-mono border border-slate-200/90 dark:border-white/5"
               >
-                <div className="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                <div className="flex items-center justify-between text-xs font-medium text-slate-600 dark:text-slate-300 mb-1">
                   <span className="text-blue-600 dark:text-cyan-400 font-bold">{s.id}</span>
                   <span>{s.time}</span>
                 </div>

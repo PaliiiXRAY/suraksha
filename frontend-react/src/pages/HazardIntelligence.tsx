@@ -226,19 +226,19 @@ export default function HazardIntelligence({ onShowToast }: Props) {
       <div className="bg-white dark:bg-[#121622] rounded-xl border border-slate-200/90 dark:border-white/10 p-4 shadow-sm grid grid-cols-2 sm:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-slate-100 dark:divide-white/10 gap-3 sm:gap-0">
         <div className="px-4 py-1 flex items-baseline gap-2">
           <span className="text-2xl font-black font-mono text-slate-900 dark:text-white">39</span>
-          <span className="text-xs text-slate-500 dark:text-white/60">sectors analyzed</span>
+          <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">sectors analyzed</span>
         </div>
         <div className="px-4 py-1 flex items-baseline gap-2">
           <span className="text-2xl font-black font-mono text-slate-900 dark:text-white">100%</span>
-          <span className="text-xs text-slate-500 dark:text-white/60">classification rate</span>
+          <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">classification rate</span>
         </div>
         <div className="px-4 py-1 flex items-baseline gap-2">
           <span className="text-2xl font-black font-mono text-red-600 dark:text-red-400">6</span>
-          <span className="text-xs text-slate-500 dark:text-white/60">critical — action needed</span>
+          <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">critical — action needed</span>
         </div>
         <div className="px-4 py-1 flex items-baseline gap-2">
           <span className="text-2xl font-black font-mono text-emerald-600 dark:text-emerald-400">1.18s</span>
-          <span className="text-xs text-slate-500 dark:text-white/60">avg model score latency</span>
+          <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">avg model score latency</span>
         </div>
       </div>
 
@@ -396,9 +396,9 @@ export default function HazardIntelligence({ onShowToast }: Props) {
                   </div>
 
                   <h3 className="font-bold text-sm text-slate-900 dark:text-white leading-snug">{s.title}</h3>
-                  <div className="text-xs font-bold text-slate-700 dark:text-slate-300 mt-0.5">{s.location}</div>
+                  <div className="text-sm font-semibold text-slate-700 dark:text-slate-300 mt-0.5">{s.location}</div>
 
-                  <div className="flex items-center justify-between mt-3 pt-2 border-t border-slate-100 dark:border-white/5 text-xs font-mono text-slate-700 dark:text-slate-300">
+                  <div className="flex items-center justify-between mt-3 pt-2 border-t border-slate-100 dark:border-white/5 text-xs font-mono font-medium text-slate-700 dark:text-slate-300">
                     <span>Class: <strong className="text-slate-950 dark:text-white font-black">{s.classification}</strong></span>
                     <span className="px-2 py-0.5 rounded-md bg-slate-200 dark:bg-white/10 text-slate-900 dark:text-white text-xs font-black border border-slate-300 dark:border-white/15">
                       {s.status}
@@ -468,7 +468,7 @@ export default function HazardIntelligence({ onShowToast }: Props) {
               className={`pb-2.5 transition-all flex items-center gap-1.5 ${
                 activeDossierTab === 'classification'
                   ? 'border-b-2 border-blue-600 text-blue-600 dark:text-blue-400'
-                  : 'text-slate-500 hover:text-slate-900 dark:text-white/50'
+                  : 'text-slate-600 hover:text-slate-900 dark:text-slate-300 font-semibold'
               }`}
             >
               <span>Classification</span>
@@ -478,7 +478,7 @@ export default function HazardIntelligence({ onShowToast }: Props) {
               className={`pb-2.5 transition-all flex items-center gap-1.5 ${
                 activeDossierTab === 'dossier'
                   ? 'border-b-2 border-blue-600 text-blue-600 dark:text-blue-400'
-                  : 'text-slate-500 hover:text-slate-900 dark:text-white/50'
+                  : 'text-slate-600 hover:text-slate-900 dark:text-slate-300 font-semibold'
               }`}
             >
               <span>Intelligence Dossier</span>
@@ -490,13 +490,13 @@ export default function HazardIntelligence({ onShowToast }: Props) {
             {/* Classification & AI Confidence */}
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-xs font-mono text-slate-700 dark:text-slate-300 uppercase font-bold tracking-wider">CLASSIFICATION</div>
+                <div className="text-xs font-mono font-medium text-slate-700 dark:text-slate-300 uppercase font-bold tracking-wider">CLASSIFICATION</div>
                 <div className="text-base font-black text-slate-900 dark:text-white">
                   {selectedSignal.classification}
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-xs font-mono text-slate-700 dark:text-slate-300 uppercase font-bold tracking-wider">AI CONFIDENCE</div>
+                <div className="text-xs font-mono font-medium text-slate-700 dark:text-slate-300 uppercase font-bold tracking-wider">AI CONFIDENCE</div>
                 <div className="text-base font-black font-mono text-emerald-600 dark:text-emerald-400">
                   {selectedSignal.confidence}
                 </div>
@@ -575,13 +575,13 @@ export default function HazardIntelligence({ onShowToast }: Props) {
 
           <div className="flex items-center gap-2">
             <div className="relative">
-              <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+              <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" />
               <input
                 type="text"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
                 placeholder="Search ID, place, class..."
-                className="bg-slate-50 dark:bg-[#181d2a] border border-slate-200 dark:border-white/10 rounded-lg pl-8 pr-3 py-1.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none w-48 sm:w-64"
+                className="bg-slate-50 dark:bg-[#181d2a] border border-slate-200 dark:border-white/10 rounded-lg pl-8 pr-3 py-1.5 text-xs text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none w-48 sm:w-64"
               />
             </div>
             <select className="bg-slate-50 dark:bg-[#181d2a] border border-slate-200 dark:border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-slate-700 dark:text-white font-mono">

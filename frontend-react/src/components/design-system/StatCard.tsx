@@ -35,7 +35,7 @@ export default function StatCard({
               <Icon size={14} className={iconColor} />
             </div>
           )}
-          <span className="text-xs font-mono uppercase tracking-wider font-black text-slate-800 dark:text-slate-100">
+          <span className="text-xs font-mono uppercase tracking-wider font-bold text-slate-700 dark:text-slate-200">
             {title}
           </span>
         </div>
@@ -66,7 +66,7 @@ export default function StatCard({
       </div>
 
       {subtitle && (
-        <div className="mt-2 text-xs font-bold text-slate-700 dark:text-slate-300">
+        <div className="mt-2 text-xs font-semibold text-slate-600 dark:text-slate-300">
           {subtitle}
         </div>
       )}
