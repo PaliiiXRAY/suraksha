@@ -1,7 +1,7 @@
 import os
 import json
 import csv
-import pytest
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SEED_DATA_DIR = os.path.join(BASE_DIR, "db", "seed", "data")
