@@ -1064,9 +1064,8 @@ async function updateResponderDetailPanel(id) {
 // ==========================================
 function switchPortal(portalName) {
     currentPortal = portalName;
-    const portals = ['ntro', 'command', 'responder', 'citizen'];
-    // Keep all 4 dashboard portals accessible for live judging & presentation
-    const allowed = ['ntro', 'command', 'responder', 'citizen'];
+    const portals = ['cyclone', 'ntro', 'command', 'responder', 'citizen'];
+    const allowed = ['cyclone', 'ntro', 'command', 'responder', 'citizen'];
 
     portals.forEach(p => {
         const el = document.getElementById(`portal-${p}`);
@@ -1089,10 +1088,14 @@ function switchPortal(portalName) {
     if (portalName === 'command' && window.cmdMap) {
         setTimeout(() => window.cmdMap.invalidateSize(), 250);
     }
+    if (portalName === 'cyclone' && window.CycloneView) {
+        setTimeout(() => CycloneView.invalidateMap(), 250);
+    }
 
     const footerLabel = document.getElementById('txt-footer-portal-label');
     if (footerLabel) {
-        footerLabel.textContent = portalName === 'ntro' ? 'NTRO Intelligence Portal' :
+        footerLabel.textContent = portalName === 'cyclone' ? 'SURAKSHA Cyclone Decision Support & Simulation Console' :
+            portalName === 'ntro' ? 'NTRO Intelligence Portal' :
             portalName === 'command' ? 'Government Command Dashboard' :
             portalName === 'responder' ? 'First Responder Operational Console' :
             'Citizen Services Portal';
@@ -1409,7 +1412,7 @@ window.switchPortal = function(portalName) {
     currentPortal = portalName;
     
     // 1. Hide all portals and reset tabs
-    const portals = ['ntro', 'command', 'responder', 'citizen'];
+    const portals = ['cyclone', 'ntro', 'command', 'responder', 'citizen'];
     portals.forEach(p => {
         const portalEl = document.getElementById(`portal-${p}`);
         if (portalEl) portalEl.classList.add('hidden');
@@ -1427,7 +1430,11 @@ window.switchPortal = function(portalName) {
     // 3. Highlight active tab
     const activeTabEl = document.getElementById(`tab-${portalName}`);
     if (activeTabEl) {
-        activeTabEl.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-sm border border-slate-200/80 dark:border-slate-700 transition-all font-bold";
+        if (portalName === 'cyclone') {
+            activeTabEl.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white dark:bg-slate-900 text-purple-600 dark:text-purple-400 shadow-sm border border-slate-200/80 dark:border-slate-700 transition-all font-bold cursor-pointer";
+        } else {
+            activeTabEl.className = "flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-sm border border-slate-200/80 dark:border-slate-700 transition-all font-bold cursor-pointer";
+        }
     }
     
     // 4. Update URL parameter for persistence without reload
@@ -1445,11 +1452,16 @@ window.switchPortal = function(portalName) {
 document.addEventListener('DOMContentLoaded', async () => {
     if (window.lucide) lucide.createIcons();
     const qp = new URLSearchParams(window.location.search).get('portal');
-    if (['ntro', 'command', 'responder', 'citizen'].includes(qp)) {
+    if (['cyclone', 'ntro', 'command', 'responder', 'citizen'].includes(qp)) {
         currentPortal = qp;
+    } else if (!qp) {
+        currentPortal = 'cyclone';
     }
     await Auth.init();
     await loadIncidents();
+    if (window.CycloneView) {
+        await CycloneView.init();
+    }
     switchPortal(currentPortal);
     loadLiveStats();
 });

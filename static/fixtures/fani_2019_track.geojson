@@ -1,0 +1,651 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "event": "Extremely Severe Cyclonic Storm Fani (2019)",
+    "provenance_tag": "REPLAY",
+    "source": "India Meteorological Department (IMD) Report on Cyclonic Disturbances Over North Indian Ocean 2019",
+    "license": "Government Open Data License - India (GODL)",
+    "total_track_points": 20,
+    "is_simulated": false
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.5,
+          5.2
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "timestamp_utc": "2019-04-26T06:00:00Z",
+        "timestamp_ist": "2019-04-26T11:30:00+05:30",
+        "latitude": 5.2,
+        "longitude": 88.5,
+        "wind_speed_knots": 25,
+        "wind_speed_kmh": 45,
+        "central_pressure_hpa": 1006,
+        "cyclone_category": "Depression",
+        "operational_stage": "Genesis in Bay of Bengal",
+        "eye_radius_km": 0.0,
+        "hazard_radius_90kmh_km": 40.0,
+        "hazard_radius_120kmh_km": 0.0,
+        "provenance_tag": "REPLAY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.2,
+          5.8
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "timestamp_utc": "2019-04-27T00:00:00Z",
+        "timestamp_ist": "2019-04-27T05:30:00+05:30",
+        "latitude": 5.8,
+        "longitude": 88.2,
+        "wind_speed_knots": 35,
+        "wind_speed_kmh": 65,
+        "central_pressure_hpa": 1000,
+        "cyclone_category": "Deep Depression",
+        "operational_stage": "Intensifying",
+        "eye_radius_km": 0.0,
+        "hazard_radius_90kmh_km": 40.0,
+        "hazard_radius_120kmh_km": 0.0,
+        "provenance_tag": "REPLAY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          87.8,
+          6.8
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "timestamp_utc": "2019-04-27T12:00:00Z",
+        "timestamp_ist": "2019-04-27T17:30:00+05:30",
+        "latitude": 6.8,
+        "longitude": 87.8,
+        "wind_speed_knots": 45,
+        "wind_speed_kmh": 85,
+        "central_pressure_hpa": 994,
+        "cyclone_category": "Cyclonic Storm",
+        "operational_stage": "Named Fani",
+        "eye_radius_km": 0.0,
+        "hazard_radius_90kmh_km": 40.0,
+        "hazard_radius_120kmh_km": 0.0,
+        "provenance_tag": "REPLAY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          86.9,
+          8.2
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "timestamp_utc": "2019-04-28T06:00:00Z",
+        "timestamp_ist": "2019-04-28T11:30:00+05:30",
+        "latitude": 8.2,
+        "longitude": 86.9,
+        "wind_speed_knots": 50,
+        "wind_speed_kmh": 95,
+        "central_pressure_hpa": 990,
+        "cyclone_category": "Cyclonic Storm",
+        "operational_stage": "Moving North-Northwest",
+        "eye_radius_km": 0.0,
+        "hazard_radius_90kmh_km": 40.0,
+        "hazard_radius_120kmh_km": 0.0,
+        "provenance_tag": "REPLAY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          86.2,
+          9.5
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "timestamp_utc": "2019-04-29T00:00:00Z",
+        "timestamp_ist": "2019-04-29T05:30:00+05:30",
+        "latitude": 9.5,
+        "longitude": 86.2,
+        "wind_speed_knots": 60,
+        "wind_speed_kmh": 110,
+        "central_pressure_hpa": 984,
+        "cyclone_category": "Severe Cyclonic Storm",
+        "operational_stage": "Track curvature",
+        "eye_radius_km": 0.0,
+        "hazard_radius_90kmh_km": 40.0,
+        "hazard_radius_120kmh_km": 0.0,
+        "provenance_tag": "REPLAY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          86.0,
+          11.0
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "timestamp_utc": "2019-04-29T18:00:00Z",
+        "timestamp_ist": "2019-04-29T23:30:00+05:30",
+        "latitude": 11.0,
+        "longitude": 86.0,
+        "wind_speed_knots": 75,
+        "wind_speed_kmh": 140,
+        "central_pressure_hpa": 974,
+        "cyclone_category": "Very Severe Cyclonic Storm",
+        "operational_stage": "Rapid Intensification",
+        "eye_radius_km": 0.0,
+        "hazard_radius_90kmh_km": 85.0,
+        "hazard_radius_120kmh_km": 0.0,
+        "provenance_tag": "REPLAY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.5,
+          12.8
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "timestamp_utc": "2019-04-30T12:00:00Z",
+        "timestamp_ist": "2019-04-30T17:30:00+05:30",
+        "latitude": 12.8,
+        "longitude": 85.5,
+        "wind_speed_knots": 95,
+        "wind_speed_kmh": 175,
+        "central_pressure_hpa": 956,
+        "cyclone_category": "Extremely Severe Cyclonic Storm",
+        "operational_stage": "Eye visible on INSAT-3D",
+        "eye_radius_km": 14.0,
+        "hazard_radius_90kmh_km": 85.0,
+        "hazard_radius_120kmh_km": 45.0,
+        "provenance_tag": "REPLAY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          84.8,
+          14.1
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "timestamp_utc": "2019-05-01T06:00:00Z",
+        "timestamp_ist": "2019-05-01T11:30:00+05:30",
+        "latitude": 14.1,
+        "longitude": 84.8,
+        "wind_speed_knots": 105,
+        "wind_speed_kmh": 195,
+        "central_pressure_hpa": 946,
+        "cyclone_category": "Extremely Severe Cyclonic Storm",
+        "operational_stage": "Curving Northeast towards Odisha",
+        "eye_radius_km": 14.0,
+        "hazard_radius_90kmh_km": 85.0,
+        "hazard_radius_120kmh_km": 45.0,
+        "provenance_tag": "REPLAY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          84.4,
+          15.2
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "timestamp_utc": "2019-05-01T18:00:00Z",
+        "timestamp_ist": "2019-05-01T23:30:00+05:30",
+        "latitude": 15.2,
+        "longitude": 84.4,
+        "wind_speed_knots": 115,
+        "wind_speed_kmh": 215,
+        "central_pressure_hpa": 938,
+        "cyclone_category": "Extremely Severe Cyclonic Storm",
+        "operational_stage": "Peak intensity, central dense overcast",
+        "eye_radius_km": 14.0,
+        "hazard_radius_90kmh_km": 85.0,
+        "hazard_radius_120kmh_km": 45.0,
+        "provenance_tag": "REPLAY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          84.5,
+          16.0
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "timestamp_utc": "2019-05-02T03:00:00Z",
+        "timestamp_ist": "2019-05-02T08:30:00+05:30",
+        "latitude": 16.0,
+        "longitude": 84.5,
+        "wind_speed_knots": 115,
+        "wind_speed_kmh": 215,
+        "central_pressure_hpa": 938,
+        "cyclone_category": "Extremely Severe Cyclonic Storm",
+        "operational_stage": "IMD issues Red Warning for 14 Odisha districts",
+        "eye_radius_km": 14.0,
+        "hazard_radius_90kmh_km": 85.0,
+        "hazard_radius_120kmh_km": 45.0,
+        "provenance_tag": "REPLAY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          84.8,
+          17.1
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "timestamp_utc": "2019-05-02T12:00:00Z",
+        "timestamp_ist": "2019-05-02T17:30:00+05:30",
+        "latitude": 17.1,
+        "longitude": 84.8,
+        "wind_speed_knots": 110,
+        "wind_speed_kmh": 205,
+        "central_pressure_hpa": 942,
+        "cyclone_category": "Extremely Severe Cyclonic Storm",
+        "operational_stage": "Approaching Odisha coast (~200 km SSW of Puri)",
+        "eye_radius_km": 14.0,
+        "hazard_radius_90kmh_km": 85.0,
+        "hazard_radius_120kmh_km": 45.0,
+        "provenance_tag": "REPLAY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.3,
+          18.5
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "timestamp_utc": "2019-05-02T21:00:00Z",
+        "timestamp_ist": "2019-05-03T02:30:00+05:30",
+        "latitude": 18.5,
+        "longitude": 85.3,
+        "wind_speed_knots": 110,
+        "wind_speed_kmh": 205,
+        "central_pressure_hpa": 944,
+        "cyclone_category": "Extremely Severe Cyclonic Storm",
+        "operational_stage": "Outer rainbands strike Gopalpur & Puri",
+        "eye_radius_km": 14.0,
+        "hazard_radius_90kmh_km": 85.0,
+        "hazard_radius_120kmh_km": 45.0,
+        "provenance_tag": "REPLAY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.8,
+          19.8
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "timestamp_utc": "2019-05-03T03:00:00Z",
+        "timestamp_ist": "2019-05-03T08:30:00+05:30",
+        "latitude": 19.8,
+        "longitude": 85.8,
+        "wind_speed_knots": 115,
+        "wind_speed_kmh": 215,
+        "central_pressure_hpa": 937,
+        "cyclone_category": "Extremely Severe Cyclonic Storm",
+        "operational_stage": "LANDFALL: Eye crosses Puri coast (gusts 240 km/h)",
+        "eye_radius_km": 14.0,
+        "hazard_radius_90kmh_km": 85.0,
+        "hazard_radius_120kmh_km": 45.0,
+        "provenance_tag": "REPLAY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.8,
+          20.3
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "timestamp_utc": "2019-05-03T06:00:00Z",
+        "timestamp_ist": "2019-05-03T11:30:00+05:30",
+        "latitude": 20.3,
+        "longitude": 85.8,
+        "wind_speed_knots": 85,
+        "wind_speed_kmh": 160,
+        "central_pressure_hpa": 960,
+        "cyclone_category": "Very Severe Cyclonic Storm",
+        "operational_stage": "Passing over Khordha / Bhubaneswar",
+        "eye_radius_km": 0.0,
+        "hazard_radius_90kmh_km": 85.0,
+        "hazard_radius_120kmh_km": 0.0,
+        "provenance_tag": "REPLAY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          86.1,
+          20.6
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "timestamp_utc": "2019-05-03T09:00:00Z",
+        "timestamp_ist": "2019-05-03T14:30:00+05:30",
+        "latitude": 20.6,
+        "longitude": 86.1,
+        "wind_speed_knots": 75,
+        "wind_speed_kmh": 140,
+        "central_pressure_hpa": 970,
+        "cyclone_category": "Severe Cyclonic Storm",
+        "operational_stage": "Passing over Cuttack / Jagatsinghpur",
+        "eye_radius_km": 0.0,
+        "hazard_radius_90kmh_km": 85.0,
+        "hazard_radius_120kmh_km": 0.0,
+        "provenance_tag": "REPLAY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          86.4,
+          20.9
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "timestamp_utc": "2019-05-03T12:00:00Z",
+        "timestamp_ist": "2019-05-03T17:30:00+05:30",
+        "latitude": 20.9,
+        "longitude": 86.4,
+        "wind_speed_knots": 65,
+        "wind_speed_kmh": 120,
+        "central_pressure_hpa": 978,
+        "cyclone_category": "Severe Cyclonic Storm",
+        "operational_stage": "Striking Kendrapara / Jajpur",
+        "eye_radius_km": 0.0,
+        "hazard_radius_90kmh_km": 40.0,
+        "hazard_radius_120kmh_km": 0.0,
+        "provenance_tag": "REPLAY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          86.7,
+          21.2
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "timestamp_utc": "2019-05-03T15:00:00Z",
+        "timestamp_ist": "2019-05-03T20:30:00+05:30",
+        "latitude": 21.2,
+        "longitude": 86.7,
+        "wind_speed_knots": 55,
+        "wind_speed_kmh": 100,
+        "central_pressure_hpa": 984,
+        "cyclone_category": "Cyclonic Storm",
+        "operational_stage": "Striking Bhadrak / Balasore",
+        "eye_radius_km": 0.0,
+        "hazard_radius_90kmh_km": 40.0,
+        "hazard_radius_120kmh_km": 0.0,
+        "provenance_tag": "REPLAY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          87.0,
+          21.6
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "timestamp_utc": "2019-05-03T18:00:00Z",
+        "timestamp_ist": "2019-05-03T23:30:00+05:30",
+        "latitude": 21.6,
+        "longitude": 87.0,
+        "wind_speed_knots": 45,
+        "wind_speed_kmh": 85,
+        "central_pressure_hpa": 988,
+        "cyclone_category": "Cyclonic Storm",
+        "operational_stage": "Moving past Balasore towards West Bengal",
+        "eye_radius_km": 0.0,
+        "hazard_radius_90kmh_km": 40.0,
+        "hazard_radius_120kmh_km": 0.0,
+        "provenance_tag": "REPLAY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          87.8,
+          22.4
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "timestamp_utc": "2019-05-04T00:00:00Z",
+        "timestamp_ist": "2019-05-04T05:30:00+05:30",
+        "latitude": 22.4,
+        "longitude": 87.8,
+        "wind_speed_knots": 35,
+        "wind_speed_kmh": 65,
+        "central_pressure_hpa": 994,
+        "cyclone_category": "Deep Depression",
+        "operational_stage": "Inland West Bengal / Bangladesh border",
+        "eye_radius_km": 0.0,
+        "hazard_radius_90kmh_km": 40.0,
+        "hazard_radius_120kmh_km": 0.0,
+        "provenance_tag": "REPLAY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          88.8,
+          23.5
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "timestamp_utc": "2019-05-04T06:00:00Z",
+        "timestamp_ist": "2019-05-04T11:30:00+05:30",
+        "latitude": 23.5,
+        "longitude": 88.8,
+        "wind_speed_knots": 25,
+        "wind_speed_kmh": 45,
+        "central_pressure_hpa": 1000,
+        "cyclone_category": "Depression",
+        "operational_stage": "Degraded over Bangladesh",
+        "eye_radius_km": 0.0,
+        "hazard_radius_90kmh_km": 40.0,
+        "hazard_radius_120kmh_km": 0.0,
+        "provenance_tag": "REPLAY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            88.5,
+            5.2
+          ],
+          [
+            88.2,
+            5.8
+          ],
+          [
+            87.8,
+            6.8
+          ],
+          [
+            86.9,
+            8.2
+          ],
+          [
+            86.2,
+            9.5
+          ],
+          [
+            86.0,
+            11.0
+          ],
+          [
+            85.5,
+            12.8
+          ],
+          [
+            84.8,
+            14.1
+          ],
+          [
+            84.4,
+            15.2
+          ],
+          [
+            84.5,
+            16.0
+          ],
+          [
+            84.8,
+            17.1
+          ],
+          [
+            85.3,
+            18.5
+          ],
+          [
+            85.8,
+            19.8
+          ],
+          [
+            85.8,
+            20.3
+          ],
+          [
+            86.1,
+            20.6
+          ],
+          [
+            86.4,
+            20.9
+          ],
+          [
+            86.7,
+            21.2
+          ],
+          [
+            87.0,
+            21.6
+          ],
+          [
+            87.8,
+            22.4
+          ],
+          [
+            88.8,
+            23.5
+          ]
+        ]
+      },
+      "properties": {
+        "event_id": "fani_2019",
+        "cyclone_name": "FANI",
+        "start_time": "2019-04-26T06:00:00Z",
+        "end_time": "2019-05-04T06:00:00Z",
+        "peak_intensity_kmh": 215,
+        "landfall_point": "Puri, Odisha (19.80\u00b0N, 85.82\u00b0E)",
+        "source": "IMD Best Track Data Archive",
+        "provenance_tag": "REPLAY"
+      }
+    }
+  ]
+}

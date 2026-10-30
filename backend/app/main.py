@@ -15,7 +15,7 @@ from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from sqlalchemy import text
 
-from backend.app.api import auth, hotspots, incidents, public, reports, responders, stats
+from backend.app.api import auth, hotspots, incidents, public, reports, responders, stats, cyclone
 from backend.app.core.config import CORS_ORIGINS
 from backend.app.core.errors import AppException, make_error_response
 from backend.app.db.session import SessionLocal
@@ -178,6 +178,10 @@ app.include_router(public.router, prefix="/api/v2")
 
 app.include_router(responders.router, prefix="/api")
 app.include_router(responders.router, prefix="/api/v2")
+
+app.include_router(cyclone.router)
+app.include_router(cyclone.router, prefix="/api")
+app.include_router(cyclone.router, prefix="/api/v2")
 
 # Mount Static Assets and UI Routes
 STATIC_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "static")

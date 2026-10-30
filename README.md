@@ -150,9 +150,43 @@ pytest -v
 
 ---
 
-## 🎯 Offline-First Reliability
+## 🎯 Offline-First Reliability & Data Pack
+Network connectivity at disaster response sites and hackathon venues is notoriously fragile. SURAKSHA guarantees **100% offline demonstration capability** through a pre-packaged, timestamped **Cyclone Fani (May 2019) Replay Pack** (`db/seed/data/`). The entire spatial engine, route analysis, what-if simulation, and situation brief run completely locally without requiring external network connectivity.
 
-Network connectivity at disaster response sites and hackathon venues can be unreliable. SURAKSHA guarantees **100% offline demonstration capability** through a pre-packaged, timestamped **Cyclone Fani (May 2019) Replay Pack**. The entire spatial engine, route analysis, and what-if simulation run completely locally without requiring external network connectivity.
+### Pre-Seeded Offline Pack (`db/seed/data/` · Total Size: ~110 KB)
+| File | Description | Source & License | Tag |
+|---|---|---|---|
+| `fani_2019_track.geojson` | 20 chronological fix points (April 26 – May 4, 2019) with landfall at Puri | IMD Cyclone Warning Division (GODL-India) | `REPLAY` |
+| `fani_2019_warnings.json` | 4 official warning bulletins with stage, wind, and surge alerts | IMD National Weather Forecasting Centre (GODL-India) | `REPLAY` |
+| `odisha_blocks.geojson` | 39 administrative block polygons across 8 coastal/flood districts | Local Government Directory (LGD) / Census (GODL) | `HISTORICAL` |
+| `block_population.csv` | 39 block demographics: total & vulnerable (u5/o65) population | Office of Registrar General / Census 2011 (GODL) | `HISTORICAL` |
+| `osm_roads_coastal_odisha.geojson` | 13 arterial and evacuation corridors in Kendrapara, Balasore, Puri | OpenStreetMap contributors (ODbL 1.0) | `OBSERVED` |
+| `strategic_assets.csv` | 42 curated installations (hospitals, shelters, NDRF bases, fuel, ports) | OSDMA / NHM / PPT Registries (Open Government Data) | `OBSERVED` |
+
+Full per-file metadata, retrieval dates, and legal licenses are cataloged in [`db/seed/sources.md`](db/seed/sources.md).
+
+---
+
+## 🏷️ Provenance Badges (Zero Illusions)
+
+Every score, track fix, road segment, and dispatch task carries one of five canonical tags (detailed in [`docs/PROVENANCE_SPEC.md`](docs/PROVENANCE_SPEC.md)):
+- `OFFICIAL_FORECAST` — Direct, unmanipulated forecast from IMD (governs all decisions)
+- `OBSERVED` — Physical ground truth (OSM roads, OSDMA asset catalog)
+- `MODEL_ESTIMATE` — Algorithmic priority score (0–100) or route cut ratio
+- `REPLAY` — Historical Cyclone Fani verification pack
+- `SIMULATED` — What-if perturbation or simulated responder task
+- `INSUFFICIENT_DATA` — Safety gate fallback when telemetry is stale (>6h) or missing
+
+---
+
+## 📚 Essential Documentation
+- **[5-Minute Timed Demo Script](docs/DEMO_SCRIPT.md):** Minute-by-minute walkthrough hit for hit.
+- **[Presentation Slides](docs/SLIDES.md):** 10-slide high-impact deck for the Defence & Aerospace track.
+- **[Judge Q&A Defense Guide](docs/JUDGE_QA.md):** 20 battle-tested questions with bold answers.
+- **[Rehearsal & Drill Guide](docs/REHEARSAL_GUIDE.md):** Team timing and contingency ladder.
+- **[System Architecture](ARCHITECTURE.md):** Technical design, data flows, and container diagrams.
+- **[Architectural Decisions Log (ADR)](DECISIONS.md):** 14 architectural decisions (D1–D14).
+
 
 ---
 
@@ -160,5 +194,6 @@ Network connectivity at disaster response sites and hackathon venues can be unre
 
 1. **Priority Score $\neq$ Probability:** The 0–100 score is an operational urgency indicator, never a probability of occurrence.
 2. **Simulated Response Tasks:** All dispatches and operational tasks are explicitly tagged with `is_simulated: true`.
-3. **Transparent Provenance:** Every metric displays an explicit badge: `OFFICIAL_FORECAST`, `MODEL_ESTIMATE`, `REPLAY`, or `SIMULATED`.
+3. **Transparent Provenance:** Every metric displays an explicit badge: `OFFICIAL_FORECAST`, `OBSERVED`, `MODEL_ESTIMATE`, `REPLAY`, or `SIMULATED`.
 4. **Official System Integration:** SURAKSHA is designed to supplement and convert official warnings (IMD/ISRO/NDMA) into actionable logistics—never to override or replace official warning mandates.
+

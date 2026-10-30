@@ -1,0 +1,3815 @@
+{
+  "event_id": "fani_2019",
+  "event_name": "Cyclone Fani (May 2019)",
+  "lifecycle_state": "WARNING",
+  "landfall": {
+    "lat": 19.78,
+    "lon": 85.82,
+    "location": "Puri Coast, Odisha",
+    "peak_wind_kmh": 215
+  },
+  "ranked_blocks": [
+    {
+      "area_code": "OD_PUR_01",
+      "block_name": "Puri Sadar",
+      "district": "Puri",
+      "center_lat": 19.825,
+      "center_lon": 85.845,
+      "score": 94.3,
+      "distance_km": 5.6,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 29.2,
+          "detail": "Forecast wind peak 209 km/h (landfall proximity 5.6 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 18.3,
+          "detail": "Terrain flood susceptibility index 0.88 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 14.3,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 19.0,
+          "detail": "238,000 residents in administrative boundary (47,600 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 8.5,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 5.0,
+          "detail": "Immediate impact zone (< 6 hours to projected landfall)"
+        }
+      ],
+      "interlock_flags": [
+        "IMD_WARNING_SUPERSEDES_ALL"
+      ],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 1
+    },
+    {
+      "area_code": "OD_PUR_02",
+      "block_name": "Brahmagiri",
+      "district": "Puri",
+      "center_lat": 19.79,
+      "center_lon": 85.67,
+      "score": 85.0,
+      "distance_km": 15.7,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 27.9,
+          "detail": "Forecast wind peak 200 km/h (landfall proximity 15.7 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 19.2,
+          "detail": "Terrain flood susceptibility index 0.94 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 13.0,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 11.4,
+          "detail": "142,000 residents in administrative boundary (28,400 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 8.5,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 5.0,
+          "detail": "Immediate impact zone (< 6 hours to projected landfall)"
+        }
+      ],
+      "interlock_flags": [
+        "IMD_WARNING_SUPERSEDES_ALL"
+      ],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 2
+    },
+    {
+      "area_code": "OD_PUR_05",
+      "block_name": "Gop",
+      "district": "Puri",
+      "center_lat": 19.99,
+      "center_lon": 86.01,
+      "score": 83.0,
+      "distance_km": 30.7,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 26.1,
+          "detail": "Forecast wind peak 187 km/h (landfall proximity 30.7 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 17.5,
+          "detail": "Terrain flood susceptibility index 0.82 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 11.2,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 14.8,
+          "detail": "185,000 residents in administrative boundary (37,000 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 8.5,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 5.0,
+          "detail": "Immediate impact zone (< 6 hours to projected landfall)"
+        }
+      ],
+      "interlock_flags": [
+        "IMD_WARNING_SUPERSEDES_ALL"
+      ],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 3
+    },
+    {
+      "area_code": "OD_PUR_03",
+      "block_name": "Krushnaprasad",
+      "district": "Puri",
+      "center_lat": 19.68,
+      "center_lon": 85.45,
+      "score": 75.6,
+      "distance_km": 40.3,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 24.8,
+          "detail": "Forecast wind peak 178 km/h (landfall proximity 40.3 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 19.4,
+          "detail": "Terrain flood susceptibility index 0.96 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 10.0,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 7.9,
+          "detail": "98,500 residents in administrative boundary (19,700 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 8.5,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 5.0,
+          "detail": "Immediate impact zone (< 6 hours to projected landfall)"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 4
+    },
+    {
+      "area_code": "OD_PUR_06",
+      "block_name": "Kakatpur",
+      "district": "Puri",
+      "center_lat": 19.98,
+      "center_lon": 86.2,
+      "score": 75.6,
+      "distance_km": 45.5,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 24.3,
+          "detail": "Forecast wind peak 174 km/h (landfall proximity 45.5 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 18.7,
+          "detail": "Terrain flood susceptibility index 0.91 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 9.3,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 9.8,
+          "detail": "122,000 residents in administrative boundary (24,400 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 8.5,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 5.0,
+          "detail": "Immediate impact zone (< 6 hours to projected landfall)"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 5
+    },
+    {
+      "area_code": "OD_PUR_04",
+      "block_name": "Satyabadi",
+      "district": "Puri",
+      "center_lat": 19.95,
+      "center_lon": 85.82,
+      "score": 73.0,
+      "distance_km": 18.9,
+      "is_coastal": false,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 27.5,
+          "detail": "Forecast wind peak 197 km/h (landfall proximity 18.9 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 16.1,
+          "detail": "Terrain flood susceptibility index 0.72 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 2.5,
+          "detail": "Inland buffered elevation"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 13.4,
+          "detail": "168,000 residents in administrative boundary (33,600 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 8.5,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 5.0,
+          "detail": "Immediate impact zone (< 6 hours to projected landfall)"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 6
+    },
+    {
+      "area_code": "OD_PUR_09",
+      "block_name": "Nimapara",
+      "district": "Puri",
+      "center_lat": 20.06,
+      "center_lon": 86.02,
+      "score": 73.0,
+      "distance_km": 37.5,
+      "is_coastal": false,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 25.3,
+          "detail": "Forecast wind peak 181 km/h (landfall proximity 37.5 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 16.4,
+          "detail": "Terrain flood susceptibility index 0.74 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 2.1,
+          "detail": "Inland buffered elevation"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 15.8,
+          "detail": "198,000 residents in administrative boundary (39,600 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 8.5,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 5.0,
+          "detail": "Immediate impact zone (< 6 hours to projected landfall)"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 7
+    },
+    {
+      "area_code": "OD_PUR_07",
+      "block_name": "Astaranga",
+      "district": "Puri",
+      "center_lat": 19.92,
+      "center_lon": 86.26,
+      "score": 72.7,
+      "distance_km": 48.6,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 23.9,
+          "detail": "Forecast wind peak 171 km/h (landfall proximity 48.6 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 19.3,
+          "detail": "Terrain flood susceptibility index 0.95 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 8.9,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 7.1,
+          "detail": "89,000 residents in administrative boundary (17,800 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 8.5,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 5.0,
+          "detail": "Immediate impact zone (< 6 hours to projected landfall)"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 8
+    },
+    {
+      "area_code": "OD_KHO_03",
+      "block_name": "Chilika",
+      "district": "Khordha",
+      "center_lat": 19.78,
+      "center_lon": 85.32,
+      "score": 72.4,
+      "distance_km": 52.3,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 23.3,
+          "detail": "Forecast wind peak 167 km/h (landfall proximity 52.3 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 18.6,
+          "detail": "Terrain flood susceptibility index 0.9 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 8.5,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 11.0,
+          "detail": "138,000 residents in administrative boundary (27,600 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 6.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 5.0,
+          "detail": "Immediate impact zone (< 6 hours to projected landfall)"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 9
+    },
+    {
+      "area_code": "OD_JSP_04",
+      "block_name": "Balikuda",
+      "district": "Jagatsinghpur",
+      "center_lat": 20.09,
+      "center_lon": 86.35,
+      "score": 70.3,
+      "distance_km": 65.3,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 21.8,
+          "detail": "Forecast wind peak 156 km/h (landfall proximity 65.3 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 17.9,
+          "detail": "Terrain flood susceptibility index 0.85 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 6.8,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 14.2,
+          "detail": "178,000 residents in administrative boundary (35,600 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 6.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 3.5,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 10
+    },
+    {
+      "area_code": "OD_PUR_08",
+      "block_name": "Pipili",
+      "district": "Puri",
+      "center_lat": 20.12,
+      "center_lon": 85.83,
+      "score": 69.5,
+      "distance_km": 37.8,
+      "is_coastal": false,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 25.1,
+          "detail": "Forecast wind peak 180 km/h (landfall proximity 37.8 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 15.1,
+          "detail": "Terrain flood susceptibility index 0.65 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 2.1,
+          "detail": "Inland buffered elevation"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 13.8,
+          "detail": "172,000 residents in administrative boundary (34,400 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 8.5,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 5.0,
+          "detail": "Immediate impact zone (< 6 hours to projected landfall)"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 11
+    },
+    {
+      "area_code": "OD_CUT_03",
+      "block_name": "Niali",
+      "district": "Cuttack",
+      "center_lat": 20.14,
+      "center_lon": 86.06,
+      "score": 68.7,
+      "distance_km": 47.2,
+      "is_coastal": false,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 24.0,
+          "detail": "Forecast wind peak 172 km/h (landfall proximity 47.2 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 16.8,
+          "detail": "Terrain flood susceptibility index 0.77 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 1.8,
+          "detail": "Inland buffered elevation"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 12.6,
+          "detail": "158,000 residents in administrative boundary (31,600 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 8.5,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 5.0,
+          "detail": "Immediate impact zone (< 6 hours to projected landfall)"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 12
+    },
+    {
+      "area_code": "OD_KHO_01",
+      "block_name": "Bhubaneswar",
+      "district": "Khordha",
+      "center_lat": 20.296,
+      "center_lon": 85.824,
+      "score": 67.2,
+      "distance_km": 57.4,
+      "is_coastal": false,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 22.7,
+          "detail": "Forecast wind peak 163 km/h (landfall proximity 57.4 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 11.9,
+          "detail": "Terrain flood susceptibility index 0.42 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 1.6,
+          "detail": "Inland buffered elevation"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 20.0,
+          "detail": "885,000 residents in administrative boundary (132,750 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 6.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 5.0,
+          "detail": "Immediate impact zone (< 6 hours to projected landfall)"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 13
+    },
+    {
+      "area_code": "OD_JSP_01",
+      "block_name": "Erasama",
+      "district": "Jagatsinghpur",
+      "center_lat": 20.18,
+      "center_lon": 86.42,
+      "score": 66.7,
+      "distance_km": 76.9,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 20.2,
+          "detail": "Forecast wind peak 145 km/h (landfall proximity 76.9 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 19.7,
+          "detail": "Terrain flood susceptibility index 0.98 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 5.4,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 11.8,
+          "detail": "148,000 residents in administrative boundary (29,600 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 6.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 3.5,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 14
+    },
+    {
+      "area_code": "OD_CUT_01",
+      "block_name": "Cuttack Sadar",
+      "district": "Cuttack",
+      "center_lat": 20.462,
+      "center_lon": 85.882,
+      "score": 66.5,
+      "distance_km": 76.1,
+      "is_coastal": false,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 20.4,
+          "detail": "Forecast wind peak 146 km/h (landfall proximity 76.1 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 15.5,
+          "detail": "Terrain flood susceptibility index 0.68 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 1.1,
+          "detail": "Inland buffered elevation"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 20.0,
+          "detail": "650,000 residents in administrative boundary (117,000 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 6.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 3.5,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 15
+    },
+    {
+      "area_code": "OD_KHO_02",
+      "block_name": "Jatani",
+      "district": "Khordha",
+      "center_lat": 20.16,
+      "center_lon": 85.7,
+      "score": 65.7,
+      "distance_km": 44.1,
+      "is_coastal": false,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 24.4,
+          "detail": "Forecast wind peak 175 km/h (landfall proximity 44.1 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 12.7,
+          "detail": "Terrain flood susceptibility index 0.48 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 1.9,
+          "detail": "Inland buffered elevation"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 13.2,
+          "detail": "165,000 residents in administrative boundary (33,000 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 8.5,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 5.0,
+          "detail": "Immediate impact zone (< 6 hours to projected landfall)"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 16
+    },
+    {
+      "area_code": "OD_JSP_05",
+      "block_name": "Jagatsinghpur Sadar",
+      "district": "Jagatsinghpur",
+      "center_lat": 20.26,
+      "center_lon": 86.17,
+      "score": 65.6,
+      "distance_km": 64.7,
+      "is_coastal": false,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 21.8,
+          "detail": "Forecast wind peak 156 km/h (landfall proximity 64.7 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 15.8,
+          "detail": "Terrain flood susceptibility index 0.7 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 1.4,
+          "detail": "Inland buffered elevation"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 17.2,
+          "detail": "215,000 residents in administrative boundary (43,000 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 6.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 3.5,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 17
+    },
+    {
+      "area_code": "OD_JSP_02",
+      "block_name": "Kujang",
+      "district": "Jagatsinghpur",
+      "center_lat": 20.31,
+      "center_lon": 86.53,
+      "score": 59.1,
+      "distance_km": 94.7,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 18.0,
+          "detail": "Forecast wind peak 129 km/h (landfall proximity 94.7 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 15.3,
+          "detail": "Terrain flood susceptibility index 0.92 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 3.2,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 13.2,
+          "detail": "165,000 residents in administrative boundary (33,000 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 6.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 3.5,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 18
+    },
+    {
+      "area_code": "OD_CUT_02",
+      "block_name": "Salepur",
+      "district": "Cuttack",
+      "center_lat": 20.52,
+      "center_lon": 86.01,
+      "score": 59.1,
+      "distance_km": 84.6,
+      "is_coastal": false,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 19.3,
+          "detail": "Forecast wind peak 138 km/h (landfall proximity 84.6 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 12.6,
+          "detail": "Terrain flood susceptibility index 0.73 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 0.9,
+          "detail": "Inland buffered elevation"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 16.8,
+          "detail": "210,000 residents in administrative boundary (42,000 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 6.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 3.5,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 19
+    },
+    {
+      "area_code": "OD_GAN_01",
+      "block_name": "Chatrapur",
+      "district": "Ganjam",
+      "center_lat": 19.35,
+      "center_lon": 84.99,
+      "score": 59.1,
+      "distance_km": 99.2,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 17.4,
+          "detail": "Forecast wind peak 125 km/h (landfall proximity 99.2 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 13.6,
+          "detail": "Terrain flood susceptibility index 0.8 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 3.0,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 15.6,
+          "detail": "195,000 residents in administrative boundary (39,000 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 6.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 3.5,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 20
+    },
+    {
+      "area_code": "OD_GAN_02",
+      "block_name": "Rangeilunda (Gopalpur)",
+      "district": "Ganjam",
+      "center_lat": 19.26,
+      "center_lon": 84.86,
+      "score": 56.9,
+      "distance_km": 116.0,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 15.3,
+          "detail": "Forecast wind peak 110 km/h (landfall proximity 116.0 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 14.4,
+          "detail": "Terrain flood susceptibility index 0.86 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 3.0,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 17.6,
+          "detail": "220,000 residents in administrative boundary (44,000 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 3.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 3.5,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 21
+    },
+    {
+      "area_code": "OD_KEN_01",
+      "block_name": "Mahakalapada",
+      "district": "Kendrapara",
+      "center_lat": 20.45,
+      "center_lon": 86.62,
+      "score": 55.9,
+      "distance_km": 111.9,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 15.9,
+          "detail": "Forecast wind peak 114 km/h (landfall proximity 111.9 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 16.0,
+          "detail": "Terrain flood susceptibility index 0.97 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 3.0,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 14.6,
+          "detail": "182,000 residents in administrative boundary (36,400 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 3.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 3.5,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 22
+    },
+    {
+      "area_code": "OD_KEN_05",
+      "block_name": "Kendrapara Sadar",
+      "district": "Kendrapara",
+      "center_lat": 20.5,
+      "center_lon": 86.42,
+      "score": 55.2,
+      "distance_km": 101.7,
+      "is_coastal": false,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 17.2,
+          "detail": "Forecast wind peak 123 km/h (landfall proximity 101.7 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 13.0,
+          "detail": "Terrain flood susceptibility index 0.76 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 0.6,
+          "detail": "Inland buffered elevation"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 17.9,
+          "detail": "224,000 residents in administrative boundary (44,800 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 3.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 3.5,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 23
+    },
+    {
+      "area_code": "OD_BHD_01",
+      "block_name": "Chandbali",
+      "district": "Bhadrak",
+      "center_lat": 20.78,
+      "center_lon": 86.74,
+      "score": 54.8,
+      "distance_km": 146.9,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 11.4,
+          "detail": "Forecast wind peak 82 km/h (landfall proximity 146.9 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 15.7,
+          "detail": "Terrain flood susceptibility index 0.95 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 3.0,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 19.7,
+          "detail": "246,000 residents in administrative boundary (49,200 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 3.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 2.0,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 24
+    },
+    {
+      "area_code": "OD_BAL_05",
+      "block_name": "Bhograi",
+      "district": "Balasore",
+      "center_lat": 21.65,
+      "center_lon": 87.35,
+      "score": 51.8,
+      "distance_km": 261.8,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 8.4,
+          "detail": "Forecast wind peak 60 km/h (landfall proximity 261.8 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 15.4,
+          "detail": "Terrain flood susceptibility index 0.93 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 3.0,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 20.0,
+          "detail": "285,000 residents in administrative boundary (57,000 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 3.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 2.0,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 25
+    },
+    {
+      "area_code": "OD_KEN_04",
+      "block_name": "Pattamundai",
+      "district": "Kendrapara",
+      "center_lat": 20.57,
+      "center_lon": 86.56,
+      "score": 51.4,
+      "distance_km": 117.0,
+      "is_coastal": false,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 15.2,
+          "detail": "Forecast wind peak 109 km/h (landfall proximity 117.0 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 13.7,
+          "detail": "Terrain flood susceptibility index 0.81 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 0.6,
+          "detail": "Inland buffered elevation"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 15.4,
+          "detail": "192,000 residents in administrative boundary (38,400 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 3.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 3.5,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 26
+    },
+    {
+      "area_code": "OD_KEN_02",
+      "block_name": "Rajnagar",
+      "district": "Kendrapara",
+      "center_lat": 20.61,
+      "center_lon": 86.78,
+      "score": 51.1,
+      "distance_km": 136.2,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 12.8,
+          "detail": "Forecast wind peak 92 km/h (landfall proximity 136.2 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 16.3,
+          "detail": "Terrain flood susceptibility index 0.99 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 3.0,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 14.0,
+          "detail": "175,000 residents in administrative boundary (35,000 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 3.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 2.0,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 27
+    },
+    {
+      "area_code": "OD_JSP_03",
+      "block_name": "Paradeep",
+      "district": "Jagatsinghpur",
+      "center_lat": 20.29,
+      "center_lon": 86.64,
+      "score": 50.6,
+      "distance_km": 102.7,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 17.0,
+          "detail": "Forecast wind peak 122 km/h (landfall proximity 102.7 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 14.9,
+          "detail": "Terrain flood susceptibility index 0.89 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 3.0,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 9.2,
+          "detail": "115,000 residents in administrative boundary (23,000 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 3.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 3.5,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 28
+    },
+    {
+      "area_code": "OD_BAL_01",
+      "block_name": "Balasore Sadar",
+      "district": "Balasore",
+      "center_lat": 21.49,
+      "center_lon": 86.93,
+      "score": 50.4,
+      "distance_km": 222.5,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 8.4,
+          "detail": "Forecast wind peak 60 km/h (landfall proximity 222.5 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 14.0,
+          "detail": "Terrain flood susceptibility index 0.83 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 3.0,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 20.0,
+          "detail": "310,000 residents in administrative boundary (62,000 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 3.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 2.0,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 29
+    },
+    {
+      "area_code": "OD_BHD_02",
+      "block_name": "Basudevpur",
+      "district": "Bhadrak",
+      "center_lat": 21.13,
+      "center_lon": 86.77,
+      "score": 48.8,
+      "distance_km": 179.8,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 8.4,
+          "detail": "Forecast wind peak 60 km/h (landfall proximity 179.8 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 15.0,
+          "detail": "Terrain flood susceptibility index 0.9 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 3.0,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 17.4,
+          "detail": "218,000 residents in administrative boundary (43,600 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 3.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 2.0,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 30
+    },
+    {
+      "area_code": "OD_BAL_06",
+      "block_name": "Baliapal",
+      "district": "Balasore",
+      "center_lat": 21.64,
+      "center_lon": 87.14,
+      "score": 48.2,
+      "distance_km": 248.2,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 8.4,
+          "detail": "Forecast wind peak 60 km/h (landfall proximity 248.2 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 14.9,
+          "detail": "Terrain flood susceptibility index 0.89 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 3.0,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 17.0,
+          "detail": "212,000 residents in administrative boundary (42,400 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 3.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 2.0,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 31
+    },
+    {
+      "area_code": "OD_BHD_03",
+      "block_name": "Bhadrak Sadar",
+      "district": "Bhadrak",
+      "center_lat": 21.05,
+      "center_lon": 86.51,
+      "score": 47.6,
+      "distance_km": 158.5,
+      "is_coastal": false,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 10.0,
+          "detail": "Forecast wind peak 72 km/h (landfall proximity 158.5 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 11.9,
+          "detail": "Terrain flood susceptibility index 0.68 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 0.6,
+          "detail": "Inland buffered elevation"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 20.0,
+          "detail": "275,000 residents in administrative boundary (55,000 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 3.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 2.0,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 32
+    },
+    {
+      "area_code": "OD_BHD_04",
+      "block_name": "Dhamnagar",
+      "district": "Bhadrak",
+      "center_lat": 20.92,
+      "center_lon": 86.44,
+      "score": 46.5,
+      "distance_km": 142.3,
+      "is_coastal": false,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 12.0,
+          "detail": "Forecast wind peak 86 km/h (landfall proximity 142.3 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 13.3,
+          "detail": "Terrain flood susceptibility index 0.78 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 0.6,
+          "detail": "Inland buffered elevation"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 15.6,
+          "detail": "195,000 residents in administrative boundary (39,000 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 3.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 2.0,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 33
+    },
+    {
+      "area_code": "OD_KEN_06",
+      "block_name": "Aul",
+      "district": "Kendrapara",
+      "center_lat": 20.67,
+      "center_lon": 86.51,
+      "score": 46.2,
+      "distance_km": 122.4,
+      "is_coastal": false,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 14.5,
+          "detail": "Forecast wind peak 104 km/h (landfall proximity 122.4 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 14.4,
+          "detail": "Terrain flood susceptibility index 0.86 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 0.6,
+          "detail": "Inland buffered elevation"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 11.7,
+          "detail": "146,000 residents in administrative boundary (29,200 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 3.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 2.0,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 34
+    },
+    {
+      "area_code": "OD_BAL_07",
+      "block_name": "Jaleswar",
+      "district": "Balasore",
+      "center_lat": 21.8,
+      "center_lon": 87.21,
+      "score": 46.2,
+      "distance_km": 267.1,
+      "is_coastal": false,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 8.4,
+          "detail": "Forecast wind peak 60 km/h (landfall proximity 267.1 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 13.5,
+          "detail": "Terrain flood susceptibility index 0.79 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 0.6,
+          "detail": "Inland buffered elevation"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 18.8,
+          "detail": "235,000 residents in administrative boundary (47,000 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 3.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 2.0,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 35
+    },
+    {
+      "area_code": "OD_KEN_03",
+      "block_name": "Rajkanika",
+      "district": "Kendrapara",
+      "center_lat": 20.76,
+      "center_lon": 86.68,
+      "score": 44.2,
+      "distance_km": 141.1,
+      "is_coastal": false,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 12.1,
+          "detail": "Forecast wind peak 87 km/h (landfall proximity 141.1 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 14.2,
+          "detail": "Terrain flood susceptibility index 0.84 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 0.6,
+          "detail": "Inland buffered elevation"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 12.3,
+          "detail": "154,000 residents in administrative boundary (30,800 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 3.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 2.0,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 36
+    },
+    {
+      "area_code": "OD_BAL_03",
+      "block_name": "Bahanaga",
+      "district": "Balasore",
+      "center_lat": 21.32,
+      "center_lon": 86.78,
+      "score": 43.9,
+      "distance_km": 198.3,
+      "is_coastal": true,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 8.4,
+          "detail": "Forecast wind peak 60 km/h (landfall proximity 198.3 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 14.6,
+          "detail": "Terrain flood susceptibility index 0.87 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 3.0,
+          "detail": "Direct coastal littoral boundary exposed to 4.5m surge"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 13.0,
+          "detail": "162,000 residents in administrative boundary (32,400 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 3.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 2.0,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 37
+    },
+    {
+      "area_code": "OD_BAL_04",
+      "block_name": "Soro",
+      "district": "Balasore",
+      "center_lat": 21.28,
+      "center_lon": 86.69,
+      "score": 41.1,
+      "distance_km": 189.8,
+      "is_coastal": false,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 8.4,
+          "detail": "Forecast wind peak 60 km/h (landfall proximity 189.8 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 12.9,
+          "detail": "Terrain flood susceptibility index 0.75 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 0.6,
+          "detail": "Inland buffered elevation"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 14.2,
+          "detail": "178,000 residents in administrative boundary (35,600 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 3.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 2.0,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 38
+    },
+    {
+      "area_code": "OD_BAL_02",
+      "block_name": "Remuna",
+      "district": "Balasore",
+      "center_lat": 21.53,
+      "center_lon": 86.87,
+      "score": 41.0,
+      "distance_km": 223.2,
+      "is_coastal": false,
+      "reasons": [
+        {
+          "factor": "wind_exposure",
+          "weight": 30,
+          "contribution": 8.4,
+          "detail": "Forecast wind peak 60 km/h (landfall proximity 223.2 km)"
+        },
+        {
+          "factor": "rainfall_flood",
+          "weight": 20,
+          "contribution": 12.2,
+          "detail": "Terrain flood susceptibility index 0.7 with heavy storm surge inundation"
+        },
+        {
+          "factor": "storm_surge",
+          "weight": 15,
+          "contribution": 0.6,
+          "detail": "Inland buffered elevation"
+        },
+        {
+          "factor": "population_exposure",
+          "weight": 20,
+          "contribution": 14.8,
+          "detail": "185,000 residents in administrative boundary (37,000 vulnerable)"
+        },
+        {
+          "factor": "critical_infrastructure",
+          "weight": 10,
+          "contribution": 3.0,
+          "detail": "High concentration of strategic shelters, hospitals and electrical substations"
+        },
+        {
+          "factor": "urgency_window",
+          "weight": 5,
+          "contribution": 2.0,
+          "detail": "Secondary impact zone"
+        }
+      ],
+      "interlock_flags": [],
+      "provenance_tag": "MODEL_ESTIMATE",
+      "rank": 39
+    }
+  ],
+  "assets": [
+    {
+      "id": "ast_pur_dhh_01",
+      "name": "District Headquarters Hospital Puri",
+      "type": "hospital",
+      "category": "health_services",
+      "criticality": "5.0",
+      "risk_weight": "5.0",
+      "latitude": "19.8135",
+      "longitude": "85.8312",
+      "district": "Puri",
+      "block_name": "Puri Sadar",
+      "capacity": "550 beds, ICU 30",
+      "contact_channel": "VHF-Ch12 / +91-6752-222045",
+      "readiness": "0.95",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_bbsr_aiims_02",
+      "name": "AIIMS Bhubaneswar Super Specialty Trauma Hospital",
+      "type": "hospital",
+      "category": "health_services",
+      "criticality": "5.0",
+      "risk_weight": "5.0",
+      "latitude": "20.2311",
+      "longitude": "85.7765",
+      "district": "Khordha",
+      "block_name": "Bhubaneswar",
+      "capacity": "1100 beds, ICU 120, Trauma Level 1",
+      "contact_channel": "VHF-Ch02 / +91-674-2476789",
+      "readiness": "1.0",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_cut_scb_03",
+      "name": "SCB Medical College & Hospital Cuttack",
+      "type": "hospital",
+      "category": "health_services",
+      "criticality": "5.0",
+      "risk_weight": "5.0",
+      "latitude": "20.4789",
+      "longitude": "85.8885",
+      "district": "Cuttack",
+      "block_name": "Cuttack Sadar",
+      "capacity": "2100 beds, ICU 180, Regional Trauma Centre",
+      "contact_channel": "VHF-Ch03 / +91-671-2414080",
+      "readiness": "0.9",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_ken_dhh_04",
+      "name": "District Headquarters Hospital Kendrapara",
+      "type": "hospital",
+      "category": "health_services",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "20.5052",
+      "longitude": "86.4258",
+      "district": "Kendrapara",
+      "block_name": "Kendrapara Sadar",
+      "capacity": "320 beds, ICU 16",
+      "contact_channel": "VHF-Ch14 / +91-6727-232102",
+      "readiness": "0.85",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_bal_dhh_05",
+      "name": "Fakir Mohan Medical College & Hospital Balasore",
+      "type": "hospital",
+      "category": "health_services",
+      "criticality": "5.0",
+      "risk_weight": "5.0",
+      "latitude": "21.498",
+      "longitude": "86.915",
+      "district": "Balasore",
+      "block_name": "Balasore Sadar",
+      "capacity": "650 beds, ICU 40",
+      "contact_channel": "VHF-Ch16 / +91-6782-262024",
+      "readiness": "0.9",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_jsp_dhh_06",
+      "name": "District Headquarters Hospital Jagatsinghpur",
+      "type": "hospital",
+      "category": "health_services",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "20.2592",
+      "longitude": "86.1685",
+      "district": "Jagatsinghpur",
+      "block_name": "Jagatsinghpur Sadar",
+      "capacity": "280 beds, ICU 12",
+      "contact_channel": "VHF-Ch15 / +91-6724-220025",
+      "readiness": "0.88",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_bhd_dhh_07",
+      "name": "District Headquarters Hospital Bhadrak",
+      "type": "hospital",
+      "category": "health_services",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "21.058",
+      "longitude": "86.502",
+      "district": "Bhadrak",
+      "block_name": "Bhadrak Sadar",
+      "capacity": "300 beds, ICU 15",
+      "contact_channel": "VHF-Ch18 / +91-6784-251500",
+      "readiness": "0.85",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_pur_chc_brahmagiri_08",
+      "name": "Community Health Centre Brahmagiri",
+      "type": "hospital",
+      "category": "health_services",
+      "criticality": "3.0",
+      "risk_weight": "3.0",
+      "latitude": "19.795",
+      "longitude": "85.678",
+      "district": "Puri",
+      "block_name": "Brahmagiri",
+      "capacity": "60 beds, Emergency Triage",
+      "contact_channel": "VHF-Ch12 / +91-6752-243015",
+      "readiness": "0.8",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_ken_chc_mahakalapada_09",
+      "name": "Community Health Centre Mahakalapada",
+      "type": "hospital",
+      "category": "health_services",
+      "criticality": "3.0",
+      "risk_weight": "3.0",
+      "latitude": "20.448",
+      "longitude": "86.618",
+      "district": "Kendrapara",
+      "block_name": "Mahakalapada",
+      "capacity": "50 beds, Mobile Ambulance 2",
+      "contact_channel": "VHF-Ch14 / +91-6727-245010",
+      "readiness": "0.82",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_bhd_chc_chandbali_10",
+      "name": "Community Health Centre Chandbali",
+      "type": "hospital",
+      "category": "health_services",
+      "criticality": "3.0",
+      "risk_weight": "3.0",
+      "latitude": "20.778",
+      "longitude": "86.745",
+      "district": "Bhadrak",
+      "block_name": "Chandbali",
+      "capacity": "60 beds, Boat Ambulance 1",
+      "contact_channel": "VHF-Ch18 / +91-6784-263020",
+      "readiness": "0.85",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_shl_pur_pentakota_11",
+      "name": "Pentakota Multi-Purpose Cyclone Shelter",
+      "type": "shelter",
+      "category": "emergency_shelter",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "19.805",
+      "longitude": "85.855",
+      "district": "Puri",
+      "block_name": "Puri Sadar",
+      "capacity": "2500 persons",
+      "contact_channel": "VHF-Ch12 / OSDMA Shelter Net",
+      "readiness": "0.95",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_shl_pur_satapada_12",
+      "name": "Satapada Chilika Coastal Cyclone Shelter",
+      "type": "shelter",
+      "category": "emergency_shelter",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "19.675",
+      "longitude": "85.445",
+      "district": "Puri",
+      "block_name": "Krushnaprasad",
+      "capacity": "1800 persons",
+      "contact_channel": "VHF-Ch12 / OSDMA Shelter Net",
+      "readiness": "0.9",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_shl_pur_astaranga_13",
+      "name": "Astaranga Devi River Mouth Cyclone Shelter",
+      "type": "shelter",
+      "category": "emergency_shelter",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "19.925",
+      "longitude": "86.265",
+      "district": "Puri",
+      "block_name": "Astaranga",
+      "capacity": "2000 persons",
+      "contact_channel": "VHF-Ch12 / OSDMA Shelter Net",
+      "readiness": "0.92",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_shl_jsp_erasama_14",
+      "name": "Erasama Batighar Heavy Cyclone Shelter",
+      "type": "shelter",
+      "category": "emergency_shelter",
+      "criticality": "5.0",
+      "risk_weight": "5.0",
+      "latitude": "20.185",
+      "longitude": "86.425",
+      "district": "Jagatsinghpur",
+      "block_name": "Erasama",
+      "capacity": "3000 persons, elevated plinth",
+      "contact_channel": "VHF-Ch15 / OSDMA Shelter Net",
+      "readiness": "0.95",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_shl_jsp_sandhakud_15",
+      "name": "Sandhakud Port Resettlement Cyclone Shelter",
+      "type": "shelter",
+      "category": "emergency_shelter",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "20.285",
+      "longitude": "86.635",
+      "district": "Jagatsinghpur",
+      "block_name": "Paradeep",
+      "capacity": "2200 persons",
+      "contact_channel": "VHF-Ch15 / OSDMA Shelter Net",
+      "readiness": "0.9",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_shl_ken_gupti_16",
+      "name": "Gupti Bhitarkanika Border Cyclone Shelter",
+      "type": "shelter",
+      "category": "emergency_shelter",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "20.685",
+      "longitude": "86.885",
+      "district": "Kendrapara",
+      "block_name": "Rajnagar",
+      "capacity": "1800 persons",
+      "contact_channel": "VHF-Ch14 / OSDMA Shelter Net",
+      "readiness": "0.88",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_shl_ken_rajkanika_17",
+      "name": "Rajkanika Riverine Flood & Cyclone Shelter",
+      "type": "shelter",
+      "category": "emergency_shelter",
+      "criticality": "3.0",
+      "risk_weight": "3.0",
+      "latitude": "20.765",
+      "longitude": "86.685",
+      "district": "Kendrapara",
+      "block_name": "Rajkanika",
+      "capacity": "1500 persons",
+      "contact_channel": "VHF-Ch14 / OSDMA Shelter Net",
+      "readiness": "0.9",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_shl_bhd_dhamra_18",
+      "name": "Dhamra Port Coastal Cyclone Shelter",
+      "type": "shelter",
+      "category": "emergency_shelter",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "20.795",
+      "longitude": "86.955",
+      "district": "Bhadrak",
+      "block_name": "Chandbali",
+      "capacity": "2200 persons",
+      "contact_channel": "VHF-Ch18 / OSDMA Shelter Net",
+      "readiness": "0.94",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_shl_bal_chandipur_19",
+      "name": "Chandipur Coastal Community Cyclone Shelter",
+      "type": "shelter",
+      "category": "emergency_shelter",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "21.468",
+      "longitude": "87.015",
+      "district": "Balasore",
+      "block_name": "Balasore Sadar",
+      "capacity": "2000 persons",
+      "contact_channel": "VHF-Ch16 / OSDMA Shelter Net",
+      "readiness": "0.92",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_shl_bal_talasari_20",
+      "name": "Talasari-Bhograi Inter-State Cyclone Shelter",
+      "type": "shelter",
+      "category": "emergency_shelter",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "21.625",
+      "longitude": "87.505",
+      "district": "Balasore",
+      "block_name": "Bhograi",
+      "capacity": "2400 persons",
+      "contact_channel": "VHF-Ch16 / OSDMA Shelter Net",
+      "readiness": "0.9",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_ndrf_bn03_mundali_21",
+      "name": "3rd Battalion NDRF Regimental HQ & Airfield Logistics Hub",
+      "type": "ndrf_base",
+      "category": "emergency_response",
+      "criticality": "5.0",
+      "risk_weight": "5.0",
+      "latitude": "20.441",
+      "longitude": "85.735",
+      "district": "Cuttack",
+      "block_name": "Banki",
+      "capacity": "18 search & rescue teams, 45 boats, collapsed structure equipment",
+      "contact_channel": "VHF-TacOps-01 / Satcom 011-23438091",
+      "readiness": "1.0",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_odraf_hq_cuttack_22",
+      "name": "ODRAF 1st Task Force Battalion Base",
+      "type": "ndrf_base",
+      "category": "emergency_response",
+      "criticality": "5.0",
+      "risk_weight": "5.0",
+      "latitude": "20.455",
+      "longitude": "85.875",
+      "district": "Cuttack",
+      "block_name": "Cuttack Sadar",
+      "capacity": "12 disaster response teams, heavy cutting gear",
+      "contact_channel": "VHF-Ch03 / +91-671-2306112",
+      "readiness": "0.95",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_icg_station_paradeep_23",
+      "name": "Indian Coast Guard Station Paradip (ICGS Paradip)",
+      "type": "ndrf_base",
+      "category": "emergency_response",
+      "criticality": "5.0",
+      "risk_weight": "5.0",
+      "latitude": "20.278",
+      "longitude": "86.681",
+      "district": "Jagatsinghpur",
+      "block_name": "Paradeep",
+      "capacity": "4 Offshore Patrol Vessels, 2 Fast Interceptor Boats, SAR Heli hangar",
+      "contact_channel": "VHF-Marine16 / Satcom +91-6722-222045",
+      "readiness": "1.0",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_ins_chilka_naval_24",
+      "name": "INS Chilka Naval Training Command & Coastal Watch Base",
+      "type": "ndrf_base",
+      "category": "emergency_response",
+      "criticality": "5.0",
+      "risk_weight": "5.0",
+      "latitude": "19.702",
+      "longitude": "85.195",
+      "district": "Khordha",
+      "block_name": "Banapur",
+      "capacity": "Naval dive teams, emergency sea power generation, Chetak helipads",
+      "contact_channel": "Naval MilNet-7 / +91-6756-257201",
+      "readiness": "0.98",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_drdo_itr_chandipur_25",
+      "name": "DRDO Integrated Test Range (ITR) Defense Facility",
+      "type": "ndrf_base",
+      "category": "emergency_response",
+      "criticality": "5.0",
+      "risk_weight": "5.0",
+      "latitude": "21.472",
+      "longitude": "87.022",
+      "district": "Balasore",
+      "block_name": "Balasore Sadar",
+      "capacity": "Hardened bunker network, Doppler weather radar, tactical comms link",
+      "contact_channel": "DRDO TacComms / +91-6782-272001",
+      "readiness": "1.0",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_osdma_seoc_bbsr_26",
+      "name": "State Emergency Operation Centre (OSDMA SEOC) Rajiv Bhawan",
+      "type": "ndrf_base",
+      "category": "emergency_response",
+      "criticality": "5.0",
+      "risk_weight": "5.0",
+      "latitude": "20.268",
+      "longitude": "85.834",
+      "district": "Khordha",
+      "block_name": "Bhubaneswar",
+      "capacity": "Statewide command dispatch, ISDN satcom, GIS decision cell",
+      "contact_channel": "VHF-StateNet / 1070 / +91-674-2534177",
+      "readiness": "1.0",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_dep_osdma_central_27",
+      "name": "OSDMA Central Logistics & Pre-positioned Stockpile Depot",
+      "type": "relief_depot",
+      "category": "relief_logistics",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "20.325",
+      "longitude": "85.812",
+      "district": "Khordha",
+      "block_name": "Bhubaneswar",
+      "capacity": "5000 MT food rations, 50,000 tarpaulins, 20 high-capacity dewatering pumps",
+      "contact_channel": "VHF-Ch02 / +91-674-2580120",
+      "readiness": "0.95",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_dep_redcross_cuttack_28",
+      "name": "Indian Red Cross Regional Relief Warehouse Cuttack",
+      "type": "relief_depot",
+      "category": "relief_logistics",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "20.465",
+      "longitude": "85.892",
+      "district": "Cuttack",
+      "block_name": "Cuttack Sadar",
+      "capacity": "25,000 water purification kits, 10,000 trauma dressing kits",
+      "contact_channel": "VHF-Ch03 / +91-671-2301280",
+      "readiness": "0.9",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_dep_civil_puri_29",
+      "name": "Civil Supplies Pre-Positioned Food Depository Puri",
+      "type": "relief_depot",
+      "category": "relief_logistics",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "19.828",
+      "longitude": "85.829",
+      "district": "Puri",
+      "block_name": "Puri Sadar",
+      "capacity": "1500 MT dry rations, chuda & gur packs",
+      "contact_channel": "VHF-Ch12 / +91-6752-223140",
+      "readiness": "0.88",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_dep_port_paradeep_30",
+      "name": "Paradip Port Disaster Logistics & Heavy Rig Stockyard",
+      "type": "relief_depot",
+      "category": "relief_logistics",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "20.288",
+      "longitude": "86.662",
+      "district": "Jagatsinghpur",
+      "block_name": "Paradeep",
+      "capacity": "Mobile generator sets 40x125kVA, 12 rough-terrain cranes",
+      "contact_channel": "VHF-Ch15 / +91-6722-222450",
+      "readiness": "0.92",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_dep_fci_balasore_31",
+      "name": "Food Corporation of India (FCI) Silo & Grain Depot Balasore",
+      "type": "relief_depot",
+      "category": "relief_logistics",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "21.512",
+      "longitude": "86.928",
+      "district": "Balasore",
+      "block_name": "Balasore Sadar",
+      "capacity": "10,000 MT rice and wheat buffer stock",
+      "contact_channel": "VHF-Ch16 / +91-6782-263480",
+      "readiness": "0.95",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_dep_kendrapara_hub_32",
+      "name": "Kendrapara Sub-Divisional Flood Relief Depot",
+      "type": "relief_depot",
+      "category": "relief_logistics",
+      "criticality": "3.0",
+      "risk_weight": "3.0",
+      "latitude": "20.51",
+      "longitude": "86.418",
+      "district": "Kendrapara",
+      "block_name": "Kendrapara Sadar",
+      "capacity": "1200 MT rations, 15 inflatable motor boats",
+      "contact_channel": "VHF-Ch14 / +91-6727-232014",
+      "readiness": "0.85",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_dep_bhadrak_hub_33",
+      "name": "Bhadrak District Civil Supplies Emergency Warehouse",
+      "type": "relief_depot",
+      "category": "relief_logistics",
+      "criticality": "3.0",
+      "risk_weight": "3.0",
+      "latitude": "21.062",
+      "longitude": "86.515",
+      "district": "Bhadrak",
+      "block_name": "Bhadrak Sadar",
+      "capacity": "2000 MT grain stock, 8000 halogen water purification tablets",
+      "contact_channel": "VHF-Ch18 / +91-6784-251210",
+      "readiness": "0.9",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_prt_paradeep_main_34",
+      "name": "Paradip Deepwater Major Sea Port (PPT)",
+      "type": "port",
+      "category": "maritime_transport",
+      "criticality": "5.0",
+      "risk_weight": "5.0",
+      "latitude": "20.264",
+      "longitude": "86.671",
+      "district": "Jagatsinghpur",
+      "block_name": "Paradeep",
+      "capacity": "16 cargo berths, emergency roll-on/roll-off relief terminal",
+      "contact_channel": "VHF-Marine16 / +91-6722-222120",
+      "readiness": "0.95",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_prt_dhamra_35",
+      "name": "Dhamra Commercial Deepwater Sea Port",
+      "type": "port",
+      "category": "maritime_transport",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "20.805",
+      "longitude": "86.968",
+      "district": "Bhadrak",
+      "block_name": "Chandbali",
+      "capacity": "Deep draught bulk terminal, 4 tugboats for sea rescue",
+      "contact_channel": "VHF-Marine16 / +91-6784-275000",
+      "readiness": "0.92",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_prt_gopalpur_36",
+      "name": "Gopalpur All-Weather Commercial Port",
+      "type": "port",
+      "category": "maritime_transport",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "19.305",
+      "longitude": "84.975",
+      "district": "Ganjam",
+      "block_name": "Rangeilunda (Gopalpur)",
+      "capacity": "Breakwater port, Southern Odisha naval support berth",
+      "contact_channel": "VHF-Marine16 / +91-680-2343200",
+      "readiness": "0.9",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_prt_astaranga_37",
+      "name": "Astaranga Fishing Harbor & Coast Guard Jetty",
+      "type": "port",
+      "category": "maritime_transport",
+      "criticality": "3.0",
+      "risk_weight": "3.0",
+      "latitude": "19.918",
+      "longitude": "86.272",
+      "district": "Puri",
+      "block_name": "Astaranga",
+      "capacity": "Trawler mooring basin, 6 mechanized rescue boats",
+      "contact_channel": "VHF-Ch12 / +91-6752-248102",
+      "readiness": "0.85",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_nrg_iocl_paradeep_38",
+      "name": "Indian Oil Corporation (IOCL) Paradip Mega Refinery & Strategic Fuel Depot",
+      "type": "fuel_depot",
+      "category": "energy_infrastructure",
+      "criticality": "5.0",
+      "risk_weight": "5.0",
+      "latitude": "20.298",
+      "longitude": "86.582",
+      "district": "Jagatsinghpur",
+      "block_name": "Kujang",
+      "capacity": "15 MMTPA refinery, 250,000 KL emergency aviation turbine fuel & diesel storage",
+      "contact_channel": "VHF-Hazmat01 / +91-6722-254000",
+      "readiness": "1.0",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_nrg_bpcl_jatani_39",
+      "name": "BPCL Petroleum Regional Terminal Jatani",
+      "type": "fuel_depot",
+      "category": "energy_infrastructure",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "20.158",
+      "longitude": "85.698",
+      "district": "Khordha",
+      "block_name": "Jatani",
+      "capacity": "45,000 KL diesel and petrol buffer stock, rail gantry",
+      "contact_channel": "VHF-Ch02 / +91-674-2490212",
+      "readiness": "0.95",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_nrg_hpcl_balasore_40",
+      "name": "HPCL Bulk Fuel Terminal Balasore (Remuna Golei)",
+      "type": "fuel_depot",
+      "category": "energy_infrastructure",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "21.525",
+      "longitude": "86.885",
+      "district": "Balasore",
+      "block_name": "Remuna",
+      "capacity": "30,000 KL high speed diesel for North Odisha fleet",
+      "contact_channel": "VHF-Ch16 / +91-6782-274150",
+      "readiness": "0.92",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_pwr_samagara_puri_41",
+      "name": "OPTCL 220/132/33kV Samagara Grid Substation (Puri Main Spine)",
+      "type": "electrical_substation",
+      "category": "energy_infrastructure",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "19.845",
+      "longitude": "85.845",
+      "district": "Puri",
+      "block_name": "Puri Sadar",
+      "capacity": "2x160 MVA transformers powering Puri and Grand Road waterworks",
+      "contact_channel": "VHF-PowerNet / +91-6752-224890",
+      "readiness": "0.9",
+      "provenance_tag": "OBSERVED"
+    },
+    {
+      "id": "ast_pwr_marshaghai_42",
+      "name": "OPTCL 220/132kV Marshaghai Heavy Grid Substation",
+      "type": "electrical_substation",
+      "category": "energy_infrastructure",
+      "criticality": "4.0",
+      "risk_weight": "4.0",
+      "latitude": "20.485",
+      "longitude": "86.525",
+      "district": "Kendrapara",
+      "block_name": "Marshaghai",
+      "capacity": "2x100 MVA power feeds for coastal Kendrapara and Paradip pumping stations",
+      "contact_channel": "VHF-PowerNet / +91-6727-248110",
+      "readiness": "0.88",
+      "provenance_tag": "OBSERVED"
+    }
+  ],
+  "routes": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            85.824,
+            20.296
+          ],
+          [
+            85.832,
+            20.12
+          ],
+          [
+            85.821,
+            19.95
+          ],
+          [
+            85.845,
+            19.825
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_nh316_puri_bbsr",
+        "name": "NH-316 (Bhubaneswar-Pipili-Puri Highway)",
+        "ref": "NH-316",
+        "highway_type": "trunk",
+        "districts": "Khordha, Puri",
+        "surface": "asphalt",
+        "lanes": 4,
+        "bridge_count": 6,
+        "length_km": 62.5,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            85.845,
+            19.825
+          ],
+          [
+            85.96,
+            19.855
+          ],
+          [
+            86.095,
+            19.888
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_puri_konark_marine_drive",
+        "name": "Puri-Konark Marine Drive (SH-60)",
+        "ref": "SH-60",
+        "highway_type": "primary",
+        "districts": "Puri",
+        "surface": "asphalt",
+        "lanes": 2,
+        "bridge_count": 3,
+        "length_km": 35.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            86.095,
+            19.888
+          ],
+          [
+            86.01,
+            19.99
+          ],
+          [
+            86.2,
+            19.98
+          ],
+          [
+            86.26,
+            19.92
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_konark_kakatpur_astaranga",
+        "name": "Konark-Kakatpur-Astaranga Coastal Evacuation Route",
+        "ref": "OD-MDR-44",
+        "highway_type": "secondary",
+        "districts": "Puri",
+        "surface": "asphalt",
+        "lanes": 2,
+        "bridge_count": 4,
+        "length_km": 42.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            85.845,
+            19.825
+          ],
+          [
+            85.67,
+            19.79
+          ],
+          [
+            85.45,
+            19.68
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_puri_brahmagiri_krushnaprasad",
+        "name": "Puri-Brahmagiri-Satapada-Krushnaprasad Road",
+        "ref": "SH-58",
+        "highway_type": "secondary",
+        "districts": "Puri",
+        "surface": "asphalt",
+        "lanes": 2,
+        "bridge_count": 5,
+        "length_km": 54.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            86.13,
+            20.72
+          ],
+          [
+            86.42,
+            20.5
+          ],
+          [
+            86.53,
+            20.31
+          ],
+          [
+            86.64,
+            20.29
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_nh53_paradeep_expressway",
+        "name": "NH-53 (Chandikhole-Kendrapara-Paradip Port Expressway)",
+        "ref": "NH-53",
+        "highway_type": "trunk",
+        "districts": "Jajpur, Kendrapara, Jagatsinghpur",
+        "surface": "asphalt",
+        "lanes": 4,
+        "bridge_count": 8,
+        "length_km": 76.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            86.42,
+            20.5
+          ],
+          [
+            86.56,
+            20.57
+          ],
+          [
+            86.78,
+            20.61
+          ],
+          [
+            86.88,
+            20.68
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_kendrapara_pattamundai_rajnagar",
+        "name": "Kendrapara-Pattamundai-Rajnagar Coastal Lifeline",
+        "ref": "SH-9B",
+        "highway_type": "primary",
+        "districts": "Kendrapara",
+        "surface": "asphalt",
+        "lanes": 2,
+        "bridge_count": 5,
+        "length_km": 48.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            86.78,
+            20.61
+          ],
+          [
+            86.62,
+            20.45
+          ],
+          [
+            86.72,
+            20.35
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_rajnagar_mahakalapada_coastal",
+        "name": "Rajnagar-Mahakalapada-Batighar Embankment Route",
+        "ref": "OD-RD-KNP-12",
+        "highway_type": "secondary",
+        "districts": "Kendrapara",
+        "surface": "concrete/asphalt",
+        "lanes": 2,
+        "bridge_count": 6,
+        "length_km": 38.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            85.824,
+            20.296
+          ],
+          [
+            85.882,
+            20.462
+          ],
+          [
+            86.13,
+            20.72
+          ],
+          [
+            86.51,
+            21.05
+          ],
+          [
+            86.78,
+            21.32
+          ],
+          [
+            86.93,
+            21.49
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_nh16_bbsr_cuttack_bhadrak_balasore",
+        "name": "NH-16 Golden Quadrilateral (Bhubaneswar-Cuttack-Bhadrak-Balasore Spine)",
+        "ref": "NH-16",
+        "highway_type": "trunk",
+        "districts": "Khordha, Cuttack, Jajpur, Bhadrak, Balasore",
+        "surface": "asphalt",
+        "lanes": 6,
+        "bridge_count": 14,
+        "length_km": 205.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            86.93,
+            21.49
+          ],
+          [
+            86.98,
+            21.48
+          ],
+          [
+            87.02,
+            21.47
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_balasore_chandipur_drdo",
+        "name": "Balasore-Chandipur Integrated Test Range Defense Corridor",
+        "ref": "OD-DRDO-RD-01",
+        "highway_type": "primary",
+        "districts": "Balasore",
+        "surface": "heavy-duty asphalt",
+        "lanes": 4,
+        "bridge_count": 2,
+        "length_km": 16.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            86.93,
+            21.49
+          ],
+          [
+            87.07,
+            21.68
+          ],
+          [
+            87.21,
+            21.8
+          ],
+          [
+            87.31,
+            21.9
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_balasore_basta_jaleswar_nh16",
+        "name": "Balasore-Basta-Jaleswar Interstate Spine (NH-16 North)",
+        "ref": "NH-16",
+        "highway_type": "trunk",
+        "districts": "Balasore",
+        "surface": "asphalt",
+        "lanes": 4,
+        "bridge_count": 4,
+        "length_km": 52.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            87.21,
+            21.8
+          ],
+          [
+            87.14,
+            21.64
+          ],
+          [
+            87.35,
+            21.65
+          ],
+          [
+            87.51,
+            21.62
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_jaleswar_baliapal_bhograi_digha",
+        "name": "Jaleswar-Baliapal-Bhograi Coastal Evacuation Highway",
+        "ref": "SH-57",
+        "highway_type": "secondary",
+        "districts": "Balasore",
+        "surface": "asphalt",
+        "lanes": 2,
+        "bridge_count": 5,
+        "length_km": 58.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            86.51,
+            21.05
+          ],
+          [
+            86.62,
+            20.91
+          ],
+          [
+            86.74,
+            20.78
+          ],
+          [
+            86.96,
+            20.8
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_bhadrak_chandbali_dhamra",
+        "name": "Bhadrak-Chandbali-Dhamra Port Link Road",
+        "ref": "SH-9",
+        "highway_type": "primary",
+        "districts": "Bhadrak",
+        "surface": "asphalt",
+        "lanes": 2,
+        "bridge_count": 5,
+        "length_km": 52.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            85.882,
+            20.462
+          ],
+          [
+            86.17,
+            20.26
+          ],
+          [
+            86.35,
+            20.09
+          ],
+          [
+            86.42,
+            20.18
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_cuttack_jagatsinghpur_erasama",
+        "name": "Cuttack-Jagatsinghpur-Balikuda-Erasama Coastal Route",
+        "ref": "SH-9A",
+        "highway_type": "primary",
+        "districts": "Cuttack, Jagatsinghpur",
+        "surface": "asphalt",
+        "lanes": 2,
+        "bridge_count": 7,
+        "length_km": 68.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    }
+  ],
+  "track": {
+    "type": "FeatureCollection",
+    "metadata": {
+      "event": "Extremely Severe Cyclonic Storm Fani (2019)",
+      "provenance_tag": "REPLAY",
+      "source": "India Meteorological Department (IMD) Report on Cyclonic Disturbances Over North Indian Ocean 2019",
+      "license": "Government Open Data License - India (GODL)",
+      "total_track_points": 20,
+      "is_simulated": false
+    },
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            88.5,
+            5.2
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "timestamp_utc": "2019-04-26T06:00:00Z",
+          "timestamp_ist": "2019-04-26T11:30:00+05:30",
+          "latitude": 5.2,
+          "longitude": 88.5,
+          "wind_speed_knots": 25,
+          "wind_speed_kmh": 45,
+          "central_pressure_hpa": 1006,
+          "cyclone_category": "Depression",
+          "operational_stage": "Genesis in Bay of Bengal",
+          "eye_radius_km": 0.0,
+          "hazard_radius_90kmh_km": 40.0,
+          "hazard_radius_120kmh_km": 0.0,
+          "provenance_tag": "REPLAY"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            88.2,
+            5.8
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "timestamp_utc": "2019-04-27T00:00:00Z",
+          "timestamp_ist": "2019-04-27T05:30:00+05:30",
+          "latitude": 5.8,
+          "longitude": 88.2,
+          "wind_speed_knots": 35,
+          "wind_speed_kmh": 65,
+          "central_pressure_hpa": 1000,
+          "cyclone_category": "Deep Depression",
+          "operational_stage": "Intensifying",
+          "eye_radius_km": 0.0,
+          "hazard_radius_90kmh_km": 40.0,
+          "hazard_radius_120kmh_km": 0.0,
+          "provenance_tag": "REPLAY"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            87.8,
+            6.8
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "timestamp_utc": "2019-04-27T12:00:00Z",
+          "timestamp_ist": "2019-04-27T17:30:00+05:30",
+          "latitude": 6.8,
+          "longitude": 87.8,
+          "wind_speed_knots": 45,
+          "wind_speed_kmh": 85,
+          "central_pressure_hpa": 994,
+          "cyclone_category": "Cyclonic Storm",
+          "operational_stage": "Named Fani",
+          "eye_radius_km": 0.0,
+          "hazard_radius_90kmh_km": 40.0,
+          "hazard_radius_120kmh_km": 0.0,
+          "provenance_tag": "REPLAY"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            86.9,
+            8.2
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "timestamp_utc": "2019-04-28T06:00:00Z",
+          "timestamp_ist": "2019-04-28T11:30:00+05:30",
+          "latitude": 8.2,
+          "longitude": 86.9,
+          "wind_speed_knots": 50,
+          "wind_speed_kmh": 95,
+          "central_pressure_hpa": 990,
+          "cyclone_category": "Cyclonic Storm",
+          "operational_stage": "Moving North-Northwest",
+          "eye_radius_km": 0.0,
+          "hazard_radius_90kmh_km": 40.0,
+          "hazard_radius_120kmh_km": 0.0,
+          "provenance_tag": "REPLAY"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            86.2,
+            9.5
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "timestamp_utc": "2019-04-29T00:00:00Z",
+          "timestamp_ist": "2019-04-29T05:30:00+05:30",
+          "latitude": 9.5,
+          "longitude": 86.2,
+          "wind_speed_knots": 60,
+          "wind_speed_kmh": 110,
+          "central_pressure_hpa": 984,
+          "cyclone_category": "Severe Cyclonic Storm",
+          "operational_stage": "Track curvature",
+          "eye_radius_km": 0.0,
+          "hazard_radius_90kmh_km": 40.0,
+          "hazard_radius_120kmh_km": 0.0,
+          "provenance_tag": "REPLAY"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            86.0,
+            11.0
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "timestamp_utc": "2019-04-29T18:00:00Z",
+          "timestamp_ist": "2019-04-29T23:30:00+05:30",
+          "latitude": 11.0,
+          "longitude": 86.0,
+          "wind_speed_knots": 75,
+          "wind_speed_kmh": 140,
+          "central_pressure_hpa": 974,
+          "cyclone_category": "Very Severe Cyclonic Storm",
+          "operational_stage": "Rapid Intensification",
+          "eye_radius_km": 0.0,
+          "hazard_radius_90kmh_km": 85.0,
+          "hazard_radius_120kmh_km": 0.0,
+          "provenance_tag": "REPLAY"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            85.5,
+            12.8
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "timestamp_utc": "2019-04-30T12:00:00Z",
+          "timestamp_ist": "2019-04-30T17:30:00+05:30",
+          "latitude": 12.8,
+          "longitude": 85.5,
+          "wind_speed_knots": 95,
+          "wind_speed_kmh": 175,
+          "central_pressure_hpa": 956,
+          "cyclone_category": "Extremely Severe Cyclonic Storm",
+          "operational_stage": "Eye visible on INSAT-3D",
+          "eye_radius_km": 14.0,
+          "hazard_radius_90kmh_km": 85.0,
+          "hazard_radius_120kmh_km": 45.0,
+          "provenance_tag": "REPLAY"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            84.8,
+            14.1
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "timestamp_utc": "2019-05-01T06:00:00Z",
+          "timestamp_ist": "2019-05-01T11:30:00+05:30",
+          "latitude": 14.1,
+          "longitude": 84.8,
+          "wind_speed_knots": 105,
+          "wind_speed_kmh": 195,
+          "central_pressure_hpa": 946,
+          "cyclone_category": "Extremely Severe Cyclonic Storm",
+          "operational_stage": "Curving Northeast towards Odisha",
+          "eye_radius_km": 14.0,
+          "hazard_radius_90kmh_km": 85.0,
+          "hazard_radius_120kmh_km": 45.0,
+          "provenance_tag": "REPLAY"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            84.4,
+            15.2
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "timestamp_utc": "2019-05-01T18:00:00Z",
+          "timestamp_ist": "2019-05-01T23:30:00+05:30",
+          "latitude": 15.2,
+          "longitude": 84.4,
+          "wind_speed_knots": 115,
+          "wind_speed_kmh": 215,
+          "central_pressure_hpa": 938,
+          "cyclone_category": "Extremely Severe Cyclonic Storm",
+          "operational_stage": "Peak intensity, central dense overcast",
+          "eye_radius_km": 14.0,
+          "hazard_radius_90kmh_km": 85.0,
+          "hazard_radius_120kmh_km": 45.0,
+          "provenance_tag": "REPLAY"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            84.5,
+            16.0
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "timestamp_utc": "2019-05-02T03:00:00Z",
+          "timestamp_ist": "2019-05-02T08:30:00+05:30",
+          "latitude": 16.0,
+          "longitude": 84.5,
+          "wind_speed_knots": 115,
+          "wind_speed_kmh": 215,
+          "central_pressure_hpa": 938,
+          "cyclone_category": "Extremely Severe Cyclonic Storm",
+          "operational_stage": "IMD issues Red Warning for 14 Odisha districts",
+          "eye_radius_km": 14.0,
+          "hazard_radius_90kmh_km": 85.0,
+          "hazard_radius_120kmh_km": 45.0,
+          "provenance_tag": "REPLAY"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            84.8,
+            17.1
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "timestamp_utc": "2019-05-02T12:00:00Z",
+          "timestamp_ist": "2019-05-02T17:30:00+05:30",
+          "latitude": 17.1,
+          "longitude": 84.8,
+          "wind_speed_knots": 110,
+          "wind_speed_kmh": 205,
+          "central_pressure_hpa": 942,
+          "cyclone_category": "Extremely Severe Cyclonic Storm",
+          "operational_stage": "Approaching Odisha coast (~200 km SSW of Puri)",
+          "eye_radius_km": 14.0,
+          "hazard_radius_90kmh_km": 85.0,
+          "hazard_radius_120kmh_km": 45.0,
+          "provenance_tag": "REPLAY"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            85.3,
+            18.5
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "timestamp_utc": "2019-05-02T21:00:00Z",
+          "timestamp_ist": "2019-05-03T02:30:00+05:30",
+          "latitude": 18.5,
+          "longitude": 85.3,
+          "wind_speed_knots": 110,
+          "wind_speed_kmh": 205,
+          "central_pressure_hpa": 944,
+          "cyclone_category": "Extremely Severe Cyclonic Storm",
+          "operational_stage": "Outer rainbands strike Gopalpur & Puri",
+          "eye_radius_km": 14.0,
+          "hazard_radius_90kmh_km": 85.0,
+          "hazard_radius_120kmh_km": 45.0,
+          "provenance_tag": "REPLAY"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            85.8,
+            19.8
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "timestamp_utc": "2019-05-03T03:00:00Z",
+          "timestamp_ist": "2019-05-03T08:30:00+05:30",
+          "latitude": 19.8,
+          "longitude": 85.8,
+          "wind_speed_knots": 115,
+          "wind_speed_kmh": 215,
+          "central_pressure_hpa": 937,
+          "cyclone_category": "Extremely Severe Cyclonic Storm",
+          "operational_stage": "LANDFALL: Eye crosses Puri coast (gusts 240 km/h)",
+          "eye_radius_km": 14.0,
+          "hazard_radius_90kmh_km": 85.0,
+          "hazard_radius_120kmh_km": 45.0,
+          "provenance_tag": "REPLAY"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            85.8,
+            20.3
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "timestamp_utc": "2019-05-03T06:00:00Z",
+          "timestamp_ist": "2019-05-03T11:30:00+05:30",
+          "latitude": 20.3,
+          "longitude": 85.8,
+          "wind_speed_knots": 85,
+          "wind_speed_kmh": 160,
+          "central_pressure_hpa": 960,
+          "cyclone_category": "Very Severe Cyclonic Storm",
+          "operational_stage": "Passing over Khordha / Bhubaneswar",
+          "eye_radius_km": 0.0,
+          "hazard_radius_90kmh_km": 85.0,
+          "hazard_radius_120kmh_km": 0.0,
+          "provenance_tag": "REPLAY"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            86.1,
+            20.6
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "timestamp_utc": "2019-05-03T09:00:00Z",
+          "timestamp_ist": "2019-05-03T14:30:00+05:30",
+          "latitude": 20.6,
+          "longitude": 86.1,
+          "wind_speed_knots": 75,
+          "wind_speed_kmh": 140,
+          "central_pressure_hpa": 970,
+          "cyclone_category": "Severe Cyclonic Storm",
+          "operational_stage": "Passing over Cuttack / Jagatsinghpur",
+          "eye_radius_km": 0.0,
+          "hazard_radius_90kmh_km": 85.0,
+          "hazard_radius_120kmh_km": 0.0,
+          "provenance_tag": "REPLAY"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            86.4,
+            20.9
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "timestamp_utc": "2019-05-03T12:00:00Z",
+          "timestamp_ist": "2019-05-03T17:30:00+05:30",
+          "latitude": 20.9,
+          "longitude": 86.4,
+          "wind_speed_knots": 65,
+          "wind_speed_kmh": 120,
+          "central_pressure_hpa": 978,
+          "cyclone_category": "Severe Cyclonic Storm",
+          "operational_stage": "Striking Kendrapara / Jajpur",
+          "eye_radius_km": 0.0,
+          "hazard_radius_90kmh_km": 40.0,
+          "hazard_radius_120kmh_km": 0.0,
+          "provenance_tag": "REPLAY"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            86.7,
+            21.2
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "timestamp_utc": "2019-05-03T15:00:00Z",
+          "timestamp_ist": "2019-05-03T20:30:00+05:30",
+          "latitude": 21.2,
+          "longitude": 86.7,
+          "wind_speed_knots": 55,
+          "wind_speed_kmh": 100,
+          "central_pressure_hpa": 984,
+          "cyclone_category": "Cyclonic Storm",
+          "operational_stage": "Striking Bhadrak / Balasore",
+          "eye_radius_km": 0.0,
+          "hazard_radius_90kmh_km": 40.0,
+          "hazard_radius_120kmh_km": 0.0,
+          "provenance_tag": "REPLAY"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            87.0,
+            21.6
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "timestamp_utc": "2019-05-03T18:00:00Z",
+          "timestamp_ist": "2019-05-03T23:30:00+05:30",
+          "latitude": 21.6,
+          "longitude": 87.0,
+          "wind_speed_knots": 45,
+          "wind_speed_kmh": 85,
+          "central_pressure_hpa": 988,
+          "cyclone_category": "Cyclonic Storm",
+          "operational_stage": "Moving past Balasore towards West Bengal",
+          "eye_radius_km": 0.0,
+          "hazard_radius_90kmh_km": 40.0,
+          "hazard_radius_120kmh_km": 0.0,
+          "provenance_tag": "REPLAY"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            87.8,
+            22.4
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "timestamp_utc": "2019-05-04T00:00:00Z",
+          "timestamp_ist": "2019-05-04T05:30:00+05:30",
+          "latitude": 22.4,
+          "longitude": 87.8,
+          "wind_speed_knots": 35,
+          "wind_speed_kmh": 65,
+          "central_pressure_hpa": 994,
+          "cyclone_category": "Deep Depression",
+          "operational_stage": "Inland West Bengal / Bangladesh border",
+          "eye_radius_km": 0.0,
+          "hazard_radius_90kmh_km": 40.0,
+          "hazard_radius_120kmh_km": 0.0,
+          "provenance_tag": "REPLAY"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            88.8,
+            23.5
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "timestamp_utc": "2019-05-04T06:00:00Z",
+          "timestamp_ist": "2019-05-04T11:30:00+05:30",
+          "latitude": 23.5,
+          "longitude": 88.8,
+          "wind_speed_knots": 25,
+          "wind_speed_kmh": 45,
+          "central_pressure_hpa": 1000,
+          "cyclone_category": "Depression",
+          "operational_stage": "Degraded over Bangladesh",
+          "eye_radius_km": 0.0,
+          "hazard_radius_90kmh_km": 40.0,
+          "hazard_radius_120kmh_km": 0.0,
+          "provenance_tag": "REPLAY"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [
+              88.5,
+              5.2
+            ],
+            [
+              88.2,
+              5.8
+            ],
+            [
+              87.8,
+              6.8
+            ],
+            [
+              86.9,
+              8.2
+            ],
+            [
+              86.2,
+              9.5
+            ],
+            [
+              86.0,
+              11.0
+            ],
+            [
+              85.5,
+              12.8
+            ],
+            [
+              84.8,
+              14.1
+            ],
+            [
+              84.4,
+              15.2
+            ],
+            [
+              84.5,
+              16.0
+            ],
+            [
+              84.8,
+              17.1
+            ],
+            [
+              85.3,
+              18.5
+            ],
+            [
+              85.8,
+              19.8
+            ],
+            [
+              85.8,
+              20.3
+            ],
+            [
+              86.1,
+              20.6
+            ],
+            [
+              86.4,
+              20.9
+            ],
+            [
+              86.7,
+              21.2
+            ],
+            [
+              87.0,
+              21.6
+            ],
+            [
+              87.8,
+              22.4
+            ],
+            [
+              88.8,
+              23.5
+            ]
+          ]
+        },
+        "properties": {
+          "event_id": "fani_2019",
+          "cyclone_name": "FANI",
+          "start_time": "2019-04-26T06:00:00Z",
+          "end_time": "2019-05-04T06:00:00Z",
+          "peak_intensity_kmh": 215,
+          "landfall_point": "Puri, Odisha (19.80\u00b0N, 85.82\u00b0E)",
+          "source": "IMD Best Track Data Archive",
+          "provenance_tag": "REPLAY"
+        }
+      }
+    ]
+  },
+  "provenance_metadata": {
+    "source": "IMD Best Track 2019 + OSDMA Census Cadastre",
+    "tag": "REPLAY",
+    "is_simulated": false,
+    "interlocks_active": true,
+    "timestamp": "2019-05-03T08:30:00+05:30"
+  }
+}

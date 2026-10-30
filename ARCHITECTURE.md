@@ -142,9 +142,10 @@ Every factor appends to `reasons[]`: `{factor, weight, contribution, detail}`. *
 2. **IMD-wins-always:** if official warning and model score disagree, the official warning governs and the UI *shows* the disagreement.
 3. **Never-assume-safe:** no route is `PASSABLE` without evidence; missing data = `UNKNOWN`, never "safe by default".
 4. **Clamp:** never recommend a unit with `readiness < 0.4`; never `EVAC_ORDERED` with open interlock flags.
-5. **Provenance everywhere:** every score/badge carries `OFFICIAL_FORECAST | MODEL_ESTIMATE | REPLAY | SIMULATED | INSUFFICIENT_DATA`.
+5. **Provenance everywhere:** every score/badge carries `OFFICIAL_FORECAST | OBSERVED | MODEL_ESTIMATE | REPLAY | SIMULATED | INSUFFICIENT_DATA` (specification in `docs/PROVENANCE_SPEC.md`).
 
 ---
+
 
 ## 5. Relief-Logistics Layer (light, spatial-only — no routing optimization)
 
@@ -203,27 +204,33 @@ suraksha/
 ├── SRS.md                      ← pointer → docs/SRS.md (canonical)
 ├── docs/
 │   ├── SRS.md                  ← software requirements specification
-│   ├── JUDGE_QA.md             ← hostile questions + answers
-│   └── DEMO_SCRIPT.md          ← 5-minute timed walkthrough
+│   ├── JUDGE_QA.md             ← hostile questions + answers (20 defense answers)
+│   ├── DEMO_SCRIPT.md          ← 5-minute timed walkthrough
+│   ├── PROVENANCE_SPEC.md      ← 5 canonical tags + live/replay toggle spec
+│   ├── SLIDES.md               ← 10-slide high-impact defense deck
+│   └── REHEARSAL_GUIDE.md      ← timed execution breakdown & failure drills
 ├── backend/
 │   ├── app/                     ← FastAPI application layer (authoritative)
 │   │   ├── api/                 ← routers: hazard_events, area_risk, assets, routes, tasks, briefing
 │   │   ├── services/
-│   │   │   ├── risk/            ← area_engine.py, interlocks.py, exposure.py
+│   │   │   ├── risk/            ← area_engine.py, interlocks.py, exposure.py, briefing_template.py
 │   │   │   └── ingest/          ← imd_adapter.py, cap_adapter.py, firms_adapter.py, cascade.py
 │   │   ├── models/              ← SQLAlchemy models
 │   │   └── core/                ← auth, RBAC, config
 │   ├── app/db/migrations/       ← alembic (existing chain; cyclone tables = additive migrations)
 │   └── workers/                 ← scheduled pollers
 ├── db/
-│   └── seed/                    ← Fani 2019 replay pack + Odisha blocks + assets CSV
+│   └── seed/                    ← Fani 2019 replay pack + Odisha blocks + assets CSV + sources.md
+│       ├── data/                ← fani_2019_track, warnings, odisha_blocks, population, osm_roads
+│       ├── sources.md           ← per-file sources, licenses, and timestamps (< 50 MB)
+│       └── strategic_assets.csv ← 42 curated installations with coordinates & criticality
 ├── frontend/
 │   └── js/ + index.html         ← command dashboard (CDN Tailwind + MapLibre, ES modules)
 ├── data/                        ← pre-downloaded GeoJSON/CSV (gitignored where large)
 ├── legacy/                      ← frozen FireSense presentation artifacts (not part of the build)
 ├── seed_demo.py                 ← scenario seeder (imported by tests — keep at root)
 ├── docker-compose.yml           ← db + api (+frontend static served by FastAPI)
-└── tests/                       ← pytest
+└── tests/                       ← pytest (including test_seed_data_pack, test_situation_briefing)
 ```
 
 **Deliberate exclusions:** no `node_modules`/Vite, no JSX build chains, no decks/screenshots in root (they live in `legacy/`), no duplicate backends, no dead scripts.
