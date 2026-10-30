@@ -1,35 +1,92 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// GovernmentCommand.tsx — Tab 2 matching video frames 00:09 - 00:14 & 00:42 - 00:56
+// GovernmentCommand.tsx — Tab 2 matching video 2 (00:34 - 00:43)
 // ─────────────────────────────────────────────────────────────────────────────
 import React, { useState } from 'react';
-import { Send, CheckCircle2, ShieldCheck, AlertTriangle, Route } from 'lucide-react';
-import GISOverlayMap from '../components/gis/GISOverlayMap';
+import {
+  Send,
+  Radio,
+  RefreshCw,
+  Plus,
+  AlertTriangle,
+  Megaphone,
+  Tent,
+  ShieldAlert,
+  AlertOctagon,
+  PhoneCall,
+  Newspaper,
+  CheckCircle2,
+} from 'lucide-react';
 
 interface Props {
   onShowToast: (msg: string) => void;
 }
 
+const ACTIVE_ZONES = [
+  {
+    id: 'INC-2026-0042',
+    name: 'Similipal Forest Fire',
+    location: 'Similipal National Park, Mayurbhanj District, Odisha',
+    coordinates: '21.8564°N, 86.3521°E',
+    priority: '87.0/100',
+    type: 'WILDFIRE',
+    severity: 'CRITICAL',
+    popAtRisk: '34.2K',
+    teams: '3 / 4',
+  },
+  {
+    id: 'INC-2026-0043',
+    name: 'Jamnagar Refinery Flare Stack',
+    location: 'Petrochemical Refining Complex, Jamnagar, Gujarat',
+    coordinates: '22.3501°N, 69.8712°E',
+    priority: '38.0/100',
+    type: 'FACTORY FLARE',
+    severity: 'MEDIUM',
+    popAtRisk: '1.2K',
+    teams: '1 / 2',
+  },
+  {
+    id: 'INC-2026-0044',
+    name: 'Sangrur Farm Stubble Burning',
+    location: 'Sangrur Agricultural District, Punjab',
+    coordinates: '30.2481°N, 75.8392°E',
+    priority: '62.0/100',
+    type: 'CROP SMOKE',
+    severity: 'HIGH',
+    popAtRisk: '18.4K',
+    teams: '2 / 3',
+  },
+  {
+    id: 'INC-2026-0045',
+    name: 'Singrauli Unregistered Hotspot',
+    location: 'Singrauli Scrubland, MP/UP Border',
+    coordinates: '24.1841°N, 82.6432°E',
+    priority: '79.0/100',
+    type: 'SUSPICIOUS ACTIVITY',
+    severity: 'CRITICAL',
+    popAtRisk: '8.9K',
+    teams: '3 / 4',
+  },
+];
+
 export default function GovernmentCommand({ onShowToast }: Props) {
-  const [windSlider, setWindSlider] = useState<number>(50); // 0 to 100
-  const [dispatched, setDispatched] = useState<boolean>(false);
-  const [selectedRank, setSelectedRank] = useState<string>('brahmagiri');
+  const [selectedId, setSelectedId] = useState<string>('INC-2026-0042');
+  const [teamsCount, setTeamsCount] = useState<number>(9);
+  const [dispatchedAlerts, setDispatchedAlerts] = useState<Record<string, boolean>>({});
 
-  // Dynamic calculations based on wind slider
-  const windKmh = Math.round(180 + (windSlider / 100) * 30); // 180 to 210 km/h
-  const peopleAtRisk = windSlider > 60 ? '684K' : '603K';
-  const teamsDeployed = dispatched ? 10 : 9;
-
-  // Dynamic scores for priority areas
-  const scoreBrahmagiri = Math.min(100, Math.round(92 + (windSlider - 50) * 0.16));
-  const scoreKrushna = Math.min(100, Math.round(87 + (windSlider - 50) * 0.2));
-  const scoreErasama = Math.min(100, Math.round(79 + (windSlider - 50) * 0.24));
-  const scoreAstaranga = Math.min(100, Math.round(73 + (windSlider - 50) * 0.16));
+  const selectedZone = ACTIVE_ZONES.find(z => z.id === selectedId) ?? ACTIVE_ZONES[0];
 
   function handleDispatch() {
-    if (!dispatched) {
-      setDispatched(true);
-      onShowToast('Simulated dispatch alert created and added to the command log');
+    if (!dispatchedAlerts[selectedZone.id]) {
+      setDispatchedAlerts(prev => ({ ...prev, [selectedZone.id]: true }));
+      setTeamsCount(prev => prev + 1);
+      onShowToast(`Simulated dispatch alert created for ${selectedZone.id} (${selectedZone.name})`);
+    } else {
+      onShowToast(`Alert already dispatched for ${selectedZone.id}`);
     }
+  }
+
+  function handleQuickAction(actionName: string) {
+    onShowToast(`Executing: ${actionName} for ${selectedZone.name}`);
   }
 
   return (
@@ -39,267 +96,303 @@ export default function GovernmentCommand({ onShowToast }: Props) {
         <div>
           <h1 className="text-2xl font-black text-white tracking-tight">Incident Command Center</h1>
           <p className="text-xs text-white/50 mt-0.5">
-            Real-time situational awareness - Cyclone Fani replay · Odisha
+            Real-time situational awareness · Sep 6, 2026 · All states
           </p>
         </div>
         <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-red-500/40 bg-red-950/30 text-red-400 text-xs font-mono font-bold">
           <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse"></span>
-          <span>4 CRITICAL AREAS ACTIVE</span>
+          <span>3 Critical Incidents Active</span>
         </div>
       </div>
 
       {/* 4 Stat Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {/* Card 1 */}
-        <div className="bg-[#121622] border border-white/10 rounded-xl p-4 flex flex-col">
-          <div className="text-xs text-white/40 font-mono uppercase tracking-wider mb-1">Active Areas</div>
-          <div className="text-3xl font-black font-mono text-white tracking-tight">24</div>
-          <div className="text-xs text-white/40 mt-1">across 3 districts</div>
+        <div className="bg-[#121622] border border-white/10 rounded-xl p-4">
+          <div className="text-xs text-white/40 font-mono uppercase tracking-wider mb-1">Active Incidents</div>
+          <div className="text-3xl font-black font-mono text-white tracking-tight">5</div>
+          <div className="text-xs text-white/40 mt-1">across 4 states</div>
         </div>
-
-        {/* Card 2 */}
-        <div className="bg-[#121622] border border-white/10 rounded-xl p-4 flex flex-col">
+        <div className="bg-[#121622] border border-white/10 rounded-xl p-4">
           <div className="text-xs text-white/40 font-mono uppercase tracking-wider mb-1">People at Risk</div>
-          <div className="text-3xl font-black font-mono text-red-400 tracking-tight transition-all">
-            {peopleAtRisk}
-          </div>
-          <div className="text-xs text-white/40 mt-1">Within forecast wind field</div>
+          <div className="text-3xl font-black font-mono text-red-400 tracking-tight">398K</div>
+          <div className="text-xs text-white/40 mt-1">in affected zones</div>
         </div>
-
-        {/* Card 3 */}
-        <div className="bg-[#121622] border border-white/10 rounded-xl p-4 flex flex-col">
+        <div className="bg-[#121622] border border-white/10 rounded-xl p-4">
           <div className="text-xs text-white/40 font-mono uppercase tracking-wider mb-1">Teams Deployed</div>
-          <div className="text-3xl font-black font-mono text-white tracking-tight transition-all">
-            {teamsDeployed}
-          </div>
-          <div className="text-xs text-white/40 mt-1">of 14 NDRF teams</div>
+          <div className="text-3xl font-black font-mono text-white tracking-tight">{teamsCount}</div>
+          <div className="text-xs text-white/40 mt-1">of 15 NDRF teams</div>
         </div>
-
-        {/* Card 4 */}
-        <div className="bg-[#121622] border border-white/10 rounded-xl p-4 flex flex-col">
+        <div className="bg-[#121622] border border-white/10 rounded-xl p-4">
           <div className="text-xs text-white/40 font-mono uppercase tracking-wider mb-1">Relief Camps</div>
-          <div className="text-3xl font-black font-mono text-emerald-400 tracking-tight">18</div>
-          <div className="text-xs text-white/40 mt-1">44,500 capacity</div>
+          <div className="text-3xl font-black font-mono text-emerald-400 tracking-tight">6</div>
+          <div className="text-xs text-white/40 mt-1">32,000 capacity available</div>
         </div>
       </div>
 
-      {/* Priority Areas Ranked List */}
-      <div className="bg-[#121622] border border-white/10 rounded-xl overflow-hidden">
-        <div className="flex items-center justify-between px-5 py-3 border-b border-white/10 bg-[#0e121b]">
-          <span className="text-xs font-mono uppercase tracking-wider font-bold text-white/80">
-            Priority Areas
-          </span>
-          <span className="text-xs font-mono text-white/40">24 AREAS</span>
-        </div>
-
-        <div className="divide-y divide-white/5">
-          {/* Rank 1 */}
-          <div
-            onClick={() => setSelectedRank('brahmagiri')}
-            className={`flex items-center justify-between px-5 py-3.5 cursor-pointer transition-colors ${
-              selectedRank === 'brahmagiri' ? 'bg-blue-600/10' : 'hover:bg-white/5'
-            }`}
-          >
-            <div>
-              <div className="text-[10px] font-mono text-white/40">RANK 01</div>
-              <div className="font-bold text-sm text-white">Brahmagiri</div>
-              <div className="text-xs text-white/40">Puri · 118K exposed</div>
-            </div>
-            <div className="text-2xl font-black font-mono text-red-500">{scoreBrahmagiri}</div>
+      {/* Main 2-Column: Active Zones (Left) + Selected Operational Zone (Right) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        {/* LEFT: Active Zones */}
+        <div className="lg:col-span-5 bg-[#121622] border border-white/10 rounded-xl overflow-hidden flex flex-col">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-[#0e121a]">
+            <span className="text-xs font-mono uppercase font-bold text-white/80">Active Zones</span>
+            <span className="text-xs font-mono text-white/40">5 INCIDENTS</span>
           </div>
 
-          {/* Rank 2 */}
-          <div
-            onClick={() => setSelectedRank('krushnaprasad')}
-            className={`flex items-center justify-between px-5 py-3.5 cursor-pointer transition-colors ${
-              selectedRank === 'krushnaprasad' ? 'bg-blue-600/10' : 'hover:bg-white/5'
-            }`}
-          >
-            <div>
-              <div className="text-[10px] font-mono text-white/40">RANK 02</div>
-              <div className="font-bold text-sm text-white">Krushna Prasad</div>
-              <div className="text-xs text-white/40">Puri · 89K exposed</div>
-            </div>
-            <div className="text-2xl font-black font-mono text-red-500">{scoreKrushna}</div>
-          </div>
+          <div className="divide-y divide-white/5 overflow-y-auto max-h-[680px]">
+            {ACTIVE_ZONES.map(z => {
+              const isSelected = z.id === selectedId;
+              return (
+                <div
+                  key={z.id}
+                  onClick={() => setSelectedId(z.id)}
+                  className={`p-4 cursor-pointer transition-all ${
+                    isSelected ? 'bg-blue-600/15 border-l-4 border-l-blue-500' : 'hover:bg-white/5'
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <div className="text-[10px] font-mono text-white/40">{z.id}</div>
+                      <div className="font-bold text-sm text-white mt-0.5">{z.name}</div>
+                      <div className="text-xs text-white/40 mt-0.5 truncate">{z.location}</div>
+                    </div>
+                    <span
+                      className={`px-2 py-0.5 rounded text-[10px] font-bold font-mono ${
+                        z.severity === 'CRITICAL'
+                          ? 'bg-red-500/20 text-red-400 border border-red-500/30'
+                          : z.severity === 'HIGH'
+                          ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                          : 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                      }`}
+                    >
+                      {z.severity}
+                    </span>
+                  </div>
 
-          {/* Rank 3 */}
-          <div
-            onClick={() => setSelectedRank('erasama')}
-            className={`flex items-center justify-between px-5 py-3.5 cursor-pointer transition-colors ${
-              selectedRank === 'erasama' ? 'bg-blue-600/10' : 'hover:bg-white/5'
-            }`}
-          >
-            <div>
-              <div className="text-[10px] font-mono text-white/40">RANK 03</div>
-              <div className="font-bold text-sm text-white">Erasama</div>
-              <div className="text-xs text-white/40">Jagatsinghpur · 132K exposed</div>
-            </div>
-            <div className="text-2xl font-black font-mono text-orange-400">{scoreErasama}</div>
-          </div>
-
-          {/* Rank 4 */}
-          <div
-            onClick={() => setSelectedRank('astaranga')}
-            className={`flex items-center justify-between px-5 py-3.5 cursor-pointer transition-colors ${
-              selectedRank === 'astaranga' ? 'bg-blue-600/10' : 'hover:bg-white/5'
-            }`}
-          >
-            <div>
-              <div className="text-[10px] font-mono text-white/40">RANK 04</div>
-              <div className="font-bold text-sm text-white">Astaranga</div>
-              <div className="text-xs text-white/40">Puri · 65K exposed</div>
-            </div>
-            <div className="text-2xl font-black font-mono text-orange-400">{scoreAstaranga}</div>
+                  <div className="flex items-center justify-between mt-3 text-xs font-mono text-white/60 pt-2 border-t border-white/5">
+                    <span>Priority: <strong className="text-white font-bold">{z.priority}</strong></span>
+                    <span className="text-white/40">{z.type}</span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
-      </div>
 
-      {/* Selected Operational Zone Box (Brahmagiri - Puri) */}
-      <div className="bg-[#121622] border border-white/10 rounded-xl p-5 space-y-4">
-        {/* Box Header with Wind Intensity Slider */}
-        <div className="flex items-center justify-between flex-wrap gap-4">
+        {/* RIGHT: Selected Operational Zone */}
+        <div className="lg:col-span-7 bg-[#121622] border border-white/10 rounded-xl p-5 space-y-5">
           <div>
             <div className="text-[10px] font-mono text-white/40 uppercase tracking-wider">
               SELECTED OPERATIONAL ZONE
             </div>
-            <h2 className="text-xl font-extrabold text-white">Brahmagiri - Puri</h2>
+            <h2 className="text-xl font-extrabold text-white mt-0.5">{selectedZone.name}</h2>
+            <div className="text-xs font-mono text-white/50 mt-0.5">
+              {selectedZone.location} · {selectedZone.coordinates}
+            </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <span className="text-xs font-mono text-white/60">
-              INTENSITY (WIND): <strong className="text-white font-bold">{windKmh} km/h</strong>
+          <div className="flex items-center gap-2">
+            <span className="px-2.5 py-1 rounded bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-mono font-bold">
+              {selectedZone.type}
             </span>
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={windSlider}
-              onChange={e => setWindSlider(Number(e.target.value))}
-              className="w-36 accent-blue-500 cursor-pointer"
-            />
-          </div>
-        </div>
-
-        {/* Vector Map for Brahmagiri */}
-        <div className="h-[360px] w-full">
-          <GISOverlayMap
-            selectedBlockId="brahmagiri"
-            windSpeed={windKmh}
-            highlightBrahmagiri={true}
-          />
-        </div>
-
-        {/* Bottom Metrics Bar */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2 border-t border-white/5">
-          <div>
-            <div className="text-[10px] font-mono text-white/40 uppercase">PRIORITY SCORE</div>
-            <div className="text-3xl font-black font-mono text-red-500 mt-0.5">
-              {scoreBrahmagiri}<span className="text-sm text-white/40">/100</span>
-            </div>
+            <span className="px-2.5 py-1 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-mono font-bold">
+              {selectedZone.severity}
+            </span>
           </div>
 
-          <div>
-            <div className="text-[10px] font-mono text-white/40 uppercase">TIME TO IMPACT</div>
-            <div className="text-3xl font-black font-mono text-white mt-0.5">08h 20m</div>
-          </div>
-
-          <div>
-            <div className="text-[10px] font-mono text-white/40 uppercase">PRIMARY HAZARD</div>
-            <div className="text-sm font-semibold text-white/90 mt-1">
-              Storm surge + coastal exposure
-            </div>
-          </div>
-        </div>
-
-        {/* Recommended Action + Simulated Dispatch Button */}
-        <div className="flex items-center justify-between flex-wrap gap-4 p-4 rounded-xl bg-[#161b28] border border-blue-500/20">
-          <div>
-            <div className="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider">
-              RECOMMENDED ACTION · SIMULATED
-            </div>
-            <div className="text-sm font-bold text-white mt-0.5">
-              Stage NDRF Unit 3 at 7th Battalion OSAP, Bhubaneswar
-            </div>
-            <div className="text-xs text-white/50 font-mono mt-0.5">
-              NDRF Unit 3 · 45 personnel · ETA 1h 40m · Via NH-316/NH-16 clear corridor
-            </div>
-          </div>
-
+          {/* Dispatch Simulated Alert Action Button */}
           <button
             onClick={handleDispatch}
-            className={`px-5 py-2.5 rounded-xl font-bold text-xs font-mono uppercase tracking-wider transition-all shadow-lg ${
-              dispatched
-                ? 'bg-emerald-600 text-white cursor-default'
+            className={`w-full py-3 rounded-xl font-bold font-mono text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg ${
+              dispatchedAlerts[selectedZone.id]
+                ? 'bg-emerald-600 text-white'
                 : 'bg-blue-600 hover:bg-blue-500 text-white shadow-blue-900/40'
             }`}
           >
-            {dispatched ? '✓ Simulated dispatch sent' : 'Dispatch simulated alert'}
+            <Send size={14} />
+            <span>
+              {dispatchedAlerts[selectedZone.id]
+                ? `✓ Dispatch Sent (${selectedZone.id})`
+                : `Dispatch Simulated Alert (${selectedZone.id})`}
+            </span>
           </button>
-        </div>
 
-        {/* Lower Grid: Supply Route Status + Decision Interlocks */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-          {/* Supply/Route Status */}
-          <div className="p-4 rounded-xl bg-[#0f131d] border border-white/5 space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-mono uppercase font-bold text-white/70">
-                Supply/Route Status
-              </span>
-              <span className="px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/30 text-blue-300 text-[10px] font-mono">
-                SPATIAL
-              </span>
+          {/* 3 Metric Tiles */}
+          <div className="grid grid-cols-3 gap-3">
+            <div className="p-3.5 rounded-lg bg-[#0e121a] border border-white/5">
+              <div className="text-[10px] font-mono text-white/40 uppercase">POPULATION AT RISK</div>
+              <div className="text-xl font-black font-mono text-red-400 mt-1">{selectedZone.popAtRisk}</div>
             </div>
-            <div className="space-y-2 text-xs font-mono">
-              <div className="flex items-center justify-between">
-                <span className="text-white/60">NH-316 Puri-Bhubaneswar</span>
-                <span className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold text-[10px]">
-                  AT RISK
-                </span>
+            <div className="p-3.5 rounded-lg bg-[#0e121a] border border-white/5">
+              <div className="text-[10px] font-mono text-white/40 uppercase">TEAMS DEPLOYED</div>
+              <div className="text-xl font-black font-mono text-white mt-1">{selectedZone.teams}</div>
+            </div>
+            <div className="p-3.5 rounded-lg bg-[#0e121a] border border-white/5">
+              <div className="text-[10px] font-mono text-white/40 uppercase">FIRE TYPE</div>
+              <div className="text-sm font-bold font-mono text-white mt-1.5">{selectedZone.type}</div>
+            </div>
+          </div>
+
+          {/* Resource Utilisation Progress Bars */}
+          <div className="p-4 rounded-xl bg-[#0e121a] border border-white/5 space-y-3">
+            <div className="text-xs font-mono uppercase font-bold text-white/80">
+              Resource Utilisation
+            </div>
+
+            <div className="space-y-2.5 text-xs font-mono">
+              <div>
+                <div className="flex justify-between text-white/60 mb-1">
+                  <span>NDRF Teams</span>
+                  <span className="text-white font-bold">9 / 15 teams</span>
+                </div>
+                <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+                  <div className="h-full bg-blue-500 rounded-full w-[60%]"></div>
+                </div>
               </div>
-              <div className="flex items-center justify-between">
-                <span className="text-white/60">Marine Drive - Konark</span>
-                <span className="px-2 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/30 font-bold text-[10px]">
-                  CUT
-                </span>
+
+              <div>
+                <div className="flex justify-between text-white/60 mb-1">
+                  <span>Fire Brigades</span>
+                  <span className="text-white font-bold">22 / 30 units</span>
+                </div>
+                <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+                  <div className="h-full bg-orange-500 rounded-full w-[73%]"></div>
+                </div>
               </div>
-              <div className="flex items-center justify-between">
-                <span className="text-white/60">Khorda Road rail corridor</span>
-                <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold text-[10px]">
-                  CLEAR
-                </span>
+
+              <div>
+                <div className="flex justify-between text-white/60 mb-1">
+                  <span>Relief Camps</span>
+                  <span className="text-white font-bold">0 / 12 camps</span>
+                </div>
+                <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+                  <div className="h-full bg-emerald-500 rounded-full w-[0%]"></div>
+                </div>
+              </div>
+
+              <div>
+                <div className="flex justify-between text-white/60 mb-1">
+                  <span>Helicopters</span>
+                  <span className="text-white font-bold">3 / 5 aircraft</span>
+                </div>
+                <div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+                  <div className="h-full bg-cyan-500 rounded-full w-[60%]"></div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Decision Interlocks */}
-          <div className="p-4 rounded-xl bg-[#0f131d] border border-white/5 space-y-3">
+          {/* Quick Actions (6 Buttons) */}
+          <div className="space-y-2.5">
+            <div className="text-xs font-mono uppercase font-bold text-white/60">QUICK ACTIONS</div>
+            <div className="grid grid-cols-2 gap-2.5">
+              {[
+                { name: 'Issue Public Alert', icon: Megaphone },
+                { name: 'Open Relief Camp', icon: Tent },
+                { name: 'Request Army Assist.', icon: ShieldAlert },
+                { name: 'Block Affected Roads', icon: AlertOctagon },
+                { name: 'Notify District Collector', icon: PhoneCall },
+                { name: 'Media Briefing', icon: Newspaper },
+              ].map(act => {
+                const Icon = act.icon;
+                return (
+                  <button
+                    key={act.name}
+                    onClick={() => handleQuickAction(act.name)}
+                    className="flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-[#151a26] hover:bg-[#1a2130] border border-white/10 text-xs font-semibold text-white/80 hover:text-white transition-colors"
+                  >
+                    <Icon size={14} className="text-blue-400" />
+                    <span>{act.name}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Incident Lifecycle Tracker — Live State Machine */}
+          <div className="p-4 rounded-xl bg-[#0e121a] border border-white/5 space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-mono uppercase font-bold text-white/70">
-                Decision Interlocks
+              <span className="text-xs font-mono uppercase font-bold text-white/80">
+                Incident Lifecycle Tracker — Live State Machine
               </span>
-              <span className="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-[10px] font-mono">
-                3/3 CLEAR
+              <button
+                onClick={() => onShowToast('Lifecycle state machine refreshed')}
+                className="text-[10px] font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
+              >
+                <RefreshCw size={10} />
+                <span>Refresh</span>
+              </button>
+            </div>
+
+            <div className="space-y-2 divide-y divide-white/5 font-mono text-xs">
+              <div className="flex items-center justify-between pt-1">
+                <div>
+                  <div className="font-bold text-white">INC-2026-0042 Similipal Forest Fire</div>
+                  <div className="text-[11px] text-white/40">Risk Score: 87.0/100 • Severity: CRITICAL</div>
+                </div>
+                <span className="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30 text-[10px] font-bold">
+                  NEW
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between pt-2">
+                <div>
+                  <div className="font-bold text-white">INC-2026-0043 Jamnagar Refinery Flare Stack</div>
+                  <div className="text-[11px] text-white/40">Risk Score: 38.0/100 • Severity: MEDIUM</div>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">
+                    VERIFIED
+                  </span>
+                  <span className="px-2 py-0.5 rounded bg-white/10 text-white/40 text-[10px]">
+                    TERMINAL (RESOLVED)
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between pt-2">
+                <div>
+                  <div className="font-bold text-white">INC-2026-0044 Sangrur Farm Stubble Burning</div>
+                  <div className="text-[11px] text-white/40">Risk Score: 62.0/100 • Severity: HIGH</div>
+                </div>
+                <span className="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30 text-[10px] font-bold">
+                  NEW
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between pt-2">
+                <div>
+                  <div className="font-bold text-white">INC-2026-0045 Singrauli Unregistered Hotspot</div>
+                  <div className="text-[11px] text-white/40">Risk Score: 79.0/100 • Severity: CRITICAL</div>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 text-[10px] font-bold">
+                    NEW
+                  </span>
+                  <span className="px-2 py-0.5 rounded bg-white/10 text-white/40 text-[10px]">
+                    TERMINAL (RESOLVED)
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Citizen Reports Inbox */}
+          <div className="p-4 rounded-xl bg-[#0e121a] border border-white/5 space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-mono uppercase font-bold text-white/80">
+                Citizen Reports Inbox
               </span>
+              <button
+                onClick={() => onShowToast('Citizen report form opened')}
+                className="text-[10px] font-mono text-blue-400 hover:text-blue-300 flex items-center gap-1"
+              >
+                <Plus size={10} />
+                <span>New</span>
+              </button>
             </div>
-            <div className="space-y-2 text-xs font-mono text-emerald-400">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 size={12} className="flex-shrink-0" />
-                <span>Data freshness within 6h threshold</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 size={12} className="flex-shrink-0" />
-                <span>Official IMD bulletin governs</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 size={12} className="flex-shrink-0" />
-                <span>UNMANNED prevention: audit trail active</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 size={12} className="flex-shrink-0" />
-                <span>Unit readiness clamp enforced</span>
-              </div>
-            </div>
+            <p className="text-xs text-white/40 font-mono">
+              No citizen reports yet. Reports from the Citizen Services portal appear here.
+            </p>
           </div>
         </div>
       </div>

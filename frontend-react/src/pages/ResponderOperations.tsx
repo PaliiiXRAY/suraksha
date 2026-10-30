@@ -1,51 +1,84 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// ResponderOperations.tsx — Tab 3 matching video frames 00:15 - 00:22 & 00:57 - 01:06
+// ResponderOperations.tsx — Tab 3 matching video 2 (00:44 - 01:03)
 // ─────────────────────────────────────────────────────────────────────────────
 import React, { useState } from 'react';
-import { Check, CheckCircle2, Radio, MapPin, Copy, ExternalLink, ShieldAlert } from 'lucide-react';
+import {
+  Radio,
+  MapPin,
+  Copy,
+  ExternalLink,
+  Send,
+  CheckCircle2,
+  AlertTriangle,
+  Clock,
+  ShieldCheck,
+  ChevronDown,
+} from 'lucide-react';
 
 interface Props {
   onShowToast: (msg: string) => void;
 }
 
-type MissionState = 'ASSIGNED' | 'DISPATCHED' | 'EN ROUTE' | 'ON SITE' | 'COMPLETE';
+type StepState = 'DISPATCHED' | 'ACKNOWLEDGED' | 'EN ROUTE' | 'ARRIVED' | 'CONTAINED' | 'RESOLVED';
+
+const LIFECYCLE_STEPS: StepState[] = [
+  'DISPATCHED',
+  'ACKNOWLEDGED',
+  'EN ROUTE',
+  'ARRIVED',
+  'CONTAINED',
+  'RESOLVED',
+];
 
 export default function ResponderOperations({ onShowToast }: Props) {
-  const [currentState, setCurrentState] = useState<MissionState>('DISPATCHED');
+  const [currentStep, setCurrentStep] = useState<StepState>('DISPATCHED');
+  const [sitrepText, setSitrepText] = useState('');
   const [copied, setCopied] = useState(false);
+  const [sitreps, setSitreps] = useState<Array<{ id: string; text: string; time: string }>>([
+    {
+      id: 'UNIT 3 · D-09-04-0421',
+      text: 'Initial response vehicle on site. Establishing containment line along rail siding.',
+      time: '18 mins ago',
+    },
+  ]);
 
-  const steps: MissionState[] = ['ASSIGNED', 'DISPATCHED', 'EN ROUTE', 'ON SITE'];
+  const currentIndex = LIFECYCLE_STEPS.indexOf(currentStep);
 
-  const getStepIndex = (state: MissionState) => {
-    switch (state) {
-      case 'ASSIGNED': return 0;
-      case 'DISPATCHED': return 1;
-      case 'EN ROUTE': return 2;
-      case 'ON SITE': return 3;
-      case 'COMPLETE': return 4;
+  const getNextStep = (): StepState | null => {
+    if (currentIndex < LIFECYCLE_STEPS.length - 1) {
+      return LIFECYCLE_STEPS[currentIndex + 1];
     }
+    return null;
   };
 
-  const currentIndex = getStepIndex(currentState);
+  const nextStep = getNextStep();
 
   function handleAdvance() {
-    if (currentState === 'DISPATCHED') {
-      setCurrentState('EN ROUTE');
-      onShowToast('Task advanced to EN ROUTE');
-    } else if (currentState === 'EN ROUTE') {
-      setCurrentState('ON SITE');
-      onShowToast('Task advanced to ON SITE');
-    } else if (currentState === 'ON SITE') {
-      setCurrentState('COMPLETE');
-      onShowToast('Mission completed');
+    if (nextStep) {
+      setCurrentStep(nextStep);
+      onShowToast(`Task advanced to ${nextStep}`);
+    } else {
+      onShowToast('Mission is already resolved');
     }
   }
 
+  function handleTransmitSitrep() {
+    if (!sitrepText.trim()) return;
+    const newEntry = {
+      id: `UNIT 3 · D-09-04-${Math.floor(1000 + Math.random() * 9000)}`,
+      text: sitrepText,
+      time: 'Just now',
+    };
+    setSitreps(prev => [newEntry, ...prev]);
+    setSitrepText('');
+    onShowToast('SitRep transmitted to Incident Command Center');
+  }
+
   function handleCopyGPS() {
-    navigator.clipboard?.writeText('19.7991, 85.8239');
+    navigator.clipboard?.writeText('30.248, 75.839');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-    onShowToast('Coordinates copied to clipboard');
+    onShowToast('GPS coordinates copied: 30.248°N, 75.839°E');
   }
 
   return (
@@ -62,33 +95,37 @@ export default function ResponderOperations({ onShowToast }: Props) {
           </p>
         </div>
 
+        {/* Center: Active Task Dropdown */}
         <div className="flex items-center gap-3">
-          <span className="text-xs font-mono text-white/60">
-            TASK-104 · Brahmagiri Evacuation Support
-          </span>
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-emerald-500/40 bg-emerald-950/30 text-emerald-400 text-xs font-mono font-bold">
+          <div className="flex items-center gap-2 bg-[#141824] border border-white/10 rounded-xl px-3 py-1.5 text-xs font-mono">
+            <span className="text-white/40">Active Task:</span>
+            <span className="font-bold text-white">INC-2026-0044 - Sangrur Agricultural District, Punjab</span>
+            <span className="px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400 text-[10px] font-bold">NEW</span>
+          </div>
+
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-emerald-500/40 bg-emerald-950/30 text-emerald-400 text-xs font-mono font-bold">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
             <span>FIELD READY</span>
           </div>
         </div>
       </div>
 
-      {/* Focused Mission Card */}
+      {/* Assigned Mission Card */}
       <div className="bg-[#121622] border border-white/10 rounded-xl p-5 space-y-5">
         <div className="flex items-start justify-between flex-wrap gap-4">
           <div>
             <div className="text-[10px] font-mono text-white/40 uppercase tracking-wider mb-0.5">
-              FOCUSED MISSION
+              ASSIGNED MISSION
             </div>
-            <h2 className="text-xl font-extrabold text-white">Brahmagiri Evacuation Support</h2>
+            <h2 className="text-xl font-extrabold text-white">Sangrur Farm Stubble Burning</h2>
             <div className="text-xs text-white/50 font-mono mt-0.5">
-              Brahmagiri block, Puri · Target sector assessment and support
+              Sangrur Agricultural District, Punjab · Target Sector Assessment
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-1 rounded bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-mono font-bold">
-              CYCLONE
+            <span className="px-2.5 py-1 rounded bg-orange-500/20 text-orange-400 border border-orange-500/30 text-xs font-mono font-bold">
+              CROP SMOKE
             </span>
             <span className="px-2.5 py-1 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-mono font-bold">
               HIGH
@@ -96,50 +133,44 @@ export default function ResponderOperations({ onShowToast }: Props) {
           </div>
         </div>
 
-        {/* 4-Grid Mission Telemetry */}
+        {/* 4-Grid Telemetry */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2 border-t border-white/5">
-          {/* Target GPS */}
           <div className="p-3.5 rounded-lg bg-[#0e121b] border border-white/5 flex flex-col justify-between">
             <div>
               <div className="text-[10px] font-mono text-white/40 uppercase">TARGET GPS</div>
-              <div className="text-sm font-bold font-mono text-white mt-1">19.7991°N · 85.8239°E</div>
+              <div className="text-sm font-bold font-mono text-white mt-1">30.248°N · 75.839°E</div>
             </div>
             <button
               onClick={handleCopyGPS}
               className="text-[11px] text-cyan-400 hover:text-cyan-300 font-mono flex items-center gap-1 mt-2 self-start"
             >
               <Copy size={11} />
-              <span>{copied ? 'Copied' : 'Copy coordinates'}</span>
+              <span>{copied ? 'Copied' : 'Copy GPS'}</span>
             </button>
           </div>
 
-          {/* Forecast Wind */}
           <div className="p-3.5 rounded-lg bg-[#0e121b] border border-white/5 flex flex-col justify-between">
             <div>
-              <div className="text-[10px] font-mono text-white/40 uppercase">FORECAST WIND</div>
-              <div className="text-xl font-black font-mono text-white mt-1">92 km/h</div>
+              <div className="text-[10px] font-mono text-white/40 uppercase">THERMAL POWER (FRP)</div>
+              <div className="text-xl font-black font-mono text-white mt-1">24.5 MW</div>
             </div>
-            <div className="text-[11px] text-white/40 font-mono mt-2">IMD Bulletin - Official</div>
+            <div className="text-[11px] text-white/40 font-mono mt-2">VIIRS Overpass Conf: 90%</div>
           </div>
 
-          {/* Hazard Rating */}
           <div className="p-3.5 rounded-lg bg-[#0e121b] border border-white/5 flex flex-col justify-between">
             <div>
               <div className="text-[10px] font-mono text-white/40 uppercase">HAZARD RATING</div>
-              <div className="text-sm font-bold font-mono text-red-400 mt-1">
-                CRITICAL · 92/100
-              </div>
+              <div className="text-sm font-bold font-mono text-amber-400 mt-1">MODERATE (Risk: 62/100)</div>
             </div>
-            <div className="text-[11px] text-white/40 font-mono mt-2">Operational priority</div>
+            <div className="text-[11px] text-white/40 font-mono mt-2">Secondary blast / coal dust</div>
           </div>
 
-          {/* Surface Wind Vector */}
           <div className="p-3.5 rounded-lg bg-[#0e121b] border border-white/5 flex flex-col justify-between">
             <div>
               <div className="text-[10px] font-mono text-white/40 uppercase">SURFACE WIND VECTOR</div>
-              <div className="text-xs font-bold text-white mt-1">East-North-East at 92 km/h</div>
+              <div className="text-xs font-bold text-white mt-1">North-West (NW) at 14 km/h</div>
             </div>
-            <div className="text-[11px] text-white/40 font-mono mt-2">Track moving inland</div>
+            <div className="text-[11px] text-white/40 font-mono mt-2">Plume moving toward NH-55</div>
           </div>
         </div>
 
@@ -148,31 +179,31 @@ export default function ResponderOperations({ onShowToast }: Props) {
           <div className="flex items-center justify-between">
             <span className="text-xs font-mono uppercase font-bold text-white/70">ACCESS ROUTE</span>
             <span className="px-2 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[10px] font-mono font-bold">
-              38.4 KM ACCESS
+              2.4 KM ACCESS
             </span>
           </div>
           <p className="text-xs text-white/80 leading-relaxed font-sans">
-            Approach via NH-316 -&gt; Satapada Road. Avoid coastal SH-13 due to verified surge exposure.
+            Approach via NH-55 East Corridor Bypass -&gt; Gate 4 Road. Do not use Northern Coal Yard approach due to heavy smoke plume. Hydrant hookup available at Sector 4 Perimeter Gate.
           </p>
           <div className="flex items-center gap-3 pt-1">
             <button
-              onClick={() => onShowToast('Navigation route pinned to map')}
+              onClick={() => onShowToast('Navigation coordinates opened')}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-white text-xs font-mono transition-colors"
             >
               <ExternalLink size={12} />
-              <span>Open coordinates in maps</span>
+              <span>Open Coordinates in Maps</span>
             </button>
             <button
-              onClick={() => onShowToast('Connecting to Radio Channel 1670...')}
+              onClick={() => onShowToast('Connecting to Radio Channel 1078...')}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 text-blue-300 text-xs font-mono transition-colors"
             >
               <Radio size={12} />
-              <span>Radio Command 1670</span>
+              <span>Radio Command (1078)</span>
             </button>
           </div>
         </div>
 
-        {/* Lifecycle Control: Field Status Progression */}
+        {/* Lifecycle Control: Field Status Progression (6 Stepper Blocks) */}
         <div className="p-5 rounded-xl bg-[#0e121b] border border-white/5 space-y-4">
           <div className="flex items-center justify-between">
             <div className="text-[10px] font-mono text-white/40 uppercase tracking-wider">
@@ -180,84 +211,99 @@ export default function ResponderOperations({ onShowToast }: Props) {
             </div>
             <div className="text-xs font-mono">
               <span className="text-white/40">CURRENT STATE: </span>
-              <strong className="text-blue-400 font-bold">{currentState}</strong>
+              <strong className="text-amber-400 font-bold">{currentStep}</strong>
             </div>
           </div>
 
           <div className="text-sm font-bold text-white">Field Status Progression</div>
 
-          {/* Stepper Circles */}
-          <div className="relative flex items-center justify-between max-w-xl mx-auto py-4">
-            {/* Horizontal Line */}
-            <div className="absolute top-1/2 left-6 right-6 -translate-y-1/2 h-0.5 bg-white/10 z-0"></div>
-
-            {steps.map((st, i) => {
-              const isDone = currentIndex > i || currentState === 'COMPLETE';
-              const isCurrent = currentState === st;
+          {/* 6 Stepper Buttons */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 pt-2">
+            {LIFECYCLE_STEPS.map((step, idx) => {
+              const isPast = currentIndex > idx;
+              const isCurrent = currentStep === step;
               return (
-                <div key={st} className="relative z-10 flex flex-col items-center">
-                  <div
-                    className={`w-9 h-9 rounded-full flex items-center justify-center font-bold font-mono text-xs transition-all ${
-                      isDone
-                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/50'
-                        : isCurrent
-                        ? 'bg-blue-500 text-white ring-4 ring-blue-500/30'
-                        : 'bg-[#181d29] text-white/40 border border-white/10'
-                    }`}
-                  >
-                    {isDone ? <Check size={16} /> : i + 1}
+                <div
+                  key={step}
+                  className={`p-3 rounded-xl border text-center transition-all ${
+                    isCurrent
+                      ? 'bg-amber-500/20 border-amber-500 text-amber-300 shadow-md shadow-amber-950/40'
+                      : isPast
+                      ? 'bg-emerald-950/20 border-emerald-500/40 text-emerald-400'
+                      : 'bg-[#141824] border-white/5 text-white/30'
+                  }`}
+                >
+                  <div className="text-[10px] font-mono font-bold tracking-wider">{step}</div>
+                  <div className="text-[9px] font-mono mt-1 text-white/40">
+                    {isCurrent ? 'ACTIVE NOW' : isPast ? 'COMPLETED' : 'PENDING'}
                   </div>
-                  <span
-                    className={`text-[10px] font-mono mt-2 tracking-wider ${
-                      isDone || isCurrent ? 'text-white font-bold' : 'text-white/40'
-                    }`}
-                  >
-                    {st}
-                  </span>
                 </div>
               );
             })}
           </div>
 
-          {/* Advance Button */}
-          <div className="flex justify-end pt-2">
-            {currentState !== 'COMPLETE' ? (
+          {/* Action Required Banner + Advance Button */}
+          {nextStep ? (
+            <div className="space-y-2 pt-2">
+              <div className="text-xs font-mono text-amber-300/80">
+                Action Required: <strong className="text-white">Next State: {nextStep}</strong>
+              </div>
               <button
                 onClick={handleAdvance}
-                className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold font-mono text-xs uppercase tracking-wider transition-all shadow-lg shadow-blue-900/40"
+                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-black font-extrabold text-xs font-mono uppercase tracking-widest shadow-lg shadow-orange-950/40 transition-all active:scale-[0.99]"
               >
-                {currentState === 'DISPATCHED' && 'Advance to EN ROUTE'}
-                {currentState === 'EN ROUTE' && 'Advance to ON SITE'}
-                {currentState === 'ON SITE' && 'Advance to COMPLETE'}
+                ⚡ ACKNOWLEDGE DISPATCH ({nextStep})
               </button>
-            ) : (
-              <div className="px-6 py-2.5 rounded-xl bg-white/10 border border-white/20 text-white/40 font-bold font-mono text-xs uppercase tracking-wider cursor-default">
-                Mission completed
-              </div>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold text-center">
+              ✓ All lifecycle phases completed and resolved
+            </div>
+          )}
         </div>
 
-        {/* Safety Interlocks Strip */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-3 border-t border-white/5">
-          <div className="p-3 rounded-lg bg-[#0e121b] border border-white/5">
-            <div className="text-[10px] font-mono text-white/40 uppercase">SAFETY INTERLOCKS</div>
-            <div className="text-sm font-bold text-emerald-400 mt-0.5">All clear</div>
-            <div className="text-[10px] text-white/30 font-mono mt-0.5">
-              AUTOMATIC CHECK: 12 SATELLITE · 10 GROUND
+        {/* Field Situation Report (SitRep) */}
+        <div className="p-5 rounded-xl bg-[#0e121b] border border-white/5 space-y-4">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-mono uppercase font-bold text-white/80">
+              Field Situation Report (SitRep)
+            </span>
+            <span className="text-[10px] font-mono text-cyan-400 font-bold">
+              Direct sync to Command Center
+            </span>
+          </div>
+
+          <textarea
+            value={sitrepText}
+            onChange={e => setSitrepText(e.target.value)}
+            placeholder="Field report (e.g., 2 water tenders deployed on south perimeter; wind gusting 22 km/h; evacuating residential block B)..."
+            rows={3}
+            className="w-full bg-[#141824] border border-white/10 rounded-xl p-3 text-xs text-white placeholder-white/30 outline-none focus:border-amber-500/50 resize-none font-sans"
+          />
+
+          <button
+            onClick={handleTransmitSitrep}
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-black font-extrabold text-xs font-mono uppercase tracking-wider shadow-md transition-all"
+          >
+            <Send size={13} />
+            <span>Transmit SitRep to Command</span>
+          </button>
+
+          {/* Recent SitReps Logged */}
+          <div className="space-y-2 pt-3 border-t border-white/5">
+            <div className="text-[10px] font-mono text-white/40 uppercase font-bold">
+              Recent SitReps Logged
             </div>
-          </div>
-
-          <div className="p-3 rounded-lg bg-[#0e121b] border border-white/5">
-            <div className="text-[10px] font-mono text-white/40 uppercase">FIELD TEAM</div>
-            <div className="text-sm font-bold text-white mt-0.5">12 personnel</div>
-          </div>
-
-          <div className="p-3 rounded-lg bg-[#0e121b] border border-white/5">
-            <div className="text-[10px] font-mono text-white/40 uppercase">OPERATIONAL WINDOW</div>
-            <div className="text-sm font-bold text-amber-400 mt-0.5">06h 45m</div>
-            <div className="text-[10px] text-white/30 font-mono mt-0.5">
-              BEFORE 90 KM/H GALE FORCE WINDS
+            <div className="space-y-2">
+              {sitreps.map(sr => (
+                <div key={sr.id} className="p-3 rounded-lg bg-[#141824] border border-white/5 text-xs font-mono">
+                  <div className="flex items-center justify-between text-[11px] mb-1">
+                    <span className="font-bold text-cyan-400">{sr.id}</span>
+                    <span className="text-white/40">{sr.time}</span>
+                  </div>
+                  <p className="text-white/80 font-sans text-xs">{sr.text}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

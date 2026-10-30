@@ -40,6 +40,7 @@ export default function App() {
         onModeChange={setDataMode}
         onViewChange={v => setActiveView(v as ViewId)}
         activeView={activeView}
+        onSimulatePass={() => addToast('🛰️ Satellite pass simulated: Ingested 247 thermal anomalies across India (VIIRS/MODIS)')}
         onSyncReplay={() => addToast('Replay data pack verified and in-sync (Cyclone Fani 2019)')}
       />
 

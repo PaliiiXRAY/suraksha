@@ -1,8 +1,8 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// TopBar.tsx — SURAKSHA navigation header matching Figma & Screen Recording
+// TopBar.tsx — Header with SURAKSHA branding matching 8.16.10 PM recording
 // ─────────────────────────────────────────────────────────────────────────────
 import React from 'react';
-import { ShieldCheck, RefreshCw, Share2, LogOut, Radio } from 'lucide-react';
+import { ShieldCheck, Satellite, RefreshCw, Share2, LogOut, Radio } from 'lucide-react';
 import type { DataMode } from '../../types';
 
 interface Props {
@@ -10,6 +10,7 @@ interface Props {
   onModeChange: (mode: DataMode) => void;
   onViewChange: (view: string) => void;
   activeView: string;
+  onSimulatePass?: () => void;
   onSyncReplay?: () => void;
 }
 
@@ -21,10 +22,9 @@ const NAV_VIEWS = [
 ];
 
 export default function TopBar({
-  dataMode,
-  onModeChange,
   onViewChange,
   activeView,
+  onSimulatePass,
   onSyncReplay,
 }: Props) {
   const getRoleLabel = () => {
@@ -46,9 +46,12 @@ export default function TopBar({
     <header className="flex-shrink-0 bg-[#0b0e14] border-b border-white/10 select-none">
       {/* Primary Navigation Row */}
       <div className="flex items-center justify-between h-14 px-5 gap-4">
-        {/* Left: Brand + Nav tabs */}
+        {/* Left: Brand Logo + Nav tabs */}
         <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => onViewChange('intelligence')}>
+          <div
+            className="flex items-center gap-2.5 cursor-pointer"
+            onClick={() => onViewChange('intelligence')}
+          >
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#f4511e] to-[#c2410c] flex items-center justify-center shadow-md shadow-orange-950/40">
               <ShieldCheck size={18} className="text-white" />
             </div>
@@ -59,7 +62,7 @@ export default function TopBar({
             </div>
           </div>
 
-          {/* Nav pill tabs */}
+          {/* Navigation Tabs */}
           <nav className="flex items-center bg-[#141824] p-1 rounded-xl border border-white/10">
             {NAV_VIEWS.map(v => {
               const isActive = activeView === v.id;
@@ -69,7 +72,7 @@ export default function TopBar({
                   onClick={() => onViewChange(v.id)}
                   className={`px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all ${
                     isActive
-                      ? 'bg-blue-600/30 text-blue-300 border border-blue-500/40 shadow-sm'
+                      ? 'bg-blue-600 text-white shadow-sm'
                       : 'text-white/60 hover:text-white hover:bg-white/5'
                   }`}
                 >
@@ -80,8 +83,17 @@ export default function TopBar({
           </nav>
         </div>
 
-        {/* Right: Status Pills & Action Buttons */}
+        {/* Right: Actions and Status Pills */}
         <div className="flex items-center gap-2.5">
+          {/* Simulate Satellite Pass button */}
+          <button
+            onClick={onSimulatePass}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-cyan-500/30 bg-cyan-950/20 hover:bg-cyan-950/40 text-cyan-300 text-xs font-mono font-semibold transition-all shadow-sm"
+          >
+            <Satellite size={13} className="text-cyan-400 animate-pulse" />
+            <span>Simulate Satellite Pass</span>
+          </button>
+
           {/* System status pill */}
           <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-950/30 text-emerald-400 text-xs font-mono">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -96,7 +108,7 @@ export default function TopBar({
           {/* Sync replay button */}
           <button
             onClick={onSyncReplay}
-            className="flex items-center gap-1.5 px-3 py-1 rounded-lg border border-white/15 bg-white/5 hover:bg-white/10 text-white/80 text-xs font-mono transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/15 bg-white/5 hover:bg-white/10 text-white/80 text-xs font-mono transition-colors"
             title="Sync replay state with data pack"
           >
             <RefreshCw size={11} className="text-white/60" />
