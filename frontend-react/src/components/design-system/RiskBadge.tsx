@@ -25,7 +25,7 @@ export default function RiskBadge({
   const cfg = TOKENS.colors.riskTiers[tier];
 
   const sizeClasses = {
-    sm: 'text-[10px] px-1.5 py-0.5',
+    sm: 'text-[10px] px-2 py-0.5',
     md: 'text-xs px-2.5 py-1',
     lg: 'text-sm px-3.5 py-1.5',
   };
@@ -33,7 +33,7 @@ export default function RiskBadge({
   return (
     <div className={`inline-flex flex-col gap-1 ${className}`}>
       <span
-        className={`inline-flex items-center gap-1.5 rounded-md font-mono font-black border uppercase tracking-wider ${cfg.badge} ${sizeClasses[size]}`}
+        className={`inline-flex items-center gap-1.5 rounded-lg font-mono font-black border uppercase tracking-wider shadow-sm transition-colors ${cfg.badge} ${sizeClasses[size]}`}
       >
         <span>{cfg.label}</span>
         <span className="opacity-40">•</span>
@@ -45,10 +45,10 @@ export default function RiskBadge({
           <div
             className={`h-full rounded-full transition-all duration-500 ${
               score >= 80
-                ? 'bg-gradient-to-r from-amber-500 to-red-500'
+                ? 'bg-red-600'
                 : score >= 60
                 ? 'bg-amber-500'
-                : 'bg-blue-500'
+                : 'bg-blue-600'
             }`}
             style={{ width: `${Math.min(100, Math.max(0, score))}%` }}
           />

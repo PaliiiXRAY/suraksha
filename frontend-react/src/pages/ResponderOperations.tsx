@@ -111,7 +111,7 @@ export default function ResponderOperations({ onShowToast }: Props) {
       <div className="bg-white dark:bg-[#121622] border border-slate-200/90 dark:border-white/10 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] font-mono tracking-wider font-bold uppercase text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800 flex items-center gap-1.5">
+            <span className="text-[10px] font-mono tracking-wider font-bold uppercase text-emerald-900 dark:text-emerald-200 bg-emerald-100 dark:bg-emerald-950/60 px-2.5 py-1 rounded-lg border border-emerald-300 dark:border-emerald-700 font-black shadow-sm flex items-center gap-1.5">
               <Radio size={12} className="animate-pulse" />
               <span>NDRF BATTALION 03 · TACTICAL FIELD TERMINAL</span>
             </span>
@@ -126,7 +126,7 @@ export default function ResponderOperations({ onShowToast }: Props) {
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-bold shadow-sm">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-300 dark:border-emerald-700 bg-emerald-100 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200 text-xs font-mono font-black shadow-sm">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span>FIELD READY · VHF CH-04</span>
           </div>
@@ -196,25 +196,25 @@ export default function ResponderOperations({ onShowToast }: Props) {
 
         {/* 4-Metric Strip */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/5">
+          <div className="p-3.5 rounded-xl bg-slate-100/80 dark:bg-[#181d2a] border border-slate-300 dark:border-white/10 shadow-sm">
             <div className="text-xs font-mono text-slate-700 dark:text-slate-300 uppercase font-bold tracking-wider">TARGET GPS</div>
             <div className="text-sm font-bold font-mono text-slate-900 dark:text-white mt-1">
               19.7991, 85.8239
             </div>
           </div>
-          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/5">
+          <div className="p-3.5 rounded-xl bg-slate-100/80 dark:bg-[#181d2a] border border-slate-300 dark:border-white/10 shadow-sm">
             <div className="text-xs font-mono text-slate-700 dark:text-slate-300 uppercase font-bold tracking-wider">FORECAST WIND</div>
             <div className="text-sm font-bold font-mono text-amber-600 dark:text-amber-400 mt-1">
               185 km/h (Peak 215)
             </div>
           </div>
-          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/5">
+          <div className="p-3.5 rounded-xl bg-slate-100/80 dark:bg-[#181d2a] border border-slate-300 dark:border-white/10 shadow-sm">
             <div className="text-xs font-mono text-slate-700 dark:text-slate-300 uppercase font-bold tracking-wider">TERRAIN RISK</div>
             <div className="text-sm font-bold font-mono text-red-600 dark:text-red-400 mt-1">
               CRITICAL (92/100)
             </div>
           </div>
-          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/5">
+          <div className="p-3.5 rounded-xl bg-slate-100/80 dark:bg-[#181d2a] border border-slate-300 dark:border-white/10 shadow-sm">
             <div className="text-xs font-mono text-slate-700 dark:text-slate-300 uppercase font-bold tracking-wider">RADIO FREQUENCY</div>
             <div className="text-sm font-bold font-mono text-emerald-600 dark:text-emerald-400 mt-1">
               156.800 MHz (Ch 16)
@@ -243,7 +243,7 @@ export default function ResponderOperations({ onShowToast }: Props) {
                 <span className="font-bold text-sm text-slate-900 dark:text-white">
                   Route A: NH-316 via Pipili Bypass
                 </span>
-                <span className="px-2 py-0.5 rounded text-[10px] font-black bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-mono">
+                <span className="px-2.5 py-1 rounded text-xs font-black bg-emerald-100 text-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 font-mono shadow-sm">
                   RECOMMENDED · PASSABLE
                 </span>
               </div>
@@ -265,7 +265,7 @@ export default function ResponderOperations({ onShowToast }: Props) {
                 <span className="font-bold text-sm text-slate-900 dark:text-white">
                   Route B: Puri-Konark Marine Drive
                 </span>
-                <span className="px-2 py-0.5 rounded text-[10px] font-black bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20 font-mono">
+                <span className="px-2.5 py-1 rounded text-xs font-black bg-red-100 text-red-900 dark:bg-red-950/40 dark:text-red-300 border border-red-300 dark:border-red-700 font-mono shadow-sm">
                   IMPASSABLE · SURGE 1.8M
                 </span>
               </div>

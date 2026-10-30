@@ -176,7 +176,7 @@ export default function CitizenServices({ onShowToast }: Props) {
       <div className="bg-white dark:bg-[#121622] border border-slate-200/90 dark:border-white/10 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] font-mono tracking-wider font-bold uppercase text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40 px-2 py-0.5 rounded-full border border-blue-200 dark:border-blue-800">
+            <span className="text-[10px] font-mono tracking-wider font-bold uppercase text-blue-900 dark:text-blue-200 bg-blue-100 dark:bg-blue-950/60 px-2.5 py-1 rounded-lg border border-blue-300 dark:border-blue-700 font-black shadow-sm">
               CITIZEN RESILIENCE & LIFELINE PORTAL
             </span>
             <ProvenancePill tag="OFFICIAL_FORECAST" size="sm" />
@@ -271,7 +271,7 @@ export default function CitizenServices({ onShowToast }: Props) {
                 <span className="font-extrabold text-sm text-red-900 dark:text-red-200">
                   Extremely Severe Cyclone Fani Landfall Imminent
                 </span>
-                <span className="px-2 py-0.5 rounded bg-red-600 text-white text-[9px] font-mono font-bold">
+                <span className="px-2.5 py-1 rounded bg-red-700 text-white text-xs font-mono font-black shadow-sm">
                   RED ALERT
                 </span>
               </div>
@@ -289,7 +289,7 @@ export default function CitizenServices({ onShowToast }: Props) {
                 <span className="font-extrabold text-sm text-amber-900 dark:text-amber-200">
                   Storm Surge Inundation Warning
                 </span>
-                <span className="px-2 py-0.5 rounded bg-amber-500 text-white text-[9px] font-mono font-bold">
+                <span className="px-2.5 py-1 rounded bg-amber-600 text-white text-xs font-mono font-black shadow-sm">
                   HIGH SURGE
                 </span>
               </div>
@@ -319,7 +319,7 @@ export default function CitizenServices({ onShowToast }: Props) {
                 <div className="text-xs text-slate-700 dark:text-white/60">2.4 km away · High-Ground Evacuation Camp</div>
               </div>
             </div>
-            <div className="text-xs font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/20 p-2.5 rounded-xl border border-emerald-200 dark:border-emerald-800/40">
+            <div className="text-xs font-mono font-bold text-emerald-900 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/40 p-2.5 rounded-xl border border-emerald-300 dark:border-emerald-700 shadow-sm">
               Capacity: 450 / 600 · Generator Active · Potable Water
             </div>
             <div className="flex justify-between items-center pt-1 border-t border-slate-100 dark:border-white/5">
@@ -341,7 +341,7 @@ export default function CitizenServices({ onShowToast }: Props) {
                 <div className="text-xs text-slate-700 dark:text-white/60">3.8 km away · Emergency & Trauma Care</div>
               </div>
             </div>
-            <div className="text-xs font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/20 p-2.5 rounded-xl border border-blue-200 dark:border-blue-800/40">
+            <div className="text-xs font-mono font-bold text-blue-900 dark:text-blue-300 bg-blue-100 dark:bg-blue-950/40 p-2.5 rounded-xl border border-blue-300 dark:border-blue-700 shadow-sm">
               Trauma ICU 24/7 · 2 Ambulances Stationed · Blood Bank OK
             </div>
             <div className="flex justify-between items-center pt-1 border-t border-slate-100 dark:border-white/5">
@@ -363,7 +363,7 @@ export default function CitizenServices({ onShowToast }: Props) {
                 <div className="text-xs text-slate-700 dark:text-white/60">4.1 km away · OSDMA Ration Distribution</div>
               </div>
             </div>
-            <div className="text-xs font-mono text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-950/20 p-2.5 rounded-xl border border-cyan-200 dark:border-cyan-800/40">
+            <div className="text-xs font-mono font-bold text-cyan-900 dark:text-cyan-300 bg-cyan-100 dark:bg-cyan-950/40 p-2.5 rounded-xl border border-cyan-300 dark:border-cyan-700 shadow-sm">
               6 Water Tankers · 8,000 Dry Ration Packets Available
             </div>
             <div className="flex justify-between items-center pt-1 border-t border-slate-100 dark:border-white/5">
@@ -385,7 +385,7 @@ export default function CitizenServices({ onShowToast }: Props) {
                 <div className="text-xs text-slate-700 dark:text-white/60">3.2 km away · State Transport Fleet</div>
               </div>
             </div>
-            <div className="text-xs font-mono text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/20 p-2.5 rounded-xl border border-amber-200 dark:border-amber-800/40">
+            <div className="text-xs font-mono font-bold text-amber-900 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/40 p-2.5 rounded-xl border border-amber-300 dark:border-amber-700 shadow-sm">
               OSRTC Evacuation Buses Depart Every 15 Mins
             </div>
             <div className="flex justify-between items-center pt-1 border-t border-slate-100 dark:border-white/5">
@@ -407,7 +407,7 @@ export default function CitizenServices({ onShowToast }: Props) {
                 <div className="text-xs text-slate-700 dark:text-white/60">5.0 km away · IndianOil Strategic Reserve</div>
               </div>
             </div>
-            <div className="text-xs font-mono text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-950/20 p-2.5 rounded-xl border border-orange-200 dark:border-orange-800/40">
+            <div className="text-xs font-mono font-bold text-orange-900 dark:text-orange-300 bg-orange-100 dark:bg-orange-950/40 p-2.5 rounded-xl border border-orange-300 dark:border-orange-700 shadow-sm">
               Reserved for Emergency Vehicles & Hospital Generators
             </div>
             <div className="flex justify-between items-center pt-1 border-t border-slate-100 dark:border-white/5">
@@ -429,7 +429,7 @@ export default function CitizenServices({ onShowToast }: Props) {
                 <div className="text-xs text-slate-700 dark:text-white/60">Dial 112 / 1070 · 24/7 Operations</div>
               </div>
             </div>
-            <div className="text-xs font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/20 p-2.5 rounded-xl border border-emerald-200 dark:border-emerald-800/40">
+            <div className="text-xs font-mono font-bold text-emerald-900 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/40 p-2.5 rounded-xl border border-emerald-300 dark:border-emerald-700 shadow-sm">
               Toll-Free Police, Medical Ambulance & OSDMA Desk
             </div>
             <div className="flex justify-between items-center pt-1 border-t border-slate-100 dark:border-white/5">
@@ -451,7 +451,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               {t.evacuationTitle}
             </h2>
           </div>
-          <span className="px-3 py-1 rounded-full font-mono font-black text-xs bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+          <span className="px-3 py-1 rounded-full font-mono font-black text-xs bg-emerald-100 text-emerald-900 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 shadow-sm">
             {t.safePath}
           </span>
         </div>

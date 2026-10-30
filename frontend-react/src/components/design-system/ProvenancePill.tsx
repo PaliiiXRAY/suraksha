@@ -19,28 +19,28 @@ export default function ProvenancePill({
   const renderIcon = () => {
     switch (cfg.icon) {
       case 'verified':
-        return <ShieldCheck size={11} className="text-blue-400" />;
+        return <ShieldCheck size={12} className="text-blue-700 dark:text-blue-300 flex-shrink-0" />;
       case 'sensor':
-        return <Eye size={11} className="text-emerald-400" />;
+        return <Eye size={12} className="text-emerald-700 dark:text-emerald-300 flex-shrink-0" />;
       case 'cpu':
-        return <Cpu size={11} className="text-purple-400" />;
+        return <Cpu size={12} className="text-purple-700 dark:text-purple-300 flex-shrink-0" />;
       case 'history':
-        return <History size={11} className="text-slate-400" />;
+        return <History size={12} className="text-slate-800 dark:text-slate-200 flex-shrink-0" />;
       case 'sliders':
-        return <Sliders size={11} className="text-amber-400" />;
+        return <Sliders size={12} className="text-amber-800 dark:text-amber-300 flex-shrink-0" />;
       default:
-        return <AlertTriangle size={11} className="text-rose-400" />;
+        return <AlertTriangle size={12} className="text-rose-700 dark:text-rose-300 flex-shrink-0" />;
     }
   };
 
   const sizeClasses = {
-    sm: 'text-[9.5px] px-2 py-0.5',
-    md: 'text-xs px-2.5 py-1',
+    sm: 'text-[10px] px-2.5 py-1',
+    md: 'text-xs px-3 py-1.5',
   };
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded font-mono font-bold border uppercase tracking-wider ${cfg.badge} ${sizeClasses[size]} ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-lg font-mono font-black border uppercase tracking-wider shadow-sm transition-colors ${cfg.badge} ${sizeClasses[size]} ${className}`}
       title={`Data Provenance: ${cfg.label}`}
     >
       {renderIcon()}

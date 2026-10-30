@@ -145,7 +145,7 @@ export default function GovernmentCommand({ onShowToast }: Props) {
       <div className="bg-white dark:bg-[#121622] border border-slate-200/90 dark:border-white/10 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] font-mono tracking-wider font-bold uppercase text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40 px-2 py-0.5 rounded-full border border-blue-200 dark:border-blue-800">
+            <span className="text-xs font-mono tracking-wider font-black uppercase text-blue-900 dark:text-blue-200 bg-blue-100 dark:bg-blue-950/60 px-2.5 py-1 rounded-lg border border-blue-300 dark:border-blue-700 shadow-sm">
               STATE EMERGENCY OPERATIONS CENTER (SEOC)
             </span>
             <ProvenancePill tag={windSlider !== 50 ? 'SIMULATED' : 'OFFICIAL_FORECAST'} size="sm" />
@@ -153,14 +153,14 @@ export default function GovernmentCommand({ onShowToast }: Props) {
           <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
             Government Portal
           </h1>
-          <p className="text-xs text-slate-700 dark:text-white/60 mt-0.5">
+          <p className="text-xs font-bold text-slate-700 dark:text-slate-200 mt-0.5">
             Command authorization, what-if simulation, logistics routing & response coordination.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-red-500/30 bg-red-50 dark:bg-red-950/20 text-red-600 dark:text-red-400 text-xs font-mono font-bold shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-red-300 dark:border-red-500/40 bg-red-100 dark:bg-red-950/40 text-red-900 dark:text-red-200 text-xs font-mono font-black shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
             <span>4 CRITICAL SECTORS ACTIVE</span>
           </div>
         </div>
@@ -225,18 +225,18 @@ export default function GovernmentCommand({ onShowToast }: Props) {
                     onClick={() => setSelectedAreaId(area.id)}
                     className={`flex items-center justify-between px-5 py-3.5 cursor-pointer transition-all ${
                       isSelected
-                        ? 'bg-blue-50/80 dark:bg-blue-600/15 border-l-4 border-blue-600'
+                        ? 'bg-blue-100/70 dark:bg-blue-600/20 border-l-4 border-blue-600'
                         : 'hover:bg-slate-50 dark:hover:bg-white/5'
                     }`}
                   >
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-mono text-blue-600 dark:text-blue-400 font-black">
+                        <span className="text-xs font-mono text-blue-800 dark:text-blue-300 font-black">
                           {area.rank}
                         </span>
-                        <span className="text-sm font-bold text-slate-900 dark:text-white">{area.name}</span>
+                        <span className="text-base font-black text-slate-900 dark:text-white">{area.name}</span>
                       </div>
-                      <div className="text-xs text-slate-700 dark:text-white/60 mt-0.5">
+                      <div className="text-xs font-bold text-slate-700 dark:text-slate-200 mt-0.5">
                         {area.district} · {area.exposed}
                       </div>
                     </div>
@@ -416,13 +416,13 @@ export default function GovernmentCommand({ onShowToast }: Props) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
                 <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/5 flex items-center justify-between">
                   <span className="text-slate-800 dark:text-white font-bold">NH-316 (Bhubaneswar-Puri)</span>
-                  <span className="px-2.5 py-0.5 rounded text-[10px] font-black bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                  <span className="px-2.5 py-1 rounded text-xs font-black bg-emerald-100 text-emerald-900 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700">
                     PASSABLE (W/ ESCORT)
                   </span>
                 </div>
                 <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/5 flex items-center justify-between">
                   <span className="text-slate-800 dark:text-white font-bold">Marine Drive Corridor</span>
-                  <span className="px-2.5 py-0.5 rounded text-[10px] font-black bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20">
+                  <span className="px-2.5 py-1 rounded text-xs font-black bg-red-100 text-red-900 dark:bg-red-950/40 dark:text-red-300 border border-red-300 dark:border-red-700">
                     CUT (1.8M SURGE)
                   </span>
                 </div>
@@ -437,28 +437,28 @@ export default function GovernmentCommand({ onShowToast }: Props) {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 <button
                   onClick={() => handleQuickAction('Broadcast Red Evacuation Warning')}
-                  className="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-[#181d2a] dark:hover:bg-[#202738] border border-slate-200/90 dark:border-white/10 text-xs font-bold text-slate-800 dark:text-white flex flex-col items-center text-center gap-1.5 transition-all shadow-sm active:scale-95"
+                  className="p-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-[#181d2a] dark:hover:bg-[#202738] border border-slate-300 dark:border-white/10 text-xs font-bold text-slate-800 dark:text-white flex flex-col items-center text-center gap-1.5 transition-all shadow-sm active:scale-95"
                 >
                   <Megaphone size={16} className="text-red-500" />
                   <span>Issue Evac Order</span>
                 </button>
                 <button
                   onClick={() => handleQuickAction('Open High-Ground Cyclone Shelters')}
-                  className="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-[#181d2a] dark:hover:bg-[#202738] border border-slate-200/90 dark:border-white/10 text-xs font-bold text-slate-800 dark:text-white flex flex-col items-center text-center gap-1.5 transition-all shadow-sm active:scale-95"
+                  className="p-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-[#181d2a] dark:hover:bg-[#202738] border border-slate-300 dark:border-white/10 text-xs font-bold text-slate-800 dark:text-white flex flex-col items-center text-center gap-1.5 transition-all shadow-sm active:scale-95"
                 >
                   <Tent size={16} className="text-amber-500" />
                   <span>Open Shelters</span>
                 </button>
                 <button
                   onClick={() => handleQuickAction('Seal Inundated Route Corridor')}
-                  className="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-[#181d2a] dark:hover:bg-[#202738] border border-slate-200/90 dark:border-white/10 text-xs font-bold text-slate-800 dark:text-white flex flex-col items-center text-center gap-1.5 transition-all shadow-sm active:scale-95"
+                  className="p-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-[#181d2a] dark:hover:bg-[#202738] border border-slate-300 dark:border-white/10 text-xs font-bold text-slate-800 dark:text-white flex flex-col items-center text-center gap-1.5 transition-all shadow-sm active:scale-95"
                 >
                   <Route size={16} className="text-blue-500" />
                   <span>Seal Route 14</span>
                 </button>
                 <button
                   onClick={() => handleQuickAction('Activate Mobile Medical Units')}
-                  className="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-[#181d2a] dark:hover:bg-[#202738] border border-slate-200/90 dark:border-white/10 text-xs font-bold text-slate-800 dark:text-white flex flex-col items-center text-center gap-1.5 transition-all shadow-sm active:scale-95"
+                  className="p-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-[#181d2a] dark:hover:bg-[#202738] border border-slate-300 dark:border-white/10 text-xs font-bold text-slate-800 dark:text-white flex flex-col items-center text-center gap-1.5 transition-all shadow-sm active:scale-95"
                 >
                   <PhoneCall size={16} className="text-emerald-500" />
                   <span>Pre-alert CHC</span>
