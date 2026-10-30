@@ -8,6 +8,7 @@ from typing import Any, Dict
 
 import os
 from fastapi import FastAPI, Request, status
+from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
@@ -15,7 +16,7 @@ from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from sqlalchemy import text
 
-from backend.app.api import auth, hotspots, incidents, public, reports, responders, stats, cyclone, hazard_events
+from backend.app.api import auth, hotspots, incidents, public, reports, responders, stats, cyclone, hazard_events, mesh
 from backend.app.core.config import CORS_ORIGINS
 from backend.app.core.errors import AppException, make_error_response
 from backend.app.db.session import SessionLocal
@@ -93,7 +94,7 @@ async def app_exception_handler(request: Request, exc: AppException):
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
-    errors_detail = exc.errors()
+    errors_detail = jsonable_encoder(exc.errors())
     first_msg = errors_detail[0]["msg"] if errors_detail else "Request validation failed"
     return make_error_response(
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
@@ -185,6 +186,10 @@ app.include_router(hazard_events.router, prefix="/api/v2")
 app.include_router(cyclone.router)
 app.include_router(cyclone.router, prefix="/api")
 app.include_router(cyclone.router, prefix="/api/v2")
+
+app.include_router(mesh.router)
+app.include_router(mesh.router, prefix="/api")
+app.include_router(mesh.router, prefix="/api/v2")
 
 # Mount Static Assets and UI Routes
 STATIC_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "static")

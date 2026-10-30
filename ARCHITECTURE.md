@@ -240,6 +240,41 @@ suraksha/
 
 ---
 
+---
+
+## 8b. Citizen MeshMap & Store-and-Forward Gateway Architecture
+
+During catastrophic hazard landfall (cyclone, tsunami, severe earthquake), terrestrial cell networks and power grids collapse. SURAKSHA integrates with the **MeshMap Offline Citizen App** via a decentralized store-and-forward contract (`docs/gov-contract.md`):
+
+```mermaid
+flowchart LR
+    subgraph CITIZEN["Offline Disaster Zone"]
+        CA["Citizen Phone A<br/>(Offline PWA / MapLibre)"]
+        CB["Relay Phone B<br/>(P2P Mesh / QR / Hotspot)"]
+        CA -->|"Signed SOS Bundle<br/>(Ed25519 + HLC)"| CB
+    end
+
+    subgraph GW["Gateway / Cell Boundary"]
+        GWN["Gateway Phone C / Fixed Node<br/>(Regains 4G / Wi-Fi)"]
+        CB -->|"Gossip Relay"| GWN
+    end
+
+    subgraph SURAKSHA["SURAKSHA Decision Command"]
+        API["FastAPI /v1/sos<br/>(Idempotent Ingestion)"]
+        QUEUE["SOS Responder Queue<br/>(Priority / Triaged)"]
+        ACK["POST /v1/sos/{id}/ack<br/>(Signed SOS_ACK Event)"]
+        OFFICIAL["GET /v1/official<br/>(Authoritative Bulletins)"]
+        GWN -->|"POST /v1/sos"| API --> QUEUE
+        QUEUE --> ACK
+        ACK -.->|"Gossip Return via Mesh"| CA
+        API -.->|"GET /v1/official"| GWN
+    end
+```
+
+- **Idempotency & Gateway Relay:** Any citizen device carrying peer snapshots can act as a transparent upload gateway. Ingestion is strictly deduplicated by `sos_id` (ULID).
+- **Closed-Loop Verification:** Dispatchers generate cryptographic `SOS_ACK` events signed by `gov_ed25519_suraksha_v1`, which propagate back across the mesh to reassure the trapped citizen offline.
+- **Simulation Interlock:** Automated responder dispatch records remain flagged `SIMULATED DISPATCH` in demo and rehearsal modes.
+
 ## 9. Hardware & Performance Reality
 
 - **No GPU is needed anywhere.** The LLM briefing agent calls an API (free tier), never local inference.
