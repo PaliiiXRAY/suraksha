@@ -45,8 +45,8 @@ flowchart TB
 
 ```mermaid
 flowchart TB
-    subgraph CLIENT["Client (Browser — no build step)"]
-        FE["Command Dashboard<br/>vanilla JS + Tailwind CDN + MapLibre GL<br/>served as static files by FastAPI"]
+    subgraph CLIENT["Client (Browser)"]
+        FE["SURAKSHA Dashboard<br/>React 18 + TypeScript + Vite + MapLibre GL<br/>(compiled to static assets served by FastAPI :8000<br/>or Vite dev server :5173 with offline fallback)"]
     end
 
     subgraph SERVER["Application Server (Docker — runs on ANY laptop)"]
