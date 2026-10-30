@@ -163,13 +163,13 @@ Network connectivity at disaster response sites and hackathon venues is notoriou
 | `osm_roads_coastal_odisha.geojson` | 13 arterial and evacuation corridors in Kendrapara, Balasore, Puri | OpenStreetMap contributors (ODbL 1.0) | `OBSERVED` |
 | `strategic_assets.csv` | 42 curated installations (hospitals, shelters, NDRF bases, fuel, ports) | OSDMA / NHM / PPT Registries (Open Government Data) | `OBSERVED` |
 
-Full per-file metadata, retrieval dates, and legal licenses are cataloged in [`db/seed/sources.md`](file:///Users/priyanshurajput/suraksha/db/seed/sources.md).
+Full per-file metadata, retrieval dates, and legal licenses are cataloged in [`db/seed/sources.md`](db/seed/sources.md).
 
 ---
 
 ## 🏷️ Provenance Badges (Zero Illusions)
 
-Every score, track fix, road segment, and dispatch task carries one of five canonical tags (detailed in [`docs/PROVENANCE_SPEC.md`](file:///Users/priyanshurajput/suraksha/docs/PROVENANCE_SPEC.md)):
+Every score, track fix, road segment, and dispatch task carries one of five canonical tags (detailed in [`docs/PROVENANCE_SPEC.md`](docs/PROVENANCE_SPEC.md)):
 - `OFFICIAL_FORECAST` — Direct, unmanipulated forecast from IMD (governs all decisions)
 - `OBSERVED` — Physical ground truth (OSM roads, OSDMA asset catalog)
 - `MODEL_ESTIMATE` — Algorithmic priority score (0–100) or route cut ratio
@@ -180,12 +180,13 @@ Every score, track fix, road segment, and dispatch task carries one of five cano
 ---
 
 ## 📚 Essential Documentation
-- **[5-Minute Timed Demo Script](file:///Users/priyanshurajput/suraksha/docs/DEMO_SCRIPT.md):** Minute-by-minute walkthrough hit for hit.
-- **[Presentation Slides](file:///Users/priyanshurajput/suraksha/docs/SLIDES.md):** 10-slide high-impact deck for the Defence & Aerospace track.
-- **[Judge Q&A Defense Guide](file:///Users/priyanshurajput/suraksha/docs/JUDGE_QA.md):** 20 battle-tested questions with bold answers.
-- **[Rehearsal & Drill Guide](file:///Users/priyanshurajput/suraksha/docs/REHEARSAL_GUIDE.md):** Team timing and contingency ladder.
-- **[System Architecture](file:///Users/priyanshurajput/suraksha/ARCHITECTURE.md):** Technical design, data flows, and container diagrams.
-- **[Architectural Decisions Log (ADR)](file:///Users/priyanshurajput/suraksha/DECISIONS.md):** 14 architectural decisions (D1–D14).
+- **[5-Minute Timed Demo Script](docs/DEMO_SCRIPT.md):** Minute-by-minute walkthrough hit for hit.
+- **[Presentation Slides](docs/SLIDES.md):** 10-slide high-impact deck for the Defence & Aerospace track.
+- **[Judge Q&A Defense Guide](docs/JUDGE_QA.md):** 20 battle-tested questions with bold answers.
+- **[Rehearsal & Drill Guide](docs/REHEARSAL_GUIDE.md):** Team timing and contingency ladder.
+- **[System Architecture](ARCHITECTURE.md):** Technical design, data flows, and container diagrams.
+- **[Architectural Decisions Log (ADR)](DECISIONS.md):** 14 architectural decisions (D1–D14).
+
 
 ---
 

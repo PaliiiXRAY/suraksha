@@ -3,7 +3,8 @@ import json
 import csv
 import pytest
 
-SEED_DATA_DIR = "/Users/priyanshurajput/suraksha/db/seed/data"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SEED_DATA_DIR = os.path.join(BASE_DIR, "db", "seed", "data")
 
 ODISHA_BBOX = {
     "min_lat": 17.78,
@@ -74,7 +75,7 @@ def test_osm_roads_valid():
             assert ODISHA_BBOX["min_lat"] <= pt[1] <= ODISHA_BBOX["max_lat"]
 
 def test_strategic_assets_odisha_bbox_and_criticality():
-    for p in [os.path.join(SEED_DATA_DIR, "strategic_assets.csv"), "/Users/priyanshurajput/suraksha/db/seed/strategic_assets.csv"]:
+    for p in [os.path.join(SEED_DATA_DIR, "strategic_assets.csv"), os.path.join(BASE_DIR, "db", "seed", "strategic_assets.csv")]:
         assert os.path.exists(p)
         with open(p) as f:
             rows = list(csv.DictReader(f))
