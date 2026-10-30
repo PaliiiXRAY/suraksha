@@ -197,6 +197,9 @@ if os.path.isdir(STATIC_DIR):
     assets_dir = os.path.join(STATIC_DIR, "assets")
     if os.path.isdir(assets_dir):
         app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
+    media_dir = os.path.join(STATIC_DIR, "media")
+    if os.path.isdir(media_dir):
+        app.mount("/media", StaticFiles(directory=media_dir), name="media")
 
     @app.get("/", response_class=FileResponse)
     @app.get("/app", response_class=FileResponse)

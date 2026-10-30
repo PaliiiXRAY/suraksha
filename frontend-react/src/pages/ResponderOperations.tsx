@@ -20,6 +20,10 @@ import {
   Truck,
   Users,
   LifeBuoy,
+  Wind,
+  Navigation,
+  Check,
+  AlertOctagon,
 } from 'lucide-react';
 import StatCard from '../components/design-system/StatCard';
 import RiskBadge from '../components/design-system/RiskBadge';
@@ -102,37 +106,39 @@ export default function ResponderOperations({ onShowToast }: Props) {
   }
 
   return (
-    <div className="flex-1 flex flex-col overflow-y-auto bg-slate-50 dark:bg-[#0a0d14] text-slate-900 dark:text-white p-6 space-y-6 transition-colors">
-      {/* Top Header */}
-      <div className="flex items-start justify-between flex-wrap gap-4">
+    <div className="flex-1 flex flex-col space-y-6">
+      {/* Top Header Card */}
+      <div className="bg-white dark:bg-[#121622] border border-slate-200/90 dark:border-white/10 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="text-[11px] font-mono tracking-widest text-emerald-600 dark:text-emerald-400 font-bold uppercase mb-1 flex items-center gap-1.5">
-            <Radio size={13} className="animate-pulse" />
-            <span>NDRF BATTALION 03 · TACTICAL FIELD TERMINAL</span>
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-[10px] font-mono tracking-wider font-bold uppercase text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800 flex items-center gap-1.5">
+              <Radio size={12} className="animate-pulse" />
+              <span>NDRF BATTALION 03 · TACTICAL FIELD TERMINAL</span>
+            </span>
+            <ProvenancePill tag="SIMULATED" size="sm" />
           </div>
           <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
-            Response Portal
+            Responder Operations
           </h1>
-          <p className="text-xs text-slate-600 dark:text-white/50 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-white/50 mt-0.5">
             Field execution, mission progression, safe routing & ground condition telemetry.
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
-          <ProvenancePill tag="SIMULATED" />
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-bold">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse"></span>
-            <span>VHF LINK ACTIVE · CH-04</span>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-bold shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>FIELD READY · VHF CH-04</span>
           </div>
         </div>
       </div>
 
-      {/* 4 Stat Cards */}
+      {/* 4 Summary Stat Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <StatCard
           title="Unit Status"
           value={currentStep}
-          subtitle="Assigned Sector: Brahmagiri / Puri"
+          subtitle="Brahmagiri / Puri Sector"
           icon={Truck}
           iconColor="text-emerald-500"
           provenance="SIMULATED"
@@ -140,7 +146,7 @@ export default function ResponderOperations({ onShowToast }: Props) {
         <StatCard
           title="Personnel Deployed"
           value={42}
-          subtitle="4 Officer Leads + 38 Responders"
+          subtitle="4 Officers + 38 Responders"
           icon={Users}
           iconColor="text-blue-500"
           provenance="BATTALION ROSTER"
@@ -148,7 +154,7 @@ export default function ResponderOperations({ onShowToast }: Props) {
         <StatCard
           title="Civilians Evacuated"
           value="1,420"
-          subtitle="Accommodated in Zilla High School"
+          subtitle="Zilla High School Shelter"
           delta="+240 recent"
           deltaType="positive"
           provenance="GROUND SITREP"
@@ -156,103 +162,93 @@ export default function ResponderOperations({ onShowToast }: Props) {
         <StatCard
           title="Equipment Readiness"
           value="100%"
-          subtitle="4 Inflatable Boats · 8 Chainsaws"
+          subtitle="4 Boats · 8 Chainsaws"
           icon={LifeBuoy}
           iconColor="text-amber-500"
           provenance="EQUIPMENT LOG"
         />
       </div>
 
-      {/* Active Mission Lifecycle Step Bar */}
-      <div className="bg-white dark:bg-[#121622] border border-slate-200 dark:border-white/10 rounded-2xl p-5 shadow-sm space-y-4">
-        <div className="flex items-center justify-between flex-wrap gap-2">
-          <span className="text-xs font-mono uppercase tracking-wider font-bold text-slate-800 dark:text-white/80">
-            Mission Lifecycle Progression · OP-2019-042
-          </span>
-          <span className="text-xs font-mono text-slate-500 dark:text-white/40">
-            CURRENT PHASE: <strong className="text-blue-600 dark:text-blue-400 font-bold">{currentStep}</strong>
-          </span>
-        </div>
-
-        {/* 6 Step Interactive Pills */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
-          {LIFECYCLE_STEPS.map((step, idx) => {
-            const isCompleted = idx < currentIndex;
-            const isCurrent = idx === currentIndex;
-            return (
-              <div
-                key={step}
-                className={`p-3 rounded-xl border text-center font-mono text-xs font-bold transition-all ${
-                  isCurrent
-                    ? 'bg-blue-600 text-white border-blue-500 shadow-md ring-2 ring-blue-500/20'
-                    : isCompleted
-                    ? 'bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 border-emerald-500/30'
-                    : 'bg-slate-50 dark:bg-[#181d2a] text-slate-400 dark:text-white/30 border-slate-200 dark:border-white/5'
-                }`}
-              >
-                <div className="text-[9px] opacity-70">STAGE 0{idx + 1}</div>
-                <div className="mt-0.5">{step}</div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Action button to advance */}
-        <div className="flex items-center justify-between pt-2 flex-wrap gap-3">
-          <div className="text-xs text-slate-500 dark:text-white/50">
-            Next Objective: {nextStep ? `Transition field unit to ${nextStep}` : 'All operational targets completed'}
+      {/* Card 1: ASSIGNED MISSION CARD */}
+      <div className="bg-white dark:bg-[#121622] border border-slate-200/90 dark:border-white/10 rounded-2xl p-6 shadow-sm space-y-5">
+        <div className="flex items-start justify-between flex-wrap gap-4 border-b border-slate-200 dark:border-white/10 pb-4">
+          <div>
+            <div className="text-[10px] font-mono text-amber-600 dark:text-amber-400 font-bold uppercase tracking-wider mb-1 flex items-center gap-1.5">
+              <AlertTriangle size={13} />
+              <span>ASSIGNED MISSION · OP-2019-042</span>
+            </div>
+            <h2 className="text-xl font-black text-slate-900 dark:text-white">
+              TASK-2019-FANI-084: Brahmagiri Relief Pre-positioning
+            </h2>
+            <div className="text-xs text-slate-500 dark:text-white/50 font-mono mt-0.5">
+              Puri Coastal District · Target Coordinates: 19.7991° N, 85.8239° E
+            </div>
           </div>
 
           <button
-            onClick={handleAdvance}
-            className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs font-bold shadow-md transition-all flex items-center gap-1.5"
+            onClick={handleCopyCoords}
+            className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/5 text-xs font-mono font-bold text-slate-700 dark:text-white/80 flex items-center gap-1.5 transition-colors shadow-sm"
           >
-            <span>Advance to {nextStep || 'COMPLETED'}</span>
-            <ChevronRight size={14} />
+            <Copy size={13} />
+            <span>{copied ? 'Copied GPS!' : 'Copy Target GPS'}</span>
           </button>
         </div>
-      </div>
 
-      {/* 2-Column Split: Tactical Route Advice (Left) & Live SITREP Feed (Right) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left (6 Cols): Route Intelligence */}
-        <div className="lg:col-span-6 bg-white dark:bg-[#121622] border border-slate-200 dark:border-white/10 rounded-2xl p-5 shadow-sm space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-3">
-            <div className="flex items-center gap-2">
-              <Route size={16} className="text-cyan-500" />
-              <span className="text-xs font-mono uppercase tracking-wider font-bold text-slate-800 dark:text-white/80">
-                Tactical Route Verification
-              </span>
+        {/* 4-Metric Strip */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/5">
+            <div className="text-[10px] font-mono text-slate-400 uppercase">TARGET GPS</div>
+            <div className="text-sm font-bold font-mono text-slate-900 dark:text-white mt-1">
+              19.7991, 85.8239
             </div>
-            <button
-              onClick={handleCopyCoords}
-              className="text-xs font-mono text-blue-600 dark:text-blue-400 flex items-center gap-1 hover:underline"
-            >
-              <Copy size={12} />
-              <span>{copied ? 'Copied!' : 'Copy Target Coords'}</span>
-            </button>
+          </div>
+          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/5">
+            <div className="text-[10px] font-mono text-slate-400 uppercase">FORECAST WIND</div>
+            <div className="text-sm font-bold font-mono text-amber-600 dark:text-amber-400 mt-1">
+              185 km/h (Peak 215)
+            </div>
+          </div>
+          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/5">
+            <div className="text-[10px] font-mono text-slate-400 uppercase">TERRAIN RISK</div>
+            <div className="text-sm font-bold font-mono text-red-600 dark:text-red-400 mt-1">
+              CRITICAL (92/100)
+            </div>
+          </div>
+          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/5">
+            <div className="text-[10px] font-mono text-slate-400 uppercase">RADIO FREQUENCY</div>
+            <div className="text-sm font-bold font-mono text-emerald-600 dark:text-emerald-400 mt-1">
+              156.800 MHz (Ch 16)
+            </div>
+          </div>
+        </div>
+
+        {/* Tactical Routing Assessment */}
+        <div className="space-y-3 pt-2">
+          <div className="text-xs font-mono uppercase tracking-wider font-bold text-slate-700 dark:text-white/70 flex items-center gap-1.5">
+            <Route size={14} className="text-blue-500" />
+            <span>Tactical Route Assessment & Inundation Status</span>
           </div>
 
-          <div className="space-y-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {/* Route A: NH-316 */}
             <div
               onClick={() => setSelectedRoute('nh316')}
               className={`p-4 rounded-xl border cursor-pointer transition-all ${
                 selectedRoute === 'nh316'
-                  ? 'bg-blue-50/50 dark:bg-[#182032] border-blue-500 ring-1 ring-blue-500'
-                  : 'bg-slate-50 dark:bg-[#181d2a] border-slate-200 dark:border-white/5 hover:border-slate-300'
+                  ? 'bg-blue-50/70 dark:bg-blue-950/20 border-blue-500 ring-1 ring-blue-500/30'
+                  : 'bg-slate-50 dark:bg-[#181d2a] border-slate-200/90 dark:border-white/5 hover:border-slate-300'
               }`}
             >
               <div className="flex items-center justify-between">
                 <span className="font-bold text-sm text-slate-900 dark:text-white">
-                  Route A: NH-316 via Pipili Bypass (Recommended)
+                  Route A: NH-316 via Pipili Bypass
                 </span>
                 <span className="px-2 py-0.5 rounded text-[10px] font-black bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-mono">
-                  PASSABLE (W/ ESCORT)
+                  RECOMMENDED · PASSABLE
                 </span>
               </div>
-              <p className="text-xs text-slate-600 dark:text-white/60 mt-1">
-                Distance: 54 km · Tree falls cleared by NHAI team at km 28 · Bridges intact.
+              <p className="text-xs text-slate-600 dark:text-white/60 mt-1.5 leading-relaxed">
+                Distance: 54 km · Tree falls cleared by NHAI team at km 28 · Bridges structurally intact · Safe for heavy rescue vehicles.
               </p>
             </div>
 
@@ -261,78 +257,144 @@ export default function ResponderOperations({ onShowToast }: Props) {
               onClick={() => setSelectedRoute('marinedrive')}
               className={`p-4 rounded-xl border cursor-pointer transition-all ${
                 selectedRoute === 'marinedrive'
-                  ? 'bg-red-50/50 dark:bg-[#28181e] border-red-500 ring-1 ring-red-500'
-                  : 'bg-slate-50 dark:bg-[#181d2a] border-slate-200 dark:border-white/5 hover:border-slate-300'
+                  ? 'bg-red-50/70 dark:bg-red-950/20 border-red-500 ring-1 ring-red-500/30'
+                  : 'bg-slate-50 dark:bg-[#181d2a] border-slate-200/90 dark:border-white/5 hover:border-slate-300'
               }`}
             >
               <div className="flex items-center justify-between">
                 <span className="font-bold text-sm text-slate-900 dark:text-white">
-                  Route B: Puri-Konark Marine Drive (Restricted)
+                  Route B: Puri-Konark Marine Drive
                 </span>
                 <span className="px-2 py-0.5 rounded text-[10px] font-black bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20 font-mono">
-                  CUT (INUNDATED 1.8M)
+                  IMPASSABLE · SURGE 1.8M
                 </span>
               </div>
-              <p className="text-xs text-slate-600 dark:text-white/60 mt-1">
-                Hazard: High storm surge breach at Culvert 14. Inaccessible to heavy rescue trucks.
+              <p className="text-xs text-slate-600 dark:text-white/60 mt-1.5 leading-relaxed">
+                Hazard: High storm surge breach at Culvert 14. Roadway washed out. Inaccessible to wheeled transport.
               </p>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Right (6 Cols): Transmit Ground SITREP */}
-        <div className="lg:col-span-6 bg-white dark:bg-[#121622] border border-slate-200 dark:border-white/10 rounded-2xl p-5 shadow-sm space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-3">
-            <span className="text-xs font-mono uppercase tracking-wider font-bold text-slate-800 dark:text-white/80">
-              Field Telemetry & SITREP Transmit
-            </span>
-            <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">
-              ENCRYPTED RELAY
-            </span>
-          </div>
-
-          <div className="space-y-2">
-            <textarea
-              rows={3}
-              value={sitrepText}
-              onChange={e => setSitrepText(e.target.value)}
-              placeholder="Enter field condition report (e.g. road water depth, shelter occupancy, generator fuel status)..."
-              className="w-full bg-slate-50 dark:bg-[#181d2a] border border-slate-200 dark:border-white/10 rounded-xl p-3 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-blue-500 shadow-sm font-mono"
-            />
-            <div className="flex justify-end">
-              <button
-                onClick={handleTransmitSitrep}
-                disabled={!sitrepText.trim()}
-                className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-mono text-xs font-bold shadow-md transition-all flex items-center gap-1.5"
-              >
-                <Send size={13} />
-                <span>Transmit SITREP</span>
-              </button>
+      {/* Card 2: MISSION LIFECYCLE CONTROL */}
+      <div className="bg-white dark:bg-[#121622] border border-slate-200/90 dark:border-white/10 rounded-2xl p-6 shadow-sm space-y-5">
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <div>
+            <div className="text-[10px] font-mono text-blue-600 dark:text-blue-400 font-bold uppercase tracking-wider mb-1">
+              FIELD STAGE MACHINE
             </div>
+            <h3 className="text-lg font-black text-slate-900 dark:text-white">
+              Mission Lifecycle Progression
+            </h3>
           </div>
-
-          {/* Previous Sitreps Log */}
-          <div className="space-y-2 pt-1 border-t border-slate-100 dark:border-white/5">
-            <div className="text-[10px] font-mono uppercase text-slate-400 font-bold">Recent Field Transmissions</div>
-            <div className="space-y-2 max-h-40 overflow-y-auto">
-              {sitreps.map((s, idx) => (
-                <div key={idx} className="p-2.5 rounded-lg bg-slate-50 dark:bg-[#181d2a] text-xs font-mono border border-slate-200 dark:border-white/5">
-                  <div className="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                    <span className="text-cyan-600 dark:text-cyan-400 font-bold">{s.id}</span>
-                    <span>{s.time}</span>
-                  </div>
-                  <p className="text-slate-800 dark:text-white/80 font-sans text-xs">{s.text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <AuditVerificationBlock
-            hash="0x28a190b4c8109278ba0119f49b1094892c908123e4758129a0081249b6184ff"
-            sourceAuthority="NDRF Unit 3 Tactical Keyring"
-            onVerify={() => onShowToast('Audit Verified: Tactical field signature validated')}
-          />
+          <span className="text-xs font-mono text-slate-500 dark:text-white/40">
+            CURRENT PHASE: <strong className="text-blue-600 dark:text-blue-400 font-bold">{currentStep}</strong>
+          </span>
         </div>
+
+        {/* 6 Step Interactive Stepper */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
+          {LIFECYCLE_STEPS.map((step, idx) => {
+            const isCompleted = idx < currentIndex;
+            const isCurrent = idx === currentIndex;
+            return (
+              <div
+                key={step}
+                className={`p-3.5 rounded-xl border text-center font-mono text-xs font-bold transition-all ${
+                  isCurrent
+                    ? 'bg-blue-600 text-white border-blue-600 shadow-md ring-2 ring-blue-500/20'
+                    : isCompleted
+                    ? 'bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 border-emerald-500/30'
+                    : 'bg-slate-50 dark:bg-[#181d2a] text-slate-400 dark:text-white/30 border-slate-200/90 dark:border-white/5'
+                }`}
+              >
+                <div className="text-[9px] opacity-70">STAGE 0{idx + 1}</div>
+                <div className="mt-1 flex items-center justify-center gap-1">
+                  {isCompleted && <Check size={12} />}
+                  <span>{step}</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Full-width Orange Stage CTA Button (matching FireSense reference) */}
+        <div>
+          <button
+            onClick={handleAdvance}
+            className="w-full py-3.5 px-6 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-mono text-sm font-black flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 active:scale-[0.99] transition-all"
+          >
+            <span>
+              {nextStep ? `ADVANCE TO ${nextStep} ->` : 'MISSION COMPLETED (ALL STAGES VERIFIED)'}
+            </span>
+          </button>
+        </div>
+      </div>
+
+      {/* Card 3: FIELD SITUATION REPORT (SITREP) */}
+      <div className="bg-white dark:bg-[#121622] border border-slate-200/90 dark:border-white/10 rounded-2xl p-6 shadow-sm space-y-5">
+        <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4">
+          <div>
+            <div className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold uppercase tracking-wider mb-1">
+              GROUND TELEMETRY & LOGS
+            </div>
+            <h3 className="text-lg font-black text-slate-900 dark:text-white">
+              Field Situation Report (SitRep)
+            </h3>
+          </div>
+          <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-950/30 px-2.5 py-1 rounded-full border border-emerald-200 dark:border-emerald-800">
+            ENCRYPTED RELAY ACTIVE
+          </span>
+        </div>
+
+        <div className="space-y-3">
+          <textarea
+            rows={3}
+            value={sitrepText}
+            onChange={e => setSitrepText(e.target.value)}
+            placeholder="Log tactical ground observation (e.g., road blockage, water levels, shelter status, generator fuel)..."
+            className="w-full bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/10 rounded-xl p-3.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-blue-500 shadow-sm font-mono leading-relaxed"
+          />
+          <div className="flex justify-end">
+            <button
+              onClick={handleTransmitSitrep}
+              disabled={!sitrepText.trim()}
+              className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-mono text-xs font-bold shadow-md transition-all flex items-center gap-2 active:scale-95"
+            >
+              <Send size={14} />
+              <span>TRANSMIT SITREP</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Previous Sitreps Log */}
+        <div className="space-y-2.5 pt-2 border-t border-slate-100 dark:border-white/5">
+          <div className="text-[10px] font-mono uppercase text-slate-400 font-bold">
+            Recent Field Transmissions Feed
+          </div>
+          <div className="space-y-2.5 max-h-48 overflow-y-auto">
+            {sitreps.map((s, idx) => (
+              <div
+                key={idx}
+                className="p-3 rounded-xl bg-slate-50 dark:bg-[#181d2a] text-xs font-mono border border-slate-200/90 dark:border-white/5"
+              >
+                <div className="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                  <span className="text-blue-600 dark:text-cyan-400 font-bold">{s.id}</span>
+                  <span>{s.time}</span>
+                </div>
+                <p className="text-slate-800 dark:text-white/90 font-sans text-xs leading-relaxed">{s.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Audit Verification Block */}
+        <AuditVerificationBlock
+          hash="0x28a190b4c8109278ba0119f49b1094892c908123e4758129a0081249b6184ff"
+          sourceAuthority="NDRF Unit 3 Tactical Keyring"
+          onVerify={() => onShowToast('Audit Verified: Tactical field signature validated')}
+        />
       </div>
     </div>
   );
