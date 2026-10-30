@@ -1,0 +1,111 @@
+{
+  "event_id": "fani_2019",
+  "agency": "India Meteorological Department (IMD)",
+  "provenance_tag": "REPLAY",
+  "license": "Government Open Data License - India (GODL)",
+  "archive_notes": "Official warnings issued by Cyclone Warning Division during Cyclone Fani May 2019",
+  "bulletins": [
+    {
+      "bulletin_no": "CW/FANI/BULLETIN-12",
+      "issue_time_utc": "2019-05-01T06:00:00Z",
+      "issue_time_ist": "2019-05-01T11:30:00+05:30",
+      "stage": "CYCLONE_ALERT",
+      "alert_color": "YELLOW",
+      "cyclone_name": "FANI",
+      "current_position": {
+        "lat": 14.1,
+        "lon": 84.8
+      },
+      "targeted_districts": [
+        "Ganjam",
+        "Puri",
+        "Jagatsinghpur",
+        "Kendrapara"
+      ],
+      "wind_forecast": "Wind speed reaching 175-185 kmph gusting to 205 kmph likely to impact coastal Odisha.",
+      "surge_warning": "Storm surge of about 1.5 m above astronomical tide likely to inundate low lying areas of Ganjam, Khordha, Puri & Jagatsinghpur.",
+      "recommended_action": "Total suspension of fishing operations. Fishermen out at sea advised to return immediately.",
+      "provenance_tag": "REPLAY"
+    },
+    {
+      "bulletin_no": "CW/FANI/BULLETIN-18",
+      "issue_time_utc": "2019-05-02T03:00:00Z",
+      "issue_time_ist": "2019-05-02T08:30:00+05:30",
+      "stage": "CYCLONE_WARNING",
+      "alert_color": "ORANGE",
+      "cyclone_name": "FANI",
+      "current_position": {
+        "lat": 16.0,
+        "lon": 84.5
+      },
+      "targeted_districts": [
+        "Ganjam",
+        "Gajapati",
+        "Puri",
+        "Khordha",
+        "Cuttack",
+        "Jagatsinghpur",
+        "Kendrapara",
+        "Bhadrak",
+        "Balasore",
+        "Mayurbhanj"
+      ],
+      "wind_forecast": "Wind speed 180-190 kmph gusting to 210 kmph over Puri and adjoining Khordha/Jagatsinghpur.",
+      "surge_warning": "Storm surge height 1.5 to 2.0 m in Puri and Jagatsinghpur districts.",
+      "recommended_action": "Evacuation of people from vulnerable coastal low lying areas to safe shelters. Coastal rail traffic regulated.",
+      "provenance_tag": "REPLAY"
+    },
+    {
+      "bulletin_no": "CW/FANI/BULLETIN-24",
+      "issue_time_utc": "2019-05-02T21:00:00Z",
+      "issue_time_ist": "2019-05-03T02:30:00+05:30",
+      "stage": "POST_LANDFALL_OUTLOOK / RED_ALERT",
+      "alert_color": "RED",
+      "cyclone_name": "FANI",
+      "current_position": {
+        "lat": 18.5,
+        "lon": 85.3
+      },
+      "targeted_districts": [
+        "Puri",
+        "Khordha",
+        "Cuttack",
+        "Jagatsinghpur",
+        "Kendrapara",
+        "Jajpur",
+        "Bhadrak",
+        "Balasore"
+      ],
+      "wind_forecast": "Gale wind speed reaching 200-210 kmph gusting to 230 kmph over Puri and adjoining coast during landfall.",
+      "surge_warning": "Inundation expected up to 2-3 km inland in Brahmagiri, Krushnaprasad, Puri Sadar blocks.",
+      "recommended_action": "Mass evacuation to multi-purpose cyclone shelters. Stay indoors. Essential services on emergency standby.",
+      "provenance_tag": "REPLAY"
+    },
+    {
+      "bulletin_no": "CW/FANI/BULLETIN-28",
+      "issue_time_utc": "2019-05-03T06:00:00Z",
+      "issue_time_ist": "2019-05-03T11:30:00+05:30",
+      "stage": "LANDFALL_OCCURRENCE",
+      "alert_color": "RED",
+      "cyclone_name": "FANI",
+      "current_position": {
+        "lat": 20.3,
+        "lon": 85.8
+      },
+      "targeted_districts": [
+        "Khordha",
+        "Cuttack",
+        "Dhenkanal",
+        "Jajpur",
+        "Kendrapara",
+        "Bhadrak",
+        "Balasore",
+        "Mayurbhanj"
+      ],
+      "wind_forecast": "Eye of the cyclone made landfall at Puri between 08:00 and 10:00 IST. Wind speed 150-160 kmph over Bhubaneswar and Cuttack moving NE.",
+      "surge_warning": "Severe sea surge in Puri, Astaranga, Kakatpur coast.",
+      "recommended_action": "Post-landfall emergency response: Road clearance by NDRF/ODRAF, medical teams deployment, restoration of telecommunication and power grid.",
+      "provenance_tag": "REPLAY"
+    }
+  ]
+}
