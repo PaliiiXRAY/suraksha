@@ -1,14 +1,19 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// App.tsx — root application connecting all 4 tabs matching video exactly
+// App.tsx — SURAKSHA root — 4 tabs wired to canonical + API-backed views
+// Intelligence  → HazardIntelligence (canonical SURAKSHA branding)
+// Govt Command  → CommandDashboard   (MapLibre map + block risk + situation brief)
+// Responder Ops → ResponderOperations
+// Citizen Svcs  → PublicServices     (real API data with offline fallback)
 // ─────────────────────────────────────────────────────────────────────────────
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { DataMode } from './types';
 import TopBar from './components/layout/TopBar';
 import ToastContainer, { ToastMessage } from './components/ui/Toast';
 import HazardIntelligence from './pages/HazardIntelligence';
-import GovernmentCommand from './pages/GovernmentCommand';
+import CommandDashboard from './pages/CommandDashboard';
 import ResponderOperations from './pages/ResponderOperations';
-import CitizenServices from './pages/CitizenServices';
+import PublicServices from './pages/PublicServices';
+import { checkBackendHealth } from './services/api';
 
 type ViewId = 'intelligence' | 'command' | 'responder' | 'citizen';
 
@@ -16,6 +21,13 @@ export default function App() {
   const [dataMode, setDataMode] = useState<DataMode>('REPLAY');
   const [activeView, setActiveView] = useState<ViewId>('intelligence');
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
+
+  // Probe backend once at startup; fall back to REPLAY if unreachable
+  useEffect(() => {
+    checkBackendHealth().then(alive => {
+      if (alive) setDataMode('LIVE');
+    });
+  }, []);
 
   function addToast(message: string, type: 'success' | 'warning' | 'info' = 'success') {
     const id = `${Date.now()}-${Math.random().toString(36).substr(2, 4)}`;
@@ -50,13 +62,13 @@ export default function App() {
           <HazardIntelligence onShowToast={msg => addToast(msg, 'info')} />
         )}
         {activeView === 'command' && (
-          <GovernmentCommand onShowToast={msg => addToast(msg, 'success')} />
+          <CommandDashboard />
         )}
         {activeView === 'responder' && (
           <ResponderOperations onShowToast={msg => addToast(msg, 'info')} />
         )}
         {activeView === 'citizen' && (
-          <CitizenServices onShowToast={msg => addToast(msg, 'warning')} />
+          <PublicServices />
         )}
       </main>
     </div>

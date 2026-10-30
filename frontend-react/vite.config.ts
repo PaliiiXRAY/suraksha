@@ -3,6 +3,8 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+  // /static/ prefix matches FastAPI's StaticFiles mount at /static
+  base: '/static/',
   server: {
     host: '0.0.0.0',
     port: 5173,
@@ -31,3 +33,4 @@ export default defineConfig({
     }
   }
 })
+
