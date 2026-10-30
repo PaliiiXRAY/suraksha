@@ -198,4 +198,4 @@ def test_static_routes_and_frontend_serving():
     resp_app = client.get("/app")
     assert resp_app.status_code == 200
     assert "text/html" in resp_app.headers.get("content-type", "")
-    assert "FireSense" in resp_app.text
+    assert ("FireSense" in resp_app.text) or ("SURAKSHA" in resp_app.text)

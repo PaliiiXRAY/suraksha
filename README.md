@@ -5,7 +5,7 @@
 [![Architecture](https://img.shields.io/badge/Architecture-Explainable%20Decision%20Engine-blue?style=flat-square)](#-decision-engine--scoring)
 [![Geospatial](https://img.shields.io/badge/Database-PostgreSQL%2016%20%2B%20PostGIS-336791?style=flat-square&logo=postgresql)](https://postgis.net)
 [![Backend](https://img.shields.io/badge/Backend-FastAPI%20%2B%20Python%203.11-009688?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com)
-[![Frontend](https://img.shields.io/badge/Frontend-Build--less%20MapLibre%20%2B%20Tailwind-38bdf8?style=flat-square)](https://maplibre.org)
+[![Frontend](https://img.shields.io/badge/Frontend-React%2018%20%2B%20Vite%20%2B%20MapLibre-38bdf8?style=flat-square)](https://maplibre.org)
 [![Offline Demo](https://img.shields.io/badge/Demo-Offline%20Fani%20Replay%20Pack-success?style=flat-square)](#-offline-first-reliability)
 
 ---
@@ -14,13 +14,13 @@
 
 > **"Official hazard systems tell you a cyclone is coming. They don't tell you *which block, which depot, which road to act on first*."**
 
-**SURAKSHA** transforms multi-source hazard feeds (IMD, ISRO MOSDAC, satellite telemetry) into an explainable, ranked operating picture for India's disaster command and response forces (NDRF, SDMA, Defence units). It identifies:
+**SURAKSHA** transforms multi-source hazard feeds (IMD bulletins, ISRO satellite telemetry) into an explainable, ranked operating picture for India's disaster command and response forces (NDRF, SDMA, Defence units). It identifies:
 - **Which administrative blocks** have the highest operational urgency (0–100 score + auditable `reasons[]`)
 - **Which strategic assets** (depots, helipads, hospitals, NDRF staging bases) are exposed
-- **Which critical supply routes** (National Highways, rail corridors) are severed or passable
+- **Which critical supply routes** (National Highways, evacuation corridors) are severed or passable
 - **Where to stage nearest-safe relief resources** outside the hazard footprint
 
-**The Core Differentiator:** Deterministic safety interlocks that refuse to auto-escalate on stale data, always defer to official IMD warnings, and explicitly tag every output with its provenance (`OFFICIAL_FORECAST`, `MODEL_ESTIMATE`, `REPLAY`, `SIMULATED`).
+**The Core Differentiator:** Deterministic safety interlocks that refuse to auto-escalate on stale data, always defer to official IMD warnings, and explicitly tag every output with its provenance (`OFFICIAL_FORECAST`, `OBSERVED`, `MODEL_ESTIMATE`, `REPLAY`, `SIMULATED`, `INSUFFICIENT_DATA`).
 
 ---
 
@@ -28,15 +28,15 @@
 
 ```text
                [EXTERNAL DATA CASCADE]
-   IMD API / CAP Alert Feed  +  ISRO MOSDAC  +  OSM / Bhuvan
+   IMD Bulletins / CAP Feed  +  ISRO Telemetry  +  OSM / Bhuvan
                               │
                               ▼
         ┌───────────────────────────────────────────┐
         │       4-Tier Fallback Cascade             │
-        │  Tier 1: Live IMD API                     │
-        │  Tier 2: IMD CAP RSS Feed                 │
-        │  Tier 3: Timestamped Local Cache          │
-        │  Tier 4: Offline Cyclone Fani Replay Pack │
+        │  Tier 1: Live IMD / CAP Feed (or cached)  │
+        │  Tier 2: Timestamped Local Cache          │
+        │  Tier 3: Offline Cyclone Fani Replay Pack │
+        │  Tier 4: INSUFFICIENT_DATA Safety Interlock│
         └─────────────────────┬─────────────────────┘
                               │
                               ▼
@@ -44,7 +44,7 @@
         │       Geospatial Core (PostGIS)           │
         │  • Odisha Administrative Blocks (Census)  │
         │  • Strategic Infrastructure & Depots      │
-        │  • Supply Route Road/Rail Network         │
+        │  • Supply Route Road/Evacuation Network   │
         └─────────────────────┬─────────────────────┘
                               │
                               ▼
@@ -59,20 +59,33 @@
                               ▼
         ┌───────────────────────────────────────────┐
         │       Application Layer (FastAPI)         │
-        │  • Org-Scoped RBAC (Authority/Analyst)    │
+        │  • Org Boundary Isolation & RBAC          │
         │  • Cyclone State Machine & Audit Trail    │
         │  • Simulated Dispatch Queue               │
-        │  • Natural-Language Situation Briefing    │
+        │  • Deterministic Slot-Filled Briefing     │
         └─────────────────────┬─────────────────────┘
                               │
                               ▼
         ┌───────────────────────────────────────────┐
-        │       Command Dashboard (MapLibre GL)     │
-        │  • Dynamic Risk Chloropleth & Track View  │
-        │  • Live "What-If" Track Re-ranking (<2s)  │
+        │     Command Dashboard (React 18 + MapLibre)│
+        │  • Dynamic Risk Choropleth & Track View   │
+        │  • Live "What-If" Track Re-ranking (<10ms)│
         │  • Auditable Reasons Drawer & Provenance  │
+        │  • Dual Dark / Light FireSense Theme      │
         └───────────────────────────────────────────┘
 ```
+
+---
+
+## 📁 Repository Structure
+
+| Path | Purpose | Status |
+|---|---|---|
+| `backend/app/` | Authoritative FastAPI backend (routers, RBAC, PostGIS models, alembic migrations) | **Active & Authoritative** |
+| `frontend-react/` | Modern React 18 + TypeScript + Vite frontend source code | **Active Source** |
+| `static/` | Compiled production dashboard served by FastAPI at `http://localhost:8000/dashboard` | **Active Bundle** |
+| `db/seed/` | Verified offline datasets (Fani track, Odisha blocks, curated assets, OSM roads) | **Active Data Pack** |
+| `legacy/` | Frozen legacy prototype artifacts & flat scripts | *Archived / Frozen* |
 
 ---
 
@@ -103,25 +116,25 @@ Every single block outputs an auditable `reasons[]` array explaining exact contr
 - **Nearest-Safe Staging:** Suggests secure staging hubs outside the hazard perimeter with verified intact routes.
 
 ### 4. Interactive "What-If" Track Re-ranking
-Commanders can adjust projected storm tracks or intensity (±20%) in real time. The engine re-ranks all blocks, recalculates route severances, and repositions staging recommendations across the entire operational picture in under **2 seconds**.
+Commanders can adjust projected storm tracks or intensity (±20%) in real time. The engine re-ranks all blocks, recalculates route severances, and repositions staging recommendations with client-side mathematical execution in **< 10 milliseconds** and server-side validation in **< 15 milliseconds**.
 
 ---
 
-## 🔒 Multi-Tenant Role-Based Access Control (RBAC)
+## 🔒 Role-Based Access Control & Organizational Scope
 
 | Role | Target Persona | Key Capabilities |
 |---|---|---|
-| **Admin** | System / Agency IT Lead | Manage organization users, audit logs, and configurations |
+| **Admin** | System / Agency IT Lead | Manage organization users, view audit logs, configure system boundaries |
 | **Authority** | Disaster Commander (NDRF / SDMA) | Approve relief tasks, change cyclone lifecycle, execute what-if simulations |
 | **Analyst** | Geospatial / Intelligence Analyst | Inspect risk factors, evaluate spatial layers, propose relief tasks |
-| **Responder** | Field Team Lead | Access assigned operational tasks, update task progression |
+| **Responder** | Field Team Lead | Access assigned operational tasks, update task progression (simulated) |
 | **Public** | Citizen Portal | Read-only access to `/public/alerts` public safety advisories |
 
 ---
 
 ## 🚀 Quickstart & Local Setup
 
-SURAKSHA runs fully containerized via Docker Compose. No local Node toolchains or GPUs are needed.
+SURAKSHA runs fully containerized via Docker Compose.
 
 ### Prerequisites
 - Docker & Docker Compose
@@ -139,16 +152,16 @@ cp .env.example .env
 docker compose up -d
 ```
 The stack will spin up:
-- **Database:** PostgreSQL 16 with PostGIS at `localhost:5432`
+- **Database:** PostgreSQL with PostGIS at `localhost:5432`
 - **Backend API:** FastAPI with automated OpenAPI docs at `http://localhost:8000/docs`
-- **Dashboard:** Interactive Command Interface served at `http://localhost:8000`
+- **Dashboard:** Interactive Command Interface served at `http://localhost:8000/dashboard`
 
 ### 3. Run Test Suite
 ```bash
 # Run in-container (PostGIS + dependencies fully configured)
 docker compose exec backend python -m pytest -q
 
-# 408 tests passing (214 cyclone domain tests covering schema, seed, state machine, interlocks, RBAC, exposure, and decision APIs)
+# 400+ unit and integration tests passing across cyclone risk engine, spatial exposure, state machine, safety interlocks, and API contracts.
 ```
 
 ### 4. Seed Offline Demo Fixtures
@@ -169,7 +182,7 @@ Network connectivity at disaster response sites and hackathon venues is notoriou
 | `odisha_blocks.geojson` | 39 administrative block polygons across 8 coastal/flood districts | Local Government Directory (LGD) / Census (GODL) | `HISTORICAL` |
 | `block_population.csv` | 39 block demographics: total & vulnerable (u5/o65) population | Office of Registrar General / Census 2011 (GODL) | `HISTORICAL` |
 | `osm_roads_coastal_odisha.geojson` | 13 arterial and evacuation corridors in Kendrapara, Balasore, Puri | OpenStreetMap contributors (ODbL 1.0) | `OBSERVED` |
-| `strategic_assets.csv` | 42 curated installations (hospitals, shelters, NDRF bases, fuel, ports) | OSDMA / NHM / PPT Registries (Open Government Data) | `OBSERVED` |
+| `strategic_assets.csv` | 42 curated installations (hospitals, shelters, NDRF bases, fuel, ports) | Curated from OSDMA / NHM / PPT Public Registries | `OBSERVED` |
 
 Full per-file metadata, retrieval dates, and legal licenses are cataloged in [`db/seed/sources.md`](db/seed/sources.md).
 
@@ -177,9 +190,9 @@ Full per-file metadata, retrieval dates, and legal licenses are cataloged in [`d
 
 ## 🏷️ Provenance Badges (Zero Illusions)
 
-Every score, track fix, road segment, and dispatch task carries one of five canonical tags (detailed in [`docs/PROVENANCE_SPEC.md`](docs/PROVENANCE_SPEC.md)):
+Every score, track fix, road segment, and dispatch task carries one of five canonical tags plus one safety fallback (detailed in [`docs/PROVENANCE_SPEC.md`](docs/PROVENANCE_SPEC.md)):
 - `OFFICIAL_FORECAST` — Direct, unmanipulated forecast from IMD (governs all decisions)
-- `OBSERVED` — Physical ground truth (OSM roads, OSDMA asset catalog)
+- `OBSERVED` — Physical ground truth (OSM roads, curated public registries)
 - `MODEL_ESTIMATE` — Algorithmic priority score (0–100) or route cut ratio
 - `REPLAY` — Historical Cyclone Fani verification pack
 - `SIMULATED` — What-if perturbation or simulated responder task
@@ -193,8 +206,7 @@ Every score, track fix, road segment, and dispatch task carries one of five cano
 - **[Judge Q&A Defense Guide](docs/JUDGE_QA.md):** 20 battle-tested questions with bold answers.
 - **[Rehearsal & Drill Guide](docs/REHEARSAL_GUIDE.md):** Team timing and contingency ladder.
 - **[System Architecture](ARCHITECTURE.md):** Technical design, data flows, and container diagrams.
-- **[Architectural Decisions Log (ADR)](DECISIONS.md):** 14 architectural decisions (D1–D14).
-
+- **[Architectural Decisions Log (ADR)](DECISIONS.md):** Architectural decisions (D1–D20).
 
 ---
 
@@ -204,4 +216,3 @@ Every score, track fix, road segment, and dispatch task carries one of five cano
 2. **Simulated Response Tasks:** All dispatches and operational tasks are explicitly tagged with `is_simulated: true`.
 3. **Transparent Provenance:** Every metric displays an explicit badge: `OFFICIAL_FORECAST`, `OBSERVED`, `MODEL_ESTIMATE`, `REPLAY`, or `SIMULATED`.
 4. **Official System Integration:** SURAKSHA is designed to supplement and convert official warnings (IMD/ISRO/NDMA) into actionable logistics—never to override or replace official warning mandates.
-
