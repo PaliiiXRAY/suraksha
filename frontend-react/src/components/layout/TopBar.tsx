@@ -1,8 +1,8 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// TopBar.tsx — Header with SURAKSHA branding matching 8.16.10 PM recording
+// TopBar.tsx — Header with SURAKSHA branding matching FireSense & recording
 // ─────────────────────────────────────────────────────────────────────────────
 import React from 'react';
-import { ShieldCheck, Satellite, RefreshCw, Share2, LogOut, Radio } from 'lucide-react';
+import { ShieldCheck, Satellite, RefreshCw, Share2, LogOut, Radio, Sun, Moon } from 'lucide-react';
 import type { DataMode } from '../../types';
 
 interface Props {
@@ -10,6 +10,8 @@ interface Props {
   onModeChange: (mode: DataMode) => void;
   onViewChange: (view: string) => void;
   activeView: string;
+  theme?: 'dark' | 'light';
+  onToggleTheme?: () => void;
   onSimulatePass?: () => void;
   onSyncReplay?: () => void;
 }
@@ -24,6 +26,8 @@ const NAV_VIEWS = [
 export default function TopBar({
   onViewChange,
   activeView,
+  theme = 'dark',
+  onToggleTheme,
   onSimulatePass,
   onSyncReplay,
 }: Props) {
@@ -85,6 +89,22 @@ export default function TopBar({
 
         {/* Right: Actions and Status Pills */}
         <div className="flex items-center gap-2.5">
+          {/* Theme Toggle (Dark / Light) */}
+          {onToggleTheme && (
+            <button
+              onClick={onToggleTheme}
+              id="theme-toggle"
+              className="flex items-center justify-center w-8 h-8 rounded-lg border border-white/15 bg-white/5 hover:bg-white/10 text-white/80 hover:text-white transition-all shadow-sm"
+              title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            >
+              {theme === 'dark' ? (
+                <Sun size={15} className="text-amber-400" />
+              ) : (
+                <Moon size={15} className="text-blue-400" />
+              )}
+            </button>
+          )}
+
           {/* Simulate Satellite Pass button */}
           <button
             onClick={onSimulatePass}
