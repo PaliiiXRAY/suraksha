@@ -8,6 +8,15 @@ from backend.app.models.hotspot import Hotspot
 from backend.app.models.incident import Incident
 from backend.app.models.incident_log import IncidentLog
 from backend.app.models.alert import Alert
+from backend.app.models.cyclone import (
+    Organization,
+    HazardEvent,
+    HazardEventLog,
+    Area,
+    AreaRisk,
+    StrategicAsset,
+    SupplyRoute,
+)
 
 __all__ = [
     "User",
@@ -17,4 +26,11 @@ __all__ = [
     "Incident",
     "IncidentLog",
     "Alert",
+    "Organization",
+    "HazardEvent",
+    "HazardEventLog",
+    "Area",
+    "AreaRisk",
+    "StrategicAsset",
+    "SupplyRoute",
 ]
