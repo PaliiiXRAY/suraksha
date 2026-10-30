@@ -13,7 +13,6 @@ from backend.app.main import app
 from backend.app.core.config import DATABASE_URL
 from backend.app.core.security import create_access_token
 from backend.app.models.alert import Alert
-from backend.app.models.asset import Asset
 from backend.app.models.incident import Incident
 from backend.app.models.incident_log import IncidentLog
 from backend.app.models.responder import Responder
