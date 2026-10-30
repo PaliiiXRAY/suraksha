@@ -195,16 +195,16 @@ if os.path.isdir(STATIC_DIR):
         app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
 
     @app.get("/", response_class=FileResponse)
-    @app.get("/landing", response_class=FileResponse)
+    @app.get("/app", response_class=FileResponse)
+    @app.get("/dashboard", response_class=FileResponse)
     @app.get("/index.html", response_class=FileResponse)
+    def serve_dashboard():
+        return FileResponse(os.path.join(STATIC_DIR, "index.html"))
+
+    @app.get("/landing", response_class=FileResponse)
     def serve_landing():
         landing_path = os.path.join(STATIC_DIR, "landing.html")
         if os.path.exists(landing_path):
             return FileResponse(landing_path)
-        return FileResponse(os.path.join(STATIC_DIR, "index.html"))
-
-    @app.get("/app", response_class=FileResponse)
-    @app.get("/dashboard", response_class=FileResponse)
-    def serve_app():
         return FileResponse(os.path.join(STATIC_DIR, "index.html"))
 
