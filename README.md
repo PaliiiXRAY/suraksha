@@ -145,7 +145,15 @@ The stack will spin up:
 
 ### 3. Run Test Suite
 ```bash
-pytest -v
+# Run in-container (PostGIS + dependencies fully configured)
+docker compose exec backend python -m pytest -q
+
+# 408 tests passing (214 cyclone domain tests covering schema, seed, state machine, interlocks, RBAC, exposure, and decision APIs)
+```
+
+### 4. Seed Offline Demo Fixtures
+```bash
+docker compose exec backend python seed_demo.py --scenario all
 ```
 
 ---

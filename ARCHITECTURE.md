@@ -161,34 +161,37 @@ Scope wall (do NOT cross): no convoy scheduling, no vehicle/fuel optimization, n
 
 ---
 
-## 6. Database Schema (summary — full DDL in `backend/app/db/migrations/` [alembic])
+## 6. Database Schema (summary — full DDL in `backend/app/db/migrations/versions/`)
 
-| Table | Purpose |
-|---|---|
-| `organizations` | multi-tenancy: `org_type` = disaster_authority / security_agency / infrastructure_operator |
-| `users` | + `org_id`, role: admin / authority / analyst / responder / viewer |
-| `hazard_events` | cyclone/fire/flood parent; `provenance_tag`, `data_freshness`, `status` |
-| `areas` | Odisha blocks: geom, population, elevation, coastal, flood_susceptibility |
-| `area_risk` | engine output: score, rank, `reasons[]`, `interlock_flags[]` |
-| `strategic_assets` | relief stockpiles, NDRF bases, helipads, fuel depots, hospitals, ports, substations |
-| `supply_routes` | OSM NH/rail segments |
-| `asset_exposure`, `route_status` | engine output for logistics layer |
-| `response_tasks` | simulated dispatch queue; `is_simulated = true` always |
-| `incident_log` | append-only audit trail of state transitions & actions |
+| Table | Primary Key | Key Columns & Spatial Types | Purpose & Multi-Tenancy |
+|---|---|---|---|
+| `organizations` | `id` (INTEGER SERIAL) | `name`, `org_type` (disaster_authority / security_agency / infrastructure_operator) | Tenant boundary root (ADR D18) |
+| `users` | `id` (VARCHAR) | `org_id` (INTEGER FK → organizations.id, nullable), `role` | Tenant-scoped RBAC: analyst / authority / responder / admin |
+| `hazard_events` | `id` (VARCHAR) | `org_id` (INTEGER FK), `category`, `status`, `track_geometry` (Geometry LINESTRING 4326), `provenance_tag` | Cyclone lifecycle parent record |
+| `hazard_event_logs` | `id` (INTEGER SERIAL) | `event_id` (FK), `from_status`, `to_status`, `changed_by` (FK), `interlock_snapshot` (JSONB) | Transactional, append-only state transition audit |
+| `areas` | `area_code` (VARCHAR PK) | `block_name`, `district`, `geom` (Geometry MULTIPOLYGON 4326), `total_population`, `is_coastal` | 39 coastal Odisha administrative blocks |
+| `area_risk` | `id` (INTEGER SERIAL) | `event_id` (FK), `area_code` (FK), `score` (0–100), `reasons` (JSONB), `interlock_flags` (JSONB) | M1 six-factor explainable ranking output |
+| `strategic_assets` | `id` (VARCHAR PK) | `name`, `asset_type`, `criticality` (1.0–5.0), `geom` (Geometry POINT 4326), `readiness` | 42 hospitals, shelters, NDRF bases, fuel depots |
+| `supply_routes` | `id` (VARCHAR PK) | `name`, `route_type`, `geom` (Geometry LINESTRING 4326), `baseline_status` | 13 arterial highway/rail resupply corridors |
 
-Cyclone-domain tables are **additive** alembic migrations extending the existing `backend/app/db/migrations/` chain. Existing FireSense tables are never dropped or altered destructively.
+Cyclone-domain tables are **strictly additive** alembic migrations extending the existing `backend/app/db/migrations/versions/` chain:
+- `003_cyclone_schema.py` (down_revision = `a2b3c4d5e6f7`): Adds `organizations`, `hazard_events`, `areas`, `area_risk`, `strategic_assets`, `supply_routes`, and `users.org_id`.
+- `004_hazard_event_logs.py` (down_revision = `003_cyclone_schema`): Adds transactional audit table `hazard_event_logs`.
+Existing FireSense tables (`hotspots`, `incidents`, `incident_log`, `alerts`, `responders`) are never dropped or altered destructively.
 
 ---
 
-## 7. Cyclone State Machine
+## 7. Cyclone State Machine & Security Interlocks
 
 ```
 MONITORING → WARNING → EVAC_ORDERED → DEPLOYED → RESOLVED
                  ↘ STAND_DOWN (from WARNING)
 ```
 
-- Transitions only via `PATCH /api/hazard-events/{id}/status`, logged to `incident_log`.
-- `EVAC_ORDERED` requires `interlock_flags == []` — enforced at the state-machine layer, not the UI.
+- **Strict Tenant Boundary:** Every hazard event operation requires `user.org_id == event.org_id`. Users unassigned to an organization receive `403 Forbidden`. Cross-tenant mutations return `403 Forbidden`.
+- **State Machine Guard:** `EVAC_ORDERED` requires `interlock_flags == []` — enforced at the service layer in `backend/app/services/cyclone/state_machine.py`.
+- **Audit Interlock:** Every status transition and event update atomically writes an immutable entry into `hazard_event_logs` with actor ID and before/after status.
+- **Reference-Time Boundary:** Forecast source timestamps > 6 hours old flag `DATA_STALE_OVER_6H` (triggering `REVIEW_REQUIRED`); timestamps > 24 hours old trigger absolute evacuation order refusal (`DATA_STALE_OVER_24H_REFUSE`). Future timestamps are rejected at the boundary (`422 Unprocessable Content`).
 
 ---
 
