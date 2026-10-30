@@ -105,6 +105,13 @@ Every single block outputs an auditable `reasons[]` array explaining exact contr
 ### 4. Interactive "What-If" Track Re-ranking
 Commanders can adjust projected storm tracks or intensity (±20%) in real time. The engine re-ranks all blocks, recalculates route severances, and repositions staging recommendations across the entire operational picture in under **2 seconds**.
 
+### 5. Offline Citizen MeshMap & Store-and-Forward SOS Gateway
+During extreme disaster landfall, cellular base stations and power grids often collapse. SURAKSHA features a zero-network citizen intake channel via the **MeshMap** protocol (`docs/gov-contract.md`):
+- **Peer-to-Peer Gossip Sync:** Citizens navigate via offline vector maps (PMTiles) and record local hazards/SOS distress signals offline. Records spread phone-to-phone via local Wi-Fi hotspots, QR frames, or Bluetooth.
+- **Store-and-Forward Ingestion (`POST /v1/sos`):** Any citizen or responder phone that reaches network connectivity acts as a transparent gateway, uploading queued SOS bundles with immutable cryptographic Ed25519 signatures.
+- **Closed-Loop Responder Verification (`POST /v1/sos/{id}/ack`):** When dispatchers acknowledge an SOS, the platform generates an authoritative `SOS_ACK` mesh event that travels back through the peer network to reassure trapped citizens offline.
+- **Authoritative Directive Broadcast (`GET /v1/official`):** Official IMD warnings, shelter statuses, and evacuation orders sync downward to citizen devices to override unverified crowd rumors.
+
 ---
 
 ## 🔒 Multi-Tenant Role-Based Access Control (RBAC)
@@ -193,7 +200,8 @@ Every score, track fix, road segment, and dispatch task carries one of five cano
 - **[Judge Q&A Defense Guide](docs/JUDGE_QA.md):** 20 battle-tested questions with bold answers.
 - **[Rehearsal & Drill Guide](docs/REHEARSAL_GUIDE.md):** Team timing and contingency ladder.
 - **[System Architecture](ARCHITECTURE.md):** Technical design, data flows, and container diagrams.
-- **[Architectural Decisions Log (ADR)](DECISIONS.md):** 14 architectural decisions (D1–D14).
+- **[Architectural Decisions Log (ADR)](DECISIONS.md):** 20 architectural decisions (D1–D20).
+- **[Citizen Mesh Interface Contract](docs/gov-contract.md):** Formal specification for offline citizen mesh sync and SOS ingestion.
 
 
 ---
