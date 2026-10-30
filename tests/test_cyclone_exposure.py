@@ -163,16 +163,16 @@ def spatial_test_fixtures():
         # 5. Low-readiness distant depot: ~28.0 km away (readiness 0.20 -> excluded by clamp)
         db.execute(text("""
             INSERT INTO strategic_assets (id, name, asset_type, criticality, geom, latitude, longitude, district, readiness)
-            VALUES 
-            ('test_exp_ast_01', 'Puri DHH Hospital', 'hospital', 1.0, 
+            VALUES
+            ('test_exp_ast_01', 'Puri DHH Hospital', 'hospital', 1.0,
              ST_SetSRID(ST_MakePoint(85.8312, 19.8240), 4326), 19.8240, 85.8312, 'Puri', 0.90),
-            ('test_exp_ast_02', 'Brahmagiri Shelter', 'shelter', 0.8, 
+            ('test_exp_ast_02', 'Brahmagiri Shelter', 'shelter', 0.8,
              ST_SetSRID(ST_MakePoint(85.8000, 19.8350), 4326), 19.8350, 85.8000, 'Puri', 0.85),
-            ('test_exp_ast_03', 'Satyabadi Depot', 'relief_depot', 1.2, 
+            ('test_exp_ast_03', 'Satyabadi Depot', 'relief_depot', 1.2,
              ST_SetSRID(ST_MakePoint(85.7800, 19.8700), 4326), 19.8700, 85.7800, 'Puri', 0.80),
-            ('test_exp_ast_safe', 'Bhubaneswar Central Depot', 'relief_depot', 1.5, 
+            ('test_exp_ast_safe', 'Bhubaneswar Central Depot', 'relief_depot', 1.5,
              ST_SetSRID(ST_MakePoint(85.8245, 20.2961), 4326), 20.2961, 85.8245, 'Khordha', 0.95),
-            ('test_exp_ast_unready', 'Distant Unready Depot', 'relief_depot', 1.0, 
+            ('test_exp_ast_unready', 'Distant Unready Depot', 'relief_depot', 1.0,
              ST_SetSRID(ST_MakePoint(85.8500, 20.3500), 4326), 20.3500, 85.8500, 'Khordha', 0.20);
         """))
 
@@ -180,7 +180,7 @@ def spatial_test_fixtures():
         # Route 1: NH-316 running south to north through Puri
         db.execute(text("""
             INSERT INTO supply_routes (id, name, route_type, geom, length_km, baseline_status)
-            VALUES 
+            VALUES
             ('test_rt_nh316', 'NH-316 Puri-Bhubaneswar', 'PRIMARY',
              ST_SetSRID(ST_GeomFromText('LINESTRING(85.8312 19.8135, 85.8200 19.8800, 85.8245 20.2961)'), 4326),
              60.0, 'PASSABLE_WITH_EVIDENCE');
@@ -271,4 +271,3 @@ def test_postgis_staging_hub_recommendation(spatial_test_fixtures):
         assert rec.is_safe is True
     finally:
         db.close()
-

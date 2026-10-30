@@ -249,7 +249,7 @@ def assess_asset_exposure_spatial(
     max_meters = max_distance_km * 1000.0
 
     sql = text("""
-        SELECT 
+        SELECT
             id, name, asset_type, criticality, latitude, longitude,
             readiness, provenance_tag,
             ST_Distance(geom::geography, ST_SetSRID(ST_MakePoint(:lon, :lat), 4326)::geography) / 1000.0 AS distance_km
@@ -294,7 +294,7 @@ def assess_route_status_spatial(
     Uses ST_Intersection and ST_Length on geography to compute affected ratio.
     """
     sql = text("""
-        SELECT 
+        SELECT
             id, name, route_type, length_km,
             ST_Length(geom::geography) / 1000.0 AS total_length_km,
             ST_Length(ST_Intersection(geom, ST_SetSRID(ST_GeomFromText(:hazard_wkt), 4326))::geography) / 1000.0 AS affected_length_km
@@ -345,7 +345,7 @@ def recommend_staging_hub(
     Enforces FR-4.4 clamp (readiness >= 0.40) and distance > hazard_radius_km.
     """
     sql = text("""
-        SELECT 
+        SELECT
             id, name, asset_type, readiness,
             ST_Distance(geom::geography, ST_SetSRID(ST_MakePoint(:lon, :lat), 4326)::geography) / 1000.0 AS distance_km
         FROM strategic_assets
@@ -376,4 +376,3 @@ def recommend_staging_hub(
         rationale=f"Selected nearest safe operational hub ({row.name}) outside {hazard_radius_km}km hazard buffer with readiness {row.readiness:.2f} >= 0.40",
         is_safe=True,
     )
-

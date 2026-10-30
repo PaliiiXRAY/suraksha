@@ -242,4 +242,3 @@ def test_invalid_negative_inputs_clamped():
 
     norm_p, det_p = compute_population_factor(-5000)
     assert norm_p == 0.0
-

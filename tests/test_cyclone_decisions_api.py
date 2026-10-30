@@ -97,7 +97,7 @@ def setup_decision_fixtures():
         # 4. Areas (Test Blocks)
         db.execute(text("""
             INSERT INTO areas (area_code, block_name, district, geom, total_population, vulnerable_population, is_coastal, flood_susceptibility)
-            VALUES 
+            VALUES
             ('TEST_DEC_PUR', 'Puri Sadar', 'Puri', ST_SetSRID(ST_Multi(ST_GeomFromText('POLYGON((85.80 19.80, 85.86 19.80, 85.86 19.86, 85.80 19.86, 85.80 19.80))')), 4326), 180000, 30000, true, 0.85),
             ('TEST_DEC_BRA', 'Brahmagiri', 'Puri', ST_SetSRID(ST_Multi(ST_GeomFromText('POLYGON((85.70 19.75, 85.78 19.75, 85.78 19.83, 85.70 19.83, 85.70 19.75))')), 4326), 140000, 22000, true, 0.75),
             ('TEST_DEC_BBS', 'Bhubaneswar', 'Khordha', ST_SetSRID(ST_Multi(ST_GeomFromText('POLYGON((85.80 20.25, 85.86 20.25, 85.86 20.32, 85.80 20.32, 85.80 20.25))')), 4326), 850000, 75000, false, 0.40);
@@ -107,12 +107,12 @@ def setup_decision_fixtures():
         # 5. Strategic Assets around Puri (19.8135, 85.8312)
         db.execute(text("""
             INSERT INTO strategic_assets (id, name, asset_type, criticality, geom, latitude, longitude, district, readiness)
-            VALUES 
-            ('test_dec_ast_hosp', 'Puri District Hospital', 'hospital', 1.0, 
+            VALUES
+            ('test_dec_ast_hosp', 'Puri District Hospital', 'hospital', 1.0,
              ST_SetSRID(ST_MakePoint(85.8312, 19.8240), 4326), 19.8240, 85.8312, 'Puri', 0.95),
-            ('test_dec_ast_shelter', 'Puri Cyclone Shelter 1', 'shelter', 0.9, 
+            ('test_dec_ast_shelter', 'Puri Cyclone Shelter 1', 'shelter', 0.9,
              ST_SetSRID(ST_MakePoint(85.8100, 19.8200), 4326), 19.8200, 85.8100, 'Puri', 0.90),
-            ('test_dec_ast_depot', 'Bhubaneswar Supply Hub', 'relief_depot', 1.5, 
+            ('test_dec_ast_depot', 'Bhubaneswar Supply Hub', 'relief_depot', 1.5,
              ST_SetSRID(ST_MakePoint(85.8245, 20.2961), 4326), 20.2961, 85.8245, 'Khordha', 0.98);
         """))
         db.commit()
@@ -120,7 +120,7 @@ def setup_decision_fixtures():
         # 6. Supply Routes
         db.execute(text("""
             INSERT INTO supply_routes (id, name, route_type, geom, length_km, baseline_status)
-            VALUES 
+            VALUES
             ('test_dec_rt_nh316', 'NH-316 Puri Highway', 'PRIMARY',
              ST_SetSRID(ST_GeomFromText('LINESTRING(85.8312 19.8135, 85.8245 20.2961)'), 4326),
              60.0, 'PASSABLE_WITH_EVIDENCE');
@@ -437,4 +437,3 @@ def test_get_briefing_cross_org_denial(auth2_headers):
     resp = client.get("/api/briefing?event_id=test_dec_fani", headers=auth2_headers)
     assert resp.status_code == 403
     assert resp.json()["error"]["code"] == "FORBIDDEN_CROSS_ORG"
-

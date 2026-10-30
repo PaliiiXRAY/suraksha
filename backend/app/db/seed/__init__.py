@@ -15,4 +15,3 @@ __all__ = [
     "load_strategic_assets",
     "seed_cyclone_all",
 ]
-

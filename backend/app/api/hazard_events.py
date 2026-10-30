@@ -372,4 +372,3 @@ def get_hazard_event_logs(
         .all()
     )
     return logs
-

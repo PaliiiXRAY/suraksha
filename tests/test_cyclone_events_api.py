@@ -861,4 +861,3 @@ def test_audit_schema_and_foreign_keys():
     assert fk_event["referred_table"] == "hazard_events"
     assert fk_event["referred_columns"] == ["id"]
     assert fk_event["options"].get("ondelete") == "CASCADE"
-

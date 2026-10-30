@@ -152,4 +152,3 @@ class BriefingResponse(BaseModel):
     provenance_tag: str = "MODEL_ESTIMATE"
     external_calls_made: int = 0
     is_simulated: bool = False
-

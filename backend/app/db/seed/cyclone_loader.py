@@ -385,4 +385,3 @@ def seed_cyclone_all(
         "areas": blocks_res,
         "strategic_assets": assets_res,
     }
-

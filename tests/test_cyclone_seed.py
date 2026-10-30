@@ -264,4 +264,3 @@ def test_population_validation():
     """Verify vulnerable population exceeding total population is rejected."""
     with pytest.raises(ValueError, match="exceeds total_population"):
         validate_population(total=1000, vulnerable=1500, area_code="OD_TEST_01")
-

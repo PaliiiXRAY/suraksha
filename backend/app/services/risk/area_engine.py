@@ -330,4 +330,3 @@ def calculate_area_risk(
         calculated_at=now_utc,
         data_freshness=freshness_tag,
     )
-
