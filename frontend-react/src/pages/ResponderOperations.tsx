@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// ResponderOperations.tsx — Tab 3 matching video 2 (00:44 - 01:03)
+// ResponderOperations.tsx — Tab 3 matching 8.16.10 PM canonical UI + 8.37.45 PM features
 // ─────────────────────────────────────────────────────────────────────────────
 import React, { useState } from 'react';
 import {
@@ -12,18 +12,20 @@ import {
   AlertTriangle,
   Clock,
   ShieldCheck,
-  ChevronDown,
+  ChevronRight,
+  Database,
+  Route,
 } from 'lucide-react';
 
 interface Props {
   onShowToast: (msg: string) => void;
 }
 
-type StepState = 'DISPATCHED' | 'ACKNOWLEDGED' | 'EN ROUTE' | 'ARRIVED' | 'CONTAINED' | 'RESOLVED';
+type StepState = 'ASSIGNED' | 'DISPATCHED' | 'EN ROUTE' | 'ARRIVED' | 'CONTAINED' | 'RESOLVED';
 
 const LIFECYCLE_STEPS: StepState[] = [
+  'ASSIGNED',
   'DISPATCHED',
-  'ACKNOWLEDGED',
   'EN ROUTE',
   'ARRIVED',
   'CONTAINED',
@@ -32,13 +34,21 @@ const LIFECYCLE_STEPS: StepState[] = [
 
 export default function ResponderOperations({ onShowToast }: Props) {
   const [currentStep, setCurrentStep] = useState<StepState>('DISPATCHED');
+  const [selectedRoute, setSelectedRoute] = useState<'nh316' | 'marinedrive'>('nh316');
   const [sitrepText, setSitrepText] = useState('');
   const [copied, setCopied] = useState(false);
-  const [sitreps, setSitreps] = useState<Array<{ id: string; text: string; time: string }>>([
+  const [sitreps, setSitreps] = useState<Array<{ id: string; text: string; time: string; state: string }>>([
     {
       id: 'UNIT 3 · D-09-04-0421',
-      text: 'Initial response vehicle on site. Establishing containment line along rail siding.',
+      text: 'Staging vehicles at Pipili Bypass depot. VHF radio check confirmed on Channel 4.',
       time: '18 mins ago',
+      state: 'DISPATCHED',
+    },
+    {
+      id: 'UNIT 3 · D-09-04-0418',
+      text: 'Clearing fallen tree debris on SH-13 with chainsaws. 240 villagers escorted to cyclone shelter.',
+      time: '42 mins ago',
+      state: 'EN ROUTE',
     },
   ]);
 
@@ -56,9 +66,9 @@ export default function ResponderOperations({ onShowToast }: Props) {
   function handleAdvance() {
     if (nextStep) {
       setCurrentStep(nextStep);
-      onShowToast(`Task advanced to ${nextStep}`);
+      onShowToast(`Mission advanced to ${nextStep}`);
     } else {
-      onShowToast('Mission is already resolved');
+      onShowToast('Mission is fully resolved');
     }
   }
 
@@ -68,6 +78,7 @@ export default function ResponderOperations({ onShowToast }: Props) {
       id: `UNIT 3 · D-09-04-${Math.floor(1000 + Math.random() * 9000)}`,
       text: sitrepText,
       time: 'Just now',
+      state: currentStep,
     };
     setSitreps(prev => [newEntry, ...prev]);
     setSitrepText('');
@@ -75,15 +86,15 @@ export default function ResponderOperations({ onShowToast }: Props) {
   }
 
   function handleCopyGPS() {
-    navigator.clipboard?.writeText('30.248, 75.839');
+    navigator.clipboard?.writeText('19.7991, 85.8239');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-    onShowToast('GPS coordinates copied: 30.248°N, 75.839°E');
+    onShowToast('GPS coordinates copied: 19.7991°N, 85.8239°E (Brahmagiri)');
   }
 
   return (
     <div className="flex-1 flex flex-col overflow-y-auto bg-[#0a0d14] text-white p-6 space-y-6">
-      {/* Top Header */}
+      {/* Top Header matching 8.16.10 PM */}
       <div className="flex items-start justify-between flex-wrap gap-4">
         <div>
           <div className="text-[11px] font-mono tracking-widest text-emerald-400 font-semibold uppercase mb-1">
@@ -95,12 +106,14 @@ export default function ResponderOperations({ onShowToast }: Props) {
           </p>
         </div>
 
-        {/* Center: Active Task Dropdown */}
+        {/* Active Task Badge matching 8.16.10 PM */}
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2 bg-[#141824] border border-white/10 rounded-xl px-3 py-1.5 text-xs font-mono">
             <span className="text-white/40">Active Task:</span>
-            <span className="font-bold text-white">INC-2026-0044 - Sangrur Agricultural District, Punjab</span>
-            <span className="px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400 text-[10px] font-bold">NEW</span>
+            <span className="font-bold text-white">TASK-104 · Brahmagiri Evacuation Support</span>
+            <span className="px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400 text-[10px] font-bold">
+              ACTIVE
+            </span>
           </div>
 
           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-emerald-500/40 bg-emerald-950/30 text-emerald-400 text-xs font-mono font-bold">
@@ -110,22 +123,22 @@ export default function ResponderOperations({ onShowToast }: Props) {
         </div>
       </div>
 
-      {/* Assigned Mission Card */}
+      {/* Focused Mission Card matching 8.16.10 PM */}
       <div className="bg-[#121622] border border-white/10 rounded-xl p-5 space-y-5">
         <div className="flex items-start justify-between flex-wrap gap-4">
           <div>
             <div className="text-[10px] font-mono text-white/40 uppercase tracking-wider mb-0.5">
-              ASSIGNED MISSION
+              FOCUSED MISSION
             </div>
-            <h2 className="text-xl font-extrabold text-white">Sangrur Farm Stubble Burning</h2>
+            <h2 className="text-xl font-extrabold text-white">Brahmagiri Evacuation Support</h2>
             <div className="text-xs text-white/50 font-mono mt-0.5">
-              Sangrur Agricultural District, Punjab · Target Sector Assessment
+              Brahmagiri block, Puri · Target sector assessment and support
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-1 rounded bg-orange-500/20 text-orange-400 border border-orange-500/30 text-xs font-mono font-bold">
-              CROP SMOKE
+            <span className="px-2.5 py-1 rounded bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-mono font-bold">
+              CYCLONE
             </span>
             <span className="px-2.5 py-1 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-mono font-bold">
               HIGH
@@ -133,178 +146,204 @@ export default function ResponderOperations({ onShowToast }: Props) {
           </div>
         </div>
 
-        {/* 4-Grid Telemetry */}
+        {/* 4-Grid Mission Telemetry matching 8.16.10 PM */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2 border-t border-white/5">
+          {/* Target GPS */}
           <div className="p-3.5 rounded-lg bg-[#0e121b] border border-white/5 flex flex-col justify-between">
             <div>
               <div className="text-[10px] font-mono text-white/40 uppercase">TARGET GPS</div>
-              <div className="text-sm font-bold font-mono text-white mt-1">30.248°N · 75.839°E</div>
+              <div className="text-sm font-bold font-mono text-white mt-1">19.7991°N · 85.8239°E</div>
             </div>
             <button
               onClick={handleCopyGPS}
               className="text-[11px] text-cyan-400 hover:text-cyan-300 font-mono flex items-center gap-1 mt-2 self-start"
             >
               <Copy size={11} />
-              <span>{copied ? 'Copied' : 'Copy GPS'}</span>
+              <span>{copied ? 'Copied' : 'Copy coordinates'}</span>
             </button>
           </div>
 
+          {/* Forecast Wind */}
           <div className="p-3.5 rounded-lg bg-[#0e121b] border border-white/5 flex flex-col justify-between">
             <div>
-              <div className="text-[10px] font-mono text-white/40 uppercase">THERMAL POWER (FRP)</div>
-              <div className="text-xl font-black font-mono text-white mt-1">24.5 MW</div>
+              <div className="text-[10px] font-mono text-white/40 uppercase">FORECAST WIND</div>
+              <div className="text-xl font-black font-mono text-white mt-1">92 km/h</div>
             </div>
-            <div className="text-[11px] text-white/40 font-mono mt-2">VIIRS Overpass Conf: 90%</div>
+            <div className="text-[11px] text-red-400 font-mono mt-2">Peak gusts 215 km/h</div>
           </div>
 
+          {/* Terrain Risk */}
           <div className="p-3.5 rounded-lg bg-[#0e121b] border border-white/5 flex flex-col justify-between">
             <div>
-              <div className="text-[10px] font-mono text-white/40 uppercase">HAZARD RATING</div>
-              <div className="text-sm font-bold font-mono text-amber-400 mt-1">MODERATE (Risk: 62/100)</div>
+              <div className="text-[10px] font-mono text-white/40 uppercase">TERRAIN RISK</div>
+              <div className="text-xs font-bold text-white mt-1">Storm Surge Inundation Corridor</div>
             </div>
-            <div className="text-[11px] text-white/40 font-mono mt-2">Secondary blast / coal dust</div>
+            <div className="text-[11px] text-amber-400 font-mono mt-2">1.8m coastal flood swath</div>
           </div>
 
+          {/* Radio Frequency */}
           <div className="p-3.5 rounded-lg bg-[#0e121b] border border-white/5 flex flex-col justify-between">
             <div>
-              <div className="text-[10px] font-mono text-white/40 uppercase">SURFACE WIND VECTOR</div>
-              <div className="text-xs font-bold text-white mt-1">North-West (NW) at 14 km/h</div>
+              <div className="text-[10px] font-mono text-white/40 uppercase">RADIO FREQUENCY</div>
+              <div className="text-sm font-bold font-mono text-white mt-1">CH-4 (VHF 156.200 MHz)</div>
             </div>
-            <div className="text-[11px] text-white/40 font-mono mt-2">Plume moving toward NH-55</div>
+            <div className="text-[11px] text-emerald-400 font-mono mt-2">Repeater: Pipli Active</div>
           </div>
         </div>
 
-        {/* Access Route Box */}
-        <div className="p-4 rounded-xl bg-[#161a25] border border-amber-500/20 space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-mono uppercase font-bold text-white/70">ACCESS ROUTE</span>
-            <span className="px-2 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[10px] font-mono font-bold">
-              2.4 KM ACCESS
-            </span>
+        {/* Optimal Access Route matching 8.16.10 PM */}
+        <div className="pt-3 border-t border-white/5 space-y-2.5">
+          <div className="text-[10px] font-mono text-white/40 uppercase tracking-wider">
+            OPTIMAL ACCESS ROUTE
           </div>
-          <p className="text-xs text-white/80 leading-relaxed font-sans">
-            Approach via NH-55 East Corridor Bypass -&gt; Gate 4 Road. Do not use Northern Coal Yard approach due to heavy smoke plume. Hydrant hookup available at Sector 4 Perimeter Gate.
-          </p>
-          <div className="flex items-center gap-3 pt-1">
-            <button
-              onClick={() => onShowToast('Navigation coordinates opened')}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-white text-xs font-mono transition-colors"
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {/* Route A */}
+            <div
+              onClick={() => setSelectedRoute('nh316')}
+              className={`p-3 rounded-lg border cursor-pointer transition-all ${
+                selectedRoute === 'nh316'
+                  ? 'bg-blue-600/10 border-blue-500'
+                  : 'bg-[#0e121b] border-white/10 hover:border-white/20'
+              }`}
             >
-              <ExternalLink size={12} />
-              <span>Open Coordinates in Maps</span>
-            </button>
-            <button
-              onClick={() => onShowToast('Connecting to Radio Channel 1078...')}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 text-blue-300 text-xs font-mono transition-colors"
-            >
-              <Radio size={12} />
-              <span>Radio Command (1078)</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Lifecycle Control: Field Status Progression (6 Stepper Blocks) */}
-        <div className="p-5 rounded-xl bg-[#0e121b] border border-white/5 space-y-4">
-          <div className="flex items-center justify-between">
-            <div className="text-[10px] font-mono text-white/40 uppercase tracking-wider">
-              LIFECYCLE CONTROL
-            </div>
-            <div className="text-xs font-mono">
-              <span className="text-white/40">CURRENT STATE: </span>
-              <strong className="text-amber-400 font-bold">{currentStep}</strong>
-            </div>
-          </div>
-
-          <div className="text-sm font-bold text-white">Field Status Progression</div>
-
-          {/* 6 Stepper Buttons */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 pt-2">
-            {LIFECYCLE_STEPS.map((step, idx) => {
-              const isPast = currentIndex > idx;
-              const isCurrent = currentStep === step;
-              return (
-                <div
-                  key={step}
-                  className={`p-3 rounded-xl border text-center transition-all ${
-                    isCurrent
-                      ? 'bg-amber-500/20 border-amber-500 text-amber-300 shadow-md shadow-amber-950/40'
-                      : isPast
-                      ? 'bg-emerald-950/20 border-emerald-500/40 text-emerald-400'
-                      : 'bg-[#141824] border-white/5 text-white/30'
-                  }`}
-                >
-                  <div className="text-[10px] font-mono font-bold tracking-wider">{step}</div>
-                  <div className="text-[9px] font-mono mt-1 text-white/40">
-                    {isCurrent ? 'ACTIVE NOW' : isPast ? 'COMPLETED' : 'PENDING'}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Action Required Banner + Advance Button */}
-          {nextStep ? (
-            <div className="space-y-2 pt-2">
-              <div className="text-xs font-mono text-amber-300/80">
-                Action Required: <strong className="text-white">Next State: {nextStep}</strong>
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-xs text-white">NH-316 via Pipili Bypass</span>
+                <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-mono text-[10px] font-bold">
+                  RECOMMENDED
+                </span>
               </div>
-              <button
-                onClick={handleAdvance}
-                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-black font-extrabold text-xs font-mono uppercase tracking-widest shadow-lg shadow-orange-950/40 transition-all active:scale-[0.99]"
-              >
-                ⚡ ACKNOWLEDGE DISPATCH ({nextStep})
-              </button>
+              <p className="text-[11px] text-white/50 mt-1">
+                Avoids coastal surge corridor. Police escort stationed at km 28. ETA: 42 mins.
+              </p>
             </div>
-          ) : (
-            <div className="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold text-center">
-              ✓ All lifecycle phases completed and resolved
-            </div>
-          )}
-        </div>
 
-        {/* Field Situation Report (SitRep) */}
-        <div className="p-5 rounded-xl bg-[#0e121b] border border-white/5 space-y-4">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-mono uppercase font-bold text-white/80">
-              Field Situation Report (SitRep)
-            </span>
-            <span className="text-[10px] font-mono text-cyan-400 font-bold">
-              Direct sync to Command Center
-            </span>
+            {/* Route B */}
+            <div
+              onClick={() => setSelectedRoute('marinedrive')}
+              className={`p-3 rounded-lg border cursor-pointer transition-all ${
+                selectedRoute === 'marinedrive'
+                  ? 'bg-blue-600/10 border-blue-500'
+                  : 'bg-[#0e121b] border-white/10 hover:border-white/20'
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-xs text-white">Puri Marine Drive</span>
+                <span className="px-2 py-0.5 rounded bg-red-500/20 text-red-400 font-mono text-[10px] font-bold">
+                  BLOCKED / CUT
+                </span>
+              </div>
+              <p className="text-[11px] text-red-400/80 mt-1">
+                ALERT: Marine Drive inundated by 1.8m surge flood near Konark spit. Do NOT attempt.
+              </p>
+            </div>
           </div>
+        </div>
+      </div>
 
-          <textarea
-            value={sitrepText}
-            onChange={e => setSitrepText(e.target.value)}
-            placeholder="Field report (e.g., 2 water tenders deployed on south perimeter; wind gusting 22 km/h; evacuating residential block B)..."
-            rows={3}
-            className="w-full bg-[#141824] border border-white/10 rounded-xl p-3 text-xs text-white placeholder-white/30 outline-none focus:border-amber-500/50 resize-none font-sans"
-          />
+      {/* 6-Step Lifecycle Progression Stepper (from 8.16.10 PM & 8.37.45 PM) */}
+      <div className="bg-[#121622] border border-white/10 rounded-xl p-5 space-y-4">
+        <div className="flex items-center justify-between flex-wrap gap-4">
+          <div>
+            <div className="text-[10px] font-mono text-white/40 uppercase tracking-wider mb-0.5">
+              INCIDENT LIFECYCLE PROGRESSION
+            </div>
+            <h3 className="text-base font-bold text-white">
+              Status Stepper · Current State: <span className="text-cyan-400 font-mono">{currentStep}</span>
+            </h3>
+          </div>
 
           <button
-            onClick={handleTransmitSitrep}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-black font-extrabold text-xs font-mono uppercase tracking-wider shadow-md transition-all"
+            onClick={handleAdvance}
+            className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-md transition-colors"
           >
-            <Send size={13} />
-            <span>Transmit SitRep to Command</span>
+            <span>{nextStep ? `Advance to ${nextStep}` : 'Mission Resolved'}</span>
+            <ChevronRight size={13} />
           </button>
+        </div>
 
-          {/* Recent SitReps Logged */}
-          <div className="space-y-2 pt-3 border-t border-white/5">
-            <div className="text-[10px] font-mono text-white/40 uppercase font-bold">
-              Recent SitReps Logged
-            </div>
-            <div className="space-y-2">
-              {sitreps.map(sr => (
-                <div key={sr.id} className="p-3 rounded-lg bg-[#141824] border border-white/5 text-xs font-mono">
-                  <div className="flex items-center justify-between text-[11px] mb-1">
-                    <span className="font-bold text-cyan-400">{sr.id}</span>
-                    <span className="text-white/40">{sr.time}</span>
+        {/* Stepper Bar */}
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-2 pt-2">
+          {LIFECYCLE_STEPS.map((step, idx) => {
+            const isCompleted = idx < currentIndex;
+            const isCurrent = idx === currentIndex;
+            return (
+              <div
+                key={step}
+                className={`p-2.5 rounded-lg border text-center transition-all ${
+                  isCurrent
+                    ? 'bg-blue-600/20 border-blue-500 text-white font-bold shadow-sm'
+                    : isCompleted
+                    ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
+                    : 'bg-[#0e121b] border-white/5 text-white/30'
+                }`}
+              >
+                <div className="text-[9px] font-mono mb-1">STEP 0{idx + 1}</div>
+                <div className="text-xs font-mono font-semibold truncate">{step}</div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Field SitRep Logger (from 8.37.45 PM) */}
+      <div className="bg-[#121622] border border-white/10 rounded-xl p-5 space-y-4">
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <div className="flex items-center gap-2">
+            <Radio size={16} className="text-cyan-400 animate-pulse" />
+            <h3 className="text-sm font-mono uppercase tracking-wider font-bold text-white">
+              Field Situation Report (SitRep) Logger
+            </h3>
+          </div>
+          <div className="flex items-center gap-1.5 text-[11px] font-mono text-emerald-400">
+            <Database size={12} />
+            <span>LOCAL SQLITE / INDEXEDDB CACHED · ZERO-WIFI READY</span>
+          </div>
+        </div>
+
+        <div className="flex gap-3">
+          <input
+            type="text"
+            value={sitrepText}
+            onChange={e => setSitrepText(e.target.value)}
+            placeholder="Log tactical observation: e.g. Shelter occupancy, road conditions, casualty count..."
+            className="flex-1 bg-[#0e121b] border border-white/10 rounded-lg px-3.5 py-2 text-xs text-white placeholder-white/40 focus:outline-none focus:border-blue-500"
+            onKeyDown={e => {
+              if (e.key === 'Enter') handleTransmitSitrep();
+            }}
+          />
+          <button
+            onClick={handleTransmitSitrep}
+            className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-md transition-colors whitespace-nowrap"
+          >
+            <Send size={12} />
+            <span>Transmit SitRep</span>
+          </button>
+        </div>
+
+        {/* SitRep History Feed */}
+        <div className="space-y-2 pt-2 border-t border-white/5">
+          <div className="text-[10px] font-mono text-white/40 uppercase">TRANSMITTED FIELD LOGS</div>
+          <div className="space-y-2">
+            {sitreps.map(sr => (
+              <div
+                key={sr.id}
+                className="p-3 rounded-lg bg-[#0e121b] border border-white/5 flex items-start justify-between gap-4 text-xs font-mono"
+              >
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="font-bold text-cyan-300">{sr.id}</span>
+                    <span className="text-white/40">·</span>
+                    <span className="text-white/50">{sr.time}</span>
+                    <span className="px-1.5 py-0.2 rounded bg-white/5 text-[9px] text-white/60">
+                      {sr.state}
+                    </span>
                   </div>
-                  <p className="text-white/80 font-sans text-xs">{sr.text}</p>
+                  <div className="font-sans text-white/90">{sr.text}</div>
                 </div>
-              ))}
-            </div>
+                <CheckCircle2 size={14} className="text-emerald-400 flex-shrink-0 mt-1" />
+              </div>
+            ))}
           </div>
         </div>
       </div>
