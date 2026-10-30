@@ -1,127 +1,141 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// TopBar — SURAKSHA global header with mode toggle, interlock status, timestamp
+// TopBar.tsx — SURAKSHA navigation header matching Figma & Screen Recording
 // ─────────────────────────────────────────────────────────────────────────────
-import { useState, useEffect } from 'react';
-import { ShieldCheck, Radio, Clock, AlertTriangle, RefreshCw } from 'lucide-react';
+import React from 'react';
+import { ShieldCheck, RefreshCw, Share2, LogOut, Radio } from 'lucide-react';
 import type { DataMode } from '../../types';
-import { checkBackendHealth, setDataMode } from '../../services/api';
 
 interface Props {
   dataMode: DataMode;
   onModeChange: (mode: DataMode) => void;
   onViewChange: (view: string) => void;
   activeView: string;
+  onSyncReplay?: () => void;
 }
 
-const MODE_STYLES: Record<DataMode, string> = {
-  LIVE:   'bg-emerald-500/20 text-emerald-300 border-emerald-500/50',
-  CACHED: 'bg-amber-500/20 text-amber-300 border-amber-500/50',
-  REPLAY: 'bg-purple-500/20 text-purple-300 border-purple-500/50',
-};
-
 const NAV_VIEWS = [
-  { id: 'command', label: 'Command' },
-  { id: 'ntro',    label: 'NTRO Intel' },
-  { id: 'responder', label: 'Responder' },
-  { id: 'public',  label: 'Public' },
+  { id: 'intelligence', label: 'Intelligence' },
+  { id: 'command', label: 'Government Command' },
+  { id: 'responder', label: 'Responder Operations' },
+  { id: 'citizen', label: 'Citizen Services' },
 ];
 
-export default function TopBar({ dataMode, onModeChange, onViewChange, activeView }: Props) {
-  const [time, setTime] = useState(new Date());
-  const [showFallbackBanner, setShowFallbackBanner] = useState(false);
-  const [checking, setChecking] = useState(false);
-
-  useEffect(() => {
-    const t = setInterval(() => setTime(new Date()), 1000);
-    return () => clearInterval(t);
-  }, []);
-
-  async function handleToggleLive() {
-    if (dataMode === 'REPLAY') {
-      setChecking(true);
-      const ok = await checkBackendHealth();
-      setChecking(false);
-      if (ok) {
-        setDataMode('LIVE');
-        onModeChange('LIVE');
-        setShowFallbackBanner(false);
-      } else {
-        setShowFallbackBanner(true);
-        setTimeout(() => setShowFallbackBanner(false), 5000);
-      }
-    } else {
-      setDataMode('REPLAY');
-      onModeChange('REPLAY');
+export default function TopBar({
+  dataMode,
+  onModeChange,
+  onViewChange,
+  activeView,
+  onSyncReplay,
+}: Props) {
+  const getRoleLabel = () => {
+    switch (activeView) {
+      case 'intelligence':
+        return 'INTEL ANALYST · NDMA';
+      case 'command':
+        return 'AUTHORITY · WHISPER-4';
+      case 'responder':
+        return 'FIELD RESPONDER · NDRF';
+      case 'citizen':
+        return 'CITIZEN ACCESS';
+      default:
+        return 'SURAKSHA OPERATOR';
     }
-  }
-
-  const modeStyle = MODE_STYLES[dataMode];
-  const istTime = time.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour12: false });
-  const istDate = time.toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata', day: '2-digit', month: 'short', year: '2-digit' });
+  };
 
   return (
-    <header className="flex-shrink-0 bg-[#0f1117] border-b border-white/10">
-      {/* Fallback banner */}
-      {showFallbackBanner && (
-        <div className="bg-amber-950 border-b border-amber-500/40 px-4 py-1.5 text-amber-300 text-xs font-mono flex items-center gap-2">
-          <AlertTriangle size={12} />
-          <span className="font-bold">[!] LIVE FEED UNREACHABLE — AUTOMATIC SAFETY FALLBACK ENGAGED.</span>
-          <span className="opacity-80">System reverted to Cyclone Fani 2019 replay. Zero data loss.</span>
-        </div>
-      )}
-
-      <div className="flex items-center h-12 px-4 gap-3">
-        {/* Logo */}
-        <div className="flex items-center gap-2 mr-4">
-          <div className="w-6 h-6 bg-[#f4511e] rounded-sm flex items-center justify-center">
-            <ShieldCheck size={14} className="text-white" />
-          </div>
-          <span className="font-bold text-sm tracking-widest text-white">SURAKSHA</span>
-          <span className="text-white/30 text-xs font-mono hidden sm:block">| Disaster Intelligence</span>
-        </div>
-
-        {/* Nav tabs */}
-        <nav className="flex items-center gap-0.5 flex-1">
-          {NAV_VIEWS.map(v => (
-            <button
-              key={v.id}
-              onClick={() => onViewChange(v.id)}
-              className={`px-3 py-1.5 text-xs font-medium rounded transition-colors ${
-                activeView === v.id
-                  ? 'bg-white/10 text-white'
-                  : 'text-white/50 hover:text-white hover:bg-white/5'
-              }`}
-            >
-              {v.label}
-            </button>
-          ))}
-        </nav>
-
-        {/* Right controls */}
-        <div className="flex items-center gap-2">
-          {/* Interlock indicator */}
-          <div className="hidden md:flex items-center gap-1.5 px-2 py-1 rounded border border-emerald-500/30 bg-emerald-950/30 text-emerald-400 text-xs font-mono">
-            <ShieldCheck size={11} />
-            <span>INTERLOCKS ARMED</span>
+    <header className="flex-shrink-0 bg-[#0b0e14] border-b border-white/10 select-none">
+      {/* Primary Navigation Row */}
+      <div className="flex items-center justify-between h-14 px-5 gap-4">
+        {/* Left: Brand + Nav tabs */}
+        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => onViewChange('intelligence')}>
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#f4511e] to-[#c2410c] flex items-center justify-center shadow-md shadow-orange-950/40">
+              <ShieldCheck size={18} className="text-white" />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-extrabold text-base tracking-widest text-white leading-none">
+                SURAKSHA
+              </span>
+            </div>
           </div>
 
-          {/* Data mode toggle */}
+          {/* Nav pill tabs */}
+          <nav className="flex items-center bg-[#141824] p-1 rounded-xl border border-white/10">
+            {NAV_VIEWS.map(v => {
+              const isActive = activeView === v.id;
+              return (
+                <button
+                  key={v.id}
+                  onClick={() => onViewChange(v.id)}
+                  className={`px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all ${
+                    isActive
+                      ? 'bg-blue-600/30 text-blue-300 border border-blue-500/40 shadow-sm'
+                      : 'text-white/60 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  {v.label}
+                </button>
+              );
+            })}
+          </nav>
+        </div>
+
+        {/* Right: Status Pills & Action Buttons */}
+        <div className="flex items-center gap-2.5">
+          {/* System status pill */}
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-950/30 text-emerald-400 text-xs font-mono">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>SYSTEM NORMAL</span>
+          </div>
+
+          {/* Active role badge */}
+          <div className="px-3 py-1 rounded-full border border-white/15 bg-white/5 text-white/70 text-xs font-mono font-medium">
+            {getRoleLabel()}
+          </div>
+
+          {/* Sync replay button */}
           <button
-            onClick={handleToggleLive}
-            disabled={checking}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded border text-xs font-mono font-bold transition-all ${modeStyle}`}
+            onClick={onSyncReplay}
+            className="flex items-center gap-1.5 px-3 py-1 rounded-lg border border-white/15 bg-white/5 hover:bg-white/10 text-white/80 text-xs font-mono transition-colors"
+            title="Sync replay state with data pack"
           >
-            {checking ? <RefreshCw size={10} className="animate-spin" /> : <Radio size={10} />}
-            {checking ? 'CHECKING...' : dataMode}
-            {dataMode === 'REPLAY' && <span className="opacity-60 font-normal">: FANI 2019</span>}
+            <RefreshCw size={11} className="text-white/60" />
+            <span>Sync replay</span>
           </button>
 
-          {/* Time */}
-          <div className="hidden lg:flex items-center gap-1 text-white/40 text-xs font-mono">
-            <Clock size={11} />
-            <span>{istTime} IST</span>
-            <span className="opacity-50">{istDate}</span>
-          </div>
+          {/* Sign out */}
+          <button
+            onClick={() => {}}
+            className="p-1.5 rounded-lg border border-white/10 text-white/40 hover:text-white/80 hover:bg-white/5 transition-colors"
+            title="Sign out"
+          >
+            <LogOut size={14} />
+          </button>
+
+          {/* Share button */}
+          <button
+            onClick={() => {
+              navigator.clipboard?.writeText(window.location.href);
+            }}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-sm shadow-blue-900/40 transition-colors ml-1"
+          >
+            <Share2 size={12} />
+            <span>Share</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Secondary Mode Sub-strip */}
+      <div className="flex items-center justify-between px-5 py-1.5 bg-[#0e121b] border-t border-white/5 text-[11px] font-mono">
+        <div className="flex items-center gap-2">
+          <span className="text-white/40 font-semibold">DATA MODE:</span>
+          <span className="px-2 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 text-amber-300 font-bold flex items-center gap-1">
+            <Radio size={10} className="text-amber-400" />
+            <span>REPLAY: CYCLONE FANI · MAY 2019</span>
+          </span>
+        </div>
+        <div className="text-white/30 text-[10px]">
+          PRIORITY: IMD &gt; PROBABILITY · ALL DISPATCH: SIMULATED · REGION: ODISHA COAST
         </div>
       </div>
     </header>

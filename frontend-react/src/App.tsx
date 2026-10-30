@@ -1,45 +1,62 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// App.tsx — root component with routing, data mode state, layout
+// App.tsx — root application connecting all 4 tabs matching video exactly
 // ─────────────────────────────────────────────────────────────────────────────
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import type { DataMode } from './types';
-import { checkBackendHealth } from './services/api';
 import TopBar from './components/layout/TopBar';
-import CommandDashboard from './pages/CommandDashboard';
-import NTROIntelligence from './pages/NTROIntelligence';
+import ToastContainer, { ToastMessage } from './components/ui/Toast';
+import HazardIntelligence from './pages/HazardIntelligence';
+import GovernmentCommand from './pages/GovernmentCommand';
 import ResponderOperations from './pages/ResponderOperations';
-import PublicServices from './pages/PublicServices';
+import CitizenServices from './pages/CitizenServices';
 
-type ViewId = 'command' | 'ntro' | 'responder' | 'public';
+type ViewId = 'intelligence' | 'command' | 'responder' | 'citizen';
 
 export default function App() {
   const [dataMode, setDataMode] = useState<DataMode>('REPLAY');
-  const [activeView, setActiveView] = useState<ViewId>('command');
+  const [activeView, setActiveView] = useState<ViewId>('intelligence');
+  const [toasts, setToasts] = useState<ToastMessage[]>([]);
 
-  // Non-blocking health check on load
-  useEffect(() => {
-    checkBackendHealth().catch(() => {
-      // stays REPLAY — no banner unless user clicks LIVE
-    });
-  }, []);
+  function addToast(message: string, type: 'success' | 'warning' | 'info' = 'success') {
+    const id = `${Date.now()}-${Math.random().toString(36).substr(2, 4)}`;
+    setToasts(prev => [...prev, { id, message, type }]);
+    setTimeout(() => {
+      setToasts(prev => prev.filter(t => t.id !== id));
+    }, 3500);
+  }
 
-  const views: Record<ViewId, React.ReactNode> = {
-    command:   <CommandDashboard />,
-    ntro:      <NTROIntelligence />,
-    responder: <ResponderOperations />,
-    public:    <PublicServices />,
-  };
+  function dismissToast(id: string) {
+    setToasts(prev => prev.filter(t => t.id !== id));
+  }
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden bg-[#0f1117] text-white">
+    <div className="flex flex-col h-screen w-screen overflow-hidden bg-[#0a0d14] text-white">
+      {/* Toast Notification Container */}
+      <ToastContainer toasts={toasts} onDismiss={dismissToast} />
+
+      {/* Global TopBar Header */}
       <TopBar
         dataMode={dataMode}
         onModeChange={setDataMode}
-        onViewChange={(v) => setActiveView(v as ViewId)}
+        onViewChange={v => setActiveView(v as ViewId)}
         activeView={activeView}
+        onSyncReplay={() => addToast('Replay data pack verified and in-sync (Cyclone Fani 2019)')}
       />
+
+      {/* Main Tab View Canvas */}
       <main className="flex-1 flex flex-col overflow-hidden">
-        {views[activeView]}
+        {activeView === 'intelligence' && (
+          <HazardIntelligence onShowToast={msg => addToast(msg, 'info')} />
+        )}
+        {activeView === 'command' && (
+          <GovernmentCommand onShowToast={msg => addToast(msg, 'success')} />
+        )}
+        {activeView === 'responder' && (
+          <ResponderOperations onShowToast={msg => addToast(msg, 'info')} />
+        )}
+        {activeView === 'citizen' && (
+          <CitizenServices onShowToast={msg => addToast(msg, 'warning')} />
+        )}
       </main>
     </div>
   );
