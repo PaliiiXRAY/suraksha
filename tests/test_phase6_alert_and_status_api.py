@@ -258,7 +258,7 @@ def test_valid_status_transitions_sequence(test_users, phase6_test_incident, db_
     logs = db_session.query(IncidentLog).filter(
         IncidentLog.incident_id == inc_id,
         IncidentLog.action == "STATUS_CHANGE"
-    ).all()
+    ).order_by(IncidentLog.id.asc()).all()
     assert len(logs) == len(lifecycle)
     last_log = logs[-1]
     assert last_log.old_status == "CONTAINED"
