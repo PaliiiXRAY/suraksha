@@ -1,0 +1,15 @@
+{
+  "venvPath": ".",
+  "venv": ".venv",
+  "include": [
+    "backend",
+    "tests",
+    "ml"
+  ],
+  "extraPaths": [
+    ".",
+    "backend",
+    "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages"
+  ],
+  "reportMissingImports": "none"
+}
