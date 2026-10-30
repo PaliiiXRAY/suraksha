@@ -209,3 +209,161 @@ export async function getPublicAlerts() {
     notice: 'REPLAY scenario — all alerts are historical data from Cyclone Fani 2019.',
   };
 }
+
+
+// ─── Multi-Hazard Intelligence & Operations ──────────────────────────────────
+
+export interface ScenarioMeta {
+  hazard_type: string;
+  event_id: string;
+  name: string;
+  severity: string;
+  provenance: string;
+  source: string;
+  observed_at: string;
+  attributes: Record<string, any>;
+}
+
+export interface HazardEvaluationReport {
+  event_id: string;
+  hazard_type: string;
+  name: string;
+  severity: string;
+  provenance: string;
+  ranked_blocks: Array<{
+    area_code: string;
+    block_name: string;
+    district: string;
+    priority_score: number;
+    risk_tier: string;
+    reasons: string[];
+    population_exposed: number;
+    is_intersecting: boolean;
+    distance_km: number;
+  }>;
+  exposed_assets: Array<{
+    asset_id: string;
+    name: string;
+    asset_type: string;
+    district: string;
+    criticality: string;
+    status: string;
+    exposure_level: string;
+    distance_km: number;
+  }>;
+  evaluated_routes: Array<{
+    route_id: string;
+    name: string;
+    route_type: string;
+    status: string;
+    cutoff_percentage: number;
+  }>;
+  safe_staging_hubs: string[];
+}
+
+export async function fetchHazardScenarios(): Promise<ScenarioMeta[]> {
+  try {
+    const res = await fetchWithTimeout('/api/hazards/scenarios');
+    if (res.ok) return await res.json();
+  } catch { /* fallback */ }
+  return [
+    {
+      hazard_type: 'CYCLONE',
+      event_id: 'HZ-2019-FANI-CYCLONE',
+      name: 'Cyclone Fani Extremely Severe Cyclonic Storm',
+      severity: 'CRITICAL',
+      provenance: 'REPLAY',
+      source: 'IMD / INSAT-3DR',
+      observed_at: '2019-05-03T08:00:00Z',
+      attributes: { max_wind_kmh: 215.0, landfall_point: 'Puri Coast, Odisha' },
+    },
+    {
+      hazard_type: 'WILDFIRE',
+      event_id: 'HZ-2021-SIMILIPAL-FIRE',
+      name: 'Similipal Biosphere Reserve Thermal Hotspot Cluster',
+      severity: 'HIGH',
+      provenance: 'REPLAY',
+      source: 'NASA FIRMS / Suomi-NPP VIIRS',
+      observed_at: '2021-03-02T13:45:00Z',
+      attributes: { total_frp_mw: 469.2, hotspot_count: 5 },
+    },
+    {
+      hazard_type: 'FLOOD',
+      event_id: 'HZ-2020-MAHANADI-FLOOD',
+      name: 'Mahanadi Delta Monsoon Inundation Event',
+      severity: 'HIGH',
+      provenance: 'REPLAY',
+      source: 'Sentinel-1A SAR C-band / CWC',
+      observed_at: '2020-08-28T05:30:00Z',
+      attributes: { inundation_water_depth_m: 2.4, satellite_sensor: 'Sentinel-1A IW C-SAR' },
+    },
+    {
+      hazard_type: 'EARTHQUAKE',
+      event_id: 'HZ-2023-ODISHA-SEISMIC',
+      name: 'Eastern Ghats Strike-Slip Seismic Event',
+      severity: 'HIGH',
+      provenance: 'REPLAY',
+      source: 'USGS ShakeMap / NDMA',
+      observed_at: '2023-04-14T11:22:00Z',
+      attributes: { magnitude: 6.8, modified_mercalli_intensity: 7.5 },
+    },
+  ];
+}
+
+export async function evaluateHazard(hazardType: string): Promise<HazardEvaluationReport | null> {
+  try {
+    const res = await fetchWithTimeout(`/api/hazards/evaluate?hazard_type=${hazardType}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    });
+    if (res.ok) return await res.json();
+  } catch { /* fallback */ }
+  return null;
+}
+
+export async function fetchOperations(): Promise<any[]> {
+  try {
+    const res = await fetchWithTimeout('/api/hazards/operations');
+    if (res.ok) return await res.json();
+  } catch { /* fallback */ }
+  return [];
+}
+
+export async function authorizeOperation(payload: {
+  hazard_event_id: string;
+  title: string;
+  priority?: string;
+  location: string;
+  assigned_unit?: string;
+  instructions?: string;
+}): Promise<any> {
+  try {
+    const res = await fetchWithTimeout('/api/hazards/operations/authorize', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (res.ok) return await res.json();
+  } catch { /* fallback */ }
+  return null;
+}
+
+export async function updateOperationStatus(
+  taskId: string,
+  payload: {
+    status: string;
+    field_note?: string;
+    reported_road_blocked?: boolean;
+    flood_depth_meters?: number;
+  }
+): Promise<any> {
+  try {
+    const res = await fetchWithTimeout(`/api/hazards/operations/${taskId}/status`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (res.ok) return await res.json();
+  } catch { /* fallback */ }
+  return null;
+}
