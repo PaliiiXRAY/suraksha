@@ -1,5 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// ResponderOperations.tsx — Tab 3 matching 8.16.10 PM canonical UI + 8.37.45 PM features
+// ResponderOperations.tsx — Portal 3: Response Portal
+// Field execution layer: mission lifecycle, tactical navigation & ground sitreps.
+// Inherits FireSense design language with dual theme support.
 // ─────────────────────────────────────────────────────────────────────────────
 import React, { useState } from 'react';
 import {
@@ -15,7 +17,14 @@ import {
   ChevronRight,
   Database,
   Route,
+  Truck,
+  Users,
+  LifeBuoy,
 } from 'lucide-react';
+import StatCard from '../components/design-system/StatCard';
+import RiskBadge from '../components/design-system/RiskBadge';
+import ProvenancePill from '../components/design-system/ProvenancePill';
+import AuditVerificationBlock from '../components/design-system/AuditVerificationBlock';
 
 interface Props {
   onShowToast: (msg: string) => void;
@@ -82,269 +91,247 @@ export default function ResponderOperations({ onShowToast }: Props) {
     };
     setSitreps(prev => [newEntry, ...prev]);
     setSitrepText('');
-    onShowToast('SitRep transmitted to Incident Command Center');
+    onShowToast('Ground SITREP transmitted to Government Command HQ');
   }
 
-  function handleCopyGPS() {
+  function handleCopyCoords() {
     navigator.clipboard?.writeText('19.7991, 85.8239');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-    onShowToast('GPS coordinates copied: 19.7991°N, 85.8239°E (Brahmagiri)');
+    onShowToast('Target coordinates copied: 19.7991°N, 85.8239°E');
   }
 
   return (
-    <div className="flex-1 flex flex-col overflow-y-auto bg-[#0a0d14] text-white p-6 space-y-6">
-      {/* Top Header matching 8.16.10 PM */}
+    <div className="flex-1 flex flex-col overflow-y-auto bg-slate-50 dark:bg-[#0a0d14] text-slate-900 dark:text-white p-6 space-y-6 transition-colors">
+      {/* Top Header */}
       <div className="flex items-start justify-between flex-wrap gap-4">
         <div>
-          <div className="text-[11px] font-mono tracking-widest text-emerald-400 font-semibold uppercase mb-1">
-            NDRF UNIT 3 · FIELD TERMINAL
+          <div className="text-[11px] font-mono tracking-widest text-emerald-600 dark:text-emerald-400 font-bold uppercase mb-1 flex items-center gap-1.5">
+            <Radio size={13} className="animate-pulse" />
+            <span>NDRF BATTALION 03 · TACTICAL FIELD TERMINAL</span>
           </div>
-          <h1 className="text-2xl font-black text-white tracking-tight">Responder Operations</h1>
-          <p className="text-xs text-white/50 mt-0.5">
-            Assigned mission, site conditions and next actions.
+          <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+            Response Portal
+          </h1>
+          <p className="text-xs text-slate-600 dark:text-white/50 mt-0.5">
+            Field execution, mission progression, safe routing & ground condition telemetry.
           </p>
         </div>
 
-        {/* Active Task Badge matching 8.16.10 PM */}
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 bg-[#141824] border border-white/10 rounded-xl px-3 py-1.5 text-xs font-mono">
-            <span className="text-white/40">Active Task:</span>
-            <span className="font-bold text-white">TASK-104 · Brahmagiri Evacuation Support</span>
-            <span className="px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400 text-[10px] font-bold">
-              ACTIVE
-            </span>
-          </div>
-
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-emerald-500/40 bg-emerald-950/30 text-emerald-400 text-xs font-mono font-bold">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>FIELD READY</span>
+        <div className="flex items-center gap-2">
+          <ProvenancePill tag="SIMULATED" />
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-bold">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse"></span>
+            <span>VHF LINK ACTIVE · CH-04</span>
           </div>
         </div>
       </div>
 
-      {/* Focused Mission Card matching 8.16.10 PM */}
-      <div className="bg-[#121622] border border-white/10 rounded-xl p-5 space-y-5">
-        <div className="flex items-start justify-between flex-wrap gap-4">
-          <div>
-            <div className="text-[10px] font-mono text-white/40 uppercase tracking-wider mb-0.5">
-              FOCUSED MISSION
-            </div>
-            <h2 className="text-xl font-extrabold text-white">Brahmagiri Evacuation Support</h2>
-            <div className="text-xs text-white/50 font-mono mt-0.5">
-              Brahmagiri block, Puri · Target sector assessment and support
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <span className="px-2.5 py-1 rounded bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-mono font-bold">
-              CYCLONE
-            </span>
-            <span className="px-2.5 py-1 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-mono font-bold">
-              HIGH
-            </span>
-          </div>
-        </div>
-
-        {/* 4-Grid Mission Telemetry matching 8.16.10 PM */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2 border-t border-white/5">
-          {/* Target GPS */}
-          <div className="p-3.5 rounded-lg bg-[#0e121b] border border-white/5 flex flex-col justify-between">
-            <div>
-              <div className="text-[10px] font-mono text-white/40 uppercase">TARGET GPS</div>
-              <div className="text-sm font-bold font-mono text-white mt-1">19.7991°N · 85.8239°E</div>
-            </div>
-            <button
-              onClick={handleCopyGPS}
-              className="text-[11px] text-cyan-400 hover:text-cyan-300 font-mono flex items-center gap-1 mt-2 self-start"
-            >
-              <Copy size={11} />
-              <span>{copied ? 'Copied' : 'Copy coordinates'}</span>
-            </button>
-          </div>
-
-          {/* Forecast Wind */}
-          <div className="p-3.5 rounded-lg bg-[#0e121b] border border-white/5 flex flex-col justify-between">
-            <div>
-              <div className="text-[10px] font-mono text-white/40 uppercase">FORECAST WIND</div>
-              <div className="text-xl font-black font-mono text-white mt-1">92 km/h</div>
-            </div>
-            <div className="text-[11px] text-red-400 font-mono mt-2">Peak gusts 215 km/h</div>
-          </div>
-
-          {/* Terrain Risk */}
-          <div className="p-3.5 rounded-lg bg-[#0e121b] border border-white/5 flex flex-col justify-between">
-            <div>
-              <div className="text-[10px] font-mono text-white/40 uppercase">TERRAIN RISK</div>
-              <div className="text-xs font-bold text-white mt-1">Storm Surge Inundation Corridor</div>
-            </div>
-            <div className="text-[11px] text-amber-400 font-mono mt-2">1.8m coastal flood swath</div>
-          </div>
-
-          {/* Radio Frequency */}
-          <div className="p-3.5 rounded-lg bg-[#0e121b] border border-white/5 flex flex-col justify-between">
-            <div>
-              <div className="text-[10px] font-mono text-white/40 uppercase">RADIO FREQUENCY</div>
-              <div className="text-sm font-bold font-mono text-white mt-1">CH-4 (VHF 156.200 MHz)</div>
-            </div>
-            <div className="text-[11px] text-emerald-400 font-mono mt-2">Repeater: Pipli Active</div>
-          </div>
-        </div>
-
-        {/* Optimal Access Route matching 8.16.10 PM */}
-        <div className="pt-3 border-t border-white/5 space-y-2.5">
-          <div className="text-[10px] font-mono text-white/40 uppercase tracking-wider">
-            OPTIMAL ACCESS ROUTE
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {/* Route A */}
-            <div
-              onClick={() => setSelectedRoute('nh316')}
-              className={`p-3 rounded-lg border cursor-pointer transition-all ${
-                selectedRoute === 'nh316'
-                  ? 'bg-blue-600/10 border-blue-500'
-                  : 'bg-[#0e121b] border-white/10 hover:border-white/20'
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-xs text-white">NH-316 via Pipili Bypass</span>
-                <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-mono text-[10px] font-bold">
-                  RECOMMENDED
-                </span>
-              </div>
-              <p className="text-[11px] text-white/50 mt-1">
-                Avoids coastal surge corridor. Police escort stationed at km 28. ETA: 42 mins.
-              </p>
-            </div>
-
-            {/* Route B */}
-            <div
-              onClick={() => setSelectedRoute('marinedrive')}
-              className={`p-3 rounded-lg border cursor-pointer transition-all ${
-                selectedRoute === 'marinedrive'
-                  ? 'bg-blue-600/10 border-blue-500'
-                  : 'bg-[#0e121b] border-white/10 hover:border-white/20'
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-xs text-white">Puri Marine Drive</span>
-                <span className="px-2 py-0.5 rounded bg-red-500/20 text-red-400 font-mono text-[10px] font-bold">
-                  BLOCKED / CUT
-                </span>
-              </div>
-              <p className="text-[11px] text-red-400/80 mt-1">
-                ALERT: Marine Drive inundated by 1.8m surge flood near Konark spit. Do NOT attempt.
-              </p>
-            </div>
-          </div>
-        </div>
+      {/* 4 Stat Cards */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <StatCard
+          title="Unit Status"
+          value={currentStep}
+          subtitle="Assigned Sector: Brahmagiri / Puri"
+          icon={Truck}
+          iconColor="text-emerald-500"
+          provenance="SIMULATED"
+        />
+        <StatCard
+          title="Personnel Deployed"
+          value={42}
+          subtitle="4 Officer Leads + 38 Responders"
+          icon={Users}
+          iconColor="text-blue-500"
+          provenance="BATTALION ROSTER"
+        />
+        <StatCard
+          title="Civilians Evacuated"
+          value="1,420"
+          subtitle="Accommodated in Zilla High School"
+          delta="+240 recent"
+          deltaType="positive"
+          provenance="GROUND SITREP"
+        />
+        <StatCard
+          title="Equipment Readiness"
+          value="100%"
+          subtitle="4 Inflatable Boats · 8 Chainsaws"
+          icon={LifeBuoy}
+          iconColor="text-amber-500"
+          provenance="EQUIPMENT LOG"
+        />
       </div>
 
-      {/* 6-Step Lifecycle Progression Stepper (from 8.16.10 PM & 8.37.45 PM) */}
-      <div className="bg-[#121622] border border-white/10 rounded-xl p-5 space-y-4">
-        <div className="flex items-center justify-between flex-wrap gap-4">
-          <div>
-            <div className="text-[10px] font-mono text-white/40 uppercase tracking-wider mb-0.5">
-              INCIDENT LIFECYCLE PROGRESSION
-            </div>
-            <h3 className="text-base font-bold text-white">
-              Status Stepper · Current State: <span className="text-cyan-400 font-mono">{currentStep}</span>
-            </h3>
-          </div>
-
-          <button
-            onClick={handleAdvance}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-md transition-colors"
-          >
-            <span>{nextStep ? `Advance to ${nextStep}` : 'Mission Resolved'}</span>
-            <ChevronRight size={13} />
-          </button>
+      {/* Active Mission Lifecycle Step Bar */}
+      <div className="bg-white dark:bg-[#121622] border border-slate-200 dark:border-white/10 rounded-2xl p-5 shadow-sm space-y-4">
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <span className="text-xs font-mono uppercase tracking-wider font-bold text-slate-800 dark:text-white/80">
+            Mission Lifecycle Progression · OP-2019-042
+          </span>
+          <span className="text-xs font-mono text-slate-500 dark:text-white/40">
+            CURRENT PHASE: <strong className="text-blue-600 dark:text-blue-400 font-bold">{currentStep}</strong>
+          </span>
         </div>
 
-        {/* Stepper Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-2 pt-2">
+        {/* 6 Step Interactive Pills */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
           {LIFECYCLE_STEPS.map((step, idx) => {
             const isCompleted = idx < currentIndex;
             const isCurrent = idx === currentIndex;
             return (
               <div
                 key={step}
-                className={`p-2.5 rounded-lg border text-center transition-all ${
+                className={`p-3 rounded-xl border text-center font-mono text-xs font-bold transition-all ${
                   isCurrent
-                    ? 'bg-blue-600/20 border-blue-500 text-white font-bold shadow-sm'
+                    ? 'bg-blue-600 text-white border-blue-500 shadow-md ring-2 ring-blue-500/20'
                     : isCompleted
-                    ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
-                    : 'bg-[#0e121b] border-white/5 text-white/30'
+                    ? 'bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 border-emerald-500/30'
+                    : 'bg-slate-50 dark:bg-[#181d2a] text-slate-400 dark:text-white/30 border-slate-200 dark:border-white/5'
                 }`}
               >
-                <div className="text-[9px] font-mono mb-1">STEP 0{idx + 1}</div>
-                <div className="text-xs font-mono font-semibold truncate">{step}</div>
+                <div className="text-[9px] opacity-70">STAGE 0{idx + 1}</div>
+                <div className="mt-0.5">{step}</div>
               </div>
             );
           })}
         </div>
-      </div>
 
-      {/* Field SitRep Logger (from 8.37.45 PM) */}
-      <div className="bg-[#121622] border border-white/10 rounded-xl p-5 space-y-4">
-        <div className="flex items-center justify-between flex-wrap gap-2">
-          <div className="flex items-center gap-2">
-            <Radio size={16} className="text-cyan-400 animate-pulse" />
-            <h3 className="text-sm font-mono uppercase tracking-wider font-bold text-white">
-              Field Situation Report (SitRep) Logger
-            </h3>
+        {/* Action button to advance */}
+        <div className="flex items-center justify-between pt-2 flex-wrap gap-3">
+          <div className="text-xs text-slate-500 dark:text-white/50">
+            Next Objective: {nextStep ? `Transition field unit to ${nextStep}` : 'All operational targets completed'}
           </div>
-          <div className="flex items-center gap-1.5 text-[11px] font-mono text-emerald-400">
-            <Database size={12} />
-            <span>LOCAL SQLITE / INDEXEDDB CACHED · ZERO-WIFI READY</span>
-          </div>
-        </div>
 
-        <div className="flex gap-3">
-          <input
-            type="text"
-            value={sitrepText}
-            onChange={e => setSitrepText(e.target.value)}
-            placeholder="Log tactical observation: e.g. Shelter occupancy, road conditions, casualty count..."
-            className="flex-1 bg-[#0e121b] border border-white/10 rounded-lg px-3.5 py-2 text-xs text-white placeholder-white/40 focus:outline-none focus:border-blue-500"
-            onKeyDown={e => {
-              if (e.key === 'Enter') handleTransmitSitrep();
-            }}
-          />
           <button
-            onClick={handleTransmitSitrep}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-md transition-colors whitespace-nowrap"
+            onClick={handleAdvance}
+            className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs font-bold shadow-md transition-all flex items-center gap-1.5"
           >
-            <Send size={12} />
-            <span>Transmit SitRep</span>
+            <span>Advance to {nextStep || 'COMPLETED'}</span>
+            <ChevronRight size={14} />
           </button>
         </div>
+      </div>
 
-        {/* SitRep History Feed */}
-        <div className="space-y-2 pt-2 border-t border-white/5">
-          <div className="text-[10px] font-mono text-white/40 uppercase">TRANSMITTED FIELD LOGS</div>
-          <div className="space-y-2">
-            {sitreps.map(sr => (
-              <div
-                key={sr.id}
-                className="p-3 rounded-lg bg-[#0e121b] border border-white/5 flex items-start justify-between gap-4 text-xs font-mono"
-              >
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-bold text-cyan-300">{sr.id}</span>
-                    <span className="text-white/40">·</span>
-                    <span className="text-white/50">{sr.time}</span>
-                    <span className="px-1.5 py-0.2 rounded bg-white/5 text-[9px] text-white/60">
-                      {sr.state}
-                    </span>
-                  </div>
-                  <div className="font-sans text-white/90">{sr.text}</div>
-                </div>
-                <CheckCircle2 size={14} className="text-emerald-400 flex-shrink-0 mt-1" />
-              </div>
-            ))}
+      {/* 2-Column Split: Tactical Route Advice (Left) & Live SITREP Feed (Right) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* Left (6 Cols): Route Intelligence */}
+        <div className="lg:col-span-6 bg-white dark:bg-[#121622] border border-slate-200 dark:border-white/10 rounded-2xl p-5 shadow-sm space-y-4">
+          <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-3">
+            <div className="flex items-center gap-2">
+              <Route size={16} className="text-cyan-500" />
+              <span className="text-xs font-mono uppercase tracking-wider font-bold text-slate-800 dark:text-white/80">
+                Tactical Route Verification
+              </span>
+            </div>
+            <button
+              onClick={handleCopyCoords}
+              className="text-xs font-mono text-blue-600 dark:text-blue-400 flex items-center gap-1 hover:underline"
+            >
+              <Copy size={12} />
+              <span>{copied ? 'Copied!' : 'Copy Target Coords'}</span>
+            </button>
           </div>
+
+          <div className="space-y-3">
+            {/* Route A: NH-316 */}
+            <div
+              onClick={() => setSelectedRoute('nh316')}
+              className={`p-4 rounded-xl border cursor-pointer transition-all ${
+                selectedRoute === 'nh316'
+                  ? 'bg-blue-50/50 dark:bg-[#182032] border-blue-500 ring-1 ring-blue-500'
+                  : 'bg-slate-50 dark:bg-[#181d2a] border-slate-200 dark:border-white/5 hover:border-slate-300'
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-sm text-slate-900 dark:text-white">
+                  Route A: NH-316 via Pipili Bypass (Recommended)
+                </span>
+                <span className="px-2 py-0.5 rounded text-[10px] font-black bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-mono">
+                  PASSABLE (W/ ESCORT)
+                </span>
+              </div>
+              <p className="text-xs text-slate-600 dark:text-white/60 mt-1">
+                Distance: 54 km · Tree falls cleared by NHAI team at km 28 · Bridges intact.
+              </p>
+            </div>
+
+            {/* Route B: Marine Drive */}
+            <div
+              onClick={() => setSelectedRoute('marinedrive')}
+              className={`p-4 rounded-xl border cursor-pointer transition-all ${
+                selectedRoute === 'marinedrive'
+                  ? 'bg-red-50/50 dark:bg-[#28181e] border-red-500 ring-1 ring-red-500'
+                  : 'bg-slate-50 dark:bg-[#181d2a] border-slate-200 dark:border-white/5 hover:border-slate-300'
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-sm text-slate-900 dark:text-white">
+                  Route B: Puri-Konark Marine Drive (Restricted)
+                </span>
+                <span className="px-2 py-0.5 rounded text-[10px] font-black bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20 font-mono">
+                  CUT (INUNDATED 1.8M)
+                </span>
+              </div>
+              <p className="text-xs text-slate-600 dark:text-white/60 mt-1">
+                Hazard: High storm surge breach at Culvert 14. Inaccessible to heavy rescue trucks.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Right (6 Cols): Transmit Ground SITREP */}
+        <div className="lg:col-span-6 bg-white dark:bg-[#121622] border border-slate-200 dark:border-white/10 rounded-2xl p-5 shadow-sm space-y-4">
+          <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-3">
+            <span className="text-xs font-mono uppercase tracking-wider font-bold text-slate-800 dark:text-white/80">
+              Field Telemetry & SITREP Transmit
+            </span>
+            <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">
+              ENCRYPTED RELAY
+            </span>
+          </div>
+
+          <div className="space-y-2">
+            <textarea
+              rows={3}
+              value={sitrepText}
+              onChange={e => setSitrepText(e.target.value)}
+              placeholder="Enter field condition report (e.g. road water depth, shelter occupancy, generator fuel status)..."
+              className="w-full bg-slate-50 dark:bg-[#181d2a] border border-slate-200 dark:border-white/10 rounded-xl p-3 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-white/40 focus:outline-none focus:border-blue-500 shadow-sm font-mono"
+            />
+            <div className="flex justify-end">
+              <button
+                onClick={handleTransmitSitrep}
+                disabled={!sitrepText.trim()}
+                className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-mono text-xs font-bold shadow-md transition-all flex items-center gap-1.5"
+              >
+                <Send size={13} />
+                <span>Transmit SITREP</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Previous Sitreps Log */}
+          <div className="space-y-2 pt-1 border-t border-slate-100 dark:border-white/5">
+            <div className="text-[10px] font-mono uppercase text-slate-400 font-bold">Recent Field Transmissions</div>
+            <div className="space-y-2 max-h-40 overflow-y-auto">
+              {sitreps.map((s, idx) => (
+                <div key={idx} className="p-2.5 rounded-lg bg-slate-50 dark:bg-[#181d2a] text-xs font-mono border border-slate-200 dark:border-white/5">
+                  <div className="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                    <span className="text-cyan-600 dark:text-cyan-400 font-bold">{s.id}</span>
+                    <span>{s.time}</span>
+                  </div>
+                  <p className="text-slate-800 dark:text-white/80 font-sans text-xs">{s.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <AuditVerificationBlock
+            hash="0x28a190b4c8109278ba0119f49b1094892c908123e4758129a0081249b6184ff"
+            sourceAuthority="NDRF Unit 3 Tactical Keyring"
+            onVerify={() => onShowToast('Audit Verified: Tactical field signature validated')}
+          />
         </div>
       </div>
     </div>

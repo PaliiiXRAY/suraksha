@@ -1,0 +1,59 @@
+import React from 'react';
+import { TOKENS, RiskTier } from '../../theme/tokens';
+
+interface RiskBadgeProps {
+  score: number;
+  showGauge?: boolean;
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+}
+
+export default function RiskBadge({
+  score,
+  showGauge = false,
+  size = 'md',
+  className = '',
+}: RiskBadgeProps) {
+  const getTier = (s: number): RiskTier => {
+    if (s >= TOKENS.colors.riskTiers.critical.min) return 'critical';
+    if (s >= TOKENS.colors.riskTiers.high.min) return 'high';
+    if (s >= TOKENS.colors.riskTiers.moderate.min) return 'moderate';
+    return 'low';
+  };
+
+  const tier = getTier(score);
+  const cfg = TOKENS.colors.riskTiers[tier];
+
+  const sizeClasses = {
+    sm: 'text-[10px] px-1.5 py-0.5',
+    md: 'text-xs px-2.5 py-1',
+    lg: 'text-sm px-3.5 py-1.5',
+  };
+
+  return (
+    <div className={`inline-flex flex-col gap-1 ${className}`}>
+      <span
+        className={`inline-flex items-center gap-1.5 rounded-md font-mono font-black border uppercase tracking-wider ${cfg.badge} ${sizeClasses[size]}`}
+      >
+        <span>{cfg.label}</span>
+        <span className="opacity-40">•</span>
+        <span>{score}</span>
+      </span>
+
+      {showGauge && (
+        <div className="w-full h-1.5 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden">
+          <div
+            className={`h-full rounded-full transition-all duration-500 ${
+              score >= 80
+                ? 'bg-gradient-to-r from-amber-500 to-red-500'
+                : score >= 60
+                ? 'bg-amber-500'
+                : 'bg-blue-500'
+            }`}
+            style={{ width: `${Math.min(100, Math.max(0, score))}%` }}
+          />
+        </div>
+      )}
+    </div>
+  );
+}

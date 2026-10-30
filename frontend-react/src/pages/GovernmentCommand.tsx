@@ -1,5 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// GovernmentCommand.tsx — Tab 2 matching 8.16.10 PM canonical UI + 8.37.45 PM features
+// GovernmentCommand.tsx — Portal 2: Government Portal
+// Government command, operational decision-making, what-if simulations & dispatch authorizations.
+// Inherits FireSense design language with dual theme support.
 // ─────────────────────────────────────────────────────────────────────────────
 import React, { useState } from 'react';
 import {
@@ -16,8 +18,15 @@ import {
   Route,
   ShieldCheck,
   Zap,
+  Sliders,
+  Users,
+  Building,
 } from 'lucide-react';
 import GISOverlayMap from '../components/gis/GISOverlayMap';
+import StatCard from '../components/design-system/StatCard';
+import RiskBadge from '../components/design-system/RiskBadge';
+import ProvenancePill from '../components/design-system/ProvenancePill';
+import AuditVerificationBlock from '../components/design-system/AuditVerificationBlock';
 
 interface Props {
   onShowToast: (msg: string) => void;
@@ -39,7 +48,7 @@ const PRIORITY_AREAS: PriorityArea[] = [
     id: 'brahmagiri',
     rank: 'RANK 01',
     name: 'Brahmagiri',
-    district: 'Puri',
+    district: 'Puri District',
     exposed: '118K exposed',
     baseScore: 92,
     criticalAssets: ['Brahmagiri CHC Hospital', 'Marine Drive Culvert 14', 'Power Substation 33kV'],
@@ -49,7 +58,7 @@ const PRIORITY_AREAS: PriorityArea[] = [
     id: 'krushnaprasad',
     rank: 'RANK 02',
     name: 'Krushna Prasad',
-    district: 'Puri',
+    district: 'Puri District',
     exposed: '94K exposed',
     baseScore: 87,
     criticalAssets: ['Chilika Ferry Terminal', 'Satapada Medical Camp', 'Rural Water Works'],
@@ -59,7 +68,7 @@ const PRIORITY_AREAS: PriorityArea[] = [
     id: 'erasama',
     rank: 'RANK 03',
     name: 'Erasama',
-    district: 'Jagatsinghpur',
+    district: 'Jagatsinghpur District',
     exposed: '142K exposed',
     baseScore: 79,
     criticalAssets: ['Erasama Multipurpose Cyclone Shelter', 'Paradip Feeder Line', 'Coastal Embankment #4'],
@@ -69,7 +78,7 @@ const PRIORITY_AREAS: PriorityArea[] = [
     id: 'astaranga',
     rank: 'RANK 04',
     name: 'Astaranga',
-    district: 'Puri',
+    district: 'Puri District',
     exposed: '85K exposed',
     baseScore: 73,
     criticalAssets: ['Astaranga Fishing Harbour', 'Coastal VHF Relay Tower', 'Primary Health Centre'],
@@ -84,13 +93,12 @@ export default function GovernmentCommand({ onShowToast }: Props) {
   const [showDispatchModal, setShowDispatchModal] = useState<boolean>(false);
 
   // Dynamic calculations based on slider (What-if scenario engine)
-  const currentWindKmh = Math.round(180 + (windSlider / 100) * 35); // 180 to 215 km/h
+  const currentWindKmh = Math.round(180 + (windSlider / 100) * 35);
   const peopleAtRisk = windSlider > 60 ? '684K' : '603K';
   const deployedTeamsCount = dispatched ? 10 : 9;
 
   const selectedArea = PRIORITY_AREAS.find(a => a.id === selectedAreaId) ?? PRIORITY_AREAS[0];
 
-  // Dynamic scores for priority areas
   const getDynamicScore = (base: number) => {
     return Math.min(100, Math.round(base + (windSlider - 50) * 0.16));
   };
@@ -112,83 +120,75 @@ export default function GovernmentCommand({ onShowToast }: Props) {
   }
 
   return (
-    <div className="flex-1 flex flex-col overflow-y-auto bg-[#0a0d14] text-white p-6 space-y-6">
-      {/* Top Header matching 8.16.10 PM */}
+    <div className="flex-1 flex flex-col overflow-y-auto bg-slate-50 dark:bg-[#0a0d14] text-slate-900 dark:text-white p-6 space-y-6 transition-colors">
+      {/* Top Header */}
       <div className="flex items-start justify-between flex-wrap gap-4">
         <div>
-          <h1 className="text-2xl font-black text-white tracking-tight">Incident Command Center</h1>
-          <p className="text-xs text-white/50 mt-0.5">
-            Real-time situational awareness - Cyclone Fani replay · Odisha
+          <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+            Government Portal
+          </h1>
+          <p className="text-xs text-slate-600 dark:text-white/50 mt-0.5">
+            Command authorization, what-if simulation, logistics routing & response coordination.
           </p>
         </div>
-        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-red-500/40 bg-red-950/30 text-red-400 text-xs font-mono font-bold">
-          <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse"></span>
-          <span>4 CRITICAL AREAS ACTIVE</span>
+        <div className="flex items-center gap-2">
+          {windSlider !== 50 ? (
+            <ProvenancePill tag="SIMULATED" />
+          ) : (
+            <ProvenancePill tag="OFFICIAL_FORECAST" />
+          )}
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-red-500/40 bg-red-950/20 text-red-500 dark:text-red-400 text-xs font-mono font-bold">
+            <span className="w-1.5 h-1.5 rounded-full bg-red-500 dark:bg-red-400 animate-pulse"></span>
+            <span>4 CRITICAL SECTORS ACTIVE</span>
+          </div>
         </div>
       </div>
 
-      {/* 4 Stat Cards matching 8.16.10 PM */}
+      {/* 4 Stat Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {/* Card 1 */}
-        <div className="bg-[#121622] border border-white/10 rounded-xl p-4 flex flex-col justify-between">
-          <div className="text-xs text-white/40 font-mono uppercase tracking-wider mb-1">Active Areas</div>
-          <div className="text-3xl font-black font-mono text-white tracking-tight">24</div>
-          <div className="text-xs text-white/40 mt-1">across 3 districts</div>
-        </div>
-
-        {/* Card 2 (Dynamic with wind slider) */}
-        <div className="bg-[#121622] border border-white/10 rounded-xl p-4 flex flex-col justify-between">
-          <div className="flex items-center justify-between">
-            <div className="text-xs text-white/40 font-mono uppercase tracking-wider">People at Risk</div>
-            {windSlider > 60 && (
-              <span className="text-[10px] font-mono font-bold text-red-400 bg-red-500/10 px-1.5 py-0.5 rounded">
-                +81K SURGE
-              </span>
-            )}
-          </div>
-          <div className="text-3xl font-black font-mono text-red-400 tracking-tight transition-all">
-            {peopleAtRisk}
-          </div>
-          <div className="text-xs text-white/40 mt-1">Within forecast wind field</div>
-        </div>
-
-        {/* Card 3 (Dynamic with dispatch button) */}
-        <div className="bg-[#121622] border border-white/10 rounded-xl p-4 flex flex-col justify-between">
-          <div className="flex items-center justify-between">
-            <div className="text-xs text-white/40 font-mono uppercase tracking-wider">Teams Deployed</div>
-            {dispatched && (
-              <span className="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
-                +1 DISPATCHED
-              </span>
-            )}
-          </div>
-          <div className="text-3xl font-black font-mono text-white tracking-tight transition-all">
-            {deployedTeamsCount}
-          </div>
-          <div className="text-xs text-white/40 mt-1">of 14 NDRF teams</div>
-        </div>
-
-        {/* Card 4 */}
-        <div className="bg-[#121622] border border-white/10 rounded-xl p-4 flex flex-col justify-between">
-          <div className="text-xs text-white/40 font-mono uppercase tracking-wider mb-1">Relief Camps</div>
-          <div className="text-3xl font-black font-mono text-emerald-400 tracking-tight">18</div>
-          <div className="text-xs text-white/40 mt-1">44,500 capacity</div>
-        </div>
+        <StatCard
+          title="Active Prioritised Blocks"
+          value={39}
+          subtitle="3 Coastal Districts"
+          provenance="OSDMA BASELINE"
+        />
+        <StatCard
+          title="Exposed Population"
+          value={peopleAtRisk}
+          subtitle="Within Active Hazard Footprint"
+          delta={windSlider > 60 ? '+81K SURGE' : undefined}
+          deltaType="negative"
+          provenance={windSlider !== 50 ? 'SIMULATED' : 'CENSUS 2011'}
+        />
+        <StatCard
+          title="Disaster Teams Mobilized"
+          value={deployedTeamsCount}
+          subtitle="of 14 NDRF & ODRAF Battalions"
+          delta={dispatched ? '+1 DISPATCHED' : undefined}
+          deltaType="positive"
+          provenance="SIMULATED"
+        />
+        <StatCard
+          title="Verified Relief Shelters"
+          value={18}
+          subtitle="44,500 High-Ground Capacity"
+          provenance="DISTRICT REGISTRY"
+        />
       </div>
 
-      {/* Main Grid: Priority Areas Ranking (Left) & Incident Action Board (Right) */}
+      {/* Main Grid: Priority Areas (Left) & Incident Action Board (Right) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left Column (5 Cols): Priority Areas List matching 8.16.10 PM */}
+        {/* Left Column (5 Cols): Priority Areas List */}
         <div className="lg:col-span-5 flex flex-col space-y-4">
-          <div className="bg-[#121622] border border-white/10 rounded-xl overflow-hidden flex flex-col">
-            <div className="flex items-center justify-between px-5 py-3 border-b border-white/10 bg-[#0e121b]">
-              <span className="text-xs font-mono uppercase tracking-wider font-bold text-white/80">
-                Priority Areas
+          <div className="bg-white dark:bg-[#121622] border border-slate-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-sm flex flex-col">
+            <div className="flex items-center justify-between px-5 py-3 border-b border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#0e121b]">
+              <span className="text-xs font-mono uppercase tracking-wider font-bold text-slate-800 dark:text-white/80">
+                Priority Area Rankings
               </span>
-              <span className="text-xs font-mono text-white/40">24 AREAS</span>
+              <span className="text-xs font-mono text-slate-500 dark:text-white/40">39 AREAS TOTAL</span>
             </div>
 
-            <div className="divide-y divide-white/5">
+            <div className="divide-y divide-slate-100 dark:divide-white/5">
               {PRIORITY_AREAS.map(area => {
                 const isSelected = selectedAreaId === area.id;
                 const dynamicScore = getDynamicScore(area.baseScore);
@@ -197,31 +197,25 @@ export default function GovernmentCommand({ onShowToast }: Props) {
                     key={area.id}
                     onClick={() => setSelectedAreaId(area.id)}
                     className={`flex items-center justify-between px-5 py-3.5 cursor-pointer transition-colors ${
-                      isSelected ? 'bg-blue-600/15 border-l-2 border-blue-500' : 'hover:bg-white/5'
+                      isSelected
+                        ? 'bg-blue-50 dark:bg-blue-600/15 border-l-4 border-blue-500'
+                        : 'hover:bg-slate-50 dark:hover:bg-white/5'
                     }`}
                   >
                     <div>
-                      <div className="text-[10px] font-mono text-white/40 font-semibold">{area.rank}</div>
-                      <div className="font-bold text-sm text-white">{area.name}</div>
-                      <div className="text-xs text-white/40">{area.district} · {area.exposed}</div>
-                    </div>
-                    <div className="text-right">
-                      <div
-                        className={`text-2xl font-black font-mono ${
-                          dynamicScore >= 90
-                            ? 'text-red-500'
-                            : dynamicScore >= 80
-                            ? 'text-orange-400'
-                            : 'text-amber-400'
-                        }`}
-                      >
-                        {dynamicScore}
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-mono text-blue-600 dark:text-blue-400 font-black">
+                          {area.rank}
+                        </span>
+                        <span className="text-sm font-bold text-slate-900 dark:text-white">{area.name}</span>
                       </div>
-                      {dynamicScore > area.baseScore && (
-                        <div className="text-[10px] font-mono text-red-400 font-bold">
-                          +{dynamicScore - area.baseScore} pts
-                        </div>
-                      )}
+                      <div className="text-xs text-slate-500 dark:text-white/50 mt-0.5">
+                        {area.district} · {area.exposed}
+                      </div>
+                    </div>
+
+                    <div className="text-right">
+                      <RiskBadge score={dynamicScore} size="sm" />
                     </div>
                   </div>
                 );
@@ -229,264 +223,208 @@ export default function GovernmentCommand({ onShowToast }: Props) {
             </div>
           </div>
 
-          {/* Dynamic What-If Scenario Slider matching 8.16.10 PM */}
-          <div className="bg-[#121622] border border-white/10 rounded-xl p-4 space-y-3">
+          {/* Interactive What-If Scenario Slider */}
+          <div className="bg-white dark:bg-[#121622] border border-slate-200 dark:border-white/10 rounded-2xl p-5 shadow-sm space-y-3">
             <div className="flex items-center justify-between">
-              <div>
-                <span className="text-xs font-mono uppercase tracking-wider font-bold text-white/80">
-                  What-If Scenario: Wind Intensity
+              <div className="flex items-center gap-2">
+                <Sliders size={14} className="text-amber-500 dark:text-amber-400" />
+                <span className="text-xs font-mono uppercase tracking-wider font-bold text-slate-800 dark:text-white/90">
+                  Interactive "What-If" Perturbation
                 </span>
-                <p className="text-[11px] text-white/40">Adjust sustained wind speed to evaluate exposure</p>
               </div>
-              <span className="text-sm font-black font-mono text-red-400 px-2 py-0.5 rounded bg-red-500/10 border border-red-500/20">
-                {currentWindKmh} km/h
-              </span>
+              <ProvenancePill tag="SIMULATED" size="sm" />
             </div>
 
-            <input
-              type="range"
-              min="0"
-              max="100"
-              value={windSlider}
-              onChange={e => setWindSlider(Number(e.target.value))}
-              className="w-full h-1.5 bg-[#1e2536] rounded-lg appearance-none cursor-pointer accent-blue-500"
-            />
-
-            <div className="flex justify-between text-[10px] font-mono text-white/40">
-              <span>Baseline: 180 km/h</span>
-              <span>IMD Forecast: 195 km/h</span>
-              <span>Extreme Surge: 215 km/h</span>
-            </div>
-          </div>
-
-          {/* Safety Gates & Decision Interlocks matching 8.16.10 PM */}
-          <div className="bg-[#121622] border border-white/10 rounded-xl p-4 space-y-2.5">
-            <div className="text-xs font-mono uppercase tracking-wider font-bold text-white/80 mb-1">
-              Safety Gates & Decision Interlocks
-            </div>
-            <div className="space-y-1.5 text-xs">
-              <div className="flex items-center gap-2 text-emerald-400">
-                <CheckCircle2 size={13} />
-                <span>IMD Official wins conflict precedence</span>
+            <div className="space-y-1.5">
+              <div className="flex justify-between text-xs font-mono">
+                <span className="text-slate-500 dark:text-white/60">Simulated Wind Intensity:</span>
+                <span className="font-bold text-amber-500 dark:text-amber-300">{currentWindKmh} km/h (Category 4)</span>
               </div>
-              <div className="flex items-center gap-2 text-emerald-400">
-                <CheckCircle2 size={13} />
-                <span>Stale-data refuse interlock active</span>
-              </div>
-              <div className="flex items-center gap-2 text-emerald-400">
-                <CheckCircle2 size={13} />
-                <span>Human-in-the-loop authorization enforced</span>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={windSlider}
+                onChange={e => setWindSlider(Number(e.target.value))}
+                className="w-full accent-amber-500 cursor-pointer"
+              />
+              <div className="flex justify-between text-[10px] font-mono text-slate-400 dark:text-white/30">
+                <span>180 km/h (Weakened)</span>
+                <span>215 km/h (Official Peak)</span>
               </div>
             </div>
+            <p className="text-[11px] text-slate-500 dark:text-white/40 italic">
+              Adjusting slider recalculates block exposure, bridge scours and route cutoff ratios in real-time (&lt; 15ms).
+            </p>
           </div>
         </div>
 
-        {/* Right Column (7 Cols): Focus Map, Recommended Action & Routes */}
+        {/* Right Column (7 Cols): Selected Action Dossier & Strategic Controls */}
         <div className="lg:col-span-7 flex flex-col space-y-4">
-          {/* Recommended Action Dispatch Card matching 8.16.10 PM */}
-          <div className="bg-[#121622] border border-white/10 rounded-xl p-5 space-y-4">
-            <div className="flex items-start justify-between flex-wrap gap-4">
+          <div className="bg-white dark:bg-[#121622] border border-slate-200 dark:border-white/10 rounded-2xl p-6 shadow-sm space-y-5">
+            <div className="flex items-start justify-between flex-wrap gap-3 border-b border-slate-200 dark:border-white/10 pb-4">
               <div>
-                <div className="text-[10px] font-mono text-white/40 uppercase tracking-wider mb-0.5">
-                  RECOMMENDED ACTION · PRIORITY 01
+                <div className="text-[10px] font-mono text-blue-600 dark:text-cyan-400 font-bold uppercase tracking-wider">
+                  DISASTER DECISION & ACTION BOARD
                 </div>
-                <h3 className="text-lg font-bold text-white">{selectedArea.recommendedAction}</h3>
-                <p className="text-xs text-white/50 mt-0.5">
-                  Target sector: {selectedArea.name} ({selectedArea.district}) · Priority score: {selectedAreaScore}/100
-                </p>
+                <h2 className="text-2xl font-black text-slate-900 dark:text-white">
+                  {selectedArea.name} ({selectedArea.district})
+                </h2>
+                <div className="text-xs text-slate-500 dark:text-white/50 font-mono mt-0.5">
+                  Action Recommendation: {selectedArea.recommendedAction}
+                </div>
               </div>
 
-              <div>
-                {dispatched ? (
-                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold">
-                    <CheckCircle2 size={14} />
-                    <span>SIMULATED DISPATCH SENT</span>
-                  </div>
-                ) : (
-                  <button
-                    onClick={handleTriggerDispatch}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-md shadow-blue-900/30 transition-colors"
-                  >
-                    <Send size={13} />
-                    <span>Dispatch simulated alert</span>
-                  </button>
-                )}
+              <div className="text-right">
+                <div className="text-[10px] font-mono text-slate-500 dark:text-white/40 uppercase">
+                  ACTIVE PRIORITY SCORE
+                </div>
+                <div className="text-3xl font-black font-mono text-red-500 dark:text-red-400">
+                  {selectedAreaScore} <span className="text-xs font-normal text-slate-400">/ 100</span>
+                </div>
               </div>
             </div>
 
-            {/* Critical Assets in Selected Sector */}
-            <div className="pt-2 border-t border-white/5">
-              <div className="text-[11px] font-mono text-white/40 uppercase mb-2">
-                CRITICAL ASSETS AT RISK IN {selectedArea.name.toUpperCase()}
+            {/* Exposed Critical Infrastructure */}
+            <div className="space-y-2">
+              <div className="text-xs font-mono uppercase tracking-wider font-bold text-slate-600 dark:text-white/60">
+                Critical Exposed Assets in Sector
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {selectedArea.criticalAssets.map((asset, i) => (
                   <div
                     key={i}
-                    className="p-2.5 rounded-lg bg-[#0e121b] border border-white/5 text-xs text-white/80 font-mono flex items-center gap-2"
+                    className="p-3 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200 dark:border-white/5 text-xs flex flex-col justify-between"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-red-400"></span>
-                    <span className="truncate">{asset}</span>
+                    <span className="font-bold text-slate-800 dark:text-white truncate">{asset}</span>
+                    <span className="text-[10px] font-mono text-amber-600 dark:text-amber-400 mt-2">
+                      Vulnerability: HIGH
+                    </span>
                   </div>
                 ))}
               </div>
             </div>
-          </div>
 
-          {/* Embedded GIS Focus Map */}
-          <div className="bg-[#121622] border border-white/10 rounded-xl overflow-hidden p-3 h-[250px] flex items-center justify-center">
-            <GISOverlayMap
-              selectedBlockId={selectedAreaId}
-              onSelectBlock={setSelectedAreaId}
-              windSpeed={currentWindKmh}
-              highlightBrahmagiri={selectedAreaId === 'brahmagiri'}
+            {/* Supply Route Cutoff Flags */}
+            <div className="space-y-2">
+              <div className="text-xs font-mono uppercase tracking-wider font-bold text-slate-600 dark:text-white/60">
+                Critical Arterial Supply Routes
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
+                <div className="p-3 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200 dark:border-white/5 flex items-center justify-between">
+                  <span className="text-slate-800 dark:text-white font-bold">NH-316 (Bhubaneswar-Puri)</span>
+                  <span className="px-2 py-0.5 rounded text-[10px] font-black bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                    PASSABLE (W/ ESCORT)
+                  </span>
+                </div>
+                <div className="p-3 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200 dark:border-white/5 flex items-center justify-between">
+                  <span className="text-slate-800 dark:text-white font-bold">Marine Drive Corridor</span>
+                  <span className="px-2 py-0.5 rounded text-[10px] font-black bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20">
+                    CUT (1.8M SURGE)
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Tactical Actions Grid */}
+            <div className="space-y-2">
+              <div className="text-xs font-mono uppercase tracking-wider font-bold text-slate-600 dark:text-white/60">
+                Command Directive Dispatches
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                <button
+                  onClick={() => handleQuickAction('Broadcast Red Evacuation Warning')}
+                  className="p-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-[#181d2a] dark:hover:bg-[#202738] border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-800 dark:text-white flex flex-col items-center text-center gap-1.5 transition-all shadow-sm"
+                >
+                  <Megaphone size={16} className="text-red-500" />
+                  <span>Issue Evac Order</span>
+                </button>
+                <button
+                  onClick={() => handleQuickAction('Open High-Ground Cyclone Shelters')}
+                  className="p-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-[#181d2a] dark:hover:bg-[#202738] border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-800 dark:text-white flex flex-col items-center text-center gap-1.5 transition-all shadow-sm"
+                >
+                  <Tent size={16} className="text-amber-500" />
+                  <span>Open Shelters</span>
+                </button>
+                <button
+                  onClick={() => handleQuickAction('Seal Inundated Route Corridor')}
+                  className="p-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-[#181d2a] dark:hover:bg-[#202738] border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-800 dark:text-white flex flex-col items-center text-center gap-1.5 transition-all shadow-sm"
+                >
+                  <Route size={16} className="text-blue-500" />
+                  <span>Seal Route 14</span>
+                </button>
+                <button
+                  onClick={() => handleQuickAction('Activate Mobile Medical Units')}
+                  className="p-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-[#181d2a] dark:hover:bg-[#202738] border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-800 dark:text-white flex flex-col items-center text-center gap-1.5 transition-all shadow-sm"
+                >
+                  <PhoneCall size={16} className="text-emerald-500" />
+                  <span>Pre-alert CHC</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Primary Command Authorization CTA */}
+            <div className="pt-2">
+              <button
+                onClick={handleTriggerDispatch}
+                disabled={dispatched}
+                className={`w-full py-3.5 px-4 rounded-xl font-mono text-sm font-black flex items-center justify-center gap-2 shadow-lg transition-all ${
+                  dispatched
+                    ? 'bg-emerald-600 text-white cursor-default shadow-emerald-900/30'
+                    : 'bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-500 hover:to-orange-500 text-white shadow-red-950/40'
+                }`}
+              >
+                {dispatched ? (
+                  <>
+                    <CheckCircle2 size={16} />
+                    <span>OPERATIONAL DISPATCH AUTHORIZED (SIMULATED)</span>
+                  </>
+                ) : (
+                  <>
+                    <Send size={16} />
+                    <span>AUTHORIZE FIELD RESPONSE & DISPATCH RELIEF TEAMS</span>
+                  </>
+                )}
+              </button>
+            </div>
+
+            {/* Audit Trail Block */}
+            <AuditVerificationBlock
+              hash="0x5f812e99c1a084129b0081249b6184aae7b0deadbeefcafe1234567890abcdef"
+              sourceAuthority="Government Command Executive Council"
+              onVerify={() => onShowToast(`Audit Verified: Decision ledger consensus established for ${selectedArea.name}`)}
             />
-          </div>
-
-          {/* Supply Route Status & Quick Actions from 8.37.45 PM */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Supply Routes matching 8.16.10 PM */}
-            <div className="bg-[#121622] border border-white/10 rounded-xl p-4 space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono uppercase tracking-wider font-bold text-white/80">
-                  Supply Routes Status
-                </span>
-                <Route size={14} className="text-white/40" />
-              </div>
-
-              <div className="space-y-2 text-xs font-mono">
-                <div className="flex items-center justify-between p-2 rounded bg-[#0e121b] border border-white/5">
-                  <span className="text-white/80">NH-316 Puri-Bhubaneswar</span>
-                  <span className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold text-[10px]">
-                    AT RISK
-                  </span>
-                </div>
-                <div className="flex items-center justify-between p-2 rounded bg-[#0e121b] border border-white/5">
-                  <span className="text-white/80">Marine Drive Konark-Puri</span>
-                  <span className="px-2 py-0.5 rounded bg-red-500/20 text-red-400 font-bold text-[10px]">
-                    CUT (1.8m surge)
-                  </span>
-                </div>
-                <div className="flex items-center justify-between p-2 rounded bg-[#0e121b] border border-white/5">
-                  <span className="text-white/80">SH-13 Pipli-Nimapada</span>
-                  <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold text-[10px]">
-                    PASSABLE
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Quick Actions (from 8.37.45 PM) */}
-            <div className="bg-[#121622] border border-white/10 rounded-xl p-4 space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-mono uppercase tracking-wider font-bold text-white/80">
-                  Tactical Quick Actions
-                </span>
-                <Zap size={14} className="text-amber-400" />
-              </div>
-
-              <div className="space-y-2">
-                <button
-                  onClick={() => handleQuickAction('Broadcast CAP SMS Alert to Puri & Brahmagiri residents')}
-                  className="w-full flex items-center justify-between p-2 rounded bg-[#182030] hover:bg-[#202c42] border border-white/10 text-xs text-white/90 transition-colors text-left"
-                >
-                  <span className="flex items-center gap-2">
-                    <Megaphone size={12} className="text-cyan-400" />
-                    <span>Broadcast Public Alert</span>
-                  </span>
-                  <span className="text-[10px] text-white/40 font-mono">SIMULATED</span>
-                </button>
-
-                <button
-                  onClick={() => handleQuickAction('Order Precautionary Road Closure on Marine Drive')}
-                  className="w-full flex items-center justify-between p-2 rounded bg-[#182030] hover:bg-[#202c42] border border-white/10 text-xs text-white/90 transition-colors text-left"
-                >
-                  <span className="flex items-center gap-2">
-                    <AlertOctagon size={12} className="text-red-400" />
-                    <span>Order Coastal Road Closure</span>
-                  </span>
-                  <span className="text-[10px] text-white/40 font-mono">SIMULATED</span>
-                </button>
-
-                <button
-                  onClick={() => handleQuickAction('Deploy Mobile Water & Power Resupply to Shelters')}
-                  className="w-full flex items-center justify-between p-2 rounded bg-[#182030] hover:bg-[#202c42] border border-white/10 text-xs text-white/90 transition-colors text-left"
-                >
-                  <span className="flex items-center gap-2">
-                    <Tent size={12} className="text-emerald-400" />
-                    <span>Open Standby Shelters</span>
-                  </span>
-                  <span className="text-[10px] text-white/40 font-mono">SIMULATED</span>
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       </div>
 
-      {/* Multi-Agency Alert Dispatch Confirmation Modal (from 8.37.45 PM) */}
+      {/* Confirmation Modal */}
       {showDispatchModal && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#121622] border border-white/20 rounded-2xl max-w-lg w-full p-6 space-y-5 shadow-2xl animate-in fade-in duration-200">
-            <div className="flex items-start justify-between">
-              <div>
-                <div className="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider">
-                  MULTI-AGENCY DISPATCH PROTOCOL · SIMULATED
-                </div>
-                <h3 className="text-xl font-extrabold text-white mt-1">
-                  Authorize Emergency Dispatch
-                </h3>
-                <p className="text-xs text-white/60 mt-0.5">
-                  Confirm task order transmission for {selectedArea.name} ({selectedArea.district})
-                </p>
-              </div>
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-[#121622] border border-slate-200 dark:border-white/15 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+            <div className="flex items-center gap-3 text-red-500">
+              <ShieldAlert size={24} />
+              <h3 className="text-lg font-black text-slate-900 dark:text-white">
+                Authorize Field Response?
+              </h3>
+            </div>
+            <p className="text-xs text-slate-600 dark:text-white/70 leading-relaxed">
+              You are about to authorize the deployment of <strong>NDRF Unit 3 (Mundali Battalion)</strong> to{' '}
+              <strong>{selectedArea.name}</strong>, Puri Sector. In prototype demonstration mode, all dispatch actions are marked as{' '}
+              <span className="font-mono text-amber-500 dark:text-amber-400 font-bold">SIMULATED</span>.
+            </p>
+            <div className="flex items-center justify-end gap-3 pt-2">
               <button
                 onClick={() => setShowDispatchModal(false)}
-                className="text-white/40 hover:text-white p-1"
-              >
-                ✕
-              </button>
-            </div>
-
-            <div className="space-y-3 bg-[#0a0d14] p-4 rounded-xl border border-white/10 text-xs font-mono">
-              <div className="flex justify-between text-white/60">
-                <span>TARGET COMMAND:</span>
-                <span className="font-bold text-white">NDRF 3rd Battalion (Mundali)</span>
-              </div>
-              <div className="flex justify-between text-white/60">
-                <span>SUPPORT UNITS:</span>
-                <span className="font-bold text-cyan-300">ODRAF Unit 2 · Coast Guard Paradip</span>
-              </div>
-              <div className="flex justify-between text-white/60">
-                <span>HAZARD ZONE:</span>
-                <span className="font-bold text-red-400">{selectedArea.name} ({selectedArea.district})</span>
-              </div>
-              <div className="flex justify-between text-white/60">
-                <span>ESTIMATED EXPOSURE:</span>
-                <span className="font-bold text-amber-400">{selectedArea.exposed}</span>
-              </div>
-              <div className="flex justify-between text-white/60">
-                <span>PROTOCOL:</span>
-                <span className="text-emerald-400">CAP 1.2 XML Broadcast + VHF Ch-4</span>
-              </div>
-            </div>
-
-            <div className="p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg text-xs text-amber-300">
-              ⚠️ <strong>Decision Interlock Notice:</strong> This dispatch is an offline simulation. In live operations, official NDMA and Odisha SDMA sign-off is required.
-            </div>
-
-            <div className="flex justify-end gap-3 pt-2">
-              <button
-                onClick={() => setShowDispatchModal(false)}
-                className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/15 text-white text-xs font-semibold"
+                className="px-4 py-2 rounded-lg text-xs font-bold text-slate-600 dark:text-white/60 hover:text-slate-900 dark:hover:text-white"
               >
                 Cancel
               </button>
               <button
                 onClick={handleConfirmDispatch}
-                className="px-5 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-lg shadow-blue-900/40"
+                className="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-500 text-white text-xs font-bold shadow-md"
               >
-                Confirm Simulated Dispatch
+                Confirm Dispatch Authorization
               </button>
             </div>
           </div>
