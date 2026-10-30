@@ -8,67 +8,8 @@
   }
 
   body {
-    @apply bg-[#0f1117] text-white font-sans antialiased;
+    @apply bg-slate-50 text-slate-900 dark:bg-[#0a0d14] dark:text-white font-sans antialiased;
     font-feature-settings: "tnum" 1; /* tabular numbers everywhere */
-  }
-
-  /* FireSense light-theme depth system */
-  html:not(.dark) body {
-    background-color: #F3F5F7 !important;
-    color: #0f172a !important;
-  }
-
-  html:not(.dark) .bg-\[\#0a0d14\],
-  html:not(.dark) .bg-\[\#0f1117\],
-  html:not(.dark) .bg-\[\#0f121d\],
-  html:not(.dark) .bg-\[\#0c101c\] {
-    background-color: #F3F5F7 !important;
-    color: #0f172a !important;
-  }
-
-  html:not(.dark) .bg-\[\#0b0e14\],
-  html:not(.dark) .bg-\[\#0e121b\],
-  html:not(.dark) .bg-\[\#141824\],
-  html:not(.dark) .bg-\[\#161921\],
-  html:not(.dark) .bg-\[\#121622\],
-  html:not(.dark) .bg-\[\#1a1f2e\],
-  html:not(.dark) .bg-\[\#151a28\] {
-    background-color: #FFFFFF !important;
-    border-color: #D5DCE2 !important;
-    color: #0f172a !important;
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
-  }
-
-  html:not(.dark) .text-white {
-    color: #0f172a !important;
-  }
-
-  html:not(.dark) .text-white\/90,
-  html:not(.dark) .text-white\/80 {
-    color: #1e293b !important;
-  }
-
-  html:not(.dark) .text-white\/70,
-  html:not(.dark) .text-white\/60 {
-    color: #334155 !important;
-  }
-
-  html:not(.dark) .text-white\/50,
-  html:not(.dark) .text-white\/40,
-  html:not(.dark) .text-white\/30 {
-    color: #64748b !important;
-  }
-
-  html:not(.dark) .border-white\/10,
-  html:not(.dark) .border-white\/15,
-  html:not(.dark) .border-white\/20,
-  html:not(.dark) .border-white\/5 {
-    border-color: #E2E8F0 !important;
-  }
-
-  html:not(.dark) .bg-white\/5,
-  html:not(.dark) .bg-white\/10 {
-    background-color: #F1F5F9 !important;
   }
 
   /* Scrollbars */
@@ -77,16 +18,13 @@
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-transparent;
+    background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-white/10 rounded-full;
+    @apply bg-slate-300 dark:bg-white/20 rounded-full;
   }
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-white/20;
-  }
-  html:not(.dark) ::-webkit-scrollbar-thumb {
-    background-color: #CBD5E1 !important;
+    @apply bg-slate-400 dark:bg-white/30;
   }
 }
 
@@ -98,13 +36,12 @@
   }
 
   /* Pulse animation for SIMULATED badge */
-  @keyframes ping-sm {
-    75%, 100% {
-      transform: scale(1.5);
-      opacity: 0;
-    }
+  @keyframes simulated-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
   }
-  .animate-ping-sm {
-    animation: ping-sm 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+
+  .animate-simulated {
+    animation: simulated-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 }

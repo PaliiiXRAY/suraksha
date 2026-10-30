@@ -412,36 +412,50 @@ export default function HazardIntelligence({ onShowToast }: Props) {
 
         {/* Right Column (65%): Detailed Intelligence Dossier */}
         <div className="lg:col-span-8 bg-white dark:bg-[#121622] rounded-2xl border border-slate-200/90 dark:border-white/10 p-6 shadow-sm space-y-5">
-          {/* Sector Preview Banner with Satellite/Radar Image matching Screenshot 110143 */}
+          {/* Sector Preview Banner with Photograph matching Screenshot 110143 */}
           <div
-            className="text-white p-6 rounded-2xl shadow-md space-y-2 relative overflow-hidden border border-slate-800"
+            className="p-6 rounded-2xl shadow-md space-y-2 relative overflow-hidden border border-slate-700"
             style={{
               backgroundImage:
-                "linear-gradient(to top, rgba(11, 15, 25, 0.95) 0%, rgba(11, 15, 25, 0.65) 60%, rgba(11, 15, 25, 0.35) 100%), url('/media/earth_at_night.jpg')",
+                "linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.70) 50%, rgba(15, 23, 42, 0.25) 100%), url('/media/sector_detail_bg.jpg')",
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
           >
             <div className="flex items-center justify-between">
-              <span className="px-2.5 py-0.5 rounded bg-black/50 backdrop-blur-md text-white/80 text-[10px] font-mono tracking-wider uppercase border border-white/10">
-                Registered Sector · {selectedSignal.location}, {selectedSignal.state}
+              <span
+                className="px-2.5 py-1 rounded text-xs font-mono font-bold tracking-wider uppercase border border-white/20 shadow-sm"
+                style={{ color: '#ffffff', backgroundColor: 'rgba(0, 0, 0, 0.65)' }}
+              >
+                REGISTERED SECTOR · {selectedSignal.location}, {selectedSignal.state}
               </span>
               <span
-                className={`px-2.5 py-0.5 rounded text-[10px] font-black font-mono text-white shadow-sm ${
+                className={`px-3 py-1 rounded text-xs font-black font-mono shadow-sm ${
                   selectedSignal.severity === 'CRITICAL'
                     ? 'bg-red-600'
                     : selectedSignal.severity === 'HIGH'
                     ? 'bg-amber-600'
                     : 'bg-blue-600'
                 }`}
+                style={{ color: '#ffffff' }}
               >
                 {selectedSignal.severity}
               </span>
             </div>
 
             <div className="pt-2">
-              <h2 className="text-xl font-black text-white tracking-tight">{selectedSignal.title}</h2>
-              <div className="text-xs font-mono text-cyan-300 mt-0.5">{selectedSignal.coordinates}</div>
+              <h2
+                className="text-xl font-black tracking-tight"
+                style={{ color: '#ffffff', textShadow: '0 2px 4px rgba(0,0,0,0.9)' }}
+              >
+                {selectedSignal.title}
+              </h2>
+              <div
+                className="text-xs font-mono font-bold mt-1"
+                style={{ color: '#38bdf8', textShadow: '0 1px 2px rgba(0,0,0,0.8)' }}
+              >
+                {selectedSignal.coordinates}
+              </div>
             </div>
           </div>
 
@@ -474,13 +488,13 @@ export default function HazardIntelligence({ onShowToast }: Props) {
             {/* Classification & AI Confidence */}
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-[10px] font-mono text-slate-400 uppercase font-bold">CLASSIFICATION</div>
+                <div className="text-xs font-mono text-slate-700 dark:text-slate-300 uppercase font-bold tracking-wider">CLASSIFICATION</div>
                 <div className="text-base font-black text-slate-900 dark:text-white">
                   {selectedSignal.classification}
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-[10px] font-mono text-slate-400 uppercase font-bold">AI CONFIDENCE</div>
+                <div className="text-xs font-mono text-slate-700 dark:text-slate-300 uppercase font-bold tracking-wider">AI CONFIDENCE</div>
                 <div className="text-base font-black font-mono text-emerald-600 dark:text-emerald-400">
                   {selectedSignal.confidence}
                 </div>
@@ -488,41 +502,41 @@ export default function HazardIntelligence({ onShowToast }: Props) {
             </div>
 
             {/* 3-Column Metric Strip matching Reference */}
-            <div className="grid grid-cols-3 gap-3 bg-slate-50 dark:bg-[#181d2a] p-3.5 rounded-xl border border-slate-200/80 dark:border-white/5 text-xs font-mono">
+            <div className="grid grid-cols-3 gap-3 bg-slate-100/80 dark:bg-[#181d2a] p-4 rounded-xl border border-slate-300 dark:border-white/10 text-xs font-mono">
               <div>
-                <div className="text-[10px] text-slate-400 uppercase font-bold">PEAK INTENSITY</div>
-                <div className="font-bold text-slate-900 dark:text-white text-sm mt-0.5">{selectedSignal.peakMetric}</div>
+                <div className="text-xs text-slate-700 dark:text-slate-300 uppercase font-bold tracking-wider">PEAK INTENSITY</div>
+                <div className="font-black text-slate-900 dark:text-white text-sm mt-1">{selectedSignal.peakMetric}</div>
               </div>
               <div>
-                <div className="text-[10px] text-slate-400 uppercase font-bold">PERSISTENCE / SCALE</div>
-                <div className="font-bold text-slate-900 dark:text-white text-sm mt-0.5">{selectedSignal.persistenceMetric}</div>
+                <div className="text-xs text-slate-700 dark:text-slate-300 uppercase font-bold tracking-wider">PERSISTENCE / SCALE</div>
+                <div className="font-black text-slate-900 dark:text-white text-sm mt-1">{selectedSignal.persistenceMetric}</div>
               </div>
               <div>
-                <div className="text-[10px] text-slate-400 uppercase font-bold">DATA SOURCE</div>
-                <div className="font-bold text-slate-900 dark:text-white text-sm mt-0.5 truncate">{selectedSignal.source}</div>
+                <div className="text-xs text-slate-700 dark:text-slate-300 uppercase font-bold tracking-wider">DATA SOURCE</div>
+                <div className="font-black text-slate-900 dark:text-white text-sm mt-1 truncate">{selectedSignal.source}</div>
               </div>
             </div>
 
             {/* Facility Context Match Box */}
-            <div className="bg-slate-50 dark:bg-[#181d2a] p-4 rounded-xl border border-slate-200/80 dark:border-white/5 space-y-2 text-xs">
-              <div className="flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-white/50">
+            <div className="bg-slate-100/70 dark:bg-[#181d2a] p-4 rounded-xl border border-slate-300 dark:border-white/10 space-y-2 text-xs">
+              <div className="flex items-center justify-between text-xs font-mono text-slate-700 dark:text-white/70">
                 <span className="font-bold uppercase tracking-wider">POSTGIS GEOSPATIAL PROXIMITY</span>
-                <span className="text-blue-600 dark:text-blue-400 font-bold">ST_DWITHIN</span>
+                <span className="text-blue-700 dark:text-blue-400 font-bold bg-blue-100 dark:bg-blue-950/50 px-2 py-0.5 rounded">ST_DWITHIN</span>
               </div>
-              <div className="space-y-1.5 pt-1">
+              <div className="space-y-2 pt-1">
                 <div className="flex items-start gap-2">
-                  <span className="text-slate-400 font-mono text-[11px] w-24 flex-shrink-0">Critical Assets:</span>
+                  <span className="text-slate-700 dark:text-slate-300 font-mono text-xs font-bold w-28 flex-shrink-0">Critical Assets:</span>
                   <div className="flex flex-wrap gap-1.5">
                     {selectedSignal.assets.map((a, i) => (
-                      <span key={i} className="px-2 py-0.5 rounded bg-slate-200/80 dark:bg-white/10 text-slate-800 dark:text-white text-[11px] font-mono">
+                      <span key={i} className="px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-white/10 text-slate-900 dark:text-white text-xs font-mono font-semibold border border-slate-300 dark:border-white/15">
                         {a}
                       </span>
                     ))}
                   </div>
                 </div>
                 <div className="flex items-center gap-2 pt-1">
-                  <span className="text-slate-400 font-mono text-[11px] w-24 flex-shrink-0">Nearest Units:</span>
-                  <span className="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 text-[11px] font-mono font-bold">
+                  <span className="text-slate-700 dark:text-slate-300 font-mono text-xs font-bold w-28 flex-shrink-0">Nearest Units:</span>
+                  <span className="px-2.5 py-1 rounded-lg bg-emerald-100 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 text-xs font-mono font-bold border border-emerald-300 dark:border-emerald-700">
                     {selectedSignal.nearestUnit}
                   </span>
                 </div>

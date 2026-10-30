@@ -153,7 +153,7 @@ export default function GovernmentCommand({ onShowToast }: Props) {
           <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
             Government Portal
           </h1>
-          <p className="text-xs text-slate-500 dark:text-white/50 mt-0.5">
+          <p className="text-xs text-slate-700 dark:text-white/60 mt-0.5">
             Command authorization, what-if simulation, logistics routing & response coordination.
           </p>
         </div>
@@ -212,7 +212,7 @@ export default function GovernmentCommand({ onShowToast }: Props) {
               <span className="text-xs font-mono uppercase tracking-wider font-bold text-slate-800 dark:text-white/80">
                 Active Priority Zones (4)
               </span>
-              <span className="text-xs font-mono text-slate-400 dark:text-white/40">39 TOTAL BLOCKS</span>
+              <span className="text-xs font-mono text-slate-700 dark:text-white/60">39 TOTAL BLOCKS</span>
             </div>
 
             <div className="divide-y divide-slate-100 dark:divide-white/5">
@@ -236,7 +236,7 @@ export default function GovernmentCommand({ onShowToast }: Props) {
                         </span>
                         <span className="text-sm font-bold text-slate-900 dark:text-white">{area.name}</span>
                       </div>
-                      <div className="text-xs text-slate-500 dark:text-white/50 mt-0.5">
+                      <div className="text-xs text-slate-700 dark:text-white/60 mt-0.5">
                         {area.district} · {area.exposed}
                       </div>
                     </div>
@@ -264,7 +264,7 @@ export default function GovernmentCommand({ onShowToast }: Props) {
 
             <div className="space-y-2">
               <div className="flex justify-between text-xs font-mono">
-                <span className="text-slate-500 dark:text-white/60">Simulated Cyclone Wind Intensity:</span>
+                <span className="text-slate-700 dark:text-white/70">Simulated Cyclone Wind Intensity:</span>
                 <span className="font-bold text-amber-600 dark:text-amber-400 text-sm">
                   {currentWindKmh} km/h (Category 4)
                 </span>
@@ -301,13 +301,13 @@ export default function GovernmentCommand({ onShowToast }: Props) {
                 <h2 className="text-2xl font-black text-slate-900 dark:text-white">
                   {selectedArea.name} ({selectedArea.district})
                 </h2>
-                <div className="text-xs text-slate-500 dark:text-white/50 font-mono mt-0.5">
+                <div className="text-xs text-slate-700 dark:text-white/60 font-mono mt-0.5">
                   Action Recommendation: {selectedArea.recommendedAction}
                 </div>
               </div>
 
               <div className="text-right">
-                <div className="text-[10px] font-mono text-slate-400 dark:text-white/40 uppercase">
+                <div className="text-[10px] font-mono text-slate-700 dark:text-white/60 uppercase">
                   ACTIVE PRIORITY SCORE
                 </div>
                 <div className="text-3xl font-black font-mono text-red-600 dark:text-red-400">
@@ -480,16 +480,16 @@ export default function GovernmentCommand({ onShowToast }: Props) {
                   <Check size={12} /> ANALYZED
                 </div>
                 <div className={`p-2 rounded-lg font-bold flex items-center justify-center gap-1 transition-all ${
-                  dispatched ? 'bg-blue-600 text-white' : 'bg-slate-100 dark:bg-white/5 text-slate-400 dark:text-white/40'
+                  dispatched ? 'bg-blue-600 text-white' : 'bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-white/60'
                 }`}>
                   {dispatched ? <Check size={12} /> : null} ALERTED
                 </div>
                 <div className={`p-2 rounded-lg font-bold flex items-center justify-center gap-1 transition-all ${
-                  dispatched ? 'bg-amber-500 text-white animate-pulse' : 'bg-slate-100 dark:bg-white/5 text-slate-400 dark:text-white/40'
+                  dispatched ? 'bg-amber-500 text-white animate-pulse' : 'bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-white/60'
                 }`}>
                   MOBILIZED
                 </div>
-                <div className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-400 dark:text-white/40 font-bold">
+                <div className="p-2 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-white/60 font-bold">
                   STABILIZED
                 </div>
               </div>

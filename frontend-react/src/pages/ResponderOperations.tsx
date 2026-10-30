@@ -120,7 +120,7 @@ export default function ResponderOperations({ onShowToast }: Props) {
           <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
             Responder Operations
           </h1>
-          <p className="text-xs text-slate-500 dark:text-white/50 mt-0.5">
+          <p className="text-xs text-slate-700 dark:text-white/60 mt-0.5">
             Field execution, mission progression, safe routing & ground condition telemetry.
           </p>
         </div>
@@ -180,7 +180,7 @@ export default function ResponderOperations({ onShowToast }: Props) {
             <h2 className="text-xl font-black text-slate-900 dark:text-white">
               TASK-2019-FANI-084: Brahmagiri Relief Pre-positioning
             </h2>
-            <div className="text-xs text-slate-500 dark:text-white/50 font-mono mt-0.5">
+            <div className="text-xs text-slate-700 dark:text-white/60 font-mono mt-0.5">
               Puri Coastal District · Target Coordinates: 19.7991° N, 85.8239° E
             </div>
           </div>
@@ -197,25 +197,25 @@ export default function ResponderOperations({ onShowToast }: Props) {
         {/* 4-Metric Strip */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/5">
-            <div className="text-[10px] font-mono text-slate-400 uppercase">TARGET GPS</div>
+            <div className="text-xs font-mono text-slate-700 dark:text-slate-300 uppercase font-bold tracking-wider">TARGET GPS</div>
             <div className="text-sm font-bold font-mono text-slate-900 dark:text-white mt-1">
               19.7991, 85.8239
             </div>
           </div>
           <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/5">
-            <div className="text-[10px] font-mono text-slate-400 uppercase">FORECAST WIND</div>
+            <div className="text-xs font-mono text-slate-700 dark:text-slate-300 uppercase font-bold tracking-wider">FORECAST WIND</div>
             <div className="text-sm font-bold font-mono text-amber-600 dark:text-amber-400 mt-1">
               185 km/h (Peak 215)
             </div>
           </div>
           <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/5">
-            <div className="text-[10px] font-mono text-slate-400 uppercase">TERRAIN RISK</div>
+            <div className="text-xs font-mono text-slate-700 dark:text-slate-300 uppercase font-bold tracking-wider">TERRAIN RISK</div>
             <div className="text-sm font-bold font-mono text-red-600 dark:text-red-400 mt-1">
               CRITICAL (92/100)
             </div>
           </div>
           <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/5">
-            <div className="text-[10px] font-mono text-slate-400 uppercase">RADIO FREQUENCY</div>
+            <div className="text-xs font-mono text-slate-700 dark:text-slate-300 uppercase font-bold tracking-wider">RADIO FREQUENCY</div>
             <div className="text-sm font-bold font-mono text-emerald-600 dark:text-emerald-400 mt-1">
               156.800 MHz (Ch 16)
             </div>
@@ -247,7 +247,7 @@ export default function ResponderOperations({ onShowToast }: Props) {
                   RECOMMENDED · PASSABLE
                 </span>
               </div>
-              <p className="text-xs text-slate-600 dark:text-white/60 mt-1.5 leading-relaxed">
+              <p className="text-xs text-slate-700 dark:text-white/70 mt-1.5 leading-relaxed">
                 Distance: 54 km · Tree falls cleared by NHAI team at km 28 · Bridges structurally intact · Safe for heavy rescue vehicles.
               </p>
             </div>
@@ -269,7 +269,7 @@ export default function ResponderOperations({ onShowToast }: Props) {
                   IMPASSABLE · SURGE 1.8M
                 </span>
               </div>
-              <p className="text-xs text-slate-600 dark:text-white/60 mt-1.5 leading-relaxed">
+              <p className="text-xs text-slate-700 dark:text-white/70 mt-1.5 leading-relaxed">
                 Hazard: High storm surge breach at Culvert 14. Roadway washed out. Inaccessible to wheeled transport.
               </p>
             </div>
@@ -306,7 +306,7 @@ export default function ResponderOperations({ onShowToast }: Props) {
                     ? 'bg-blue-600 text-white border-blue-600 shadow-md ring-2 ring-blue-500/20'
                     : isCompleted
                     ? 'bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400 border-emerald-500/30'
-                    : 'bg-slate-50 dark:bg-[#181d2a] text-slate-400 dark:text-white/30 border-slate-200/90 dark:border-white/5'
+                    : 'bg-slate-50 dark:bg-[#181d2a] text-slate-700 dark:text-white/50 border-slate-200/90 dark:border-white/5'
                 }`}
               >
                 <div className="text-[9px] opacity-70">STAGE 0{idx + 1}</div>

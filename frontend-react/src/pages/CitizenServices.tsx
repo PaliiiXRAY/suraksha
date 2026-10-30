@@ -27,6 +27,7 @@ import {
   FileText,
 } from 'lucide-react';
 import StatCard from '../components/design-system/StatCard';
+import CitizenEvacuationMap from '../components/gis/CitizenEvacuationMap';
 import ProvenancePill from '../components/design-system/ProvenancePill';
 import AuditVerificationBlock from '../components/design-system/AuditVerificationBlock';
 
@@ -183,7 +184,7 @@ export default function CitizenServices({ onShowToast }: Props) {
           <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
             {t.title}
           </h1>
-          <p className="text-xs text-slate-500 dark:text-white/50 mt-0.5">
+          <p className="text-xs text-slate-700 dark:text-white/60 mt-0.5">
             {t.subtitle}
           </p>
         </div>
@@ -196,7 +197,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
                 lang === 'en'
                   ? 'bg-white dark:bg-[#121622] text-blue-600 dark:text-blue-400 shadow-sm'
-                  : 'text-slate-600 dark:text-white/60 hover:text-slate-900'
+                  : 'text-slate-700 dark:text-white/70 hover:text-slate-900'
               }`}
             >
               English
@@ -206,7 +207,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
                 lang === 'or'
                   ? 'bg-white dark:bg-[#121622] text-blue-600 dark:text-blue-400 shadow-sm'
-                  : 'text-slate-600 dark:text-white/60 hover:text-slate-900'
+                  : 'text-slate-700 dark:text-white/70 hover:text-slate-900'
               }`}
             >
               ଓଡ଼ିଆ
@@ -216,7 +217,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
                 lang === 'hi'
                   ? 'bg-white dark:bg-[#121622] text-blue-600 dark:text-blue-400 shadow-sm'
-                  : 'text-slate-600 dark:text-white/60 hover:text-slate-900'
+                  : 'text-slate-700 dark:text-white/70 hover:text-slate-900'
               }`}
             >
               हिन्दी
@@ -315,7 +316,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               </div>
               <div>
                 <h3 className="font-bold text-sm text-slate-900 dark:text-white">Puri Zilla High School Shelter</h3>
-                <div className="text-xs text-slate-500 dark:text-white/50">2.4 km away · High-Ground Evacuation Camp</div>
+                <div className="text-xs text-slate-700 dark:text-white/60">2.4 km away · High-Ground Evacuation Camp</div>
               </div>
             </div>
             <div className="text-xs font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/20 p-2.5 rounded-xl border border-emerald-200 dark:border-emerald-800/40">
@@ -337,7 +338,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               </div>
               <div>
                 <h3 className="font-bold text-sm text-slate-900 dark:text-white">District Headquarters Hospital (DHH)</h3>
-                <div className="text-xs text-slate-500 dark:text-white/50">3.8 km away · Emergency & Trauma Care</div>
+                <div className="text-xs text-slate-700 dark:text-white/60">3.8 km away · Emergency & Trauma Care</div>
               </div>
             </div>
             <div className="text-xs font-mono text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/20 p-2.5 rounded-xl border border-blue-200 dark:border-blue-800/40">
@@ -359,7 +360,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               </div>
               <div>
                 <h3 className="font-bold text-sm text-slate-900 dark:text-white">Pipili Central Relief Supply Depot</h3>
-                <div className="text-xs text-slate-500 dark:text-white/50">4.1 km away · OSDMA Ration Distribution</div>
+                <div className="text-xs text-slate-700 dark:text-white/60">4.1 km away · OSDMA Ration Distribution</div>
               </div>
             </div>
             <div className="text-xs font-mono text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-950/20 p-2.5 rounded-xl border border-cyan-200 dark:border-cyan-800/40">
@@ -381,7 +382,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               </div>
               <div>
                 <h3 className="font-bold text-sm text-slate-900 dark:text-white">Badadanda Evacuation Transit Point</h3>
-                <div className="text-xs text-slate-500 dark:text-white/50">3.2 km away · State Transport Fleet</div>
+                <div className="text-xs text-slate-700 dark:text-white/60">3.2 km away · State Transport Fleet</div>
               </div>
             </div>
             <div className="text-xs font-mono text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/20 p-2.5 rounded-xl border border-amber-200 dark:border-amber-800/40">
@@ -403,7 +404,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               </div>
               <div>
                 <h3 className="font-bold text-sm text-slate-900 dark:text-white">Balagandi Emergency Fuel Station</h3>
-                <div className="text-xs text-slate-500 dark:text-white/50">5.0 km away · IndianOil Strategic Reserve</div>
+                <div className="text-xs text-slate-700 dark:text-white/60">5.0 km away · IndianOil Strategic Reserve</div>
               </div>
             </div>
             <div className="text-xs font-mono text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-950/20 p-2.5 rounded-xl border border-orange-200 dark:border-orange-800/40">
@@ -425,7 +426,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               </div>
               <div>
                 <h3 className="font-bold text-sm text-slate-900 dark:text-white">National & State Disaster Helplines</h3>
-                <div className="text-xs text-slate-500 dark:text-white/50">Dial 112 / 1070 · 24/7 Operations</div>
+                <div className="text-xs text-slate-700 dark:text-white/60">Dial 112 / 1070 · 24/7 Operations</div>
               </div>
             </div>
             <div className="text-xs font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/20 p-2.5 rounded-xl border border-emerald-200 dark:border-emerald-800/40">
@@ -455,7 +456,7 @@ export default function CitizenServices({ onShowToast }: Props) {
           </span>
         </div>
 
-        <div className="space-y-1 text-xs text-slate-600 dark:text-white/60 font-mono">
+        <div className="space-y-1 text-xs text-slate-700 dark:text-white/70 font-mono">
           <div>{t.origin}</div>
           <div className="text-slate-900 dark:text-white font-bold">{t.destination}</div>
         </div>
@@ -463,15 +464,62 @@ export default function CitizenServices({ onShowToast }: Props) {
         <div className="space-y-2.5 pt-1 text-xs">
           <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/5 flex items-start gap-3">
             <span className="text-blue-600 dark:text-blue-400 font-bold font-mono text-sm">01.</span>
-            <span className="text-slate-800 dark:text-white/90 leading-relaxed">{t.step1}</span>
+            <span className="text-slate-800 dark:text-white/90 leading-relaxed font-medium">{t.step1}</span>
           </div>
           <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/5 flex items-start gap-3">
             <span className="text-blue-600 dark:text-blue-400 font-bold font-mono text-sm">02.</span>
-            <span className="text-slate-800 dark:text-white/90 leading-relaxed">{t.step2}</span>
+            <span className="text-slate-800 dark:text-white/90 leading-relaxed font-medium">{t.step2}</span>
           </div>
           <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/5 flex items-start gap-3">
             <span className="text-emerald-600 dark:text-emerald-400 font-bold font-mono text-sm">03.</span>
             <span className="text-slate-900 dark:text-white font-bold leading-relaxed">{t.step3}</span>
+          </div>
+        </div>
+
+        {/* Real Interactive Leaflet Evacuation Map (matching assets/screenshots/citizen_map.png) */}
+        <div className="pt-2">
+          <CitizenEvacuationMap />
+        </div>
+      </div>
+
+      {/* Official Emergency Contact Grid (matching FireSense screenshot citizen_map.png) */}
+      <div className="p-6 rounded-2xl bg-white dark:bg-[#121622] border border-slate-200/90 dark:border-white/10 shadow-sm space-y-4">
+        <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-3">
+          <div className="flex items-center gap-2">
+            <PhoneCall size={16} className="text-blue-600 dark:text-blue-400" />
+            <h3 className="text-xs font-mono uppercase tracking-wider font-bold text-slate-800 dark:text-white">
+              Official Emergency Contact Numbers
+            </h3>
+          </div>
+          <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-50 dark:bg-emerald-950/30 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">
+            TOLL-FREE 24/7 ACTIVE
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200 dark:border-white/5 flex items-center justify-between">
+            <span className="font-bold text-xs text-slate-800 dark:text-white">NDRF Command</span>
+            <a href="tel:1078" className="font-mono font-black text-sm text-blue-600 dark:text-blue-400 hover:underline">1078</a>
+          </div>
+          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200 dark:border-white/5 flex items-center justify-between">
+            <span className="font-bold text-xs text-slate-800 dark:text-white">Police Control</span>
+            <a href="tel:112" className="font-mono font-black text-sm text-blue-600 dark:text-blue-400 hover:underline">112</a>
+          </div>
+          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200 dark:border-white/5 flex items-center justify-between">
+            <span className="font-bold text-xs text-slate-800 dark:text-white">Ambulance</span>
+            <a href="tel:108" className="font-mono font-black text-sm text-blue-600 dark:text-blue-400 hover:underline">108</a>
+          </div>
+          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200 dark:border-white/5 flex items-center justify-between">
+            <span className="font-bold text-xs text-slate-800 dark:text-white">Fire & Rescue</span>
+            <a href="tel:101" className="font-mono font-black text-sm text-blue-600 dark:text-blue-400 hover:underline">101</a>
+          </div>
+          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200 dark:border-white/5 flex items-center justify-between">
+            <span className="font-bold text-xs text-slate-800 dark:text-white">Disaster Mgmt (SEOC)</span>
+            <a href="tel:1070" className="font-mono font-black text-sm text-blue-600 dark:text-blue-400 hover:underline">1070</a>
+          </div>
+          <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200 dark:border-white/5 flex items-center justify-between">
+            <span className="font-bold text-xs text-slate-800 dark:text-white">Women & Child Help</span>
+            <a href="tel:1091" className="font-mono font-black text-sm text-blue-600 dark:text-blue-400 hover:underline">1091</a>
           </div>
         </div>
       </div>
@@ -486,7 +534,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               Report Ground Obstruction or Need
             </h3>
           </div>
-          <p className="text-xs text-slate-500 dark:text-white/50">
+          <p className="text-xs text-slate-700 dark:text-white/60">
             Submit local road blockages, fallen electrical poles, or people trapped to the district control room.
           </p>
           <div className="space-y-2">
@@ -517,7 +565,7 @@ export default function CitizenServices({ onShowToast }: Props) {
                 Zero-Data SMS Distress Gateway
               </h3>
             </div>
-            <p className="text-xs text-slate-600 dark:text-white/60 mt-3 leading-relaxed">
+            <p className="text-xs text-slate-700 dark:text-white/70 mt-3 leading-relaxed">
               If cellular tower data is disrupted during cyclone landfall, text messages will route via peer-to-peer LoRa/VHF relay and direct telecom SMS bypass.
             </p>
             <div className="p-3 mt-3 rounded-xl bg-slate-50 dark:bg-[#181d2a] border border-slate-200/90 dark:border-white/5 font-mono text-xs text-slate-800 dark:text-white">
@@ -564,7 +612,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               <button
                 onClick={() => setShowSosModal(false)}
                 disabled={sosSending}
-                className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 dark:text-white/60 hover:text-slate-900 dark:hover:text-white"
+                className="px-4 py-2 rounded-xl text-xs font-bold text-slate-700 dark:text-white/70 hover:text-slate-900 dark:hover:text-white"
               >
                 Cancel
               </button>
