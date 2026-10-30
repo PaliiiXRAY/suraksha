@@ -30,10 +30,43 @@
 
 ```bash
 git clone https://github.com/PaliiiXRAY/suraksha.git && cd suraksha
+```
+
+**Step 1 — create `.env` (gitignored, never committed) — required before compose will start:**
+
+```bash
+# macOS / Linux:
+cat <<EOF > .env
+POSTGRES_PASSWORD=postgres
+JWT_SECRET_KEY=$(python3 -c 'import secrets; print(secrets.token_hex(32))')
+FIRMS_MAP_KEY=placeholder_firms_map_key
+EOF
+```
+
+```powershell
+# Windows PowerShell:
+$jwt = [guid]::NewGuid().ToString('N') + [guid]::NewGuid().ToString('N')
+@"
+POSTGRES_PASSWORD=postgres
+JWT_SECRET_KEY=$jwt
+FIRMS_MAP_KEY=placeholder_firms_map_key
+"@ | Set-Content -Encoding ascii .env
+```
+
+> `POSTGRES_PASSWORD` must be exactly `postgres` — `conftest.py`, CI, and every member's stack share this
+> local-demo-only convention. A generated random password turns the suite red with auth errors.
+> Apple Silicon note: add `platform: linux/amd64` under the `db:` service (PostGIS ships amd64-only) via PR.
+
+**Step 2 — stack + green check:**
+
+```bash
 docker compose up -d
-pip install -r requirements.txt -r requirements-ml.txt pytest   # python3 on Linux/Mac
+pip install -r requirements.txt -r requirements-ml.txt pytest   # python3 on Linux/Mac; a venv on Windows is fine
 python -m pytest -q                                            # MUST end: 194 passed
 ```
+
+No internet for pip? The Docker image already contains every dependency — run the same check inside it:
+`docker compose exec backend python -m pytest -q` (must also end: 194 passed).
 
 If it does **not** say `194 passed`, stop and say so in the group chat before writing a line of code — the base is green on every machine by design; a red base means an environment problem, not a code problem. Read `AGENTS.md` (agent rules) and skim `ARCHITECTURE.md` §4 (the engine) + §4.2 (the interlocks). Then start your card below.
 
