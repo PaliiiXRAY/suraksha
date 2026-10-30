@@ -357,10 +357,10 @@ export default function HazardIntelligence({ onShowToast }: Props) {
         {/* Left Column (35%): Incident Log */}
         <div className="lg:col-span-4 bg-white dark:bg-[#121622] rounded-2xl border border-slate-200/90 dark:border-white/10 p-5 shadow-sm space-y-3">
           <div className="flex items-center justify-between border-b border-slate-100 dark:border-white/10 pb-3">
-            <span className="text-xs font-mono uppercase tracking-wider font-bold text-slate-800 dark:text-white/90">
+            <span className="text-xs font-mono uppercase tracking-wider font-black text-slate-900 dark:text-white">
               Incident Log
             </span>
-            <span className="text-xs font-mono text-slate-500 dark:text-white/40">
+            <span className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300">
               {filteredSignals.length} events
             </span>
           </div>
@@ -379,11 +379,11 @@ export default function HazardIntelligence({ onShowToast }: Props) {
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs font-mono font-bold text-blue-600 dark:text-blue-400">
+                    <span className="text-xs font-mono font-black text-blue-700 dark:text-blue-400">
                       {s.id}
                     </span>
                     <span
-                      className={`px-2 py-0.5 rounded text-[10px] font-black font-mono text-white ${
+                      className={`px-2.5 py-1 rounded-md text-xs font-black font-mono text-white shadow-sm ${
                         s.severity === 'CRITICAL'
                           ? 'bg-red-600'
                           : s.severity === 'HIGH'
@@ -396,11 +396,11 @@ export default function HazardIntelligence({ onShowToast }: Props) {
                   </div>
 
                   <h3 className="font-bold text-sm text-slate-900 dark:text-white leading-snug">{s.title}</h3>
-                  <div className="text-xs text-slate-500 dark:text-white/50 mt-0.5">{s.location}</div>
+                  <div className="text-xs font-bold text-slate-700 dark:text-slate-300 mt-0.5">{s.location}</div>
 
-                  <div className="flex items-center justify-between mt-3 pt-2 border-t border-slate-100 dark:border-white/5 text-[11px] font-mono text-slate-600 dark:text-white/60">
-                    <span>Class: <strong className="text-slate-800 dark:text-white">{s.classification}</strong></span>
-                    <span className="px-1.5 py-0.2 rounded bg-slate-100 dark:bg-white/5 text-[9px] font-bold">
+                  <div className="flex items-center justify-between mt-3 pt-2 border-t border-slate-100 dark:border-white/5 text-xs font-mono text-slate-700 dark:text-slate-300">
+                    <span>Class: <strong className="text-slate-950 dark:text-white font-black">{s.classification}</strong></span>
+                    <span className="px-2 py-0.5 rounded-md bg-slate-200 dark:bg-white/10 text-slate-900 dark:text-white text-xs font-black border border-slate-300 dark:border-white/15">
                       {s.status}
                     </span>
                   </div>
@@ -414,45 +414,47 @@ export default function HazardIntelligence({ onShowToast }: Props) {
         <div className="lg:col-span-8 bg-white dark:bg-[#121622] rounded-2xl border border-slate-200/90 dark:border-white/10 p-6 shadow-sm space-y-5">
           {/* Sector Preview Banner with Photograph matching Screenshot 110143 */}
           <div
-            className="p-6 rounded-2xl shadow-md space-y-2 relative overflow-hidden border border-slate-700"
+            className="p-6 rounded-2xl shadow-lg min-h-[175px] flex flex-col justify-between relative overflow-hidden border-2 border-slate-700 bg-slate-950"
             style={{
               backgroundImage:
-                "linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.70) 50%, rgba(15, 23, 42, 0.25) 100%), url('/media/sector_detail_bg.jpg')",
+                "linear-gradient(to top, rgba(10, 15, 25, 0.85) 0%, rgba(10, 15, 25, 0.25) 55%, rgba(0, 0, 0, 0) 100%), url('/media/sector_detail_bg.jpg')",
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between z-10">
               <span
-                className="px-2.5 py-1 rounded text-xs font-mono font-bold tracking-wider uppercase border border-white/20 shadow-sm"
-                style={{ color: '#ffffff', backgroundColor: 'rgba(0, 0, 0, 0.65)' }}
+                className="px-3 py-1 rounded-lg text-xs font-mono font-black tracking-wider uppercase border border-white/30 backdrop-blur-md shadow-md"
+                style={{ color: '#ffffff', backgroundColor: 'rgba(15, 23, 42, 0.85)' }}
               >
                 REGISTERED SECTOR · {selectedSignal.location}, {selectedSignal.state}
               </span>
               <span
-                className={`px-3 py-1 rounded text-xs font-black font-mono shadow-sm ${
-                  selectedSignal.severity === 'CRITICAL'
-                    ? 'bg-red-600'
-                    : selectedSignal.severity === 'HIGH'
-                    ? 'bg-amber-600'
-                    : 'bg-blue-600'
-                }`}
-                style={{ color: '#ffffff' }}
+                className="px-3.5 py-1 rounded-lg text-xs font-black font-mono shadow-md uppercase tracking-wider"
+                style={{
+                  color: '#ffffff',
+                  backgroundColor:
+                    selectedSignal.severity === 'CRITICAL'
+                      ? '#dc2626'
+                      : selectedSignal.severity === 'HIGH'
+                      ? '#d97706'
+                      : '#2563eb',
+                }}
               >
                 {selectedSignal.severity}
               </span>
             </div>
 
-            <div className="pt-2">
+            <div className="pt-4 z-10">
               <h2
-                className="text-xl font-black tracking-tight"
-                style={{ color: '#ffffff', textShadow: '0 2px 4px rgba(0,0,0,0.9)' }}
+                className="text-2xl font-black tracking-tight"
+                style={{ color: '#ffffff', textShadow: '0 2px 6px rgba(0,0,0,0.95), 0 1px 3px rgba(0,0,0,0.8)' }}
               >
                 {selectedSignal.title}
               </h2>
               <div
-                className="text-xs font-mono font-bold mt-1"
-                style={{ color: '#38bdf8', textShadow: '0 1px 2px rgba(0,0,0,0.8)' }}
+                className="text-xs font-mono font-bold mt-1 tracking-wide"
+                style={{ color: '#38bdf8', textShadow: '0 1px 3px rgba(0,0,0,0.95)' }}
               >
                 {selectedSignal.coordinates}
               </div>
@@ -591,36 +593,36 @@ export default function HazardIntelligence({ onShowToast }: Props) {
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs font-mono">
-            <thead className="text-slate-400 border-b border-slate-100 dark:border-white/10">
+            <thead className="bg-slate-100 dark:bg-slate-800/80 text-slate-900 dark:text-slate-100 border-b-2 border-slate-300 dark:border-white/10 uppercase tracking-wider">
               <tr>
-                <th className="py-2.5 px-3 font-normal">ID</th>
-                <th className="py-2.5 px-3 font-normal">LOCATION</th>
-                <th className="py-2.5 px-3 font-normal">CLASSIFICATION</th>
-                <th className="py-2.5 px-3 font-normal text-right">RISK</th>
-                <th className="py-2.5 px-3 font-normal text-center">STATUS</th>
-                <th className="py-2.5 px-3 font-normal">CONFIDENCE</th>
-                <th className="py-2.5 px-3 font-normal text-right">ACTION</th>
+                <th className="py-3 px-3.5 font-black text-slate-900 dark:text-white">ID</th>
+                <th className="py-3 px-3.5 font-black text-slate-900 dark:text-white">LOCATION</th>
+                <th className="py-3 px-3.5 font-black text-slate-900 dark:text-white">CLASSIFICATION</th>
+                <th className="py-3 px-3.5 font-black text-slate-900 dark:text-white text-right">RISK</th>
+                <th className="py-3 px-3.5 font-black text-slate-900 dark:text-white text-center">STATUS</th>
+                <th className="py-3 px-3.5 font-black text-slate-900 dark:text-white">CONFIDENCE</th>
+                <th className="py-3 px-3.5 font-black text-slate-900 dark:text-white text-right">ACTION</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-white/5">
+            <tbody className="divide-y divide-slate-200 dark:divide-white/10">
               {filteredSignals.map(s => (
                 <tr
                   key={s.id}
                   onClick={() => setSelectedSignalId(s.id)}
-                  className="hover:bg-slate-50 dark:hover:bg-white/5 cursor-pointer transition-colors"
+                  className="hover:bg-slate-100/70 dark:hover:bg-white/5 cursor-pointer transition-colors"
                 >
-                  <td className="py-3 px-3 font-bold text-slate-900 dark:text-white">{s.id}</td>
-                  <td className="py-3 px-3 text-slate-600 dark:text-white/70 font-sans">{s.location}</td>
-                  <td className="py-3 px-3 font-bold text-slate-800 dark:text-white">{s.classification}</td>
-                  <td className="py-3 px-3 text-right font-black text-red-600 dark:text-red-400">{s.riskScore}</td>
-                  <td className="py-3 px-3 text-center">
-                    <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-white/10 text-[10px] font-bold">
+                  <td className="py-3.5 px-3.5 font-black text-blue-700 dark:text-blue-400">{s.id}</td>
+                  <td className="py-3.5 px-3.5 font-bold text-slate-900 dark:text-white font-sans">{s.location}</td>
+                  <td className="py-3.5 px-3.5 font-extrabold text-slate-900 dark:text-white">{s.classification}</td>
+                  <td className="py-3.5 px-3.5 text-right font-black text-red-600 dark:text-red-400 text-sm">{s.riskScore}</td>
+                  <td className="py-3.5 px-3.5 text-center">
+                    <span className="px-2.5 py-1 rounded-md bg-slate-200 dark:bg-white/10 text-slate-900 dark:text-white text-xs font-black border border-slate-300 dark:border-white/15">
                       {s.status}
                     </span>
                   </td>
-                  <td className="py-3 px-3 text-slate-500">{s.confidence}</td>
-                  <td className="py-3 px-3 text-right">
-                    <button className="text-blue-600 dark:text-blue-400 font-bold hover:underline">
+                  <td className="py-3.5 px-3.5 font-bold text-slate-800 dark:text-slate-200">{s.confidence}</td>
+                  <td className="py-3.5 px-3.5 text-right">
+                    <button className="text-blue-700 dark:text-blue-400 font-black hover:underline">
                       Details →
                     </button>
                   </td>

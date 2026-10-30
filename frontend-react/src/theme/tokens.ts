@@ -73,25 +73,25 @@ export const TOKENS = {
     // High-contrast Explainable Risk Score Tiers (Light & Dark Mode)
     riskTiers: {
       critical: {
-        badge: 'bg-red-100 text-red-900 border-red-300 dark:bg-red-950/60 dark:text-red-300 dark:border-red-500/40',
+        badge: 'bg-red-600 text-white border border-red-700 dark:bg-red-600 dark:text-white shadow-sm',
         scoreClass: 'text-red-700 dark:text-red-400',
         label: 'CRITICAL',
         min: 80,
       },
       high: {
-        badge: 'bg-amber-100 text-amber-900 border-amber-300 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-500/40',
+        badge: 'bg-amber-600 text-white border border-amber-700 dark:bg-amber-600 dark:text-white shadow-sm',
         scoreClass: 'text-amber-700 dark:text-amber-400',
         label: 'HIGH',
         min: 65,
       },
       moderate: {
-        badge: 'bg-blue-100 text-blue-900 border-blue-300 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-500/40',
+        badge: 'bg-blue-600 text-white border border-blue-700 dark:bg-blue-600 dark:text-white shadow-sm',
         scoreClass: 'text-blue-700 dark:text-blue-400',
         label: 'MODERATE',
         min: 45,
       },
       low: {
-        badge: 'bg-emerald-100 text-emerald-900 border-emerald-300 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-500/40',
+        badge: 'bg-emerald-600 text-white border border-emerald-700 dark:bg-emerald-600 dark:text-white shadow-sm',
         scoreClass: 'text-emerald-700 dark:text-emerald-400',
         label: 'LOW',
         min: 0,
@@ -100,32 +100,32 @@ export const TOKENS = {
     // High-contrast Data Provenance Tags (Light & Dark Mode)
     provenance: {
       OFFICIAL_FORECAST: {
-        badge: 'bg-blue-100 text-blue-900 border-blue-300 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-700/60',
+        badge: 'bg-blue-100 text-blue-950 border-2 border-blue-500 dark:bg-blue-950/80 dark:text-blue-100 dark:border-blue-500',
         label: 'OFFICIAL FORECAST',
         icon: 'verified',
       },
       OBSERVED: {
-        badge: 'bg-emerald-100 text-emerald-900 border-emerald-300 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-700/60',
+        badge: 'bg-emerald-100 text-emerald-950 border-2 border-emerald-500 dark:bg-emerald-950/80 dark:text-emerald-100 dark:border-emerald-500',
         label: 'OBSERVED',
         icon: 'sensor',
       },
       MODEL_ESTIMATE: {
-        badge: 'bg-purple-100 text-purple-900 border-purple-300 dark:bg-purple-950/60 dark:text-purple-300 dark:border-purple-700/60',
+        badge: 'bg-purple-100 text-purple-950 border-2 border-purple-500 dark:bg-purple-950/80 dark:text-purple-100 dark:border-purple-500',
         label: 'MODEL ESTIMATE',
         icon: 'cpu',
       },
       HISTORICAL_REPLAY: {
-        badge: 'bg-slate-200 text-slate-900 border-slate-300 dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700',
+        badge: 'bg-slate-200 text-slate-950 border-2 border-slate-500 dark:bg-slate-800 dark:text-slate-100 dark:border-slate-500',
         label: 'REPLAY ARCHIVE',
         icon: 'history',
       },
       SIMULATED: {
-        badge: 'bg-amber-100 text-amber-900 border-amber-300 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-700/60 animate-pulse',
+        badge: 'bg-amber-100 text-amber-950 border-2 border-amber-500 dark:bg-amber-950/80 dark:text-amber-100 dark:border-amber-500',
         label: 'SIMULATED',
         icon: 'sliders',
       },
       INSUFFICIENT_DATA: {
-        badge: 'bg-rose-100 text-rose-900 border-rose-300 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-700/60',
+        badge: 'bg-rose-100 text-rose-950 border-2 border-rose-500 dark:bg-rose-950/80 dark:text-rose-100 dark:border-rose-500',
         label: 'REVIEW REQUIRED',
         icon: 'alert-triangle',
       },

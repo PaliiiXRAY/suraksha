@@ -25,18 +25,18 @@ export default function RiskBadge({
   const cfg = TOKENS.colors.riskTiers[tier];
 
   const sizeClasses = {
-    sm: 'text-[10px] px-2 py-0.5',
-    md: 'text-xs px-2.5 py-1',
-    lg: 'text-sm px-3.5 py-1.5',
+    sm: 'text-xs px-2.5 py-1',
+    md: 'text-xs px-3 py-1.5',
+    lg: 'text-sm px-4 py-2',
   };
 
   return (
     <div className={`inline-flex flex-col gap-1 ${className}`}>
       <span
-        className={`inline-flex items-center gap-1.5 rounded-lg font-mono font-black border uppercase tracking-wider shadow-sm transition-colors ${cfg.badge} ${sizeClasses[size]}`}
+        className={`inline-flex items-center gap-1.5 rounded-lg font-mono font-black uppercase tracking-wider shadow-sm transition-colors ${cfg.badge} ${sizeClasses[size]}`}
       >
         <span>{cfg.label}</span>
-        <span className="opacity-40">•</span>
+        <span className="opacity-60">•</span>
         <span>{score}</span>
       </span>
 

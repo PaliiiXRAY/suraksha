@@ -34,7 +34,7 @@ export default function ProvenancePill({
   };
 
   const sizeClasses = {
-    sm: 'text-[10px] px-2.5 py-1',
+    sm: 'text-xs px-2.5 py-1',
     md: 'text-xs px-3 py-1.5',
   };
 

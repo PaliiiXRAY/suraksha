@@ -145,7 +145,7 @@ export default function GovernmentCommand({ onShowToast }: Props) {
       <div className="bg-white dark:bg-[#121622] border border-slate-200/90 dark:border-white/10 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-xs font-mono tracking-wider font-black uppercase text-blue-900 dark:text-blue-200 bg-blue-100 dark:bg-blue-950/60 px-2.5 py-1 rounded-lg border border-blue-300 dark:border-blue-700 shadow-sm">
+            <span className="text-xs font-mono tracking-wider font-black uppercase text-blue-950 dark:text-blue-100 bg-blue-100 dark:bg-blue-950/80 px-3 py-1 rounded-lg border-2 border-blue-400 dark:border-blue-500 shadow-sm">
               STATE EMERGENCY OPERATIONS CENTER (SEOC)
             </span>
             <ProvenancePill tag={windSlider !== 50 ? 'SIMULATED' : 'OFFICIAL_FORECAST'} size="sm" />
@@ -153,13 +153,13 @@ export default function GovernmentCommand({ onShowToast }: Props) {
           <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
             Government Portal
           </h1>
-          <p className="text-xs font-bold text-slate-700 dark:text-slate-200 mt-0.5">
+          <p className="text-xs font-bold text-slate-800 dark:text-slate-200 mt-0.5">
             Command authorization, what-if simulation, logistics routing & response coordination.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-red-300 dark:border-red-500/40 bg-red-100 dark:bg-red-950/40 text-red-900 dark:text-red-200 text-xs font-mono font-black shadow-sm">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border-2 border-red-400 dark:border-red-500 bg-red-50 dark:bg-red-950/80 text-red-950 dark:text-red-100 text-xs font-mono font-black shadow-sm">
             <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
             <span>4 CRITICAL SECTORS ACTIVE</span>
           </div>
@@ -209,10 +209,10 @@ export default function GovernmentCommand({ onShowToast }: Props) {
           {/* Active Priority Zones List */}
           <div className="bg-white dark:bg-[#121622] border border-slate-200/90 dark:border-white/10 rounded-2xl overflow-hidden shadow-sm flex flex-col">
             <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-[#0e121b]">
-              <span className="text-xs font-mono uppercase tracking-wider font-bold text-slate-800 dark:text-white/80">
+              <span className="text-xs font-mono uppercase tracking-wider font-black text-slate-900 dark:text-white">
                 Active Priority Zones (4)
               </span>
-              <span className="text-xs font-mono text-slate-700 dark:text-white/60">39 TOTAL BLOCKS</span>
+              <span className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300">39 TOTAL BLOCKS</span>
             </div>
 
             <div className="divide-y divide-slate-100 dark:divide-white/5">
@@ -236,7 +236,7 @@ export default function GovernmentCommand({ onShowToast }: Props) {
                         </span>
                         <span className="text-base font-black text-slate-900 dark:text-white">{area.name}</span>
                       </div>
-                      <div className="text-xs font-bold text-slate-700 dark:text-slate-200 mt-0.5">
+                      <div className="text-xs font-bold text-slate-800 dark:text-slate-200 mt-0.5">
                         {area.district} · {area.exposed}
                       </div>
                     </div>

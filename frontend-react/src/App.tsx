@@ -94,7 +94,7 @@ export default function App() {
       </main>
 
       {/* Subtle FireSense-style Footer */}
-      <footer className="border-t border-slate-200 dark:border-white/10 bg-white dark:bg-[#0b0e14] py-3 px-6 text-xs font-mono text-slate-500 dark:text-white/40 flex items-center justify-between">
+      <footer className="border-t border-slate-200 dark:border-white/10 bg-white dark:bg-[#0b0e14] py-3.5 px-6 text-xs font-mono font-bold text-slate-800 dark:text-slate-200 flex items-center justify-between border-t border-slate-300 dark:border-white/10">
         <div>SURAKSHA • Multi-Hazard Geospatial Intelligence Platform</div>
         <div>All Dispatches: SIMULATED • Replay Mode Active</div>
       </footer>
