@@ -283,7 +283,7 @@ export default function GovernmentCommand({ onShowToast }: Props) {
               </div>
             </div>
 
-            <div className="p-3 rounded-xl bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/60 dark:border-amber-800/40 text-[11px] text-amber-800 dark:text-amber-300 leading-relaxed">
+            <div className="p-3 rounded-xl bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/60 dark:border-amber-800/40 text-xs font-semibold text-amber-950 dark:text-amber-200 leading-relaxed">
               <strong>Deterministic Simulation:</strong> Adjusting perturbation slider recalculates exposed population, bridge scour indices and arterial cutoffs dynamically without altering official IMD baseline records.
             </div>
           </div>

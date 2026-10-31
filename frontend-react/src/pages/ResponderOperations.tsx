@@ -111,7 +111,7 @@ export default function ResponderOperations({ onShowToast }: Props) {
       <div className="bg-white dark:bg-[#121622] border border-slate-200/90 dark:border-white/10 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] font-mono tracking-wider font-bold uppercase text-emerald-900 dark:text-emerald-200 bg-emerald-100 dark:bg-emerald-950/60 px-2.5 py-1 rounded-lg border border-emerald-300 dark:border-emerald-700 font-black shadow-sm flex items-center gap-1.5">
+            <span className="text-xs font-mono tracking-wider uppercase text-emerald-950 dark:text-emerald-100 bg-emerald-100 dark:bg-emerald-950/80 px-3 py-1 rounded-lg border-2 border-emerald-400 dark:border-emerald-500 font-black shadow-sm flex items-center gap-1.5">
               <Radio size={12} className="animate-pulse" />
               <span>NDRF BATTALION 03 · TACTICAL FIELD TERMINAL</span>
             </span>
@@ -309,7 +309,7 @@ export default function ResponderOperations({ onShowToast }: Props) {
                     : 'bg-slate-50 dark:bg-[#181d2a] text-slate-700 dark:text-white/50 border-slate-200/90 dark:border-white/5'
                 }`}
               >
-                <div className="text-[11px] font-mono font-bold opacity-80">STAGE 0{idx + 1}</div>
+                <div className="text-xs font-mono font-black text-slate-800 dark:text-slate-200">STAGE 0{idx + 1}</div>
                 <div className="mt-1 flex items-center justify-center gap-1">
                   {isCompleted && <Check size={12} />}
                   <span>{step}</span>

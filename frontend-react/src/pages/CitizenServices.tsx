@@ -176,7 +176,7 @@ export default function CitizenServices({ onShowToast }: Props) {
       <div className="bg-white dark:bg-[#121622] border border-slate-200/90 dark:border-white/10 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] font-mono tracking-wider font-bold uppercase text-blue-900 dark:text-blue-200 bg-blue-100 dark:bg-blue-950/60 px-2.5 py-1 rounded-lg border border-blue-300 dark:border-blue-700 font-black shadow-sm">
+            <span className="text-xs font-mono tracking-wider uppercase text-blue-950 dark:text-blue-100 bg-blue-100 dark:bg-blue-950/80 px-3 py-1 rounded-lg border-2 border-blue-400 dark:border-blue-500 font-black shadow-sm">
               CITIZEN RESILIENCE & LIFELINE PORTAL
             </span>
             <ProvenancePill tag="OFFICIAL_FORECAST" size="sm" />
@@ -323,7 +323,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               Capacity: 450 / 600 · Generator Active · Potable Water
             </div>
             <div className="flex justify-between items-center pt-1 border-t border-slate-100 dark:border-white/5">
-              <span className="text-[10px] font-mono text-slate-500">GEO: 19.805, 85.830</span>
+              <span className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300">GEO: 19.805, 85.830</span>
               <span className="text-xs font-bold text-blue-600 dark:text-blue-400 cursor-pointer hover:underline flex items-center gap-1">
                 Navigate &rarr;
               </span>
@@ -345,7 +345,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               Trauma ICU 24/7 · 2 Ambulances Stationed · Blood Bank OK
             </div>
             <div className="flex justify-between items-center pt-1 border-t border-slate-100 dark:border-white/5">
-              <span className="text-[10px] font-mono text-slate-500">HOTLINE: 06752-222044</span>
+              <span className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300">HOTLINE: 06752-222044</span>
               <span className="text-xs font-bold text-blue-600 dark:text-blue-400 cursor-pointer hover:underline flex items-center gap-1">
                 Call Hospital &rarr;
               </span>
@@ -367,7 +367,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               6 Water Tankers · 8,000 Dry Ration Packets Available
             </div>
             <div className="flex justify-between items-center pt-1 border-t border-slate-100 dark:border-white/5">
-              <span className="text-[10px] font-mono text-slate-500">STOCK: ADEQUATE</span>
+              <span className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300">STOCK: ADEQUATE</span>
               <span className="text-xs font-bold text-blue-600 dark:text-blue-400 cursor-pointer hover:underline flex items-center gap-1">
                 Request Supply &rarr;
               </span>
@@ -389,7 +389,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               OSRTC Evacuation Buses Depart Every 15 Mins
             </div>
             <div className="flex justify-between items-center pt-1 border-t border-slate-100 dark:border-white/5">
-              <span className="text-[10px] font-mono text-slate-500">FARES: 100% FREE</span>
+              <span className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300">FARES: 100% FREE</span>
               <span className="text-xs font-bold text-blue-600 dark:text-blue-400 cursor-pointer hover:underline flex items-center gap-1">
                 View Schedule &rarr;
               </span>
@@ -411,7 +411,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               Reserved for Emergency Vehicles & Hospital Generators
             </div>
             <div className="flex justify-between items-center pt-1 border-t border-slate-100 dark:border-white/5">
-              <span className="text-[10px] font-mono text-slate-500">DIESEL: 18,000L</span>
+              <span className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300">DIESEL: 18,000L</span>
               <span className="text-xs font-bold text-blue-600 dark:text-blue-400 cursor-pointer hover:underline flex items-center gap-1">
                 Fuel Pass &rarr;
               </span>
@@ -433,7 +433,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               Toll-Free Police, Medical Ambulance & OSDMA Desk
             </div>
             <div className="flex justify-between items-center pt-1 border-t border-slate-100 dark:border-white/5">
-              <span className="text-[10px] font-mono text-slate-500">TOLL-FREE 24/7</span>
+              <span className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300">TOLL-FREE 24/7</span>
               <a href="tel:112" className="text-xs font-bold text-emerald-600 dark:text-emerald-400 cursor-pointer hover:underline flex items-center gap-1">
                 Dial 112 Now &rarr;
               </a>
@@ -573,7 +573,7 @@ export default function CitizenServices({ onShowToast }: Props) {
             </div>
           </div>
 
-          <div className="text-[10px] font-mono text-slate-500">
+          <div className="text-xs font-mono font-bold text-slate-700 dark:text-slate-300">
             COMPLIANT WITH ITU DISASTER TELECOM PROTOCOLS
           </div>
         </div>
@@ -605,7 +605,7 @@ export default function CitizenServices({ onShowToast }: Props) {
               This will broadcast an immutable distress beacon with your coordinates (<strong>19.8135°N, 85.8312°E</strong>)
               directly to the SURAKSHA Command HQ and nearby mesh nodes.
             </p>
-            <div className="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-500/30 text-[11px] font-mono text-amber-800 dark:text-amber-300">
+            <div className="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-500/30 text-xs font-mono font-bold text-amber-950 dark:text-amber-200">
               PROTOTYPE NOTICE: Dispatches in this demonstration system are simulated for training and technical evaluation.
             </div>
             <div className="flex items-center justify-end gap-3 pt-2">
