@@ -62,7 +62,7 @@ SECURITY_HEADERS = {
         "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com; "
         "style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; "
         "img-src 'self' data: blob: https://*.tile.openstreetmap.org https://tile.openstreetmap.org https://*.basemaps.cartocdn.com https://basemaps.cartocdn.com https://*.cartocdn.com https://images.unsplash.com; "
-        "connect-src 'self' https://*.basemaps.cartocdn.com https://basemaps.cartocdn.com https://*.cartocdn.com; "
+        "connect-src 'self' https://*.tile.openstreetmap.org https://tile.openstreetmap.org; "
         "frame-ancestors 'none'"
     ),
     "x-content-type-options": "nosniff",

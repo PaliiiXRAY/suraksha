@@ -54,9 +54,9 @@ export default function CycloneMap({ event, assets, blocks, selectedBlockId, onB
         sources: {
           osm: {
             type: 'raster',
-            tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}'],
+            tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
             tileSize: 256,
-            attribution: '© Esri',
+            attribution: '© OpenStreetMap contributors',
           },
         },
         layers: [{ id: 'osm-tiles', type: 'raster', source: 'osm', paint: { 'raster-opacity': 0.3 } }],

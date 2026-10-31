@@ -41,6 +41,11 @@
     50% { opacity: 0.4; }
   }
 
+  /* Tactical Dark Map Filter for Standard OpenStreetMap (Zero API Key) */
+  .dark .leaflet-tile-pane {
+    filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+  }
+
   .animate-simulated {
     animation: simulated-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }

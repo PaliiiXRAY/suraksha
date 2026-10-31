@@ -3,9 +3,35 @@
 // Renders Odisha coastal block boundaries, cyclone trajectory, danger swath,
 // strategic assets, and route cutoff status directly on real OSM tiles.
 // ─────────────────────────────────────────────────────────────────────────────
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+
+type MapTheme = 'colour' | 'satellite' | 'dark';
+
+const THEMES: Record<MapTheme, { url: string; options: L.TileLayerOptions }> = {
+  colour: {
+    url: 'https://tile.openstreetmap.de/{z}/{x}/{y}.png',
+    options: {
+      maxZoom: 18,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    },
+  },
+  satellite: {
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    options: {
+      maxZoom: 18,
+      attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS',
+    },
+  },
+  dark: {
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+    options: {
+      maxZoom: 16,
+      attribution: 'Tiles &copy; Esri &mdash; Tactical Dark',
+    },
+  },
+};
 
 interface Props {
   selectedBlockId?: string;
@@ -101,6 +127,8 @@ export default function GISOverlayMap({
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
   const polygonLayersRef = useRef<Record<string, L.Polygon>>({});
+  const [mapTheme, setMapTheme] = useState<MapTheme>('colour');
+  const tileLayerRef = useRef<L.TileLayer | null>(null);
 
   useEffect(() => {
     if (!mapContainerRef.current) return;
@@ -115,9 +143,9 @@ export default function GISOverlayMap({
     mapRef.current = map;
 
     // Add standard OpenStreetMap tiles
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 16,
-      attribution: '&copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+      attribution: '&copy; OpenStreetMap contributors',
     }).addTo(map);
 
     // Threat Swath Cone (Bay of Bengal landfall danger area)
@@ -235,6 +263,18 @@ export default function GISOverlayMap({
     };
   }, []);
 
+
+  // Dynamic Basemap Switcher Effect (Colour OSM / Satellite / Tactical Dark)
+  useEffect(() => {
+    if (!mapRef.current) return;
+    if (tileLayerRef.current) {
+      mapRef.current.removeLayer(tileLayerRef.current);
+    }
+    const newLayer = L.tileLayer(THEMES[mapTheme].url, THEMES[mapTheme].options).addTo(mapRef.current);
+    tileLayerRef.current = newLayer;
+    newLayer.bringToBack();
+  }, [mapTheme]);
+
   // Update selected block styling dynamically when selectedBlockId changes
   useEffect(() => {
     Object.entries(polygonLayersRef.current).forEach(([id, poly]) => {
@@ -258,11 +298,38 @@ export default function GISOverlayMap({
       {/* Real Interactive Leaflet Container */}
       <div ref={mapContainerRef} className="w-full h-full min-h-[380px] z-0" />
 
-      {/* Floating Status Badges on top of Leaflet Map */}
+      {/* Floating Basemap Controls & Status Badges */}
       <div className="absolute top-3 right-3 z-[1000] flex items-center gap-2 pointer-events-none">
-        <span className="px-2.5 py-1 rounded-lg bg-white/90 dark:bg-[#121622]/90 backdrop-blur-md border border-slate-200 dark:border-white/10 text-[11px] font-mono font-bold text-slate-800 dark:text-white shadow-sm pointer-events-auto">
-          OSM LEAFLET ENGINE
-        </span>
+        {/* Interactive Basemap Theme Switcher */}
+        <div className="flex items-center bg-black/85 backdrop-blur-md border border-white/20 rounded-lg p-0.5 shadow-lg text-[10px] font-mono pointer-events-auto">
+          <button
+            type="button"
+            onClick={() => setMapTheme('colour')}
+            className={`px-2.5 py-1 rounded font-bold transition-all ${
+              mapTheme === 'colour' ? 'bg-blue-600 text-white shadow-sm' : 'text-white/70 hover:text-white hover:bg-white/10'
+            }`}
+          >
+            🗺️ Colour OSM
+          </button>
+          <button
+            type="button"
+            onClick={() => setMapTheme('satellite')}
+            className={`px-2.5 py-1 rounded font-bold transition-all ${
+              mapTheme === 'satellite' ? 'bg-blue-600 text-white shadow-sm' : 'text-white/70 hover:text-white hover:bg-white/10'
+            }`}
+          >
+            🛰️ Satellite
+          </button>
+          <button
+            type="button"
+            onClick={() => setMapTheme('dark')}
+            className={`px-2.5 py-1 rounded font-bold transition-all ${
+              mapTheme === 'dark' ? 'bg-blue-600 text-white shadow-sm' : 'text-white/70 hover:text-white hover:bg-white/10'
+            }`}
+          >
+            🌑 Dark
+          </button>
+        </div>
         <span className="px-2.5 py-1 rounded-lg bg-red-600 text-white text-[11px] font-mono font-bold shadow-sm flex items-center gap-1.5 pointer-events-auto">
           <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
           <span>{windSpeed} KM/H GALE</span>

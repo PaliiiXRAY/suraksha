@@ -28,9 +28,9 @@ export default function CitizenEvacuationMap({ className = '' }: Props) {
     mapRef.current = map;
 
     // Standard OpenStreetMap tiles
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 16,
-      attribution: '&copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+      attribution: '&copy; OpenStreetMap contributors',
     }).addTo(map);
 
     // Coordinates:
