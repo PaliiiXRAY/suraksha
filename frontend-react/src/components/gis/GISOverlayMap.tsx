@@ -7,28 +7,29 @@ import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-type MapTheme = 'colour' | 'satellite' | 'dark';
+type MapTheme = 'colour' | 'terrain' | 'dark';
 
 const THEMES: Record<MapTheme, { url: string; options: L.TileLayerOptions }> = {
   colour: {
-    url: 'https://tile.openstreetmap.de/{z}/{x}/{y}.png',
+    url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
     options: {
       maxZoom: 18,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     },
   },
-  satellite: {
-    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+  terrain: {
+    url: 'https://tile.opentopomap.org/{z}/{x}/{y}.png',
     options: {
-      maxZoom: 18,
-      attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS',
+      maxZoom: 17,
+      attribution: 'Map: &copy; OpenStreetMap, SRTM | Style: &copy; OpenTopoMap',
     },
   },
   dark: {
-    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+    url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
     options: {
-      maxZoom: 16,
-      attribution: 'Tiles &copy; Esri &mdash; Tactical Dark',
+      maxZoom: 18,
+      className: 'map-tiles-dark',
+      attribution: '&copy; OpenStreetMap contributors &mdash; Tactical Dark',
     },
   },
 };
@@ -142,11 +143,7 @@ export default function GISOverlayMap({
     });
     mapRef.current = map;
 
-    // Add standard OpenStreetMap tiles
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 16,
-      attribution: '&copy; OpenStreetMap contributors',
-    }).addTo(map);
+    // Managed tile layer is attached via THEMES[mapTheme] effect
 
     // Threat Swath Cone (Bay of Bengal landfall danger area)
     const swathCoords: [number, number][] = [
@@ -313,12 +310,12 @@ export default function GISOverlayMap({
           </button>
           <button
             type="button"
-            onClick={() => setMapTheme('satellite')}
+            onClick={() => setMapTheme('terrain')}
             className={`px-2.5 py-1 rounded font-bold transition-all ${
-              mapTheme === 'satellite' ? 'bg-blue-600 text-white shadow-sm' : 'text-white/70 hover:text-white hover:bg-white/10'
+              mapTheme === 'terrain' ? 'bg-blue-600 text-white shadow-sm' : 'text-white/70 hover:text-white hover:bg-white/10'
             }`}
           >
-            🛰️ Satellite
+            ⛰️ Topo
           </button>
           <button
             type="button"

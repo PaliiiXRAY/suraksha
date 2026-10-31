@@ -104,8 +104,8 @@ class AeroThermalHandler(SimpleHTTPRequestHandler):
             "default-src 'self'; "
             "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com; "
             "style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; "
-            "img-src 'self' data: blob: https://*.tile.openstreetmap.org https://tile.openstreetmap.org https://*.basemaps.cartocdn.com https://basemaps.cartocdn.com https://*.cartocdn.com https://server.arcgisonline.com https://*.tile.openstreetmap.de https://tile.openstreetmap.de https://*.tile.openstreetmap.fr https://images.unsplash.com; "
-            "connect-src 'self' https://*.tile.openstreetmap.org https://tile.openstreetmap.org https://*.tile.openstreetmap.de https://tile.openstreetmap.de https://*.tile.openstreetmap.fr; "
+            "img-src 'self' data: blob: https://*.tile.openstreetmap.org https://tile.openstreetmap.org https://*.tile.opentopomap.org https://tile.opentopomap.org https://*.basemaps.cartocdn.com https://basemaps.cartocdn.com https://*.cartocdn.com https://server.arcgisonline.com https://*.tile.openstreetmap.de https://tile.openstreetmap.de https://*.tile.openstreetmap.fr https://images.unsplash.com; "
+            "connect-src 'self' https://*.tile.openstreetmap.org https://tile.openstreetmap.org https://*.tile.opentopomap.org https://tile.opentopomap.org https://*.tile.openstreetmap.de https://tile.openstreetmap.de https://*.tile.openstreetmap.fr; "
             "frame-ancestors 'none'"
         ),
         "X-Content-Type-Options": "nosniff",

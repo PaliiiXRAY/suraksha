@@ -33,6 +33,7 @@ services:
       - ./static:/app/static
       - ./backend:/app/backend
       - ./db:/app/db
+      - ./tests:/app/tests
     depends_on:
       db:
         condition: service_healthy

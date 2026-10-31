@@ -42,8 +42,10 @@
   }
 
   /* Tactical Dark Map Filter for Standard OpenStreetMap (Zero API Key) */
-  .dark .leaflet-tile-pane {
-    filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+  .dark .citizen-evacuation-map .leaflet-tile-pane,
+  .map-tiles-dark,
+  img.map-tiles-dark {
+    filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7) !important;
   }
 
   .animate-simulated {

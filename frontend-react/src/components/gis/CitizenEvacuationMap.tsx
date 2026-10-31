@@ -99,7 +99,7 @@ export default function CitizenEvacuationMap({ className = '' }: Props) {
     <div className={`space-y-3 ${className}`}>
       {/* Map Container */}
       <div className="relative w-full h-[280px] sm:h-[340px] rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 shadow-inner">
-        <div ref={mapContainerRef} className="w-full h-full" />
+        <div ref={mapContainerRef} className="w-full h-full citizen-evacuation-map" />
       </div>
 
       {/* Map Legend matching FireSense screenshot */}
