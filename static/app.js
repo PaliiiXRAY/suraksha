@@ -1262,9 +1262,10 @@ function initPipelineMap() {
     const el = document.getElementById('pipeline-map');
     if (!el || typeof L === 'undefined') return;
     pipelineMap = L.map(el, { scrollWheelZoom: true }).setView([22.3, 79.0], 5);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        subdomains: 'abcd',
         maxZoom: 18,
-        attribution: '&copy; OpenStreetMap contributors'
+        attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
     }).addTo(pipelineMap);
     pipelineLayer = L.layerGroup().addTo(pipelineMap);
 }

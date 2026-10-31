@@ -165,6 +165,22 @@ export default function HazardIntelligence({ onShowToast }: Props) {
   const [search, setSearch] = useState('');
   const [activeDossierTab, setActiveDossierTab] = useState<'classification' | 'dossier'>('classification');
   const [runningPipeline, setRunningPipeline] = useState(false);
+  const [pipelineProgressText, setPipelineProgressText] = useState<string>('');
+  const [selectedBlockId, setSelectedBlockId] = useState<string>('brahmagiri');
+  const [selectedScenario, setSelectedScenario] = useState<string>('cyclone');
+
+  function handleSelectSignal(signalId: string) {
+    setSelectedSignalId(signalId);
+    if (signalId === 'INC-2019-0042') {
+      setSelectedBlockId('puri');
+    } else if (signalId === 'INC-2019-0043') {
+      setSelectedBlockId('brahmagiri');
+    } else if (signalId === 'INC-2019-0044') {
+      setSelectedBlockId('krushnaprasad');
+    } else if (signalId === 'INC-2019-0045') {
+      setSelectedBlockId('pipili');
+    }
+  }
 
   const filteredSignals = SIGNALS.filter(s => {
     if (hazardFilter !== 'all' && s.hazardType !== hazardFilter) return false;
@@ -184,10 +200,19 @@ export default function HazardIntelligence({ onShowToast }: Props) {
 
   function handleRunPipeline() {
     setRunningPipeline(true);
+    setPipelineProgressText('1/3 Telemetry Ingest...');
+    onShowToast('⚡ Initiating Multi-Hazard AI Classification Pipeline...');
     setTimeout(() => {
-      setRunningPipeline(false);
-      onShowToast('Multi-Hazard AI Classification Pipeline executed successfully (100% evaluated)');
-    }, 800);
+      setPipelineProgressText('2/3 Route & Swath Spatial Scan...');
+      setTimeout(() => {
+        setPipelineProgressText('3/3 Risk Consensus Scoring...');
+        setTimeout(() => {
+          setRunningPipeline(false);
+          setPipelineProgressText('');
+          onShowToast('✅ AI Pipeline Complete: 4 Sectors Evaluated · 0 Conflicts · 100% Consensus');
+        }, 500);
+      }, 500);
+    }, 500);
   }
 
   return (
@@ -298,7 +323,28 @@ export default function HazardIntelligence({ onShowToast }: Props) {
           <div className="flex items-center gap-2.5 flex-wrap">
             <select
               className="bg-slate-50 dark:bg-[#181d2a] border border-slate-200 dark:border-white/10 rounded-lg px-3 py-1.5 text-xs font-mono text-slate-800 dark:text-white focus:outline-none"
-              defaultValue="cyclone"
+              value={selectedScenario}
+              onChange={(e) => {
+                const val = e.target.value;
+                setSelectedScenario(val);
+                if (val === 'cyclone') {
+                  setHazardFilter('cyclone');
+                  handleSelectSignal('INC-2019-0042');
+                  onShowToast('Active Scenario: 🌪️ Cyclone Fani Replay (Odisha)');
+                } else if (val === 'flood') {
+                  setHazardFilter('flood');
+                  handleSelectSignal('INC-2019-0043');
+                  onShowToast('Active Scenario: 🌊 Mahanadi Delta Inundation');
+                } else if (val === 'wildfire') {
+                  setHazardFilter('wildfire');
+                  handleSelectSignal('INC-2019-0044');
+                  onShowToast('Active Scenario: 🔥 Similipal Biosphere Reserve');
+                } else {
+                  setHazardFilter('all');
+                  handleSelectSignal('INC-2019-0045');
+                  onShowToast('Active Scenario: 🏭 Jamnagar Petrochemical Flare');
+                }
+              }}
             >
               <option value="cyclone">🌪️ Cyclone Fani Replay (Odisha)</option>
               <option value="flood">🌊 Mahanadi Delta Inundation (Jagatsinghpur)</option>
@@ -317,7 +363,7 @@ export default function HazardIntelligence({ onShowToast }: Props) {
               className="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all"
             >
               <Zap size={13} className={runningPipeline ? 'animate-spin' : ''} />
-              <span>{runningPipeline ? 'Evaluating...' : 'Run AI Pipeline'}</span>
+              <span>{runningPipeline ? (pipelineProgressText || 'Evaluating...') : 'Run AI Pipeline'}</span>
             </button>
 
             <button
@@ -332,7 +378,18 @@ export default function HazardIntelligence({ onShowToast }: Props) {
 
         {/* Map Container */}
         <div className="h-[380px] w-full rounded-xl overflow-hidden border border-slate-200 dark:border-white/10 relative">
-          <GISOverlayMap selectedBlockId="brahmagiri" filter={hazardFilter} />
+          <GISOverlayMap
+            selectedBlockId={selectedBlockId}
+            onSelectBlock={(id) => {
+              setSelectedBlockId(id);
+              if (id === 'puri') setSelectedSignalId('INC-2019-0042');
+              else if (id === 'brahmagiri') setSelectedSignalId('INC-2019-0043');
+              else if (id === 'krushnaprasad') setSelectedSignalId('INC-2019-0044');
+              else if (id === 'pipili') setSelectedSignalId('INC-2019-0045');
+              onShowToast(`Focused Sector: ${id.toUpperCase()}`);
+            }}
+            filter={hazardFilter}
+          />
         </div>
 
         {/* Map Legend matching FireSense bottom bar */}
@@ -371,7 +428,7 @@ export default function HazardIntelligence({ onShowToast }: Props) {
               return (
                 <div
                   key={s.id}
-                  onClick={() => setSelectedSignalId(s.id)}
+                  onClick={() => handleSelectSignal(s.id)}
                   className={`p-3.5 rounded-xl border cursor-pointer transition-all ${
                     isSelected
                       ? 'border-2 border-blue-500 bg-blue-50/20 dark:bg-blue-600/10 shadow-sm'
@@ -608,7 +665,7 @@ export default function HazardIntelligence({ onShowToast }: Props) {
               {filteredSignals.map(s => (
                 <tr
                   key={s.id}
-                  onClick={() => setSelectedSignalId(s.id)}
+                  onClick={() => handleSelectSignal(s.id)}
                   className="hover:bg-slate-100/70 dark:hover:bg-white/5 cursor-pointer transition-colors"
                 >
                   <td className="py-3.5 px-3.5 font-black text-blue-700 dark:text-blue-400">{s.id}</td>

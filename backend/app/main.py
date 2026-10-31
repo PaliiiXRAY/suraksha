@@ -61,8 +61,8 @@ SECURITY_HEADERS = {
         "default-src 'self'; "
         "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com; "
         "style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; "
-        "img-src 'self' data: blob: https://*.tile.openstreetmap.org https://tile.openstreetmap.org; "
-        "connect-src 'self'; "
+        "img-src 'self' data: blob: https://*.tile.openstreetmap.org https://tile.openstreetmap.org https://*.basemaps.cartocdn.com https://basemaps.cartocdn.com https://*.cartocdn.com https://images.unsplash.com; "
+        "connect-src 'self' https://*.basemaps.cartocdn.com https://basemaps.cartocdn.com https://*.cartocdn.com; "
         "frame-ancestors 'none'"
     ),
     "x-content-type-options": "nosniff",
@@ -189,6 +189,13 @@ app.include_router(cyclone.router, prefix="/api/v2")
 app.include_router(hazard_footprints.router)
 app.include_router(hazard_footprints.router, prefix="/api")
 app.include_router(hazard_footprints.router, prefix="/api/v2")
+
+# Backward Compatibility Route for Legacy Scenarios
+@app.get("/api/pipeline/scenario")
+@app.get("/api/v2/pipeline/scenario")
+def pipeline_scenario_alias(id: str = "jamnagar_refinery", live_osm: bool = False):
+    from backend.pipeline import HotspotPipeline
+    return HotspotPipeline.run_scenario(id, use_live_osm=live_osm)
 
 # Mount Static Assets and UI Routes
 STATIC_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "static")

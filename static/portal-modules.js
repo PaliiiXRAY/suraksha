@@ -311,8 +311,9 @@ function initCitizenMap() {
     const el = document.getElementById('citizen-map');
     if (!el || typeof L === 'undefined') return;
     citizenMap = L.map(el).setView([20.8465, 85.0985], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 18, attribution: '&copy; OpenStreetMap contributors'
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        subdomains: 'abcd',
+        maxZoom: 18, attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
     }).addTo(citizenMap);
 
     // Simulated incident zone
