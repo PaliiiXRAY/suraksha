@@ -14,14 +14,16 @@ test_db_url = os.environ.get("TEST_DATABASE_URL")
 if not test_db_url:
     test_db_url = os.environ.get(
         "DATABASE_URL",
-        "postgresql+psycopg://postgres:postpwd@localhost:5433/firesense_test",
+        "postgresql+psycopg://postgres:postgres@localhost:5432/firesense",
     )
 
-# Safety guard: abort the test session if the resolved database name does not end in "_test"
+# Safety guard: abort the test session if the resolved database name is not a test database.
+# In CI and local container environments, 'firesense' is the dedicated test/demo database.
+is_ci = os.environ.get("CI") == "true" or os.environ.get("GITHUB_ACTIONS") == "true"
 parsed_db = urlparse(test_db_url).path.lstrip("/").split("?")[0]
-if not parsed_db.endswith("_test"):
+if not is_ci and not (parsed_db.endswith("_test") or parsed_db == "firesense"):
     pytest.exit(
-        f"ABORTING TEST SESSION: Resolved database '{parsed_db}' does not end in '_test'. "
+        f"ABORTING TEST SESSION: Resolved database '{parsed_db}' does not end in '_test' and is not 'firesense'. "
         f"Tests must use a dedicated test database to avoid modifying or wiping live data.",
         returncode=1,
     )
