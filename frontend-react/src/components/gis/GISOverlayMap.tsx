@@ -7,29 +7,28 @@ import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-type MapTheme = 'colour' | 'terrain' | 'dark';
+type MapTheme = 'colour' | 'satellite' | 'dark';
 
 const THEMES: Record<MapTheme, { url: string; options: L.TileLayerOptions }> = {
   colour: {
-    url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
     options: {
       maxZoom: 18,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      attribution: 'Tiles &copy; Esri &mdash; Street Map',
     },
   },
-  terrain: {
-    url: 'https://tile.opentopomap.org/{z}/{x}/{y}.png',
+  satellite: {
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
     options: {
-      maxZoom: 17,
-      attribution: 'Map: &copy; OpenStreetMap, SRTM | Style: &copy; OpenTopoMap',
+      maxZoom: 18,
+      attribution: 'Tiles &copy; Esri &mdash; Satellite Imagery',
     },
   },
   dark: {
-    url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
     options: {
-      maxZoom: 18,
-      className: 'map-tiles-dark',
-      attribution: '&copy; OpenStreetMap contributors &mdash; Tactical Dark',
+      maxZoom: 16,
+      attribution: 'Tiles &copy; Esri &mdash; Tactical Dark',
     },
   },
 };
@@ -306,16 +305,16 @@ export default function GISOverlayMap({
               mapTheme === 'colour' ? 'bg-blue-600 text-white shadow-sm' : 'text-white/70 hover:text-white hover:bg-white/10'
             }`}
           >
-            🗺️ Colour OSM
+            🗺️ Street (Colour)
           </button>
           <button
             type="button"
-            onClick={() => setMapTheme('terrain')}
+            onClick={() => setMapTheme('satellite')}
             className={`px-2.5 py-1 rounded font-bold transition-all ${
-              mapTheme === 'terrain' ? 'bg-blue-600 text-white shadow-sm' : 'text-white/70 hover:text-white hover:bg-white/10'
+              mapTheme === 'satellite' ? 'bg-blue-600 text-white shadow-sm' : 'text-white/70 hover:text-white hover:bg-white/10'
             }`}
           >
-            ⛰️ Topo
+            🛰️ Satellite
           </button>
           <button
             type="button"
