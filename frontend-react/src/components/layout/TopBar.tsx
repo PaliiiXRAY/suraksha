@@ -15,7 +15,8 @@ import {
   Moon,
   Radio,
 } from 'lucide-react';
-import type { DataMode, AuthUser } from '../../types';
+import type { DataMode, AuthUser, ViewId } from '../../types';
+import { ROLE_PERMISSIONS } from '../../types';
 
 interface Props {
   dataMode: DataMode;
@@ -52,7 +53,11 @@ export default function TopBar({
         {/* Left: FireSense-style Flame/Shield Logo */}
         <div
           className="flex items-center gap-2.5 cursor-pointer flex-shrink-0"
-          onClick={() => onViewChange('intelligence')}
+          onClick={() => {
+            const role = user?.role || 'civilian';
+            const allowed = ROLE_PERMISSIONS[role] || ['citizen'];
+            onViewChange(allowed[0]);
+          }}
         >
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#f4511e] to-[#c2410c] flex items-center justify-center shadow-md shadow-orange-950/30">
             <ShieldCheck size={18} className="text-white" />
@@ -64,26 +69,32 @@ export default function TopBar({
           </div>
         </div>
 
-        {/* Center: Exact FireSense Reference Pill Container */}
+        {/* Center: Strict RBAC Nav Views based on authenticated role */}
         <nav className="flex items-center bg-slate-100 dark:bg-[#141824] p-1 rounded-xl border border-slate-200/80 dark:border-white/10 shadow-inner">
-          {NAV_VIEWS.map(v => {
-            const isActive = activeView === v.id;
-            const Icon = v.icon;
-            return (
-              <button
-                key={v.id}
-                onClick={() => onViewChange(v.id)}
-                className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-bold rounded-lg transition-all ${
-                  isActive
-                    ? 'bg-white dark:bg-[#1c2233] text-blue-600 dark:text-blue-400 shadow-sm border border-slate-200/80 dark:border-white/10'
-                    : 'text-slate-600 dark:text-white/60 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-white/5'
-                }`}
-              >
-                <Icon size={14} className={isActive ? 'text-blue-600 dark:text-blue-400' : 'text-slate-400 dark:text-white/40'} />
-                <span>{v.label}</span>
-              </button>
-            );
-          })}
+          {(() => {
+            const role = user?.role || 'civilian';
+            const allowed = ROLE_PERMISSIONS[role] || ['citizen'];
+            const visibleViews = NAV_VIEWS.filter(v => allowed.includes(v.id as ViewId));
+            return visibleViews.map(v => {
+              const isActive = activeView === v.id;
+              const Icon = v.icon;
+              return (
+                <button
+                  key={v.id}
+                  onClick={() => onViewChange(v.id)}
+                  className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-bold rounded-lg transition-all ${
+                    isActive
+                      ? 'bg-white dark:bg-[#1c2233] text-blue-600 dark:text-blue-400 shadow-sm border border-slate-200/80 dark:border-white/10'
+                      : 'text-slate-600 dark:text-white/60 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-white/5'
+                  }`}
+                  title={`Access ${v.label}`}
+                >
+                  <Icon size={14} className={isActive ? 'text-blue-600 dark:text-blue-400' : 'text-slate-400 dark:text-white/40'} />
+                  <span>{v.label}</span>
+                </button>
+              );
+            });
+          })()}
         </nav>
 
         {/* Right: Exact FireSense Button Layout */}

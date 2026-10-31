@@ -38,6 +38,17 @@ export type TaskStatus = 'PENDING' | 'APPROVED' | 'IN_PROGRESS' | 'COMPLETED' | 
 
 export type UserRole = 'analyst' | 'authority' | 'responder' | 'civilian' | 'admin';
 
+export type ViewId = 'intelligence' | 'command' | 'responder' | 'citizen';
+
+export const ROLE_PERMISSIONS: Record<UserRole, ViewId[]> = {
+  analyst: ['intelligence', 'command', 'responder', 'citizen'],
+  authority: ['command', 'citizen'],
+  responder: ['responder', 'citizen'],
+  civilian: ['citizen'],
+  admin: ['intelligence', 'command', 'responder', 'citizen'],
+};
+
+
 export interface AuthUser {
   id: string;
   email: string;

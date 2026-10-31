@@ -3,7 +3,8 @@
 // Centered max-w-7xl canvas, dual-theme support, and seamless portal navigation.
 // ─────────────────────────────────────────────────────────────────────────────
 import React, { useState, useEffect } from 'react';
-import type { DataMode, AuthUser } from './types';
+import type { DataMode, AuthUser, ViewId } from './types';
+import { ROLE_PERMISSIONS } from './types';
 import AuthPortal from './pages/AuthPortal';
 import TopBar from './components/layout/TopBar';
 import ToastContainer, { ToastMessage } from './components/ui/Toast';
@@ -12,7 +13,7 @@ import GovernmentCommand from './pages/GovernmentCommand';
 import ResponderOperations from './pages/ResponderOperations';
 import CitizenServices from './pages/CitizenServices';
 
-type ViewId = 'intelligence' | 'command' | 'responder' | 'citizen';
+// type ViewId imported from types
 export type ThemeMode = 'dark' | 'light';
 
 export default function App() {
@@ -50,6 +51,16 @@ export default function App() {
       localStorage.setItem('fs-theme', theme);
     } catch {}
   }, [theme]);
+
+  // Strict RBAC Guard: If active view is not authorized for current user role, redirect immediately
+  useEffect(() => {
+    if (user) {
+      const allowed = ROLE_PERMISSIONS[user.role] || ['citizen'];
+      if (!allowed.includes(activeView)) {
+        setActiveView(allowed[0]);
+      }
+    }
+  }, [user, activeView]);
 
   function toggleTheme() {
     setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
@@ -112,11 +123,19 @@ export default function App() {
       {/* Toast Notification Container */}
       <ToastContainer toasts={toasts} onDismiss={dismissToast} />
 
-      {/* Global TopBar Header */}
+      {/* Global TopBar Header with RBAC Enforcement */}
       <TopBar
         dataMode={dataMode}
         onModeChange={setDataMode}
-        onViewChange={v => setActiveView(v as ViewId)}
+        onViewChange={v => {
+          const role = user?.role || 'civilian';
+          const allowed = ROLE_PERMISSIONS[role] || ['citizen'];
+          if (allowed.includes(v as ViewId)) {
+            setActiveView(v as ViewId);
+          } else {
+            addToast(`Access Restricted: ${role.toUpperCase()} role is not authorized for ${v}`, 'warning');
+          }
+        }}
         activeView={activeView}
         theme={theme}
         onToggleTheme={toggleTheme}
