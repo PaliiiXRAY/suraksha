@@ -11,6 +11,8 @@ load_dotenv(override=False)
 # pytest imports this file before any test module, so these variables are in
 # place before backend.app.core.config (or anything that imports it) is loaded.
 test_db_url = os.environ.get("TEST_DATABASE_URL")
+if not test_db_url and os.environ.get("DATABASE_URL") and "@db:" in os.environ.get("DATABASE_URL") and not os.path.exists("/.dockerenv"):
+    os.environ["DATABASE_URL"] = os.environ["DATABASE_URL"].replace("@db:", "@localhost:")
 if not test_db_url:
     test_db_url = os.environ.get(
         "DATABASE_URL",

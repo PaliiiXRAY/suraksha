@@ -125,22 +125,27 @@ def test_nearby_responders_endpoint(db_session: Session):
     db_session.add(responder)
     db_session.commit()
 
-    # Query within 20km
-    resp = client.get("/api/responders/nearby", params={"latitude": 20.840, "longitude": 85.100, "radius_km": 20.0})
-    assert resp.status_code == 200
-    data = resp.json()
-    assert "responders" in data
-    assert data["total"] >= 1
-    
-    matching = [r for r in data["responders"] if r["id"] == resp_id]
-    assert len(matching) == 1
-    unit = matching[0]
-    assert unit["name"] == "Angul Fire Station 1"
-    assert unit["type"] == "fire_brigade"
-    assert "contact_info" not in unit  # Private contact details excluded
-    assert unit["distance_km"] < 5.0
-
-
+    try:
+        # Query within 20km with sufficient limit
+        resp = client.get("/api/responders/nearby", params={"latitude": 20.840, "longitude": 85.100, "radius_km": 20.0, "limit": 100})
+        assert resp.status_code == 200
+        data = resp.json()
+        assert "responders" in data
+        assert data["total"] >= 1
+        
+        matching = [r for r in data["responders"] if r["id"] == resp_id]
+        assert len(matching) == 1
+        unit = matching[0]
+        assert unit["name"] == "Angul Fire Station 1"
+        assert unit["type"] == "fire_brigade"
+        assert "contact_info" not in unit  # Private contact details excluded
+        assert unit["distance_km"] < 5.0
+    finally:
+        try:
+            db_session.delete(responder)
+            db_session.commit()
+        except Exception:
+            pass
 def test_incident_audit_timeline_endpoint(db_session: Session, test_users):
     """Verify GET /api/incidents/{id}/timeline returns append-only audit trail."""
     inc_id = f"inc_timeline_{uuid.uuid4().hex[:8]}"

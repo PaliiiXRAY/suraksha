@@ -77,18 +77,43 @@ export interface EmailAuthCheck {
  * - citizen@suraksha.public       -> Public Portal (Civilian)
  * Any other email is strictly rejected and cannot authenticate.
  */
-export function getAuthorizedRoleForEmail(rawEmail: string): EmailAuthCheck {
+export function getAuthorizedRoleForEmail(rawEmail: string, targetRoleKey?: string): EmailAuthCheck {
   const norm = (rawEmail || '').trim().toLowerCase();
   if (!norm) {
-    return { authorized: false, error: 'Please enter your authorized email identifier.' };
+    return { authorized: false, error: 'Please enter your email identifier.' };
   }
 
   // 1. Hazard Intelligence (Strictly 3amcommits.admin.in)
-  if (
+  const isIntelligence =
     norm === '3amcommits.admin.in' ||
     norm.endsWith('@3amcommits.admin.in') ||
-    norm.includes('3amcommits.admin.in')
-  ) {
+    norm.includes('3amcommits.admin.in');
+
+  // 2. Government Command (Strictly mosac.gov.in or virms.gov.in)
+  const isCommand =
+    norm === 'mosac.gov.in' ||
+    norm === 'virms.gov.in' ||
+    norm.endsWith('@mosac.gov.in') ||
+    norm.endsWith('@virms.gov.in') ||
+    norm.endsWith('@mosdac.gov.in') ||
+    norm.includes('mosac.gov.in') ||
+    norm.includes('virms.gov.in') ||
+    norm.includes('mosdac.gov.in');
+
+  // 3. Response Operations (Strictly responder@ndrf.gov.in)
+  const isOperations =
+    norm === 'responder@ndrf.gov.in' ||
+    norm.endsWith('@ndrf.gov.in') ||
+    norm.includes('ndrf.gov.in');
+
+  // Specific role targeted:
+  if (targetRoleKey === 'intelligence') {
+    if (!isIntelligence) {
+      return {
+        authorized: false,
+        error: "Access Denied: Intelligence Portal can ONLY be accessed by '3amcommits.admin.in'.",
+      };
+    }
     return {
       authorized: true,
       role: 'analyst',
@@ -99,17 +124,13 @@ export function getAuthorizedRoleForEmail(rawEmail: string): EmailAuthCheck {
     };
   }
 
-  // 2. Government Command (Strictly mosac.gov.in or virms.gov.in)
-  if (
-    norm === 'mosac.gov.in' ||
-    norm === 'virms.gov.in' ||
-    norm.endsWith('@mosac.gov.in') ||
-    norm.endsWith('@virms.gov.in') ||
-    norm.endsWith('@mosdac.gov.in') ||
-    norm.includes('mosac.gov.in') ||
-    norm.includes('virms.gov.in') ||
-    norm.includes('mosdac.gov.in')
-  ) {
+  if (targetRoleKey === 'command') {
+    if (!isCommand) {
+      return {
+        authorized: false,
+        error: "Access Denied: Government Portal can ONLY be accessed using 'mosac.gov.in' or 'virms.gov.in' emails.",
+      };
+    }
     return {
       authorized: true,
       role: 'authority',
@@ -120,12 +141,13 @@ export function getAuthorizedRoleForEmail(rawEmail: string): EmailAuthCheck {
     };
   }
 
-  // 3. Response Operations (Strictly responder@ndrf.gov.in)
-  if (
-    norm === 'responder@ndrf.gov.in' ||
-    norm.endsWith('@ndrf.gov.in') ||
-    norm.includes('ndrf.gov.in')
-  ) {
+  if (targetRoleKey === 'operations') {
+    if (!isOperations) {
+      return {
+        authorized: false,
+        error: "Access Denied: Response Portal can ONLY be accessed using 'responder@ndrf.gov.in'.",
+      };
+    }
     return {
       authorized: true,
       role: 'responder',
@@ -136,28 +158,60 @@ export function getAuthorizedRoleForEmail(rawEmail: string): EmailAuthCheck {
     };
   }
 
-  // 4. Public Portal (Strictly official civilian emergency access)
-  if (
-    norm === 'citizen@suraksha.public' ||
-    norm.endsWith('@suraksha.public') ||
-    norm === 'public@suraksha.gov.in' ||
-    norm === 'citizen.odisha.gov.in' ||
-    norm === 'public.odisha.gov.in'
-  ) {
+  if (targetRoleKey === 'public') {
+    // PUBLIC PORTAL: ZERO RESTRAINTS. ANY EMAIL ID CAN ACCESS!
     return {
       authorized: true,
       role: 'civilian',
       view: 'citizen',
       roleKey: 'public',
-      name: 'Civilian Resident (Public Safety)',
+      name: norm.includes('@') ? norm.split('@')[0] : 'Citizen Resident',
       org: 'Public Safety & Evacuation Portal',
     };
   }
 
-  // ANY OTHER EMAIL IS STRICTLY REJECTED
+  // Auto-detection when no specific target role is supplied:
+  if (isIntelligence) {
+    return {
+      authorized: true,
+      role: 'analyst',
+      view: 'intelligence',
+      roleKey: 'intelligence',
+      name: 'Lead Intel Analyst (3amcommits)',
+      org: 'NDMA / 3amcommits Earth Observation Division',
+    };
+  }
+
+  if (isCommand) {
+    return {
+      authorized: true,
+      role: 'authority',
+      view: 'command',
+      roleKey: 'command',
+      name: 'State Disaster Authority (MOSAC / VIRMS)',
+      org: 'State Emergency Operations Center (SEOC)',
+    };
+  }
+
+  if (isOperations) {
+    return {
+      authorized: true,
+      role: 'responder',
+      view: 'responder',
+      roleKey: 'operations',
+      name: 'Insp. Rajesh Nayak (NDRF Bn 03)',
+      org: 'NDRF 03 Battalion Mundali',
+    };
+  }
+
+  // Any other email defaults to Public Portal with zero restrictions
   return {
-    authorized: false,
-    error: `Access Denied: '${norm}' is not an authorized credential. Only official disaster response emails (3amcommits.admin.in, mosac.gov.in, virms.gov.in, responder@ndrf.gov.in, citizen@suraksha.public) can authenticate.`,
+    authorized: true,
+    role: 'civilian',
+    view: 'citizen',
+    roleKey: 'public',
+    name: norm.includes('@') ? norm.split('@')[0] : 'Citizen Resident',
+    org: 'Public Safety & Evacuation Portal',
   };
 }
 

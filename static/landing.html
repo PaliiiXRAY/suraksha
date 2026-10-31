@@ -3,25 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SURAKSHA · National Disaster Intelligence & Multi-Hazard Decision Support</title>
-<meta name="description" content="Satellite thermal anomaly surveillance and cyclone landfall impact prioritization decision-support platform. Built for SIH-26162.">
-
+<title>FireSense — From signal to action.</title>
+<meta name="description" content="Satellite thermal intelligence for faster disaster response. Detect, classify, and respond to industrial fires before they become emergencies.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<!-- React 18 & ReactDOM 18 CDN -->
-<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-
-<!-- Babel Standalone for in-browser JSX parsing (Zero build step) -->
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-<!-- Lucide Icons -->
-<script src="https://unpkg.com/lucide@latest"></script>
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-
 /* ============ FIRESENSE DESIGN LANGUAGE ============ */
 :root{
   --bg:#0a0c10;           /* graphite */
@@ -303,20 +290,442 @@ footer{border-top:1px solid var(--line);background:var(--bg-2)}
 .f-bottom .meta a{color:var(--gray)}
 .f-bottom .meta a:hover{color:var(--white)}
 @media(max-width:900px){.f-main{grid-template-columns:1fr 1fr}.f-brand{grid-column:1/-1}}
-
 </style>
 </head>
 <body>
 
-<!-- React Mount Point -->
-<div id="root">
-  <div style="min-height: 100vh; background: #0a0c10; display: flex; align-items: center; justify-content: center; color: #8b929e; font-family: monospace; font-size: 12px; letter-spacing: 0.15em;">
-    INITIALIZING SURAKSHA COMMAND PLATFORM...
+<!-- NAV -->
+<nav id="nav">
+  <div class="inner">
+    <a class="brand" href="#"><span class="dot"></span>FireSense</a>
+    <div class="nav-links">
+      <a href="#detect">Intelligence</a>
+      <a href="#respond">Response</a>
+      <a href="#platform">Platform</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:22px">
+      <span class="status-chip"><span class="pulse" style="width:7px;height:7px"></span>NRT · DEMO DATA</span>
+      <!-- Theme toggle removed -->
+      <a class="nav-cta" href="/app">Launch Dashboard <span class="arrow">→</span></a>
+    </div>
   </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-media" aria-hidden="true">
+    <video id="hero-video" autoplay muted loop playsinline preload="metadata"
+           poster="/static/media/hero_india_night.jpg"
+           src="/static/media/viirs_earth_night_720p.mp4"></video>
+    <div class="hero-signal">
+      <div class="hv-scan"></div>
+      <svg class="hv-terrain" viewBox="0 0 1200 460" preserveAspectRatio="xMidYMid slice">
+        <path d="M-20,340 C160,300 300,360 460,330 C640,296 760,352 940,316 C1060,292 1150,320 1220,300"/>
+        <path d="M-20,380 C180,340 320,400 500,368 C680,336 800,390 980,352 C1090,330 1160,352 1220,336"/>
+        <path d="M-20,420 C200,384 340,440 540,404 C720,372 840,428 1020,392 C1120,372 1170,392 1220,380"/>
+      </svg>
+      <div class="hv-crosshair">
+        <div class="hv-glow"></div>
+        <div class="hv-ring"></div>
+        <div class="hv-ring r2"></div>
+        <div class="hv-dot"></div>
+      </div>
+      <div class="hv-tag">
+        <div class="t1">VIIRS &middot; THERMAL ANOMALY</div>
+        <div class="t2">Industrial Fire &mdash; 91%</div>
+        <div class="t3">FRP 42.8 MW &middot; 30.70&deg;N 76.71&deg;E</div>
+      </div>
+      <div class="hv-meta">
+        <div><div class="k">LOCATION</div><div class="v">30.7046&deg; N &middot; 76.7104&deg; E</div></div>
+        <div><div class="k" title="Visible/Infrared Imaging Radiometer Suite, 375 m native resolution">SENSOR</div><div class="v" title="Fire Radiative Power: radiant heat output in megawatts">VIIRS &middot; 375 m</div></div>
+        <div><div class="k">OBSERVED</div><div class="v">14:32 UTC</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="container hero-content">
+    <div class="hero-eyebrow kicker"><span class="idx">FIRESENSE</span><span style="width:36px;height:1px;background:var(--line)"></span><span>SATELLITE DISASTER INTELLIGENCE</span></div>
+    <h1>From signal<br><span class="dim">to action.</span></h1>
+    <p class="body-lg hero-sub">FireSense turns raw satellite heat detections into classified, prioritized incidents — so responders act on what matters, minutes faster.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/app?portal=citizen">Explore FireSense <span class="arrow">→</span></a>
+      <a class="btn btn-ghost" href="#detect">How it works</a>
+    </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- 01 DETECT -->
+<section id="detect">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker"><span class="idx">01 /</span> DETECT</div>
+      <h2>Every incident begins<br>as a signal.</h2>
+      <p class="body-lg">NASA satellites scan India every passing orbit. FireSense ingests each thermal detection the moment it hits the feed — raw heat becomes a tracked event.</p>
+    </div>
+    <div class="stat-row reveal">
+      <div class="stat fire"><div class="n" data-count="375">375</div><div class="l"><span title="Visible/Infrared Imaging Radiometer Suite on the Suomi NPP & NOAA-20 satellites">VIIRS</span> resolution — every hotspot located to a city block.</div></div>
+      <div class="stat ice"><div class="n" data-count="24">24</div><div class="l">Hours of coverage from the <span title="NASA Fire Information for Resource Management System — near-real-time active fire detections">FIRMS</span> feed, refreshed every pass.</div></div>
+      <div class="stat"><div class="n" data-count="60">60</div><div class="l">Day persistence baseline per location <span title="How often a thermal source recurs at the same 375 m cell across satellite passes — stationary flares recur constantly, transient fires do not">(temporal recurrence)</span>, before we call anything unusual.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Editorial media pause: Earth at night (NASA, public domain) -->
+<div class="editorial reveal" aria-label="Earth at night seen from space">
+  <img src="/static/media/earth_at_night.jpg" alt="Earth at night from orbit: city lights tracing coastlines and river valleys across continents, captured by the VIIRS sensor" loading="lazy" decoding="async">
+  <div class="ed-cap">EARTH AT NIGHT &middot; VIIRS DNB &middot; NASA EARTH OBSERVATORY &middot; PUBLIC DOMAIN</div>
 </div>
 
-<!-- React Landing Page Component -->
-<script type="text/babel" src="/static/LandingPage.jsx"></script>
+<!-- 02 CLASSIFY -->
+<section id="classify" style="background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker"><span class="idx">02 /</span> CLASSIFY</div>
+      <h2>A signal isn't an answer.</h2>
+      <p class="body-lg">A thermal pixel could be a refinery flare, a stubble fire, or a spreading wildfire. FireSense fuses facility data, land-cover and 60-day temporal behaviour to say which — with evidence.</p>
+    </div>
+    <div class="classify-board reveal">
+      <div class="cb-stage anomaly">THERMAL ANOMALY</div>
+      <div class="cb-arrow">↓</div>
+      <div class="cb-stage classifying">CLASSIFYING · CONTEXT · PERSISTENCE</div>
+      <div class="cb-arrow">↓</div>
+      <div class="cb-stage result">INDUSTRIAL FIRE · 91% CONFIDENCE</div>
+      <div class="cb-classes">
+        <span class="cb-chip">WILDFIRE</span>
+        <span class="cb-chip active">INDUSTRIAL FIRE</span>
+        <span class="cb-chip">GAS FLARE</span>
+        <span class="cb-chip">POWER PLANT</span>
+        <span class="cb-chip">CROP BURNING</span>
+        <span class="cb-chip">MINING</span>
+        <span class="cb-chip" title="Unregistered thermal source: high persistence with no registered facility in OSM">UNREGISTERED</span>
+      </div>
+      <div class="evidence">
+        <div class="ev hot"><div class="row"><span class="n">Industrial proximity</span><span class="v">0.12 km &middot; registered refinery</span></div><div class="track"><div class="fill" data-w="94"></div></div></div>
+        <div class="ev hot"><div class="row"><span class="n">Thermal persistence</span><span class="v">48 / 60 passes</span></div><div class="track"><div class="fill" data-w="80"></div></div></div>
+        <div class="ev cool"><div class="row"><span class="n">Land-cover match</span><span class="v">Built-up / industrial</span></div><div class="track"><div class="fill" data-w="88"></div></div></div>
+        <div class="ev"><div class="row"><span class="n">FRP signature</span><span class="v">88.4 MW &middot; steady-state</span></div><div class="track"><div class="fill" data-w="72"></div></div></div>
+        <div class="ev-note">MODEL SCORE 91 &middot; NOT A CALIBRATED PROBABILITY &middot; EVIDENCE DISCLOSED FOR ANALYST REVIEW</div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- 03 CONTEXT -->
+<section id="context">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker"><span class="idx">03 /</span> CONTEXT</div>
+      <h2>Know what surrounds<br>the fire.</h2>
+      <p class="body-lg">NASA gives you the signal. FireSense gives you the surroundings — population, infrastructure, access routes and land-cover, computed for every incident.</p>
+    </div>
+    <div class="context-panel reveal">
+      <div class="context-map">
+        <div class="hv-scan"></div>
+        <div class="cm-node incident" style="left:50%;top:52%"><div class="pin"></div><div class="lbl">INCIDENT</div></div>
+        <div class="cm-node facility" style="left:22%;top:30%"><div class="pin"></div><div class="lbl">INDUSTRIAL FACILITY · 0.9 KM</div></div>
+        <div class="cm-node settlement" style="left:76%;top:28%"><div class="pin"></div><div class="lbl">SETTLEMENT · 2.4 KM</div></div>
+        <div class="cm-node settlement" style="left:72%;top:78%"><div class="pin"></div><div class="lbl">ACCESS ROAD · NH-55</div></div>
+      </div>
+      <div class="context-legend">
+        <div class="cl-item"><div class="k">POPULATION EXPOSURE</div><div class="v">82,000 <span class="lv lv-high">HIGH</span></div></div>
+        <div class="cl-item"><div class="k">INFRASTRUCTURE</div><div class="v">Power corridor <span class="lv lv-high">AT RISK</span></div></div>
+        <div class="cl-item"><div class="k">ACCESS ROUTES</div><div class="v">NH-55 open <span class="lv lv-med">CLEAR</span></div></div>
+        <div class="cl-item"><div class="k">LAND COVER</div><div class="v">Built-up / industrial</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 RISK -->
+<section id="risk" style="background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="container">
+    <div class="risk-wrap">
+      <div class="reveal">
+        <div class="kicker" style="margin-bottom:18px"><span class="idx">04 /</span> ASSESS</div>
+        <div class="risk-number" data-count="87">87</div>
+        <div class="risk-label">RISK SCORE / 100 · CRITICAL</div>
+      </div>
+      <div class="reveal">
+        <div class="risk-bars">
+          <div class="rb" data-w="30"><div class="row"><span>Severity</span><span class="pc">30%</span></div><div class="track"><div class="fill"></div></div></div>
+          <div class="rb" data-w="25"><div class="row"><span>Persistence</span><span class="pc">25%</span></div><div class="track"><div class="fill"></div></div></div>
+          <div class="rb" data-w="20"><div class="row"><span>Exposure</span><span class="pc">20%</span></div><div class="track"><div class="fill"></div></div></div>
+          <div class="rb" data-w="15"><div class="row"><span>Infrastructure</span><span class="pc">15%</span></div><div class="track"><div class="fill"></div></div></div>
+          <div class="rb" data-w="10"><div class="row"><span>Growth</span><span class="pc">10%</span></div><div class="track"><div class="fill"></div></div></div>
+        </div>
+        <p class="risk-note">Decision-support priority — so the most dangerous fire is never buried in a list.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 RESPOND -->
+<section id="respond">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker"><span class="idx">05 /</span> RESPOND</div>
+      <h2>One incident.<br>One source of truth.</h2>
+      <p class="body-lg">The same event moves through every pair of hands — analyst, commander, responder — without a single detail lost in translation.</p>
+    </div>
+    <div class="response-stage reveal">
+      <div class="rs-tabs">
+        <div class="rs-tab active" data-v="0">ANALYST VIEW</div>
+        <div class="rs-tab" data-v="1">COMMAND VIEW</div>
+        <div class="rs-tab" data-v="2">FIELD RESPONSE</div>
+      </div>
+      <div class="rs-body">
+        <div class="rs-main">
+          <div class="rs-id">INC-2847 · ANGUL, ODISHA</div>
+          <div class="t" id="rs-title">Industrial Fire — Classified</div>
+          <div class="d" id="rs-desc">Evidence panel: facility proximity HIGH, persistence HIGH, FRP 42.8 MW. Counter-evidence disclosed for analyst review.</div>
+        </div>
+        <div class="rs-side">
+          <div class="big" id="rs-stat">91%</div>
+          <div class="k" id="rs-stat-k">CLASSIFICATION CONFIDENCE</div>
+        </div>
+      </div>
+      <div class="rs-timeline" id="rs-timeline">
+        <div class="rs-state" data-s="0">DETECTED</div>
+        <div class="rs-state" data-s="1">VERIFIED</div>
+        <div class="rs-state" data-s="2">DISPATCHED</div>
+        <div class="rs-state" data-s="3">EN ROUTE</div>
+        <div class="rs-state" data-s="4">CONTAINED</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM: three portals -->
+<section id="platform" style="background:var(--bg-2);border-top:1px solid var(--line)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker"><span class="idx">PLATFORM</span></div>
+      <h2>Four experiences.<br>One mission.</h2>
+    </div>
+    <div class="portal-grid">
+      <a class="portal intel reveal" href="/app?portal=ntro">
+        <div class="pk">01</div>
+        <h3>Intelligence</h3>
+        <div class="pv">Understand.</div>
+        <p>Investigate thermal detections with full evidence dossiers — facility context, persistence history and land-cover, on a live GIS map.</p>
+        <span class="link-arrow">EXPLORE <span class="arrow">→</span></span>
+      </a>
+      <a class="portal reveal" href="/app?portal=command">
+        <div class="pk">02</div>
+        <h3>Command</h3>
+        <div class="pv">Coordinate.</div>
+        <p>Prioritize incidents by risk score, dispatch the right agency, and track every case from alert to resolution.</p>
+        <span class="link-arrow">EXPLORE <span class="arrow">→</span></span>
+      </a>
+      <a class="portal reveal" href="/app?portal=responder">
+        <div class="pk">03</div>
+        <h3>Responder</h3>
+        <div class="pv">Act.</div>
+        <p>Field terminal for ground units: assigned mission, site coordinates, access route, and sequential status progression.</p>
+        <span class="link-arrow">EXPLORE <span class="arrow">→</span></span>
+      </a>
+      <a class="portal reveal" href="/app?portal=citizen">
+        <div class="pk">04</div>
+        <h3>Citizen</h3>
+        <div class="pv">Protect.</div>
+        <p>Verified public alerts, safe evacuation routes, nearest shelters, multilingual guidance, and SOS assistance.</p>
+        <span class="link-arrow">EXPLORE <span class="arrow">→</span></span>
+      </a>
+    </div>
+
+    <div style="margin-top:110px" class="reveal">
+      <div class="kicker" style="justify-content:center;margin-bottom:40px"><span class="idx">BUILT ON</span>&nbsp;REAL SIGNALS</div>
+      <div class="tech-flow">
+        <div class="tf-node hot">NASA FIRMS</div><div class="tf-arrow">→</div>
+        <div class="tf-node">THERMAL DETECTION</div><div class="tf-arrow">→</div>
+        <div class="tf-node hot">CLASSIFICATION</div><div class="tf-arrow">→</div>
+        <div class="tf-node">GEOSPATIAL CONTEXT</div><div class="tf-arrow">→</div>
+        <div class="tf-node hot">RISK</div><div class="tf-arrow">→</div>
+        <div class="tf-node">RESPONSE</div>
+      </div>
+      <div class="tech-drawer"><span>VIIRS 375m</span> · OSM Overpass · ESA WorldCover · Leaflet GIS · REST API · GeoJSON</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="container reveal">
+    <h2>See what matters.<br><span style="color:var(--gray-2)">Before it becomes an emergency.</span></h2>
+    <p class="body-lg">The live platform is running right now.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/app">Open FireSense <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-main">
+    <div class="f-brand">
+      <div class="brand"><span class="dot"></span>FireSense</div>
+      <div class="tag">Satellite intelligence for faster disaster response. From signal to action.</div>
+      <div class="live"><span class="pulse" style="width:7px;height:7px"></span> OPERATIONS PLATFORM · SIH26162 · NTRO</div>
+    </div>
+    <div class="f-col">
+      <div class="h">INTELLIGENCE</div>
+      <a href="/app?portal=ntro">NTRO Intelligence</a>
+      <a href="/app?portal=ntro">Incident Analysis</a>
+      <a href="/app?portal=ntro">Detection Feed</a>
+    </div>
+    <div class="f-col">
+      <div class="h">RESPONSE</div>
+      <a href="/app?portal=command">Government Command</a>
+      <a href="/app?portal=responder">Responder Operations</a>
+      <a href="/app?portal=citizen">Citizen Services</a>
+    </div>
+    <div class="f-col">
+      <div class="h">PLATFORM</div>
+      <a href="#detect">How FireSense Works</a>
+      <a href="#classify">Data &amp; Intelligence</a>
+      <a href="#risk">Risk Engine</a>
+    </div>
+    <div class="f-col">
+      <div class="h">RESOURCES</div>
+      <a href="/api/stats">Live Statistics API</a>
+      <a href="/api/incidents">Incidents API</a>
+      <a href="https://firms.modaps.eosdis.nasa.gov/" target="_blank" rel="noopener">NASA FIRMS</a>
+    </div>
+  </div>
+  <div class="f-bottom">
+    <span class="meta">© 2026 FireSense — From space to action. &nbsp;Built for SIH26162 (NTRO) · Demo environment · Data: NASA FIRMS, OSM, ESA WorldCover</span>
+    <span class="meta"><a href="/app">Open Platform →</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* hero video: fade in once it can actually play; poster shows until then */
+  var hv = document.getElementById('hero-video');
+  if (hv) {
+    if (reduced) { hv.removeAttribute('autoplay'); }
+    var showVid = function(){ hv.classList.add('ready'); };
+    if (hv.readyState >= 2) showVid();
+    else { hv.addEventListener('loadeddata', showVid); hv.addEventListener('error', function(){ hv.style.display = 'none'; }); }
+  }
+
+  /* Force dark mode unconditionally across all browsers and devices */
+  var root = document.documentElement;
+  root.setAttribute('data-theme', 'dark');
+  root.classList.add('dark');
+
+  // nav scroll state
+  var nav = document.getElementById('nav');
+  var onScroll = function(){ nav.classList.toggle('scrolled', scrollY > 40); };
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  // scroll reveal (single observer, GPU-friendly)
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.15, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  // failsafe: never leave a section stuck invisible (fast flicks, anchor jumps, IO misses)
+  var sweep = function(){
+    document.querySelectorAll('.reveal:not(.in)').forEach(function(el){
+      var r = el.getBoundingClientRect();
+      if (r.top < innerHeight * 0.92 && r.bottom > 0) el.classList.add('in');
+      else if (r.bottom < 0) el.classList.add('in'); // scrolled past entirely
+    });
+  };
+  addEventListener('scroll', sweep, {passive:true});
+  addEventListener('load', sweep);
+  setTimeout(sweep, 800);
+
+  // count-up numbers (once, on view)
+  var cio = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el = e.target, target = +el.dataset.count, t0 = null, dur = 1400;
+      if (reduced) { el.textContent = target; cio.unobserve(el); return; }
+      el.textContent = '0'; /* animation enhances; HTML already carried the real value */
+      var step = function(ts){
+        if(!t0) t0 = ts;
+        var p = Math.min((ts - t0)/dur, 1);
+        el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+        if(p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+      cio.unobserve(el);
+    });
+  }, {threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(function(el){ cio.observe(el); });
+
+  // risk bars fill on view
+  var bio = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.querySelectorAll('.fill').forEach(function(f, i){
+        var w = f.closest('.rb').dataset.w;
+        if (reduced) { f.style.transition='none'; f.style.width = w + '%'; return; }
+        setTimeout(function(){ f.style.width = w + '%'; }, 120 * i);
+      });
+      bio.unobserve(e.target);
+    });
+  }, {threshold:.5});
+  var rw = document.querySelector('.risk-bars'); if(rw) bio.observe(rw);
+
+  // response view switcher
+  /* classify evidence bars fill when the section becomes visible */
+  var evio = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.querySelectorAll('.fill').forEach(function(f, i){
+        var w = f.dataset.w;
+        if (reduced) { f.style.transition = 'none'; f.style.width = w + '%'; return; }
+        setTimeout(function(){ f.style.width = w + '%'; }, 140 * i);
+      });
+      evio.unobserve(e.target);
+    });
+  }, {threshold:.4});
+  var evWrap = document.querySelector('.evidence'); if (evWrap) evio.observe(evWrap);
+
+  /* response timeline mirrors the active view */
+  var TIMELINE = [0, 2, 4]; // analyst -> verified, command -> dispatched, field -> en route/contained
+  function syncTimeline(v){
+    var states = document.querySelectorAll('.rs-state');
+    var upto = TIMELINE[v];
+    states.forEach(function(s, i){
+      s.classList.toggle('active', i === upto);
+      s.classList.toggle('done', i < upto);
+    });
+  }
+  syncTimeline(0);
+
+  var VIEWS = [
+    {t:'Industrial Fire — Classified', d:'Evidence panel: facility proximity HIGH, persistence HIGH, FRP 42.8 MW. Counter-evidence disclosed for analyst review.', s:'91%', k:'CLASSIFICATION CONFIDENCE'},
+    {t:'Dispatch NDRF Team 3/4', d:'Assets at risk: 82K population, power corridor, NH-55. Downwind corridor 2.1 km. Authority: Odisha Disaster Management.', s:'87', k:'RISK SCORE · CRITICAL'},
+    {t:'En Route — ETA 14 min', d:'Field terminal: safest approach via NH-55, water point at plant gate, wind NE 16 km/h. Acknowledge → Arrived → Contained.', s:'14', k:'MINUTES TO SCENE'}
+  ];
+  var tabs = document.querySelectorAll('.rs-tab');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(x){ x.classList.remove('active'); });
+      tab.classList.add('active');
+      var v = VIEWS[+tab.dataset.v];
+      var body = document.querySelector('.rs-body');
+      document.getElementById('rs-title').textContent = v.t;
+      document.getElementById('rs-desc').textContent = v.d;
+      document.getElementById('rs-stat').textContent = v.s;
+      document.getElementById('rs-stat-k').textContent = v.k;
+      syncTimeline(+tab.dataset.v);
+      if (!reduced){
+        body.style.opacity = 0; body.style.transform = 'translateY(8px)';
+        requestAnimationFrame(function(){
+          body.style.transition = 'opacity .4s var(--ease), transform .4s var(--ease)';
+          body.style.opacity = 1; body.style.transform = 'none';
+        });
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>

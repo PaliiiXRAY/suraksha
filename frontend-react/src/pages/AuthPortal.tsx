@@ -8,7 +8,7 @@
 //   - Public Portal       : ONLY 'citizen@suraksha.public' (or emergency public bypass)
 //   - ANY OTHER EMAIL     : STRICTLY REJECTED — CANNOT AUTHENTICATE.
 // ─────────────────────────────────────────────────────────────────────────────
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { ShieldCheck, Moon, Sun, Sparkles, CheckCircle2, AlertTriangle, Lock, ShieldAlert } from 'lucide-react';
 import type { AuthUser, UserRole } from '../types';
 import { getAuthorizedRoleForEmail } from '../types';
@@ -19,6 +19,8 @@ interface Props {
   onShowToast: (msg: string, type?: 'success' | 'warning' | 'info') => void;
   theme?: 'dark' | 'light';
   onToggleTheme?: () => void;
+  initialRole?: string;
+  onBackToOverview?: () => void;
 }
 
 interface RoleConfig {
@@ -60,13 +62,13 @@ const ROLES: Record<string, RoleConfig> = {
     policyLabel: 'Strictly responder@ndrf.gov.in',
   },
   public: {
-    email: 'citizen@suraksha.public',
+    email: 'citizen@odisha.in',
     role: 'civilian',
     name: 'Civilian Resident (Public Safety)',
     org: 'Public Safety & Evacuation Portal',
-    dropdownLabel: 'Public — Citizen safety (citizen@suraksha.public)',
+    dropdownLabel: 'Public — Citizen safety (Any email ID allowed)',
     targetView: 'citizen',
-    policyLabel: 'Public Emergency Access',
+    policyLabel: 'Universal: Any email allowed',
   },
 };
 
@@ -76,17 +78,50 @@ export default function AuthPortal({
   onShowToast,
   theme = 'light',
   onToggleTheme,
+  initialRole,
+  onBackToOverview,
 }: Props) {
-  const [selectedRoleKey, setSelectedRoleKey] = useState<string>('intelligence');
-  const [email, setEmail] = useState<string>(ROLES.intelligence.email);
+  const [selectedRoleKey, setSelectedRoleKey] = useState<string>(() => {
+    if (initialRole && ROLES[initialRole]) return initialRole;
+    try {
+      const p = new URLSearchParams(window.location.search).get('role') || new URLSearchParams(window.location.search).get('portal');
+      if (p && ROLES[p]) return p;
+      if (p === 'citizen') return 'public';
+      if (p === 'cyclone' || p === 'ntro') return 'intelligence';
+      if (p === 'command') return 'command';
+      if (p === 'responder') return 'operations';
+    } catch {}
+    return 'intelligence';
+  });
+  const [email, setEmail] = useState<string>(() => {
+    const rKey = (initialRole && ROLES[initialRole]) ? initialRole : (() => {
+      try {
+        const p = new URLSearchParams(window.location.search).get('role') || new URLSearchParams(window.location.search).get('portal');
+        if (p && ROLES[p]) return p;
+        if (p === 'citizen') return 'public';
+        if (p === 'cyclone' || p === 'ntro') return 'intelligence';
+        if (p === 'command') return 'command';
+        if (p === 'responder') return 'operations';
+      } catch {}
+      return 'intelligence';
+    })();
+    return ROLES[rKey]?.email || ROLES.intelligence.email;
+  });
+
+  useEffect(() => {
+    if (initialRole && ROLES[initialRole]) {
+      setSelectedRoleKey(initialRole);
+      setEmail(ROLES[initialRole].email);
+    }
+  }, [initialRole]);
   const [password, setPassword] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [authError, setAuthError] = useState<string | null>(null);
 
-  // Live validation of email against the strict authorization matrix
+  // Live validation of email against the role authorization matrix
   const authCheck = useMemo(() => {
-    return getAuthorizedRoleForEmail(email);
-  }, [email]);
+    return getAuthorizedRoleForEmail(email, selectedRoleKey);
+  }, [email, selectedRoleKey]);
 
   function handleRoleChange(key: string) {
     setSelectedRoleKey(key);
@@ -101,32 +136,27 @@ export default function AuthPortal({
   function handleEmailChange(val: string) {
     setEmail(val);
     setAuthError(null);
-    // Auto-align selected role when an authorized email is typed
-    const check = getAuthorizedRoleForEmail(val);
-    if (check.authorized && check.roleKey && check.roleKey !== selectedRoleKey) {
-      setSelectedRoleKey(check.roleKey);
+    const norm = val.trim().toLowerCase();
+    if (norm.includes('3amcommits.admin.in')) {
+      setSelectedRoleKey('intelligence');
+    } else if (norm.includes('mosac.gov.in') || norm.includes('virms.gov.in') || norm.includes('mosdac.gov.in')) {
+      setSelectedRoleKey('command');
+    } else if (norm.includes('ndrf.gov.in')) {
+      setSelectedRoleKey('operations');
     }
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    // 1. HARD GATE: Strictly block any email that is not in the authorized whitelist
-    const check = getAuthorizedRoleForEmail(email);
+    // 1. Strictly evaluate email against the selected portal role
+    const check = getAuthorizedRoleForEmail(email, selectedRoleKey);
     if (!check.authorized) {
-      setAuthError(check.error || 'Access Denied: Unrecognized email identifier.');
+      setAuthError(check.error || 'Access Denied: Email not authorized for this role.');
       onShowToast(check.error || 'Access Denied: Email not authorized', 'warning');
       return;
     }
-
-    // 2. Ensure the email aligns with the requested role
     const cfg = ROLES[selectedRoleKey] || ROLES.intelligence;
-    if (check.role && check.role !== cfg.role) {
-      const mismatchMsg = `Access Denied: '${email.trim()}' is authorized for ${check.role.toUpperCase()} role, not ${cfg.role.toUpperCase()}.`;
-      setAuthError(mismatchMsg);
-      onShowToast(mismatchMsg, 'warning');
-      return;
-    }
 
     setLoading(true);
     setAuthError(null);
@@ -362,7 +392,11 @@ export default function AuthPortal({
                 {authCheck.authorized ? (
                   <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold text-emerald-700 dark:text-emerald-400">
                     <CheckCircle2 size={13} className="text-emerald-600" />
-                    <span>Authorized credential: {authCheck.name}</span>
+                    <span>
+                      {selectedRoleKey === 'public'
+                        ? 'Public Portal: Any email accepted'
+                        : `Authorized credential: ${authCheck.name}`}
+                    </span>
                   </div>
                 ) : (
                   <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 p-2 rounded-lg border border-rose-200 dark:border-rose-900/60 mt-1">
@@ -447,15 +481,22 @@ export default function AuthPortal({
             </div>
 
             <div className="text-center pt-1">
-              <button
-                type="button"
-                onClick={() => {
-                  onShowToast('SURAKSHA v2.4 (National Geospatial Multi-Hazard Intel System)', 'info');
-                }}
-                className="text-xs text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
-              >
-                Back to SURAKSHA overview
-              </button>
+              {onBackToOverview ? (
+                <button
+                  type="button"
+                  onClick={onBackToOverview}
+                  className="text-xs text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+                >
+                  <span>&larr;</span> Back to SURAKSHA overview
+                </button>
+              ) : (
+                <a
+                  href="/landing"
+                  className="text-xs text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors inline-flex items-center gap-1.5"
+                >
+                  <span>&larr;</span> Back to SURAKSHA overview
+                </a>
+              )}
             </div>
           </div>
         </div>
