@@ -15,7 +15,7 @@ import {
   Moon,
   Radio,
 } from 'lucide-react';
-import type { DataMode } from '../../types';
+import type { DataMode, AuthUser } from '../../types';
 
 interface Props {
   dataMode: DataMode;
@@ -26,6 +26,8 @@ interface Props {
   onToggleTheme?: () => void;
   onSimulatePass?: () => void;
   onSyncReplay?: () => void;
+  user?: AuthUser | null;
+  onSignOut?: () => void;
 }
 
 const NAV_VIEWS = [
@@ -41,6 +43,8 @@ export default function TopBar({
   theme = 'dark',
   onToggleTheme,
   onSimulatePass,
+  user,
+  onSignOut,
 }: Props) {
   return (
     <header className="flex-shrink-0 bg-white dark:bg-[#0b0e14] border-b border-slate-200/90 dark:border-white/10 select-none shadow-sm transition-colors sticky top-0 z-40">
@@ -93,10 +97,25 @@ export default function TopBar({
             <span className="hidden sm:inline">Simulate Satellite Pass</span>
           </button>
 
+          {/* User profile role badge */}
+          {user && (
+            <div className="hidden md:flex items-center gap-2 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs font-mono">
+              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span className="font-black text-slate-900 dark:text-white uppercase">
+                {user.role}
+              </span>
+              <span className="text-slate-400 dark:text-white/40">•</span>
+              <span className="text-slate-700 dark:text-slate-300 font-bold truncate max-w-[120px]">
+                {user.full_name.split(' ')[0]}
+              </span>
+            </div>
+          )}
+
           {/* Sign out button */}
           <button
-            onClick={() => {}}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-red-200 dark:border-red-500/30 bg-red-50/70 dark:bg-red-950/20 hover:bg-red-100/70 dark:hover:bg-red-950/40 text-red-700 dark:text-red-300 text-xs font-semibold transition-colors"
+            onClick={onSignOut}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-red-200 dark:border-red-500/30 bg-red-50/70 dark:bg-red-950/20 hover:bg-red-100/70 dark:hover:bg-red-950/40 text-red-700 dark:text-red-300 text-xs font-semibold transition-colors cursor-pointer"
+            title="Sign out of operational session"
           >
             <LogOut size={13} className="text-red-600 dark:text-red-400" />
             <span className="hidden sm:inline">Sign Out</span>

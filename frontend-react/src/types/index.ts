@@ -36,6 +36,17 @@ export type AssetType =
 
 export type TaskStatus = 'PENDING' | 'APPROVED' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
 
+export type UserRole = 'analyst' | 'authority' | 'responder' | 'civilian' | 'admin';
+
+export interface AuthUser {
+  id: string;
+  email: string;
+  full_name: string;
+  role: UserRole;
+  org?: string;
+  token?: string;
+}
+
 // ─── Cyclone / Hazard ────────────────────────────────────────────────────────
 
 export interface CycloneTrackPoint {
