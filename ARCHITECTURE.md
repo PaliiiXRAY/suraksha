@@ -45,8 +45,8 @@ flowchart TB
 
 ```mermaid
 flowchart TB
-    subgraph CLIENT["Client (Browser — no build step)"]
-        FE["Command Dashboard<br/>vanilla JS + Tailwind CDN + MapLibre GL<br/>served as static files by FastAPI"]
+    subgraph CLIENT["Client (Browser)"]
+        FE["SURAKSHA Dashboard<br/>React 18 + TypeScript + Vite + MapLibre GL<br/>(compiled to static assets served by FastAPI :8000<br/>or Vite dev server :5173 with offline fallback)"]
     end
 
     subgraph SERVER["Application Server (Docker — runs on ANY laptop)"]
@@ -142,9 +142,10 @@ Every factor appends to `reasons[]`: `{factor, weight, contribution, detail}`. *
 2. **IMD-wins-always:** if official warning and model score disagree, the official warning governs and the UI *shows* the disagreement.
 3. **Never-assume-safe:** no route is `PASSABLE` without evidence; missing data = `UNKNOWN`, never "safe by default".
 4. **Clamp:** never recommend a unit with `readiness < 0.4`; never `EVAC_ORDERED` with open interlock flags.
-5. **Provenance everywhere:** every score/badge carries `OFFICIAL_FORECAST | MODEL_ESTIMATE | REPLAY | SIMULATED | INSUFFICIENT_DATA`.
+5. **Provenance everywhere:** every score/badge carries `OFFICIAL_FORECAST | OBSERVED | MODEL_ESTIMATE | REPLAY | SIMULATED | INSUFFICIENT_DATA` (specification in `docs/PROVENANCE_SPEC.md`).
 
 ---
+
 
 ## 5. Relief-Logistics Layer (light, spatial-only — no routing optimization)
 
@@ -160,34 +161,37 @@ Scope wall (do NOT cross): no convoy scheduling, no vehicle/fuel optimization, n
 
 ---
 
-## 6. Database Schema (summary — full DDL in `backend/app/db/migrations/` [alembic])
+## 6. Database Schema (summary — full DDL in `backend/app/db/migrations/versions/`)
 
-| Table | Purpose |
-|---|---|
-| `organizations` | multi-tenancy: `org_type` = disaster_authority / security_agency / infrastructure_operator |
-| `users` | + `org_id`, role: admin / authority / analyst / responder / viewer |
-| `hazard_events` | cyclone/fire/flood parent; `provenance_tag`, `data_freshness`, `status` |
-| `areas` | Odisha blocks: geom, population, elevation, coastal, flood_susceptibility |
-| `area_risk` | engine output: score, rank, `reasons[]`, `interlock_flags[]` |
-| `strategic_assets` | relief stockpiles, NDRF bases, helipads, fuel depots, hospitals, ports, substations |
-| `supply_routes` | OSM NH/rail segments |
-| `asset_exposure`, `route_status` | engine output for logistics layer |
-| `response_tasks` | simulated dispatch queue; `is_simulated = true` always |
-| `incident_log` | append-only audit trail of state transitions & actions |
+| Table | Primary Key | Key Columns & Spatial Types | Purpose & Multi-Tenancy |
+|---|---|---|---|
+| `organizations` | `id` (INTEGER SERIAL) | `name`, `org_type` (disaster_authority / security_agency / infrastructure_operator) | Tenant boundary root (ADR D18) |
+| `users` | `id` (VARCHAR) | `org_id` (INTEGER FK → organizations.id, nullable), `role` | Tenant-scoped RBAC: analyst / authority / responder / admin |
+| `hazard_events` | `id` (VARCHAR) | `org_id` (INTEGER FK), `category`, `status`, `track_geometry` (Geometry LINESTRING 4326), `provenance_tag` | Cyclone lifecycle parent record |
+| `hazard_event_logs` | `id` (INTEGER SERIAL) | `event_id` (FK), `from_status`, `to_status`, `changed_by` (FK), `interlock_snapshot` (JSONB) | Transactional, append-only state transition audit |
+| `areas` | `area_code` (VARCHAR PK) | `block_name`, `district`, `geom` (Geometry MULTIPOLYGON 4326), `total_population`, `is_coastal` | 39 coastal Odisha administrative blocks |
+| `area_risk` | `id` (INTEGER SERIAL) | `event_id` (FK), `area_code` (FK), `score` (0–100), `reasons` (JSONB), `interlock_flags` (JSONB) | M1 six-factor explainable ranking output |
+| `strategic_assets` | `id` (VARCHAR PK) | `name`, `asset_type`, `criticality` (1.0–5.0), `geom` (Geometry POINT 4326), `readiness` | 42 hospitals, shelters, NDRF bases, fuel depots |
+| `supply_routes` | `id` (VARCHAR PK) | `name`, `route_type`, `geom` (Geometry LINESTRING 4326), `baseline_status` | 13 arterial highway/rail resupply corridors |
 
-Cyclone-domain tables are **additive** alembic migrations extending the existing `backend/app/db/migrations/` chain. Existing FireSense tables are never dropped or altered destructively.
+Cyclone-domain tables are **strictly additive** alembic migrations extending the existing `backend/app/db/migrations/versions/` chain:
+- `003_cyclone_schema.py` (down_revision = `a2b3c4d5e6f7`): Adds `organizations`, `hazard_events`, `areas`, `area_risk`, `strategic_assets`, `supply_routes`, and `users.org_id`.
+- `004_hazard_event_logs.py` (down_revision = `003_cyclone_schema`): Adds transactional audit table `hazard_event_logs`.
+Existing FireSense tables (`hotspots`, `incidents`, `incident_log`, `alerts`, `responders`) are never dropped or altered destructively.
 
 ---
 
-## 7. Cyclone State Machine
+## 7. Cyclone State Machine & Security Interlocks
 
 ```
 MONITORING → WARNING → EVAC_ORDERED → DEPLOYED → RESOLVED
                  ↘ STAND_DOWN (from WARNING)
 ```
 
-- Transitions only via `PATCH /api/hazard-events/{id}/status`, logged to `incident_log`.
-- `EVAC_ORDERED` requires `interlock_flags == []` — enforced at the state-machine layer, not the UI.
+- **Strict Tenant Boundary:** Every hazard event operation requires `user.org_id == event.org_id`. Users unassigned to an organization receive `403 Forbidden`. Cross-tenant mutations return `403 Forbidden`.
+- **State Machine Guard:** `EVAC_ORDERED` requires `interlock_flags == []` — enforced at the service layer in `backend/app/services/cyclone/state_machine.py`.
+- **Audit Interlock:** Every status transition and event update atomically writes an immutable entry into `hazard_event_logs` with actor ID and before/after status.
+- **Reference-Time Boundary:** Forecast source timestamps > 6 hours old flag `DATA_STALE_OVER_6H` (triggering `REVIEW_REQUIRED`); timestamps > 24 hours old trigger absolute evacuation order refusal (`DATA_STALE_OVER_24H_REFUSE`). Future timestamps are rejected at the boundary (`422 Unprocessable Content`).
 
 ---
 
@@ -203,27 +207,33 @@ suraksha/
 ├── SRS.md                      ← pointer → docs/SRS.md (canonical)
 ├── docs/
 │   ├── SRS.md                  ← software requirements specification
-│   ├── JUDGE_QA.md             ← hostile questions + answers
-│   └── DEMO_SCRIPT.md          ← 5-minute timed walkthrough
+│   ├── JUDGE_QA.md             ← hostile questions + answers (20 defense answers)
+│   ├── DEMO_SCRIPT.md          ← 5-minute timed walkthrough
+│   ├── PROVENANCE_SPEC.md      ← 5 canonical tags + live/replay toggle spec
+│   ├── SLIDES.md               ← 10-slide high-impact defense deck
+│   └── REHEARSAL_GUIDE.md      ← timed execution breakdown & failure drills
 ├── backend/
 │   ├── app/                     ← FastAPI application layer (authoritative)
 │   │   ├── api/                 ← routers: hazard_events, area_risk, assets, routes, tasks, briefing
 │   │   ├── services/
-│   │   │   ├── risk/            ← area_engine.py, interlocks.py, exposure.py
+│   │   │   ├── risk/            ← area_engine.py, interlocks.py, exposure.py, briefing_template.py
 │   │   │   └── ingest/          ← imd_adapter.py, cap_adapter.py, firms_adapter.py, cascade.py
 │   │   ├── models/              ← SQLAlchemy models
 │   │   └── core/                ← auth, RBAC, config
 │   ├── app/db/migrations/       ← alembic (existing chain; cyclone tables = additive migrations)
 │   └── workers/                 ← scheduled pollers
 ├── db/
-│   └── seed/                    ← Fani 2019 replay pack + Odisha blocks + assets CSV
+│   └── seed/                    ← Fani 2019 replay pack + Odisha blocks + assets CSV + sources.md
+│       ├── data/                ← fani_2019_track, warnings, odisha_blocks, population, osm_roads
+│       ├── sources.md           ← per-file sources, licenses, and timestamps (< 50 MB)
+│       └── strategic_assets.csv ← 42 curated installations with coordinates & criticality
 ├── frontend/
 │   └── js/ + index.html         ← command dashboard (CDN Tailwind + MapLibre, ES modules)
 ├── data/                        ← pre-downloaded GeoJSON/CSV (gitignored where large)
 ├── legacy/                      ← frozen FireSense presentation artifacts (not part of the build)
 ├── seed_demo.py                 ← scenario seeder (imported by tests — keep at root)
 ├── docker-compose.yml           ← db + api (+frontend static served by FastAPI)
-└── tests/                       ← pytest
+└── tests/                       ← pytest (including test_seed_data_pack, test_situation_briefing)
 ```
 
 **Deliberate exclusions:** no `node_modules`/Vite, no JSX build chains, no decks/screenshots in root (they live in `legacy/`), no duplicate backends, no dead scripts.
@@ -296,3 +306,41 @@ flowchart TD
 3. Replay/simulated data is always visibly badged; live mode shows source + retrieval timestamp.
 4. The platform supplements, never overrides, official warnings (IMD/ISRO/NDMA).
 5. No claim of "illegal"/"hostile" activity — only "unmapped persistent heat source — flagged for verification."
+
+
+---
+
+## 8. Multi-Hazard Intelligence & Response Loop (2026-10-31)
+
+```
+┌────────────────────────────────────────────────────────┐
+│             Hazard Footprint Event Envelope            │
+│   (event_id, hazard_type, geometry, severity, source)   │
+└───────────────────────────┬────────────────────────────┘
+                            │
+   ┌──────────────┬─────────┴───────┬──────────────┐
+   ▼              ▼                 ▼              ▼
+Cyclone        Wildfire           Flood        Earthquake
+(INSAT-3DR)   (NASA VIIRS)    (Sentinel-1)     (ShakeMap)
+   │              │                 │              │
+   └──────────────┼─────────────────┴──────────────┘
+                  ▼
+┌────────────────────────────────────────────────────────┐
+│        Universal Spatial Exposure Engine (Pure Python) │
+│  - 39 Blocks Prioritized (0-100 Score + reasons[])     │
+│  - 42 Strategic Assets (DIRECT_IMPACT / PERIPHERAL)    │
+│  - 13 Arterial Routes (PASSABLE / AT_RISK / CUT)       │
+│  - Safe Logistics Staging Hub Recommendations          │
+└───────────────────────────┬────────────────────────────┘
+                            │
+         ┌──────────────────┴──────────────────┐
+         ▼                                     ▼
+┌────────────────────────────────┐ ┌────────────────────────────────┐
+│   Government Command Portal    │ │   Responder Operations Portal  │
+│  - Monitor exposure ranking    │ │  - Receive ASSIGNED missions   │
+│  - Evaluate what-if scenarios  │ │  - Transition to MOBILIZED     │
+│  - Authorize tactical tasks    │ │  - Report ON_SCENE obstacles   │
+│    (POST /hazards/operations/  │ │    (PATCH /hazards/operations/ │
+│     authorize)                 │ │     {id}/status)               │
+└────────────────────────────────┘ └────────────────────────────────┘
+```

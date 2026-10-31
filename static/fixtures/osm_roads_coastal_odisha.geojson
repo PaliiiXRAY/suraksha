@@ -1,0 +1,485 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "title": "OpenStreetMap Coastal Arterials & Evacuation Routes (Puri, Kendrapara, Balasore Corridors)",
+    "source": "OpenStreetMap contributors (ODbL 1.0) / National Highways Authority of India (NHAI)",
+    "license": "Open Database License (ODbL) 1.0",
+    "total_routes": 13,
+    "provenance_tag": "OBSERVED"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            85.824,
+            20.296
+          ],
+          [
+            85.832,
+            20.12
+          ],
+          [
+            85.821,
+            19.95
+          ],
+          [
+            85.845,
+            19.825
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_nh316_puri_bbsr",
+        "name": "NH-316 (Bhubaneswar-Pipili-Puri Highway)",
+        "ref": "NH-316",
+        "highway_type": "trunk",
+        "districts": "Khordha, Puri",
+        "surface": "asphalt",
+        "lanes": 4,
+        "bridge_count": 6,
+        "length_km": 62.5,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            85.845,
+            19.825
+          ],
+          [
+            85.96,
+            19.855
+          ],
+          [
+            86.095,
+            19.888
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_puri_konark_marine_drive",
+        "name": "Puri-Konark Marine Drive (SH-60)",
+        "ref": "SH-60",
+        "highway_type": "primary",
+        "districts": "Puri",
+        "surface": "asphalt",
+        "lanes": 2,
+        "bridge_count": 3,
+        "length_km": 35.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            86.095,
+            19.888
+          ],
+          [
+            86.01,
+            19.99
+          ],
+          [
+            86.2,
+            19.98
+          ],
+          [
+            86.26,
+            19.92
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_konark_kakatpur_astaranga",
+        "name": "Konark-Kakatpur-Astaranga Coastal Evacuation Route",
+        "ref": "OD-MDR-44",
+        "highway_type": "secondary",
+        "districts": "Puri",
+        "surface": "asphalt",
+        "lanes": 2,
+        "bridge_count": 4,
+        "length_km": 42.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            85.845,
+            19.825
+          ],
+          [
+            85.67,
+            19.79
+          ],
+          [
+            85.45,
+            19.68
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_puri_brahmagiri_krushnaprasad",
+        "name": "Puri-Brahmagiri-Satapada-Krushnaprasad Road",
+        "ref": "SH-58",
+        "highway_type": "secondary",
+        "districts": "Puri",
+        "surface": "asphalt",
+        "lanes": 2,
+        "bridge_count": 5,
+        "length_km": 54.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            86.13,
+            20.72
+          ],
+          [
+            86.42,
+            20.5
+          ],
+          [
+            86.53,
+            20.31
+          ],
+          [
+            86.64,
+            20.29
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_nh53_paradeep_expressway",
+        "name": "NH-53 (Chandikhole-Kendrapara-Paradip Port Expressway)",
+        "ref": "NH-53",
+        "highway_type": "trunk",
+        "districts": "Jajpur, Kendrapara, Jagatsinghpur",
+        "surface": "asphalt",
+        "lanes": 4,
+        "bridge_count": 8,
+        "length_km": 76.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            86.42,
+            20.5
+          ],
+          [
+            86.56,
+            20.57
+          ],
+          [
+            86.78,
+            20.61
+          ],
+          [
+            86.88,
+            20.68
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_kendrapara_pattamundai_rajnagar",
+        "name": "Kendrapara-Pattamundai-Rajnagar Coastal Lifeline",
+        "ref": "SH-9B",
+        "highway_type": "primary",
+        "districts": "Kendrapara",
+        "surface": "asphalt",
+        "lanes": 2,
+        "bridge_count": 5,
+        "length_km": 48.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            86.78,
+            20.61
+          ],
+          [
+            86.62,
+            20.45
+          ],
+          [
+            86.72,
+            20.35
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_rajnagar_mahakalapada_coastal",
+        "name": "Rajnagar-Mahakalapada-Batighar Embankment Route",
+        "ref": "OD-RD-KNP-12",
+        "highway_type": "secondary",
+        "districts": "Kendrapara",
+        "surface": "concrete/asphalt",
+        "lanes": 2,
+        "bridge_count": 6,
+        "length_km": 38.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            85.824,
+            20.296
+          ],
+          [
+            85.882,
+            20.462
+          ],
+          [
+            86.13,
+            20.72
+          ],
+          [
+            86.51,
+            21.05
+          ],
+          [
+            86.78,
+            21.32
+          ],
+          [
+            86.93,
+            21.49
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_nh16_bbsr_cuttack_bhadrak_balasore",
+        "name": "NH-16 Golden Quadrilateral (Bhubaneswar-Cuttack-Bhadrak-Balasore Spine)",
+        "ref": "NH-16",
+        "highway_type": "trunk",
+        "districts": "Khordha, Cuttack, Jajpur, Bhadrak, Balasore",
+        "surface": "asphalt",
+        "lanes": 6,
+        "bridge_count": 14,
+        "length_km": 205.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            86.93,
+            21.49
+          ],
+          [
+            86.98,
+            21.48
+          ],
+          [
+            87.02,
+            21.47
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_balasore_chandipur_drdo",
+        "name": "Balasore-Chandipur Integrated Test Range Defense Corridor",
+        "ref": "OD-DRDO-RD-01",
+        "highway_type": "primary",
+        "districts": "Balasore",
+        "surface": "heavy-duty asphalt",
+        "lanes": 4,
+        "bridge_count": 2,
+        "length_km": 16.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            86.93,
+            21.49
+          ],
+          [
+            87.07,
+            21.68
+          ],
+          [
+            87.21,
+            21.8
+          ],
+          [
+            87.31,
+            21.9
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_balasore_basta_jaleswar_nh16",
+        "name": "Balasore-Basta-Jaleswar Interstate Spine (NH-16 North)",
+        "ref": "NH-16",
+        "highway_type": "trunk",
+        "districts": "Balasore",
+        "surface": "asphalt",
+        "lanes": 4,
+        "bridge_count": 4,
+        "length_km": 52.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            87.21,
+            21.8
+          ],
+          [
+            87.14,
+            21.64
+          ],
+          [
+            87.35,
+            21.65
+          ],
+          [
+            87.51,
+            21.62
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_jaleswar_baliapal_bhograi_digha",
+        "name": "Jaleswar-Baliapal-Bhograi Coastal Evacuation Highway",
+        "ref": "SH-57",
+        "highway_type": "secondary",
+        "districts": "Balasore",
+        "surface": "asphalt",
+        "lanes": 2,
+        "bridge_count": 5,
+        "length_km": 58.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            86.51,
+            21.05
+          ],
+          [
+            86.62,
+            20.91
+          ],
+          [
+            86.74,
+            20.78
+          ],
+          [
+            86.96,
+            20.8
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_bhadrak_chandbali_dhamra",
+        "name": "Bhadrak-Chandbali-Dhamra Port Link Road",
+        "ref": "SH-9",
+        "highway_type": "primary",
+        "districts": "Bhadrak",
+        "surface": "asphalt",
+        "lanes": 2,
+        "bridge_count": 5,
+        "length_km": 52.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            85.882,
+            20.462
+          ],
+          [
+            86.17,
+            20.26
+          ],
+          [
+            86.35,
+            20.09
+          ],
+          [
+            86.42,
+            20.18
+          ]
+        ]
+      },
+      "properties": {
+        "route_id": "osm_rt_cuttack_jagatsinghpur_erasama",
+        "name": "Cuttack-Jagatsinghpur-Balikuda-Erasama Coastal Route",
+        "ref": "SH-9A",
+        "highway_type": "primary",
+        "districts": "Cuttack, Jagatsinghpur",
+        "surface": "asphalt",
+        "lanes": 2,
+        "bridge_count": 7,
+        "length_km": 68.0,
+        "baseline_status": "PASSABLE_WITH_EVIDENCE",
+        "provenance_tag": "OBSERVED"
+      }
+    }
+  ]
+}

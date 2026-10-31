@@ -7,8 +7,8 @@ docker-compose.override.yml
 
 .vercel
 
-~$*
-data/
+/data/
+!db/seed/data/
 
 ~$*
 AeroThermal_SIH26162_v2.backup.pptx

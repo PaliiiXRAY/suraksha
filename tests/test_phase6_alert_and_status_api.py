@@ -13,7 +13,6 @@ from backend.app.main import app
 from backend.app.core.config import DATABASE_URL
 from backend.app.core.security import create_access_token
 from backend.app.models.alert import Alert
-from backend.app.models.asset import Asset
 from backend.app.models.incident import Incident
 from backend.app.models.incident_log import IncidentLog
 from backend.app.models.responder import Responder
@@ -258,7 +257,7 @@ def test_valid_status_transitions_sequence(test_users, phase6_test_incident, db_
     logs = db_session.query(IncidentLog).filter(
         IncidentLog.incident_id == inc_id,
         IncidentLog.action == "STATUS_CHANGE"
-    ).all()
+    ).order_by(IncidentLog.id.asc()).all()
     assert len(logs) == len(lifecycle)
     last_log = logs[-1]
     assert last_log.old_status == "CONTAINED"

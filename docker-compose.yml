@@ -29,6 +29,10 @@ services:
       FIRMS_MAP_KEY: ${FIRMS_MAP_KEY:?FIRMS_MAP_KEY must be set in the environment or .env (see .env.example)}
     ports:
       - "8000:8000"
+    volumes:
+      - ./static:/app/static
+      - ./backend:/app/backend
+      - ./db:/app/db
     depends_on:
       db:
         condition: service_healthy

@@ -1,0 +1,40 @@
+area_code,block_name,district,lgd_code,total_population,vulnerable_population_u5_o65,household_count,pucca_house_ratio,census_source,provenance_tag
+OD_PUR_01,Puri Sadar,Puri,3751,238000,47600,52800,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_PUR_02,Brahmagiri,Puri,3752,142000,28400,31500,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_PUR_03,Krushnaprasad,Puri,3753,98500,19700,21800,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_PUR_04,Satyabadi,Puri,3754,168000,33600,37300,0.65,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_PUR_05,Gop,Puri,3755,185000,37000,41100,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_PUR_06,Kakatpur,Puri,3756,122000,24400,27100,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_PUR_07,Astaranga,Puri,3757,89000,17800,19700,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_PUR_08,Pipili,Puri,3758,172000,34400,38200,0.65,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_PUR_09,Nimapara,Puri,3759,198000,39600,44000,0.65,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_JSP_01,Erasama,Jagatsinghpur,3711,148000,29600,32800,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_JSP_02,Kujang,Jagatsinghpur,3712,165000,33000,36600,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_JSP_03,Paradeep,Jagatsinghpur,3713,115000,23000,25500,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_JSP_04,Balikuda,Jagatsinghpur,3714,178000,35600,39500,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_JSP_05,Jagatsinghpur Sadar,Jagatsinghpur,3715,215000,43000,47700,0.65,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_KEN_01,Mahakalapada,Kendrapara,3721,182000,36400,40400,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_KEN_02,Rajnagar,Kendrapara,3722,175000,35000,38800,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_KEN_03,Rajkanika,Kendrapara,3723,154000,30800,34200,0.65,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_KEN_04,Pattamundai,Kendrapara,3724,192000,38400,42600,0.65,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_KEN_05,Kendrapara Sadar,Kendrapara,3725,224000,44800,49700,0.65,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_KEN_06,Aul,Kendrapara,3726,146000,29200,32400,0.65,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_BHD_01,Chandbali,Bhadrak,3651,246000,49200,54600,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_BHD_02,Basudevpur,Bhadrak,3652,218000,43600,48400,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_BHD_03,Bhadrak Sadar,Bhadrak,3653,275000,55000,61100,0.65,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_BHD_04,Dhamnagar,Bhadrak,3654,195000,39000,43300,0.65,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_BAL_01,Balasore Sadar,Balasore,3631,310000,62000,68800,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_BAL_02,Remuna,Balasore,3632,185000,37000,41100,0.65,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_BAL_03,Bahanaga,Balasore,3633,162000,32400,36000,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_BAL_04,Soro,Balasore,3634,178000,35600,39500,0.65,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_BAL_05,Bhograi,Balasore,3635,285000,57000,63300,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_BAL_06,Baliapal,Balasore,3636,212000,42400,47100,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_BAL_07,Jaleswar,Balasore,3637,235000,47000,52200,0.65,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_KHO_01,Bhubaneswar,Khordha,3741,885000,132750,196600,0.65,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_KHO_02,Jatani,Khordha,3742,165000,33000,36600,0.65,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_KHO_03,Chilika,Khordha,3743,138000,27600,30600,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_CUT_01,Cuttack Sadar,Cuttack,3671,650000,117000,144400,0.65,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_CUT_02,Salepur,Cuttack,3672,210000,42000,46600,0.65,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_CUT_03,Niali,Cuttack,3673,158000,31600,35100,0.65,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_GAN_01,Chatrapur,Ganjam,3691,195000,39000,43300,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL
+OD_GAN_02,Rangeilunda (Gopalpur),Ganjam,3692,220000,44000,48800,0.42,Census of India 2011 / LGD Odisha 2019 baseline,HISTORICAL

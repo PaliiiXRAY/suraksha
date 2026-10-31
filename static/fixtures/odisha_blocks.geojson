@@ -1,0 +1,3016 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "title": "Odisha Coastal & Flood-Prone Administrative Blocks (LGD)",
+    "coverage": "Puri, Jagatsinghpur, Kendrapara, Bhadrak, Balasore, Khordha, Cuttack, Ganjam",
+    "total_blocks": 39,
+    "source": "Local Government Directory (LGD) Ministry of Panchayati Raj / Census of India",
+    "license": "Government Open Data License - India (GODL)",
+    "provenance_tag": "HISTORICAL"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.89791,
+              19.825
+            ],
+            [
+              85.89891,
+              19.85428
+            ],
+            [
+              85.87146,
+              19.86811
+            ],
+            [
+              85.845,
+              19.89234
+            ],
+            [
+              85.81854,
+              19.86811
+            ],
+            [
+              85.79109,
+              19.85428
+            ],
+            [
+              85.79209,
+              19.825
+            ],
+            [
+              85.80726,
+              19.8045
+            ],
+            [
+              85.81854,
+              19.78189
+            ],
+            [
+              85.845,
+              19.79279
+            ],
+            [
+              85.87146,
+              19.78189
+            ],
+            [
+              85.88274,
+              19.8045
+            ],
+            [
+              85.89791,
+              19.825
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_PUR_01",
+        "block_name": "Puri Sadar",
+        "district": "Puri",
+        "lgd_code": 3751,
+        "center_latitude": 19.825,
+        "center_longitude": 85.845,
+        "is_coastal": true,
+        "elevation_meters": 6.5,
+        "flood_susceptibility_index": 0.88,
+        "total_population": 238000,
+        "vulnerable_population": 47600,
+        "household_count": 52800,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.7229,
+              19.79
+            ],
+            [
+              85.7239,
+              19.81928
+            ],
+            [
+              85.69645,
+              19.83311
+            ],
+            [
+              85.67,
+              19.85734
+            ],
+            [
+              85.64355,
+              19.83311
+            ],
+            [
+              85.6161,
+              19.81928
+            ],
+            [
+              85.6171,
+              19.79
+            ],
+            [
+              85.63227,
+              19.7695
+            ],
+            [
+              85.64355,
+              19.74689
+            ],
+            [
+              85.67,
+              19.75779
+            ],
+            [
+              85.69645,
+              19.74689
+            ],
+            [
+              85.70773,
+              19.7695
+            ],
+            [
+              85.7229,
+              19.79
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_PUR_02",
+        "block_name": "Brahmagiri",
+        "district": "Puri",
+        "lgd_code": 3752,
+        "center_latitude": 19.79,
+        "center_longitude": 85.67,
+        "is_coastal": true,
+        "elevation_meters": 4.2,
+        "flood_susceptibility_index": 0.94,
+        "total_population": 142000,
+        "vulnerable_population": 28400,
+        "household_count": 31500,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.50286,
+              19.68
+            ],
+            [
+              85.50386,
+              19.70928
+            ],
+            [
+              85.47643,
+              19.72311
+            ],
+            [
+              85.45,
+              19.74734
+            ],
+            [
+              85.42357,
+              19.72311
+            ],
+            [
+              85.39614,
+              19.70928
+            ],
+            [
+              85.39714,
+              19.68
+            ],
+            [
+              85.4123,
+              19.6595
+            ],
+            [
+              85.42357,
+              19.63689
+            ],
+            [
+              85.45,
+              19.64779
+            ],
+            [
+              85.47643,
+              19.63689
+            ],
+            [
+              85.4877,
+              19.6595
+            ],
+            [
+              85.50286,
+              19.68
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_PUR_03",
+        "block_name": "Krushnaprasad",
+        "district": "Puri",
+        "lgd_code": 3753,
+        "center_latitude": 19.68,
+        "center_longitude": 85.45,
+        "is_coastal": true,
+        "elevation_meters": 3.5,
+        "flood_susceptibility_index": 0.96,
+        "total_population": 98500,
+        "vulnerable_population": 19700,
+        "household_count": 21800,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.87295,
+              19.95
+            ],
+            [
+              85.87395,
+              19.97928
+            ],
+            [
+              85.84648,
+              19.99311
+            ],
+            [
+              85.82,
+              20.01734
+            ],
+            [
+              85.79352,
+              19.99311
+            ],
+            [
+              85.76605,
+              19.97928
+            ],
+            [
+              85.76705,
+              19.95
+            ],
+            [
+              85.78223,
+              19.9295
+            ],
+            [
+              85.79352,
+              19.90689
+            ],
+            [
+              85.82,
+              19.91779
+            ],
+            [
+              85.84648,
+              19.90689
+            ],
+            [
+              85.85777,
+              19.9295
+            ],
+            [
+              85.87295,
+              19.95
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_PUR_04",
+        "block_name": "Satyabadi",
+        "district": "Puri",
+        "lgd_code": 3754,
+        "center_latitude": 19.95,
+        "center_longitude": 85.82,
+        "is_coastal": false,
+        "elevation_meters": 11.0,
+        "flood_susceptibility_index": 0.72,
+        "total_population": 168000,
+        "vulnerable_population": 33600,
+        "household_count": 37300,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.06297,
+              19.99
+            ],
+            [
+              86.06396,
+              20.01928
+            ],
+            [
+              86.03648,
+              20.03311
+            ],
+            [
+              86.01,
+              20.05734
+            ],
+            [
+              85.98352,
+              20.03311
+            ],
+            [
+              85.95604,
+              20.01928
+            ],
+            [
+              85.95703,
+              19.99
+            ],
+            [
+              85.97222,
+              19.9695
+            ],
+            [
+              85.98352,
+              19.94689
+            ],
+            [
+              86.01,
+              19.95779
+            ],
+            [
+              86.03648,
+              19.94689
+            ],
+            [
+              86.04778,
+              19.9695
+            ],
+            [
+              86.06297,
+              19.99
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_PUR_05",
+        "block_name": "Gop",
+        "district": "Puri",
+        "lgd_code": 3755,
+        "center_latitude": 19.99,
+        "center_longitude": 86.01,
+        "is_coastal": true,
+        "elevation_meters": 8.0,
+        "flood_susceptibility_index": 0.82,
+        "total_population": 185000,
+        "vulnerable_population": 37000,
+        "household_count": 41100,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.25296,
+              19.98
+            ],
+            [
+              86.25396,
+              20.00928
+            ],
+            [
+              86.22648,
+              20.02311
+            ],
+            [
+              86.2,
+              20.04734
+            ],
+            [
+              86.17352,
+              20.02311
+            ],
+            [
+              86.14604,
+              20.00928
+            ],
+            [
+              86.14704,
+              19.98
+            ],
+            [
+              86.16223,
+              19.9595
+            ],
+            [
+              86.17352,
+              19.93689
+            ],
+            [
+              86.2,
+              19.94779
+            ],
+            [
+              86.22648,
+              19.93689
+            ],
+            [
+              86.23777,
+              19.9595
+            ],
+            [
+              86.25296,
+              19.98
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_PUR_06",
+        "block_name": "Kakatpur",
+        "district": "Puri",
+        "lgd_code": 3756,
+        "center_latitude": 19.98,
+        "center_longitude": 86.2,
+        "is_coastal": true,
+        "elevation_meters": 5.0,
+        "flood_susceptibility_index": 0.91,
+        "total_population": 122000,
+        "vulnerable_population": 24400,
+        "household_count": 27100,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.31294,
+              19.92
+            ],
+            [
+              86.31394,
+              19.94928
+            ],
+            [
+              86.28647,
+              19.96311
+            ],
+            [
+              86.26,
+              19.98734
+            ],
+            [
+              86.23353,
+              19.96311
+            ],
+            [
+              86.20606,
+              19.94928
+            ],
+            [
+              86.20706,
+              19.92
+            ],
+            [
+              86.22224,
+              19.8995
+            ],
+            [
+              86.23353,
+              19.87689
+            ],
+            [
+              86.26,
+              19.88779
+            ],
+            [
+              86.28647,
+              19.87689
+            ],
+            [
+              86.29776,
+              19.8995
+            ],
+            [
+              86.31294,
+              19.92
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_PUR_07",
+        "block_name": "Astaranga",
+        "district": "Puri",
+        "lgd_code": 3757,
+        "center_latitude": 19.92,
+        "center_longitude": 86.26,
+        "is_coastal": true,
+        "elevation_meters": 4.0,
+        "flood_susceptibility_index": 0.95,
+        "total_population": 89000,
+        "vulnerable_population": 17800,
+        "household_count": 19700,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.88301,
+              20.12
+            ],
+            [
+              85.88401,
+              20.14928
+            ],
+            [
+              85.8565,
+              20.16311
+            ],
+            [
+              85.83,
+              20.18734
+            ],
+            [
+              85.8035,
+              20.16311
+            ],
+            [
+              85.77599,
+              20.14928
+            ],
+            [
+              85.77699,
+              20.12
+            ],
+            [
+              85.79219,
+              20.0995
+            ],
+            [
+              85.8035,
+              20.07689
+            ],
+            [
+              85.83,
+              20.08779
+            ],
+            [
+              85.8565,
+              20.07689
+            ],
+            [
+              85.86781,
+              20.0995
+            ],
+            [
+              85.88301,
+              20.12
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_PUR_08",
+        "block_name": "Pipili",
+        "district": "Puri",
+        "lgd_code": 3758,
+        "center_latitude": 20.12,
+        "center_longitude": 85.83,
+        "is_coastal": false,
+        "elevation_meters": 18.0,
+        "flood_susceptibility_index": 0.65,
+        "total_population": 172000,
+        "vulnerable_population": 34400,
+        "household_count": 38200,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.07299,
+              20.06
+            ],
+            [
+              86.07399,
+              20.08928
+            ],
+            [
+              86.04649,
+              20.10311
+            ],
+            [
+              86.02,
+              20.12734
+            ],
+            [
+              85.99351,
+              20.10311
+            ],
+            [
+              85.96601,
+              20.08928
+            ],
+            [
+              85.96701,
+              20.06
+            ],
+            [
+              85.98221,
+              20.0395
+            ],
+            [
+              85.99351,
+              20.01689
+            ],
+            [
+              86.02,
+              20.02779
+            ],
+            [
+              86.04649,
+              20.01689
+            ],
+            [
+              86.05779,
+              20.0395
+            ],
+            [
+              86.07299,
+              20.06
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_PUR_09",
+        "block_name": "Nimapara",
+        "district": "Puri",
+        "lgd_code": 3759,
+        "center_latitude": 20.06,
+        "center_longitude": 86.02,
+        "is_coastal": false,
+        "elevation_meters": 14.0,
+        "flood_susceptibility_index": 0.74,
+        "total_population": 198000,
+        "vulnerable_population": 39600,
+        "household_count": 44000,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.47303,
+              20.18
+            ],
+            [
+              86.47403,
+              20.20928
+            ],
+            [
+              86.44652,
+              20.22311
+            ],
+            [
+              86.42,
+              20.24734
+            ],
+            [
+              86.39348,
+              20.22311
+            ],
+            [
+              86.36597,
+              20.20928
+            ],
+            [
+              86.36697,
+              20.18
+            ],
+            [
+              86.38218,
+              20.1595
+            ],
+            [
+              86.39348,
+              20.13689
+            ],
+            [
+              86.42,
+              20.14779
+            ],
+            [
+              86.44652,
+              20.13689
+            ],
+            [
+              86.45782,
+              20.1595
+            ],
+            [
+              86.47303,
+              20.18
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_JSP_01",
+        "block_name": "Erasama",
+        "district": "Jagatsinghpur",
+        "lgd_code": 3711,
+        "center_latitude": 20.18,
+        "center_longitude": 86.42,
+        "is_coastal": true,
+        "elevation_meters": 3.8,
+        "flood_susceptibility_index": 0.98,
+        "total_population": 148000,
+        "vulnerable_population": 29600,
+        "household_count": 32800,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.58307,
+              20.31
+            ],
+            [
+              86.58408,
+              20.33928
+            ],
+            [
+              86.55654,
+              20.35311
+            ],
+            [
+              86.53,
+              20.37734
+            ],
+            [
+              86.50346,
+              20.35311
+            ],
+            [
+              86.47592,
+              20.33928
+            ],
+            [
+              86.47693,
+              20.31
+            ],
+            [
+              86.49215,
+              20.2895
+            ],
+            [
+              86.50346,
+              20.26689
+            ],
+            [
+              86.53,
+              20.27779
+            ],
+            [
+              86.55654,
+              20.26689
+            ],
+            [
+              86.56785,
+              20.2895
+            ],
+            [
+              86.58307,
+              20.31
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_JSP_02",
+        "block_name": "Kujang",
+        "district": "Jagatsinghpur",
+        "lgd_code": 3712,
+        "center_latitude": 20.31,
+        "center_longitude": 86.53,
+        "is_coastal": true,
+        "elevation_meters": 5.0,
+        "flood_susceptibility_index": 0.92,
+        "total_population": 165000,
+        "vulnerable_population": 33000,
+        "household_count": 36600,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.69307,
+              20.29
+            ],
+            [
+              86.69407,
+              20.31928
+            ],
+            [
+              86.66653,
+              20.33311
+            ],
+            [
+              86.64,
+              20.35734
+            ],
+            [
+              86.61347,
+              20.33311
+            ],
+            [
+              86.58593,
+              20.31928
+            ],
+            [
+              86.58693,
+              20.29
+            ],
+            [
+              86.60215,
+              20.2695
+            ],
+            [
+              86.61347,
+              20.24689
+            ],
+            [
+              86.64,
+              20.25779
+            ],
+            [
+              86.66653,
+              20.24689
+            ],
+            [
+              86.67785,
+              20.2695
+            ],
+            [
+              86.69307,
+              20.29
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_JSP_03",
+        "block_name": "Paradeep",
+        "district": "Jagatsinghpur",
+        "lgd_code": 3713,
+        "center_latitude": 20.29,
+        "center_longitude": 86.64,
+        "is_coastal": true,
+        "elevation_meters": 4.5,
+        "flood_susceptibility_index": 0.89,
+        "total_population": 115000,
+        "vulnerable_population": 23000,
+        "household_count": 25500,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.403,
+              20.09
+            ],
+            [
+              86.404,
+              20.11928
+            ],
+            [
+              86.3765,
+              20.13311
+            ],
+            [
+              86.35,
+              20.15734
+            ],
+            [
+              86.3235,
+              20.13311
+            ],
+            [
+              86.296,
+              20.11928
+            ],
+            [
+              86.297,
+              20.09
+            ],
+            [
+              86.3122,
+              20.0695
+            ],
+            [
+              86.3235,
+              20.04689
+            ],
+            [
+              86.35,
+              20.05779
+            ],
+            [
+              86.3765,
+              20.04689
+            ],
+            [
+              86.3878,
+              20.0695
+            ],
+            [
+              86.403,
+              20.09
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_JSP_04",
+        "block_name": "Balikuda",
+        "district": "Jagatsinghpur",
+        "lgd_code": 3714,
+        "center_latitude": 20.09,
+        "center_longitude": 86.35,
+        "is_coastal": true,
+        "elevation_meters": 6.2,
+        "flood_susceptibility_index": 0.85,
+        "total_population": 178000,
+        "vulnerable_population": 35600,
+        "household_count": 39500,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.22306,
+              20.26
+            ],
+            [
+              86.22406,
+              20.28928
+            ],
+            [
+              86.19653,
+              20.30311
+            ],
+            [
+              86.17,
+              20.32734
+            ],
+            [
+              86.14347,
+              20.30311
+            ],
+            [
+              86.11594,
+              20.28928
+            ],
+            [
+              86.11694,
+              20.26
+            ],
+            [
+              86.13216,
+              20.2395
+            ],
+            [
+              86.14347,
+              20.21689
+            ],
+            [
+              86.17,
+              20.22779
+            ],
+            [
+              86.19653,
+              20.21689
+            ],
+            [
+              86.20784,
+              20.2395
+            ],
+            [
+              86.22306,
+              20.26
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_JSP_05",
+        "block_name": "Jagatsinghpur Sadar",
+        "district": "Jagatsinghpur",
+        "lgd_code": 3715,
+        "center_latitude": 20.26,
+        "center_longitude": 86.17,
+        "is_coastal": false,
+        "elevation_meters": 15.0,
+        "flood_susceptibility_index": 0.7,
+        "total_population": 215000,
+        "vulnerable_population": 43000,
+        "household_count": 47700,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.67312,
+              20.45
+            ],
+            [
+              86.67412,
+              20.47928
+            ],
+            [
+              86.64656,
+              20.49311
+            ],
+            [
+              86.62,
+              20.51734
+            ],
+            [
+              86.59344,
+              20.49311
+            ],
+            [
+              86.56588,
+              20.47928
+            ],
+            [
+              86.56688,
+              20.45
+            ],
+            [
+              86.58211,
+              20.4295
+            ],
+            [
+              86.59344,
+              20.40689
+            ],
+            [
+              86.62,
+              20.41779
+            ],
+            [
+              86.64656,
+              20.40689
+            ],
+            [
+              86.65789,
+              20.4295
+            ],
+            [
+              86.67312,
+              20.45
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_KEN_01",
+        "block_name": "Mahakalapada",
+        "district": "Kendrapara",
+        "lgd_code": 3721,
+        "center_latitude": 20.45,
+        "center_longitude": 86.62,
+        "is_coastal": true,
+        "elevation_meters": 3.2,
+        "flood_susceptibility_index": 0.97,
+        "total_population": 182000,
+        "vulnerable_population": 36400,
+        "household_count": 40400,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.83318,
+              20.61
+            ],
+            [
+              86.83418,
+              20.63928
+            ],
+            [
+              86.80659,
+              20.65311
+            ],
+            [
+              86.78,
+              20.67734
+            ],
+            [
+              86.75341,
+              20.65311
+            ],
+            [
+              86.72582,
+              20.63928
+            ],
+            [
+              86.72682,
+              20.61
+            ],
+            [
+              86.74207,
+              20.5895
+            ],
+            [
+              86.75341,
+              20.56689
+            ],
+            [
+              86.78,
+              20.57779
+            ],
+            [
+              86.80659,
+              20.56689
+            ],
+            [
+              86.81793,
+              20.5895
+            ],
+            [
+              86.83318,
+              20.61
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_KEN_02",
+        "block_name": "Rajnagar",
+        "district": "Kendrapara",
+        "lgd_code": 3722,
+        "center_latitude": 20.61,
+        "center_longitude": 86.78,
+        "is_coastal": true,
+        "elevation_meters": 3.0,
+        "flood_susceptibility_index": 0.99,
+        "total_population": 175000,
+        "vulnerable_population": 35000,
+        "household_count": 38800,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.73323,
+              20.76
+            ],
+            [
+              86.73423,
+              20.78928
+            ],
+            [
+              86.70662,
+              20.80311
+            ],
+            [
+              86.68,
+              20.82734
+            ],
+            [
+              86.65338,
+              20.80311
+            ],
+            [
+              86.62577,
+              20.78928
+            ],
+            [
+              86.62677,
+              20.76
+            ],
+            [
+              86.64204,
+              20.7395
+            ],
+            [
+              86.65338,
+              20.71689
+            ],
+            [
+              86.68,
+              20.72779
+            ],
+            [
+              86.70662,
+              20.71689
+            ],
+            [
+              86.71796,
+              20.7395
+            ],
+            [
+              86.73323,
+              20.76
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_KEN_03",
+        "block_name": "Rajkanika",
+        "district": "Kendrapara",
+        "lgd_code": 3723,
+        "center_latitude": 20.76,
+        "center_longitude": 86.68,
+        "is_coastal": false,
+        "elevation_meters": 7.5,
+        "flood_susceptibility_index": 0.84,
+        "total_population": 154000,
+        "vulnerable_population": 30800,
+        "household_count": 34200,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.61316,
+              20.57
+            ],
+            [
+              86.61417,
+              20.59928
+            ],
+            [
+              86.58658,
+              20.61311
+            ],
+            [
+              86.56,
+              20.63734
+            ],
+            [
+              86.53342,
+              20.61311
+            ],
+            [
+              86.50583,
+              20.59928
+            ],
+            [
+              86.50684,
+              20.57
+            ],
+            [
+              86.52208,
+              20.5495
+            ],
+            [
+              86.53342,
+              20.52689
+            ],
+            [
+              86.56,
+              20.53779
+            ],
+            [
+              86.58658,
+              20.52689
+            ],
+            [
+              86.59792,
+              20.5495
+            ],
+            [
+              86.61316,
+              20.57
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_KEN_04",
+        "block_name": "Pattamundai",
+        "district": "Kendrapara",
+        "lgd_code": 3724,
+        "center_latitude": 20.57,
+        "center_longitude": 86.56,
+        "is_coastal": false,
+        "elevation_meters": 9.0,
+        "flood_susceptibility_index": 0.81,
+        "total_population": 192000,
+        "vulnerable_population": 38400,
+        "household_count": 42600,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.47314,
+              20.5
+            ],
+            [
+              86.47414,
+              20.52928
+            ],
+            [
+              86.44657,
+              20.54311
+            ],
+            [
+              86.42,
+              20.56734
+            ],
+            [
+              86.39343,
+              20.54311
+            ],
+            [
+              86.36586,
+              20.52928
+            ],
+            [
+              86.36686,
+              20.5
+            ],
+            [
+              86.3821,
+              20.4795
+            ],
+            [
+              86.39343,
+              20.45689
+            ],
+            [
+              86.42,
+              20.46779
+            ],
+            [
+              86.44657,
+              20.45689
+            ],
+            [
+              86.4579,
+              20.4795
+            ],
+            [
+              86.47314,
+              20.5
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_KEN_05",
+        "block_name": "Kendrapara Sadar",
+        "district": "Kendrapara",
+        "lgd_code": 3725,
+        "center_latitude": 20.5,
+        "center_longitude": 86.42,
+        "is_coastal": false,
+        "elevation_meters": 13.0,
+        "flood_susceptibility_index": 0.76,
+        "total_population": 224000,
+        "vulnerable_population": 44800,
+        "household_count": 49700,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.5632,
+              20.67
+            ],
+            [
+              86.5642,
+              20.69928
+            ],
+            [
+              86.5366,
+              20.71311
+            ],
+            [
+              86.51,
+              20.73734
+            ],
+            [
+              86.4834,
+              20.71311
+            ],
+            [
+              86.4558,
+              20.69928
+            ],
+            [
+              86.4568,
+              20.67
+            ],
+            [
+              86.47206,
+              20.6495
+            ],
+            [
+              86.4834,
+              20.62689
+            ],
+            [
+              86.51,
+              20.63779
+            ],
+            [
+              86.5366,
+              20.62689
+            ],
+            [
+              86.54794,
+              20.6495
+            ],
+            [
+              86.5632,
+              20.67
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_KEN_06",
+        "block_name": "Aul",
+        "district": "Kendrapara",
+        "lgd_code": 3726,
+        "center_latitude": 20.67,
+        "center_longitude": 86.51,
+        "is_coastal": false,
+        "elevation_meters": 8.5,
+        "flood_susceptibility_index": 0.86,
+        "total_population": 146000,
+        "vulnerable_population": 29200,
+        "household_count": 32400,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.79324,
+              20.78
+            ],
+            [
+              86.79424,
+              20.80928
+            ],
+            [
+              86.76662,
+              20.82311
+            ],
+            [
+              86.74,
+              20.84734
+            ],
+            [
+              86.71338,
+              20.82311
+            ],
+            [
+              86.68576,
+              20.80928
+            ],
+            [
+              86.68676,
+              20.78
+            ],
+            [
+              86.70203,
+              20.7595
+            ],
+            [
+              86.71338,
+              20.73689
+            ],
+            [
+              86.74,
+              20.74779
+            ],
+            [
+              86.76662,
+              20.73689
+            ],
+            [
+              86.77797,
+              20.7595
+            ],
+            [
+              86.79324,
+              20.78
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_BHD_01",
+        "block_name": "Chandbali",
+        "district": "Bhadrak",
+        "lgd_code": 3651,
+        "center_latitude": 20.78,
+        "center_longitude": 86.74,
+        "is_coastal": true,
+        "elevation_meters": 4.0,
+        "flood_susceptibility_index": 0.95,
+        "total_population": 246000,
+        "vulnerable_population": 49200,
+        "household_count": 54600,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.82336,
+              21.13
+            ],
+            [
+              86.82437,
+              21.15928
+            ],
+            [
+              86.79668,
+              21.17311
+            ],
+            [
+              86.77,
+              21.19734
+            ],
+            [
+              86.74332,
+              21.17311
+            ],
+            [
+              86.71563,
+              21.15928
+            ],
+            [
+              86.71664,
+              21.13
+            ],
+            [
+              86.73194,
+              21.1095
+            ],
+            [
+              86.74332,
+              21.08689
+            ],
+            [
+              86.77,
+              21.09779
+            ],
+            [
+              86.79668,
+              21.08689
+            ],
+            [
+              86.80806,
+              21.1095
+            ],
+            [
+              86.82336,
+              21.13
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_BHD_02",
+        "block_name": "Basudevpur",
+        "district": "Bhadrak",
+        "lgd_code": 3652,
+        "center_latitude": 21.13,
+        "center_longitude": 86.77,
+        "is_coastal": true,
+        "elevation_meters": 5.5,
+        "flood_susceptibility_index": 0.9,
+        "total_population": 218000,
+        "vulnerable_population": 43600,
+        "household_count": 48400,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.56333,
+              21.05
+            ],
+            [
+              86.56434,
+              21.07928
+            ],
+            [
+              86.53667,
+              21.09311
+            ],
+            [
+              86.51,
+              21.11734
+            ],
+            [
+              86.48333,
+              21.09311
+            ],
+            [
+              86.45566,
+              21.07928
+            ],
+            [
+              86.45667,
+              21.05
+            ],
+            [
+              86.47196,
+              21.0295
+            ],
+            [
+              86.48333,
+              21.00689
+            ],
+            [
+              86.51,
+              21.01779
+            ],
+            [
+              86.53667,
+              21.00689
+            ],
+            [
+              86.54804,
+              21.0295
+            ],
+            [
+              86.56333,
+              21.05
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_BHD_03",
+        "block_name": "Bhadrak Sadar",
+        "district": "Bhadrak",
+        "lgd_code": 3653,
+        "center_latitude": 21.05,
+        "center_longitude": 86.51,
+        "is_coastal": false,
+        "elevation_meters": 19.0,
+        "flood_susceptibility_index": 0.68,
+        "total_population": 275000,
+        "vulnerable_population": 55000,
+        "household_count": 61100,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.49329,
+              20.92
+            ],
+            [
+              86.49429,
+              20.94928
+            ],
+            [
+              86.46664,
+              20.96311
+            ],
+            [
+              86.44,
+              20.98734
+            ],
+            [
+              86.41336,
+              20.96311
+            ],
+            [
+              86.38571,
+              20.94928
+            ],
+            [
+              86.38671,
+              20.92
+            ],
+            [
+              86.402,
+              20.8995
+            ],
+            [
+              86.41336,
+              20.87689
+            ],
+            [
+              86.44,
+              20.88779
+            ],
+            [
+              86.46664,
+              20.87689
+            ],
+            [
+              86.478,
+              20.8995
+            ],
+            [
+              86.49329,
+              20.92
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_BHD_04",
+        "block_name": "Dhamnagar",
+        "district": "Bhadrak",
+        "lgd_code": 3654,
+        "center_latitude": 20.92,
+        "center_longitude": 86.44,
+        "is_coastal": false,
+        "elevation_meters": 16.0,
+        "flood_susceptibility_index": 0.78,
+        "total_population": 195000,
+        "vulnerable_population": 39000,
+        "household_count": 43300,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.98349,
+              21.49
+            ],
+            [
+              86.9845,
+              21.51928
+            ],
+            [
+              86.95675,
+              21.53311
+            ],
+            [
+              86.93,
+              21.55734
+            ],
+            [
+              86.90325,
+              21.53311
+            ],
+            [
+              86.8755,
+              21.51928
+            ],
+            [
+              86.87651,
+              21.49
+            ],
+            [
+              86.89185,
+              21.4695
+            ],
+            [
+              86.90325,
+              21.44689
+            ],
+            [
+              86.93,
+              21.45779
+            ],
+            [
+              86.95675,
+              21.44689
+            ],
+            [
+              86.96815,
+              21.4695
+            ],
+            [
+              86.98349,
+              21.49
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_BAL_01",
+        "block_name": "Balasore Sadar",
+        "district": "Balasore",
+        "lgd_code": 3631,
+        "center_latitude": 21.49,
+        "center_longitude": 86.93,
+        "is_coastal": true,
+        "elevation_meters": 12.0,
+        "flood_susceptibility_index": 0.83,
+        "total_population": 310000,
+        "vulnerable_population": 62000,
+        "household_count": 68800,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.92351,
+              21.53
+            ],
+            [
+              86.92452,
+              21.55928
+            ],
+            [
+              86.89675,
+              21.57311
+            ],
+            [
+              86.87,
+              21.59734
+            ],
+            [
+              86.84325,
+              21.57311
+            ],
+            [
+              86.81548,
+              21.55928
+            ],
+            [
+              86.81649,
+              21.53
+            ],
+            [
+              86.83184,
+              21.5095
+            ],
+            [
+              86.84325,
+              21.48689
+            ],
+            [
+              86.87,
+              21.49779
+            ],
+            [
+              86.89675,
+              21.48689
+            ],
+            [
+              86.90816,
+              21.5095
+            ],
+            [
+              86.92351,
+              21.53
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_BAL_02",
+        "block_name": "Remuna",
+        "district": "Balasore",
+        "lgd_code": 3632,
+        "center_latitude": 21.53,
+        "center_longitude": 86.87,
+        "is_coastal": false,
+        "elevation_meters": 18.0,
+        "flood_susceptibility_index": 0.7,
+        "total_population": 185000,
+        "vulnerable_population": 37000,
+        "household_count": 41100,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.83343,
+              21.32
+            ],
+            [
+              86.83444,
+              21.34928
+            ],
+            [
+              86.80672,
+              21.36311
+            ],
+            [
+              86.78,
+              21.38734
+            ],
+            [
+              86.75328,
+              21.36311
+            ],
+            [
+              86.72556,
+              21.34928
+            ],
+            [
+              86.72657,
+              21.32
+            ],
+            [
+              86.74189,
+              21.2995
+            ],
+            [
+              86.75328,
+              21.27689
+            ],
+            [
+              86.78,
+              21.28779
+            ],
+            [
+              86.80672,
+              21.27689
+            ],
+            [
+              86.81811,
+              21.2995
+            ],
+            [
+              86.83343,
+              21.32
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_BAL_03",
+        "block_name": "Bahanaga",
+        "district": "Balasore",
+        "lgd_code": 3633,
+        "center_latitude": 21.32,
+        "center_longitude": 86.78,
+        "is_coastal": true,
+        "elevation_meters": 8.0,
+        "flood_susceptibility_index": 0.87,
+        "total_population": 162000,
+        "vulnerable_population": 32400,
+        "household_count": 36000,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.74342,
+              21.28
+            ],
+            [
+              86.74442,
+              21.30928
+            ],
+            [
+              86.71671,
+              21.32311
+            ],
+            [
+              86.69,
+              21.34734
+            ],
+            [
+              86.66329,
+              21.32311
+            ],
+            [
+              86.63558,
+              21.30928
+            ],
+            [
+              86.63658,
+              21.28
+            ],
+            [
+              86.6519,
+              21.2595
+            ],
+            [
+              86.66329,
+              21.23689
+            ],
+            [
+              86.69,
+              21.24779
+            ],
+            [
+              86.71671,
+              21.23689
+            ],
+            [
+              86.7281,
+              21.2595
+            ],
+            [
+              86.74342,
+              21.28
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_BAL_04",
+        "block_name": "Soro",
+        "district": "Balasore",
+        "lgd_code": 3634,
+        "center_latitude": 21.28,
+        "center_longitude": 86.69,
+        "is_coastal": false,
+        "elevation_meters": 16.0,
+        "flood_susceptibility_index": 0.75,
+        "total_population": 178000,
+        "vulnerable_population": 35600,
+        "household_count": 39500,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              87.40355,
+              21.65
+            ],
+            [
+              87.40456,
+              21.67928
+            ],
+            [
+              87.37678,
+              21.69311
+            ],
+            [
+              87.35,
+              21.71734
+            ],
+            [
+              87.32322,
+              21.69311
+            ],
+            [
+              87.29544,
+              21.67928
+            ],
+            [
+              87.29645,
+              21.65
+            ],
+            [
+              87.31181,
+              21.6295
+            ],
+            [
+              87.32322,
+              21.60689
+            ],
+            [
+              87.35,
+              21.61779
+            ],
+            [
+              87.37678,
+              21.60689
+            ],
+            [
+              87.38819,
+              21.6295
+            ],
+            [
+              87.40355,
+              21.65
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_BAL_05",
+        "block_name": "Bhograi",
+        "district": "Balasore",
+        "lgd_code": 3635,
+        "center_latitude": 21.65,
+        "center_longitude": 87.35,
+        "is_coastal": true,
+        "elevation_meters": 4.5,
+        "flood_susceptibility_index": 0.93,
+        "total_population": 285000,
+        "vulnerable_population": 57000,
+        "household_count": 63300,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              87.19355,
+              21.64
+            ],
+            [
+              87.19456,
+              21.66928
+            ],
+            [
+              87.16677,
+              21.68311
+            ],
+            [
+              87.14,
+              21.70734
+            ],
+            [
+              87.11323,
+              21.68311
+            ],
+            [
+              87.08544,
+              21.66928
+            ],
+            [
+              87.08645,
+              21.64
+            ],
+            [
+              87.10181,
+              21.6195
+            ],
+            [
+              87.11323,
+              21.59689
+            ],
+            [
+              87.14,
+              21.60779
+            ],
+            [
+              87.16677,
+              21.59689
+            ],
+            [
+              87.17819,
+              21.6195
+            ],
+            [
+              87.19355,
+              21.64
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_BAL_06",
+        "block_name": "Baliapal",
+        "district": "Balasore",
+        "lgd_code": 3636,
+        "center_latitude": 21.64,
+        "center_longitude": 87.14,
+        "is_coastal": true,
+        "elevation_meters": 6.0,
+        "flood_susceptibility_index": 0.89,
+        "total_population": 212000,
+        "vulnerable_population": 42400,
+        "household_count": 47100,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              87.26361,
+              21.8
+            ],
+            [
+              87.26462,
+              21.82928
+            ],
+            [
+              87.2368,
+              21.84311
+            ],
+            [
+              87.21,
+              21.86734
+            ],
+            [
+              87.1832,
+              21.84311
+            ],
+            [
+              87.15538,
+              21.82928
+            ],
+            [
+              87.15639,
+              21.8
+            ],
+            [
+              87.17177,
+              21.7795
+            ],
+            [
+              87.1832,
+              21.75689
+            ],
+            [
+              87.21,
+              21.76779
+            ],
+            [
+              87.2368,
+              21.75689
+            ],
+            [
+              87.24823,
+              21.7795
+            ],
+            [
+              87.26361,
+              21.8
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_BAL_07",
+        "block_name": "Jaleswar",
+        "district": "Balasore",
+        "lgd_code": 3637,
+        "center_latitude": 21.8,
+        "center_longitude": 87.21,
+        "is_coastal": false,
+        "elevation_meters": 15.0,
+        "flood_susceptibility_index": 0.79,
+        "total_population": 235000,
+        "vulnerable_population": 47000,
+        "household_count": 52200,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.87707,
+              20.296
+            ],
+            [
+              85.87807,
+              20.32528
+            ],
+            [
+              85.85053,
+              20.33911
+            ],
+            [
+              85.824,
+              20.36334
+            ],
+            [
+              85.79747,
+              20.33911
+            ],
+            [
+              85.76993,
+              20.32528
+            ],
+            [
+              85.77093,
+              20.296
+            ],
+            [
+              85.78615,
+              20.2755
+            ],
+            [
+              85.79747,
+              20.25289
+            ],
+            [
+              85.824,
+              20.26379
+            ],
+            [
+              85.85053,
+              20.25289
+            ],
+            [
+              85.86185,
+              20.2755
+            ],
+            [
+              85.87707,
+              20.296
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_KHO_01",
+        "block_name": "Bhubaneswar",
+        "district": "Khordha",
+        "lgd_code": 3741,
+        "center_latitude": 20.296,
+        "center_longitude": 85.824,
+        "is_coastal": false,
+        "elevation_meters": 45.0,
+        "flood_susceptibility_index": 0.42,
+        "total_population": 885000,
+        "vulnerable_population": 132750,
+        "household_count": 196600,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.75302,
+              20.16
+            ],
+            [
+              85.75402,
+              20.18928
+            ],
+            [
+              85.72651,
+              20.20311
+            ],
+            [
+              85.7,
+              20.22734
+            ],
+            [
+              85.67349,
+              20.20311
+            ],
+            [
+              85.64598,
+              20.18928
+            ],
+            [
+              85.64698,
+              20.16
+            ],
+            [
+              85.66218,
+              20.1395
+            ],
+            [
+              85.67349,
+              20.11689
+            ],
+            [
+              85.7,
+              20.12779
+            ],
+            [
+              85.72651,
+              20.11689
+            ],
+            [
+              85.73782,
+              20.1395
+            ],
+            [
+              85.75302,
+              20.16
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_KHO_02",
+        "block_name": "Jatani",
+        "district": "Khordha",
+        "lgd_code": 3742,
+        "center_latitude": 20.16,
+        "center_longitude": 85.7,
+        "is_coastal": false,
+        "elevation_meters": 38.0,
+        "flood_susceptibility_index": 0.48,
+        "total_population": 165000,
+        "vulnerable_population": 33000,
+        "household_count": 36600,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.3729,
+              19.78
+            ],
+            [
+              85.37389,
+              19.80928
+            ],
+            [
+              85.34645,
+              19.82311
+            ],
+            [
+              85.32,
+              19.84734
+            ],
+            [
+              85.29355,
+              19.82311
+            ],
+            [
+              85.26611,
+              19.80928
+            ],
+            [
+              85.2671,
+              19.78
+            ],
+            [
+              85.28227,
+              19.7595
+            ],
+            [
+              85.29355,
+              19.73689
+            ],
+            [
+              85.32,
+              19.74779
+            ],
+            [
+              85.34645,
+              19.73689
+            ],
+            [
+              85.35773,
+              19.7595
+            ],
+            [
+              85.3729,
+              19.78
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_KHO_03",
+        "block_name": "Chilika",
+        "district": "Khordha",
+        "lgd_code": 3743,
+        "center_latitude": 19.78,
+        "center_longitude": 85.32,
+        "is_coastal": true,
+        "elevation_meters": 7.0,
+        "flood_susceptibility_index": 0.9,
+        "total_population": 138000,
+        "vulnerable_population": 27600,
+        "household_count": 30600,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.93513,
+              20.462
+            ],
+            [
+              85.93613,
+              20.49128
+            ],
+            [
+              85.90856,
+              20.50511
+            ],
+            [
+              85.882,
+              20.52934
+            ],
+            [
+              85.85544,
+              20.50511
+            ],
+            [
+              85.82787,
+              20.49128
+            ],
+            [
+              85.82887,
+              20.462
+            ],
+            [
+              85.84411,
+              20.4415
+            ],
+            [
+              85.85544,
+              20.41889
+            ],
+            [
+              85.882,
+              20.42979
+            ],
+            [
+              85.90856,
+              20.41889
+            ],
+            [
+              85.91989,
+              20.4415
+            ],
+            [
+              85.93513,
+              20.462
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_CUT_01",
+        "block_name": "Cuttack Sadar",
+        "district": "Cuttack",
+        "lgd_code": 3671,
+        "center_latitude": 20.462,
+        "center_longitude": 85.882,
+        "is_coastal": false,
+        "elevation_meters": 28.0,
+        "flood_susceptibility_index": 0.68,
+        "total_population": 650000,
+        "vulnerable_population": 117000,
+        "household_count": 144400,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.06315,
+              20.52
+            ],
+            [
+              86.06415,
+              20.54928
+            ],
+            [
+              86.03657,
+              20.56311
+            ],
+            [
+              86.01,
+              20.58734
+            ],
+            [
+              85.98343,
+              20.56311
+            ],
+            [
+              85.95585,
+              20.54928
+            ],
+            [
+              85.95685,
+              20.52
+            ],
+            [
+              85.9721,
+              20.4995
+            ],
+            [
+              85.98343,
+              20.47689
+            ],
+            [
+              86.01,
+              20.48779
+            ],
+            [
+              86.03657,
+              20.47689
+            ],
+            [
+              86.0479,
+              20.4995
+            ],
+            [
+              86.06315,
+              20.52
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_CUT_02",
+        "block_name": "Salepur",
+        "district": "Cuttack",
+        "lgd_code": 3672,
+        "center_latitude": 20.52,
+        "center_longitude": 86.01,
+        "is_coastal": false,
+        "elevation_meters": 22.0,
+        "flood_susceptibility_index": 0.73,
+        "total_population": 210000,
+        "vulnerable_population": 42000,
+        "household_count": 46600,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              86.11302,
+              20.14
+            ],
+            [
+              86.11402,
+              20.16928
+            ],
+            [
+              86.08651,
+              20.18311
+            ],
+            [
+              86.06,
+              20.20734
+            ],
+            [
+              86.03349,
+              20.18311
+            ],
+            [
+              86.00598,
+              20.16928
+            ],
+            [
+              86.00698,
+              20.14
+            ],
+            [
+              86.02219,
+              20.1195
+            ],
+            [
+              86.03349,
+              20.09689
+            ],
+            [
+              86.06,
+              20.10779
+            ],
+            [
+              86.08651,
+              20.09689
+            ],
+            [
+              86.09781,
+              20.1195
+            ],
+            [
+              86.11302,
+              20.14
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_CUT_03",
+        "block_name": "Niali",
+        "district": "Cuttack",
+        "lgd_code": 3673,
+        "center_latitude": 20.14,
+        "center_longitude": 86.06,
+        "is_coastal": false,
+        "elevation_meters": 18.0,
+        "flood_susceptibility_index": 0.77,
+        "total_population": 158000,
+        "vulnerable_population": 31600,
+        "household_count": 35100,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              85.04275,
+              19.35
+            ],
+            [
+              85.04375,
+              19.37928
+            ],
+            [
+              85.01638,
+              19.39311
+            ],
+            [
+              84.99,
+              19.41734
+            ],
+            [
+              84.96362,
+              19.39311
+            ],
+            [
+              84.93625,
+              19.37928
+            ],
+            [
+              84.93725,
+              19.35
+            ],
+            [
+              84.95238,
+              19.3295
+            ],
+            [
+              84.96362,
+              19.30689
+            ],
+            [
+              84.99,
+              19.31779
+            ],
+            [
+              85.01638,
+              19.30689
+            ],
+            [
+              85.02762,
+              19.3295
+            ],
+            [
+              85.04275,
+              19.35
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_GAN_01",
+        "block_name": "Chatrapur",
+        "district": "Ganjam",
+        "lgd_code": 3691,
+        "center_latitude": 19.35,
+        "center_longitude": 84.99,
+        "is_coastal": true,
+        "elevation_meters": 12.0,
+        "flood_susceptibility_index": 0.8,
+        "total_population": 195000,
+        "vulnerable_population": 39000,
+        "household_count": 43300,
+        "provenance_tag": "HISTORICAL"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              84.91273,
+              19.26
+            ],
+            [
+              84.91372,
+              19.28928
+            ],
+            [
+              84.88636,
+              19.30311
+            ],
+            [
+              84.86,
+              19.32734
+            ],
+            [
+              84.83364,
+              19.30311
+            ],
+            [
+              84.80628,
+              19.28928
+            ],
+            [
+              84.80727,
+              19.26
+            ],
+            [
+              84.8224,
+              19.2395
+            ],
+            [
+              84.83364,
+              19.21689
+            ],
+            [
+              84.86,
+              19.22779
+            ],
+            [
+              84.88636,
+              19.21689
+            ],
+            [
+              84.8976,
+              19.2395
+            ],
+            [
+              84.91273,
+              19.26
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "area_code": "OD_GAN_02",
+        "block_name": "Rangeilunda (Gopalpur)",
+        "district": "Ganjam",
+        "lgd_code": 3692,
+        "center_latitude": 19.26,
+        "center_longitude": 84.86,
+        "is_coastal": true,
+        "elevation_meters": 8.0,
+        "flood_susceptibility_index": 0.86,
+        "total_population": 220000,
+        "vulnerable_population": 44000,
+        "household_count": 48800,
+        "provenance_tag": "HISTORICAL"
+      }
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 dark:bg-[#0a0d14] dark:text-white font-sans antialiased;
+    font-feature-settings: "tnum" 1; /* tabular numbers everywhere */
+  }
+
+  /* Scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 dark:bg-white/20 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-400 dark:bg-white/30;
+  }
+}
+
+@layer components {
+  /* MapLibre map container */
+  .maplibregl-map {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Pulse animation for SIMULATED badge */
+  @keyframes simulated-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .animate-simulated {
+    animation: simulated-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
