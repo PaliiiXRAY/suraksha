@@ -1,0 +1,11 @@
+{
+  "appId": "org.suraksha.mesh",
+  "appName": "SURAKSHA",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "path": "../android"
+  }
+}

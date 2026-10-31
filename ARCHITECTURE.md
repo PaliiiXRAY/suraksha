@@ -230,6 +230,57 @@ suraksha/
 
 ---
 
+## 8b. Citizen Mobile & Mesh Architecture (Capacitor + Kotlin MeshNative)
+
+The citizen-facing application is built as a single unified TypeScript codebase running as both a PWA and a native Android application via Capacitor (`/android`).
+
+```mermaid
+flowchart TD
+    subgraph APP["Citizen Client Layer (app/src)"]
+        UI["React UI · MapLibre GL · MiniSearch Handbook"]
+        DOM["Domain Engine (Event · HLC · Sign · Validate)"]
+        SYNC["Delta-Sync Engine (Batches of 50 · Priorities · Rate Limiter)"]
+        TR["Transport Abstraction (types.ts)"]
+    end
+
+    subgraph TRANSPORTS["Transports (app/src/transports/)"]
+        T_QR["QR Optical Transport"]
+        T_FILE["File Bundle Transport"]
+        T_NEARBY["Nearby Transport (nearby.ts)"]
+    end
+
+    subgraph ANDROID["Android Native Subsystem (android/)"]
+        PLUGIN["MeshNative Capacitor Plugin (Kotlin)"]
+        FS["MeshForegroundService<br/>(Ongoing Notification + CPU WakeLock)"]
+        NC["Nearby Connections API<br/>(Strategy.P2P_CLUSTER · Auto-accept)"]
+        SMS["SmsHelper<br/>(Emergency SOS Cellular Fallback)"]
+    end
+
+    UI --> DOM --> SYNC --> TR
+    TR --> T_QR & T_FILE & T_NEARBY
+    T_NEARBY <-->|"Capacitor Bridge (Base64)"| PLUGIN
+    PLUGIN --> FS & NC & SMS
+```
+
+### Key Subsystems:
+1. **Screen-Off Background Mesh (`MeshForegroundService`)**:
+   - Manages a continuous Android Foreground Service displaying an ongoing notification (`CATEGORY_SERVICE`, `PRIORITY_LOW`).
+   - Acquires a partial wake lock to guarantee CPU availability for radio scanning and byte transfer while the screen is locked.
+2. **Autonomous Multi-Peer Networking (`NearbyMeshManager`)**:
+   - Utilizes Google Nearby Connections with `Strategy.P2P_CLUSTER`.
+   - Runs simultaneous dual-role advertising and discovery so any two phones within 50m discover and connect symmetrically.
+   - Incoming byte streams are decoded from Base64 and fed directly into the TypeScript `Session.onReceive` handler for delta-sync.
+3. **Emergency SOS Cellular Fallback (`SmsHelper`)**:
+   - When data networks are offline, SOS packets are formatted into compact short payloads and dispatched via Android `SmsManager`.
+4. **Transparent Permission Rationale (`PermissionsManager`)**:
+   - Guides citizens through the 4 required system permissions:
+     - **Location**: Required by Android OS for BLE beacon scanning.
+     - **Nearby Devices**: Bluetooth scan/advertise/connect for device discovery.
+     - **Notifications**: Foreground service status indicator.
+     - **SMS**: Emergency SOS offline dispatch fallback.
+
+---
+
 ## 9. Hardware & Performance Reality
 
 - **No GPU is needed anywhere.** The LLM briefing agent calls an API (free tier), never local inference.

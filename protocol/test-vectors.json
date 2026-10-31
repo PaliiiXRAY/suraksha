@@ -1,0 +1,76 @@
+{
+  "_comment": "MeshMap protocol test vectors — deterministic Ed25519 signatures.",
+  "_seed_hex": "deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
+  "_public_key_hex": "ff57575dc7af8bfc4d0837cc1ce2017b686a88145dc5579a958e3462fe9a908e",
+  "vectors": [
+    {
+      "description": "Valid HAZARD event – flooding",
+      "event": {
+        "id": "01TV1HAZARD00000000000000",
+        "v": 1,
+        "kind": "HAZARD",
+        "type": "flooding",
+        "feature_id": "w8r4g5h6j",
+        "ref": null,
+        "lat": 20.2961,
+        "lon": 85.8245,
+        "severity": 3,
+        "text": "Waist-deep flooding on Station Road near underpass",
+        "qty": null,
+        "hlc": "1556712000000:0000:ff57575d",
+        "device_time": "2019-05-01T12:00:00.000Z",
+        "author": "ff57575dc7af8bfc4d0837cc1ce2017b686a88145dc5579a958e3462fe9a908e",
+        "ttl_hours": 48,
+        "sig": "a784bca2f35e566b080bb914205c5270d83849b5897a07c88d15834ac06dae1d82fbaf57f22f06e880c5dcc9cd9f14962f1b146924fe9a39584895de8448a600"
+      },
+      "canonical_json": "[\"01TV1HAZARD00000000000000\",1,\"HAZARD\",\"flooding\",\"w8r4g5h6j\",null,20.2961,85.8245,3,\"Waist-deep flooding on Station Road near underpass\",null,\"1556712000000:0000:ff57575d\",\"2019-05-01T12:00:00.000Z\",\"ff57575dc7af8bfc4d0837cc1ce2017b686a88145dc5579a958e3462fe9a908e\",48]",
+      "expected_valid": true
+    },
+    {
+      "description": "Valid RESOURCE event – shelter",
+      "event": {
+        "id": "01TV2RESOURCE000000000000",
+        "v": 1,
+        "kind": "RESOURCE",
+        "type": "shelter",
+        "feature_id": "w8r3t7y2k",
+        "ref": null,
+        "lat": 20.3012,
+        "lon": 85.8301,
+        "severity": 1,
+        "text": "Community hall open – 200 capacity",
+        "qty": 200,
+        "hlc": "1556712060000:0000:ff57575d",
+        "device_time": "2019-05-01T12:01:00.000Z",
+        "author": "ff57575dc7af8bfc4d0837cc1ce2017b686a88145dc5579a958e3462fe9a908e",
+        "ttl_hours": 72,
+        "sig": "580302f9c74d6a0dc623227a40da50283b0e9a02a9ceb8d50f586f7203e1b97a5f028bd86b9a41f7b986c095c9992fc46592ab3fc5b52cf20656c636ecb17007"
+      },
+      "canonical_json": "[\"01TV2RESOURCE000000000000\",1,\"RESOURCE\",\"shelter\",\"w8r3t7y2k\",null,20.3012,85.8301,1,\"Community hall open – 200 capacity\",200,\"1556712060000:0000:ff57575d\",\"2019-05-01T12:01:00.000Z\",\"ff57575dc7af8bfc4d0837cc1ce2017b686a88145dc5579a958e3462fe9a908e\",72]",
+      "expected_valid": true
+    },
+    {
+      "description": "Valid SOS event – family trapped",
+      "event": {
+        "id": "01TV3SOS000000000000000000",
+        "v": 1,
+        "kind": "SOS",
+        "type": "other",
+        "feature_id": "w8r5p9q1m",
+        "ref": null,
+        "lat": 20.2875,
+        "lon": 85.8199,
+        "severity": 3,
+        "text": "Family trapped on second floor – 4 people including infant",
+        "qty": 4,
+        "hlc": "1556712120000:0000:ff57575d",
+        "device_time": "2019-05-01T12:02:00.000Z",
+        "author": "ff57575dc7af8bfc4d0837cc1ce2017b686a88145dc5579a958e3462fe9a908e",
+        "ttl_hours": 24,
+        "sig": "f5563c3df215f418c246e51aa279abf11c63ba0de927848a6fee22af5405ba8fbc7e2a5b58403e1edb9b26e328a59f870f8ecaed4fdd99f14ee6be400dcb9300"
+      },
+      "canonical_json": "[\"01TV3SOS000000000000000000\",1,\"SOS\",\"other\",\"w8r5p9q1m\",null,20.2875,85.8199,3,\"Family trapped on second floor – 4 people including infant\",4,\"1556712120000:0000:ff57575d\",\"2019-05-01T12:02:00.000Z\",\"ff57575dc7af8bfc4d0837cc1ce2017b686a88145dc5579a958e3462fe9a908e\",24]",
+      "expected_valid": true
+    }
+  ]
+}
