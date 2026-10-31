@@ -1262,10 +1262,9 @@ function initPipelineMap() {
     const el = document.getElementById('pipeline-map');
     if (!el || typeof L === 'undefined') return;
     pipelineMap = L.map(el, { scrollWheelZoom: true }).setView([22.3, 79.0], 5);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        subdomains: 'abcd',
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
         maxZoom: 18,
-        attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+        attribution: '&copy; Esri', maxZoom: 16
     }).addTo(pipelineMap);
     pipelineLayer = L.layerGroup().addTo(pipelineMap);
 }

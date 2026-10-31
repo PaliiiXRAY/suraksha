@@ -42,7 +42,7 @@ class CycloneViewController {
     });
 
     // Dark cartographic base tiles (works with fallback if offline)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
       maxZoom: 18,
       subdomains: 'abcd'
     }).addTo(this.map);

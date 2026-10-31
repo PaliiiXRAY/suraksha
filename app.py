@@ -104,8 +104,8 @@ class AeroThermalHandler(SimpleHTTPRequestHandler):
             "default-src 'self'; "
             "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com; "
             "style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://unpkg.com; "
-            "img-src 'self' data: blob: https://*.tile.openstreetmap.org https://tile.openstreetmap.org https://*.basemaps.cartocdn.com https://basemaps.cartocdn.com https://*.cartocdn.com https://images.unsplash.com; "
-            "connect-src 'self' https://*.basemaps.cartocdn.com https://basemaps.cartocdn.com https://*.cartocdn.com; "
+            "img-src 'self' data: blob: https://*.tile.openstreetmap.org https://tile.openstreetmap.org https://*.basemaps.cartocdn.com https://basemaps.cartocdn.com https://*.cartocdn.com https://server.arcgisonline.com https://images.unsplash.com; "
+            "connect-src 'self' https://*.basemaps.cartocdn.com https://basemaps.cartocdn.com https://*.cartocdn.com https://server.arcgisonline.com; "
             "frame-ancestors 'none'"
         ),
         "X-Content-Type-Options": "nosniff",
