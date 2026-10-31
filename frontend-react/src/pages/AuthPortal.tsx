@@ -130,16 +130,20 @@ export default function AuthPortal({
     }, 350);
   }
 
+  const isDark = theme === 'dark';
+  const heroBackgroundImage = isDark
+    ? "linear-gradient(to top, rgba(6, 9, 15, 0.96) 0%, rgba(6, 9, 15, 0.65) 30%, rgba(6, 9, 15, 0.15) 55%, rgba(6, 9, 15, 0.80) 100%), url('/media/globe_landing_dark.jpg')"
+    : "linear-gradient(to top, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.50) 28%, rgba(0, 0, 0, 0) 55%, rgba(15, 23, 42, 0.65) 100%), url('/media/globe_landing_light.jpg')";
+
   return (
-    <div className="min-h-screen w-full flex flex-col lg:flex-row bg-[#080b11] text-slate-900 relative">
+    <div className="min-h-screen w-full flex flex-col lg:flex-row bg-[#f4f7fb] dark:bg-[#080b11] text-slate-900 dark:text-white relative transition-colors duration-300">
       {/* ─────────────────────────────────────────────────────────────────────────
-          LEFT COLUMN (50%): 3D Globe with Atmosphere & Typography matching Target
+          LEFT COLUMN (50%): 3D Globe with Atmosphere & Dual Theme Imagery
           ───────────────────────────────────────────────────────────────────────── */}
       <div
-        className="lg:w-1/2 min-h-[420px] lg:min-h-screen relative flex flex-col justify-between p-8 sm:p-14 overflow-hidden border-b lg:border-b-0 lg:border-r border-white/10"
+        className="lg:w-1/2 min-h-[420px] lg:min-h-screen relative flex flex-col justify-between p-8 sm:p-14 overflow-hidden border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-white/10 transition-all duration-300"
         style={{
-          backgroundImage:
-            "linear-gradient(to top, rgba(8, 11, 17, 0.95) 0%, rgba(8, 11, 17, 0.60) 25%, rgba(8, 11, 17, 0) 50%, rgba(8, 11, 17, 0.70) 100%), url('/media/globe_landing_bg.jpg')",
+          backgroundImage: heroBackgroundImage,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
