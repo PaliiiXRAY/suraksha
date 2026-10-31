@@ -3,7 +3,8 @@
 // Centered max-w-7xl canvas, dual-theme support, and seamless portal navigation.
 // ─────────────────────────────────────────────────────────────────────────────
 import React, { useState, useEffect } from 'react';
-import type { DataMode } from './types';
+import type { DataMode, AuthUser } from './types';
+import AuthPortal from './pages/AuthPortal';
 import TopBar from './components/layout/TopBar';
 import ToastContainer, { ToastMessage } from './components/ui/Toast';
 import HazardIntelligence from './pages/HazardIntelligence';
@@ -18,6 +19,14 @@ export default function App() {
   const [dataMode, setDataMode] = useState<DataMode>('REPLAY');
   const [activeView, setActiveView] = useState<ViewId>('intelligence');
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
+  const [user, setUser] = useState<AuthUser | null>(() => {
+    try {
+      const saved = localStorage.getItem('suraksha_auth_user');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
   const [theme, setTheme] = useState<ThemeMode>(() => {
     try {
       const saved = localStorage.getItem('fs-theme');
@@ -58,6 +67,46 @@ export default function App() {
     setToasts(prev => prev.filter(t => t.id !== id));
   }
 
+  function handleSignOut() {
+    setUser(null);
+    try {
+      localStorage.removeItem('suraksha_auth_user');
+    } catch {}
+    addToast('Signed out of operational session', 'info');
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen w-full bg-[#f4f7fb] dark:bg-[#0c1017] text-slate-900 dark:text-white transition-colors">
+        <ToastContainer toasts={toasts} onDismiss={dismissToast} />
+        <AuthPortal
+          onLoginSuccess={(authUser, targetView) => {
+            setUser(authUser);
+            setActiveView(targetView as ViewId);
+            try {
+              localStorage.setItem('suraksha_auth_user', JSON.stringify(authUser));
+            } catch {}
+          }}
+          onPublicBypass={() => {
+            const guestUser: AuthUser = {
+              id: 'usr_guest_public',
+              email: 'citizen@suraksha.public',
+              full_name: 'Civilian (Public Access)',
+              role: 'civilian',
+              org: 'Public Resilience Portal',
+            };
+            setUser(guestUser);
+            setActiveView('citizen');
+            addToast('Public access granted: Citizen Safety Portal', 'info');
+          }}
+          onShowToast={(msg, type = 'info') => addToast(msg, type)}
+          theme={theme}
+          onToggleTheme={toggleTheme}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col min-h-screen w-full bg-[#f1f5f9] dark:bg-[#0a0d14] text-slate-900 dark:text-white transition-colors">
       {/* Toast Notification Container */}
@@ -71,6 +120,8 @@ export default function App() {
         activeView={activeView}
         theme={theme}
         onToggleTheme={toggleTheme}
+        user={user}
+        onSignOut={handleSignOut}
         onSimulatePass={() =>
           addToast('🛰️ Satellite pass simulated: Synthetic telemetry ingested across Bay of Bengal & Odisha basin')
         }
