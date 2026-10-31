@@ -255,3 +255,41 @@ suraksha/
 3. Replay/simulated data is always visibly badged; live mode shows source + retrieval timestamp.
 4. The platform supplements, never overrides, official warnings (IMD/ISRO/NDMA).
 5. No claim of "illegal"/"hostile" activity — only "unmapped persistent heat source — flagged for verification."
+
+
+---
+
+## 8. Multi-Hazard Intelligence & Response Loop (2026-10-31)
+
+```
+┌────────────────────────────────────────────────────────┐
+│             Hazard Footprint Event Envelope            │
+│   (event_id, hazard_type, geometry, severity, source)   │
+└───────────────────────────┬────────────────────────────┘
+                            │
+   ┌──────────────┬─────────┴───────┬──────────────┐
+   ▼              ▼                 ▼              ▼
+Cyclone        Wildfire           Flood        Earthquake
+(INSAT-3DR)   (NASA VIIRS)    (Sentinel-1)     (ShakeMap)
+   │              │                 │              │
+   └──────────────┼─────────────────┴──────────────┘
+                  ▼
+┌────────────────────────────────────────────────────────┐
+│        Universal Spatial Exposure Engine (Pure Python) │
+│  - 39 Blocks Prioritized (0-100 Score + reasons[])     │
+│  - 42 Strategic Assets (DIRECT_IMPACT / PERIPHERAL)    │
+│  - 13 Arterial Routes (PASSABLE / AT_RISK / CUT)       │
+│  - Safe Logistics Staging Hub Recommendations          │
+└───────────────────────────┬────────────────────────────┘
+                            │
+         ┌──────────────────┴──────────────────┐
+         ▼                                     ▼
+┌────────────────────────────────┐ ┌────────────────────────────────┐
+│   Government Command Portal    │ │   Responder Operations Portal  │
+│  - Monitor exposure ranking    │ │  - Receive ASSIGNED missions   │
+│  - Evaluate what-if scenarios  │ │  - Transition to MOBILIZED     │
+│  - Authorize tactical tasks    │ │  - Report ON_SCENE obstacles   │
+│    (POST /hazards/operations/  │ │    (PATCH /hazards/operations/ │
+│     authorize)                 │ │     {id}/status)               │
+└────────────────────────────────┘ └────────────────────────────────┘
+```

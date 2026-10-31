@@ -1,0 +1,38 @@
+{
+  "type": "FeatureCollection",
+  "name": "seismic_shakemap_contour_mmi",
+  "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+  "metadata": {
+    "source": "USGS Earthquake Hazards / NDMA ShakeMap Scenario",
+    "event_name": "Bay of Bengal Deep Seismic Event M6.8",
+    "depth_km": 28.5,
+    "provenance": "SIMULATED",
+    "observed_at": "2026-10-31T01:15:00Z",
+    "license": "Public Domain / CC0"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "mmi": 7.5,
+        "intensity": "VERY_STRONG",
+        "pga_g": 0.42,
+        "hazard_id": "EQ-2026-SEIS-01"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [85.5000, 19.6000],
+            [86.0000, 19.6500],
+            [86.2500, 20.0000],
+            [86.1000, 20.3500],
+            [85.6500, 20.2500],
+            [85.4000, 19.9000],
+            [85.5000, 19.6000]
+          ]
+        ]
+      }
+    }
+  ]
+}

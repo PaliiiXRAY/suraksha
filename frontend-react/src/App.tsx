@@ -1,5 +1,6 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// App.tsx — root application connecting all 4 tabs matching video exactly
+// App.tsx — SURAKSHA Global Shell adhering to FireSense Layout Rhythm
+// Centered max-w-7xl canvas, dual-theme support, and seamless portal navigation.
 // ─────────────────────────────────────────────────────────────────────────────
 import React, { useState, useEffect } from 'react';
 import type { DataMode } from './types';
@@ -21,9 +22,9 @@ export default function App() {
     try {
       const saved = localStorage.getItem('fs-theme');
       if (saved === 'dark' || saved === 'light') return saved;
-      return 'dark';
+      return 'light'; // Default to FireSense's signature clean light theme
     } catch {
-      return 'dark';
+      return 'light';
     }
   });
 
@@ -58,7 +59,7 @@ export default function App() {
   }
 
   return (
-    <div className="flex flex-col h-screen w-screen overflow-hidden bg-[#0a0d14] text-white">
+    <div className="flex flex-col min-h-screen w-full bg-[#f1f5f9] dark:bg-[#0a0d14] text-slate-900 dark:text-white transition-colors">
       {/* Toast Notification Container */}
       <ToastContainer toasts={toasts} onDismiss={dismissToast} />
 
@@ -70,12 +71,14 @@ export default function App() {
         activeView={activeView}
         theme={theme}
         onToggleTheme={toggleTheme}
-        onSimulatePass={() => addToast('🛰️ Satellite pass synchronized: INSAT-3DR & Sentinel-1 SAR imagery acquired over Bay of Bengal (14 radar telemetry feeds ingested)')}
+        onSimulatePass={() =>
+          addToast('🛰️ Satellite pass simulated: Synthetic telemetry ingested across Bay of Bengal & Odisha basin')
+        }
         onSyncReplay={() => addToast('Replay data pack verified and in-sync (Cyclone Fani 2019 · Odisha Coast)')}
       />
 
-      {/* Main Tab View Canvas */}
-      <main className="flex-1 flex flex-col overflow-hidden">
+      {/* Centered Main Tab View Container matching FireSense */}
+      <main className="flex-1 flex flex-col w-full max-w-7xl mx-auto px-6 py-6">
         {activeView === 'intelligence' && (
           <HazardIntelligence onShowToast={msg => addToast(msg, 'info')} />
         )}
@@ -89,6 +92,12 @@ export default function App() {
           <CitizenServices onShowToast={msg => addToast(msg, 'warning')} />
         )}
       </main>
+
+      {/* Subtle FireSense-style Footer */}
+      <footer className="border-t border-slate-200 dark:border-white/10 bg-white dark:bg-[#0b0e14] py-3.5 px-6 text-xs font-mono font-bold text-slate-800 dark:text-slate-200 flex items-center justify-between border-t border-slate-300 dark:border-white/10">
+        <div>SURAKSHA • Multi-Hazard Geospatial Intelligence Platform</div>
+        <div>All Dispatches: SIMULATED • Replay Mode Active</div>
+      </footer>
     </div>
   );
 }

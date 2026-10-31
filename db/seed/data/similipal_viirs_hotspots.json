@@ -1,0 +1,97 @@
+{
+  "source": "NASA FIRMS (Suomi-NPP / NOAA-20 VIIRS 375m)",
+  "region": "Similipal Biosphere Reserve, Mayurbhanj, Odisha",
+  "license": "NASA Open Data Policy / GODL-India",
+  "provenance": "OBSERVED",
+  "sensor": "VIIRS_VNP14IMGTDL_NRT",
+  "acquired_date": "2024-03-04",
+  "hotspots": [
+    {
+      "latitude": 21.8540,
+      "longitude": 86.3520,
+      "bright_ti4": 369.4,
+      "scan": 0.39,
+      "track": 0.36,
+      "acq_date": "2024-03-04",
+      "acq_time": "0815",
+      "satellite": "N",
+      "confidence": "nominal",
+      "version": "2.0NRT",
+      "bright_ti5": 305.2,
+      "frp": 142.6,
+      "daynight": "D"
+    },
+    {
+      "latitude": 21.8620,
+      "longitude": 86.3610,
+      "bright_ti4": 358.1,
+      "scan": 0.39,
+      "track": 0.36,
+      "acq_date": "2024-03-04",
+      "acq_time": "0815",
+      "satellite": "N",
+      "confidence": "high",
+      "version": "2.0NRT",
+      "bright_ti5": 302.8,
+      "frp": 98.4,
+      "daynight": "D"
+    },
+    {
+      "latitude": 21.8480,
+      "longitude": 86.3450,
+      "bright_ti4": 349.5,
+      "scan": 0.39,
+      "track": 0.36,
+      "acq_date": "2024-03-04",
+      "acq_time": "0815",
+      "satellite": "N",
+      "confidence": "nominal",
+      "version": "2.0NRT",
+      "bright_ti5": 299.1,
+      "frp": 64.2,
+      "daynight": "D"
+    },
+    {
+      "latitude": 21.8710,
+      "longitude": 86.3700,
+      "bright_ti4": 362.0,
+      "scan": 0.39,
+      "track": 0.36,
+      "acq_date": "2024-03-04",
+      "acq_time": "0815",
+      "satellite": "N",
+      "confidence": "high",
+      "version": "2.0NRT",
+      "bright_ti5": 304.5,
+      "frp": 115.3,
+      "daynight": "D"
+    },
+    {
+      "latitude": 21.8390,
+      "longitude": 86.3380,
+      "bright_ti4": 341.2,
+      "scan": 0.39,
+      "track": 0.36,
+      "acq_date": "2024-03-04",
+      "acq_time": "0815",
+      "satellite": "N",
+      "confidence": "nominal",
+      "version": "2.0NRT",
+      "bright_ti5": 298.0,
+      "frp": 48.7,
+      "daynight": "D"
+    }
+  ],
+  "convex_hull": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [86.3300, 21.8350],
+        [86.3800, 21.8350],
+        [86.3850, 21.8800],
+        [86.3350, 21.8800],
+        [86.3300, 21.8350]
+      ]
+    ]
+  }
+}

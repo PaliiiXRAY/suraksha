@@ -1,8 +1,11 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// GISOverlayMap — High-fidelity GIS polygon map matching Figma / Screen Recording
-// Renders Odisha coastal faceted polygons, hazard cone, track, and eye marker
+// GISOverlayMap.tsx — Interactive Leaflet + OpenStreetMap GIS Engine
+// Renders Odisha coastal block boundaries, cyclone trajectory, danger swath,
+// strategic assets, and route cutoff status directly on real OSM tiles.
 // ─────────────────────────────────────────────────────────────────────────────
-import React, { useState } from 'react';
+import React, { useEffect, useRef } from 'react';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 interface Props {
   selectedBlockId?: string;
@@ -12,226 +15,271 @@ interface Props {
   highlightBrahmagiri?: boolean;
 }
 
+// Odisha Coastal Blocks Geo-Polygons (Lat, Lng coordinates)
+const BLOCK_POLYGONS: Record<string, { name: string; district: string; score: number; coords: [number, number][] }> = {
+  brahmagiri: {
+    name: 'Brahmagiri',
+    district: 'Puri District',
+    score: 92,
+    coords: [
+      [19.88, 85.65],
+      [19.82, 85.75],
+      [19.74, 85.82],
+      [19.71, 85.75],
+      [19.75, 85.60],
+      [19.85, 85.58],
+    ],
+  },
+  krushnaprasad: {
+    name: 'Krushna Prasad',
+    district: 'Puri District',
+    score: 87,
+    coords: [
+      [19.75, 85.60],
+      [19.71, 85.75],
+      [19.60, 85.55],
+      [19.55, 85.40],
+      [19.65, 85.35],
+      [19.73, 85.48],
+    ],
+  },
+  puri_sadar: {
+    name: 'Puri Sadar',
+    district: 'Puri District',
+    score: 84,
+    coords: [
+      [19.88, 85.75],
+      [19.85, 85.88],
+      [19.79, 85.85],
+      [19.74, 85.82],
+      [19.82, 85.75],
+    ],
+  },
+  astaranga: {
+    name: 'Astaranga',
+    district: 'Puri District',
+    score: 73,
+    coords: [
+      [19.95, 86.15],
+      [19.98, 86.28],
+      [19.88, 86.32],
+      [19.84, 86.20],
+      [19.89, 86.12],
+    ],
+  },
+  erasama: {
+    name: 'Erasama',
+    district: 'Jagatsinghpur District',
+    score: 79,
+    coords: [
+      [20.08, 86.40],
+      [20.18, 86.55],
+      [20.10, 86.68],
+      [20.00, 86.58],
+      [20.02, 86.42],
+    ],
+  },
+};
+
+// Cyclone Track Points (May 2019 Fani Replay)
+const CYCLONE_TRACK: [number, number][] = [
+  [16.5, 84.8],  // Deep Depression
+  [17.8, 85.2],  // Severe Cyclonic Storm
+  [18.9, 85.5],  // Very Severe
+  [19.8, 85.8],  // Landfall near Puri / Brahmagiri
+  [20.3, 85.9],  // Weakening inland
+  [21.1, 86.3],  // Post-landfall
+];
+
 export default function GISOverlayMap({
   selectedBlockId = 'brahmagiri',
   onSelectBlock,
   filter = 'all',
-  windSpeed = 195,
+  windSpeed = 215,
   highlightBrahmagiri = true,
 }: Props) {
-  const [hovered, setHovered] = useState<string | null>(null);
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const mapRef = useRef<L.Map | null>(null);
+  const polygonLayersRef = useRef<Record<string, L.Polygon>>({});
+
+  useEffect(() => {
+    if (!mapContainerRef.current) return;
+
+    // Initialize Leaflet Map centered on Odisha coastline
+    const map = L.map(mapContainerRef.current, {
+      center: [19.85, 85.9],
+      zoom: 8,
+      zoomControl: true,
+      attributionControl: true,
+    });
+    mapRef.current = map;
+
+    // Add standard OpenStreetMap tiles
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    // Threat Swath Cone (Bay of Bengal landfall danger area)
+    const swathCoords: [number, number][] = [
+      [18.2, 85.1],
+      [20.5, 84.5],
+      [20.8, 86.8],
+      [18.8, 87.2],
+    ];
+    L.polygon(swathCoords, {
+      color: '#f97316',
+      weight: 1.5,
+      dashArray: '4, 4',
+      fillColor: '#ef4444',
+      fillOpacity: 0.15,
+    }).addTo(map).bindTooltip('High Storm Surge & Wind Impact Swath', { sticky: true });
+
+    // Draw Cyclone Track Line
+    L.polyline(CYCLONE_TRACK, {
+      color: '#dc2626',
+      weight: 3.5,
+      dashArray: '6, 6',
+      opacity: 0.9,
+    }).addTo(map);
+
+    // Track points
+    CYCLONE_TRACK.forEach((pt, idx) => {
+      const isLandfall = idx === 3;
+      L.circleMarker(pt, {
+        radius: isLandfall ? 9 : 5,
+        color: isLandfall ? '#b91c1c' : '#ea580c',
+        weight: isLandfall ? 3 : 2,
+        fillColor: isLandfall ? '#ef4444' : '#f97316',
+        fillOpacity: 0.9,
+      }).addTo(map).bindTooltip(
+        isLandfall ? `Landfall Window (Puri/Brahmagiri) · Peak Gusts ${windSpeed} km/h` : `Observation ${idx + 1} (Fani)`,
+        { permanent: isLandfall, direction: 'top' }
+      );
+    });
+
+    // Draw Administrative Blocks
+    const polygonLayers: Record<string, L.Polygon> = {};
+    Object.entries(BLOCK_POLYGONS).forEach(([id, block]) => {
+      const isSelected = id === selectedBlockId;
+      const poly = L.polygon(block.coords, {
+        color: isSelected ? '#2563eb' : block.score >= 85 ? '#dc2626' : '#f59e0b',
+        weight: isSelected ? 3 : 1.5,
+        fillColor: isSelected ? '#3b82f6' : block.score >= 85 ? '#ef4444' : '#f59e0b',
+        fillOpacity: isSelected ? 0.45 : 0.25,
+      }).addTo(map);
+
+      poly.bindTooltip(
+        `<strong>${block.name}</strong><br/>${block.district}<br/>Priority Score: <strong>${block.score}/100</strong>`,
+        { sticky: true }
+      );
+
+      poly.on('click', () => {
+        if (onSelectBlock) {
+          onSelectBlock(id);
+        }
+      });
+
+      polygonLayers[id] = poly;
+    });
+    polygonLayersRef.current = polygonLayers;
+
+    // Draw Arterial Routes
+    // NH-316 (Passable: Green)
+    const nh316Coords: [number, number][] = [
+      [20.29, 85.82], // Bhubaneswar
+      [20.12, 85.83], // Pipili
+      [19.81, 85.82], // Puri
+    ];
+    L.polyline(nh316Coords, {
+      color: '#10b981',
+      weight: 4,
+      opacity: 0.85,
+    }).addTo(map).bindTooltip('NH-316: Passable (Emergency Convoy Escort)', { sticky: true });
+
+    // Marine Drive (Cut: Red)
+    const marineDriveCoords: [number, number][] = [
+      [19.80, 85.83], // Puri Beach
+      [19.85, 86.01], // Marine Drive
+      [19.89, 86.11], // Konark
+    ];
+    L.polyline(marineDriveCoords, {
+      color: '#ef4444',
+      weight: 4,
+      dashArray: '4, 4',
+      opacity: 0.85,
+    }).addTo(map).bindTooltip('Puri-Konark Marine Drive: CUT (1.8m Surge Breach at Culvert 14)', { sticky: true });
+
+    // Critical Strategic Asset Markers
+    const assets = [
+      { name: 'Brahmagiri CHC Hospital', lat: 19.80, lng: 85.68, type: 'hospital' },
+      { name: 'Puri Zilla High School Shelter', lat: 19.81, lng: 85.83, type: 'shelter' },
+      { name: 'Pipili Central Relief Supply Depot', lat: 20.11, lng: 85.83, type: 'relief' },
+      { name: 'Marine Drive Culvert 14 (Breach)', lat: 19.84, lng: 85.95, type: 'hazard' },
+    ];
+
+    assets.forEach(a => {
+      const color = a.type === 'hospital' ? '#dc2626' : a.type === 'shelter' ? '#2563eb' : a.type === 'relief' ? '#059669' : '#d97706';
+      L.circleMarker([a.lat, a.lng], {
+        radius: 6,
+        color: '#ffffff',
+        weight: 1.5,
+        fillColor: color,
+        fillOpacity: 1,
+      }).addTo(map).bindTooltip(`<strong>${a.name}</strong><br/>Category: ${a.type.toUpperCase()}`);
+    });
+
+    return () => {
+      map.remove();
+      mapRef.current = null;
+    };
+  }, []);
+
+  // Update selected block styling dynamically when selectedBlockId changes
+  useEffect(() => {
+    Object.entries(polygonLayersRef.current).forEach(([id, poly]) => {
+      const block = BLOCK_POLYGONS[id];
+      if (!block) return;
+      const isSelected = id === selectedBlockId;
+      poly.setStyle({
+        color: isSelected ? '#2563eb' : block.score >= 85 ? '#dc2626' : '#f59e0b',
+        weight: isSelected ? 3.5 : 1.5,
+        fillColor: isSelected ? '#3b82f6' : block.score >= 85 ? '#ef4444' : '#f59e0b',
+        fillOpacity: isSelected ? 0.45 : 0.25,
+      });
+      if (isSelected) {
+        poly.bringToFront();
+      }
+    });
+  }, [selectedBlockId]);
 
   return (
-    <div className="relative w-full h-full min-h-[360px] bg-[#0c0f17] rounded-xl border border-white/10 overflow-hidden flex items-center justify-center select-none">
-      {/* Background grid lines */}
-      <svg className="absolute inset-0 w-full h-full opacity-10 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id="gis-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#38bdf8" strokeWidth="0.8" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#gis-grid)" />
-      </svg>
+    <div className="relative w-full h-full min-h-[380px] bg-slate-100 dark:bg-slate-900 rounded-xl overflow-hidden flex flex-col">
+      {/* Real Interactive Leaflet Container */}
+      <div ref={mapContainerRef} className="w-full h-full min-h-[380px] z-0" />
 
-      {/* Top-left toggles */}
-      <div className="absolute top-3 left-3 z-10 flex items-center gap-2">
-        <span className="px-2.5 py-1 rounded bg-[#161b26]/90 border border-white/15 text-[11px] font-mono text-white/80 flex items-center gap-1.5 shadow-sm">
-          <span className="text-[10px]">👁</span> ODISHA BLOCKS
+      {/* Floating Status Badges on top of Leaflet Map */}
+      <div className="absolute top-3 right-3 z-[1000] flex items-center gap-2 pointer-events-none">
+        <span className="px-2.5 py-1 rounded-lg bg-white/90 dark:bg-[#121622]/90 backdrop-blur-md border border-slate-200 dark:border-white/10 text-[11px] font-mono font-bold text-slate-800 dark:text-white shadow-sm pointer-events-auto">
+          OSM LEAFLET ENGINE
         </span>
-        <span className="px-2.5 py-1 rounded bg-[#161b26]/90 border border-red-500/30 text-[11px] font-mono text-red-400 flex items-center gap-1.5 shadow-sm">
-          <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span> FANI TRACK
+        <span className="px-2.5 py-1 rounded-lg bg-red-600 text-white text-[11px] font-mono font-bold shadow-sm flex items-center gap-1.5 pointer-events-auto">
+          <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+          <span>{windSpeed} KM/H GALE</span>
         </span>
       </div>
 
-      {/* Bottom-left landfall projection info */}
-      <div className="absolute bottom-3 left-3 z-10 bg-[#121620]/90 backdrop-blur-md border border-white/10 rounded-lg p-3 max-w-[240px] shadow-lg">
-        <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-red-400 uppercase tracking-wider mb-0.5">
-          <span>CYCLONE FANI</span>
-          <span className="text-white/40">·</span>
-          <span>REPLAY</span>
+      <div className="absolute bottom-3 left-3 z-[1000] bg-white/95 dark:bg-[#121622]/95 backdrop-blur-md border border-slate-200 dark:border-white/10 rounded-xl p-3 shadow-md max-w-[260px] pointer-events-auto">
+        <div className="text-[10px] font-mono uppercase tracking-wider font-bold text-blue-600 dark:text-blue-400">
+          ODISHA CYCLONE FOOTPRINT
         </div>
-        <div className="text-xs font-semibold text-white">Landfall projection: Puri coast</div>
-        <div className="text-[11px] font-mono text-white/50 mt-0.5">
-          20.19°N, 85.83°E · <span className="text-amber-400 font-bold">{windSpeed} km/h</span>
+        <div className="text-xs font-bold text-slate-900 dark:text-white mt-0.5">
+          Puri & Coastal Blocks Inundation
+        </div>
+        <div className="text-[10px] font-mono text-slate-500 dark:text-white/50 mt-1">
+          Click any block on map to inspect tactical exposure.
         </div>
       </div>
-
-      {/* Bottom-right cache tag */}
-      <div className="absolute bottom-3 right-3 z-10">
-        <span className="px-2 py-0.5 rounded bg-black/40 border border-white/10 text-[9px] font-mono text-white/40 uppercase tracking-widest">
-          LOCAL TILE CACHE
-        </span>
-      </div>
-
-      {/* Main SVG Vector Canvas */}
-      <svg
-        viewBox="0 0 600 420"
-        className="w-full h-full max-w-[700px] max-h-[440px]"
-        preserveAspectRatio="xMidYMid meet"
-      >
-        <defs>
-          {/* Danger zone radial gradient */}
-          <radialGradient id="dangerCone" cx="35%" cy="65%" r="70%">
-            <stop offset="0%" stopColor="#ef4444" stopOpacity="0.45" />
-            <stop offset="50%" stopColor="#f97316" stopOpacity="0.25" />
-            <stop offset="100%" stopColor="#ea580c" stopOpacity="0" />
-          </radialGradient>
-
-          {/* Glowing filter for eye */}
-          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-        </defs>
-
-        {/* Hazard Wind / Surge Danger Swath Sector (expanding eastward into Bay of Bengal) */}
-        <polygon
-          points="250,285 370,240 450,290 340,340 250,285"
-          fill="url(#dangerCone)"
-          stroke="#f87171"
-          strokeWidth="1"
-          strokeDasharray="3 3"
-          opacity="0.8"
-        />
-
-        {/* Cyclone Inflow Radial Fan */}
-        <path
-          d="M 250 285 L 360 210 A 160 160 0 0 1 380 340 Z"
-          fill="#dc2626"
-          fillOpacity="0.28"
-          stroke="#ef4444"
-          strokeWidth="1.2"
-        />
-
-        {/* Faceted Block Polygons (Odisha Coastal Region) */}
-
-        {/* 1. CUTTACK (North inland) */}
-        <polygon
-          points="280,120 340,110 370,165 310,185 270,150"
-          fill={hovered === 'cuttack' ? '#273549' : '#1c2433'}
-          stroke="#38bdf8"
-          strokeWidth="0.8"
-          strokeOpacity="0.4"
-          className="cursor-pointer transition-colors"
-          onMouseEnter={() => setHovered('cuttack')}
-          onMouseLeave={() => setHovered(null)}
-          onClick={() => onSelectBlock?.('cuttack')}
-        />
-        <text x="325" y="145" fill="#94a3b8" fontSize="9" fontFamily="monospace" textAnchor="middle">
-          CUTTACK
-        </text>
-
-        {/* 2. KHORDHA (Central west) */}
-        <polygon
-          points="230,195 285,160 310,185 290,240 235,235"
-          fill={hovered === 'khordha' ? '#263445' : '#17202d'}
-          stroke="#38bdf8"
-          strokeWidth="0.8"
-          strokeOpacity="0.35"
-          className="cursor-pointer transition-colors"
-          onMouseEnter={() => setHovered('khordha')}
-          onMouseLeave={() => setHovered(null)}
-          onClick={() => onSelectBlock?.('khordha')}
-        />
-
-        {/* 3. JAGATSINGHPUR (East coast) */}
-        <polygon
-          points="310,185 370,165 410,210 395,260 330,240"
-          fill={hovered === 'jagatsinghpur' ? '#332722' : '#221e25'}
-          stroke="#fb923c"
-          strokeWidth="0.9"
-          strokeOpacity="0.5"
-          className="cursor-pointer transition-colors"
-          onMouseEnter={() => setHovered('jagatsinghpur')}
-          onMouseLeave={() => setHovered(null)}
-          onClick={() => onSelectBlock?.('jagatsinghpur')}
-        />
-        <text x="365" y="215" fill="#cbd5e1" fontSize="9" fontFamily="monospace" textAnchor="middle">
-          JAGATSINGHPUR
-        </text>
-
-        {/* 4. ERASAMA (Southeast coastal delta) */}
-        <polygon
-          points="395,260 410,210 445,245 425,295 365,280"
-          fill={hovered === 'erasama' ? '#442220' : '#2d1c22'}
-          stroke="#f87171"
-          strokeWidth="1"
-          strokeOpacity="0.6"
-          className="cursor-pointer transition-colors"
-          onMouseEnter={() => setHovered('erasama')}
-          onMouseLeave={() => setHovered(null)}
-          onClick={() => onSelectBlock?.('erasama')}
-        />
-        <text x="410" y="260" fill="#fca5a5" fontSize="8" fontFamily="monospace" textAnchor="middle">
-          ERASAMA
-        </text>
-
-        {/* 5. KRUSHNAPRASAD (Chilika coastal spit) */}
-        <polygon
-          points="200,310 245,290 280,315 255,360 195,340"
-          fill={hovered === 'krushnaprasad' ? '#4a1d1d' : '#33171f'}
-          stroke="#ef4444"
-          strokeWidth="1"
-          strokeOpacity="0.7"
-          className="cursor-pointer transition-colors"
-          onMouseEnter={() => setHovered('krushnaprasad')}
-          onMouseLeave={() => setHovered(null)}
-          onClick={() => onSelectBlock?.('krushnaprasad')}
-        />
-
-        {/* 6. BRAHMAGIRI & PURI (Landfall zone - Prominent red highlight) */}
-        <polygon
-          points="240,245 300,230 330,265 290,315 245,285"
-          fill={highlightBrahmagiri || selectedBlockId === 'brahmagiri' ? '#b91c1c' : '#7f1d1d'}
-          fillOpacity={highlightBrahmagiri ? 0.95 : 0.8}
-          stroke="#fca5a5"
-          strokeWidth={highlightBrahmagiri ? '2.2' : '1.2'}
-          className="cursor-pointer transition-all"
-          filter={highlightBrahmagiri ? 'url(#glow)' : undefined}
-          onMouseEnter={() => setHovered('brahmagiri')}
-          onMouseLeave={() => setHovered(null)}
-          onClick={() => onSelectBlock?.('brahmagiri')}
-        />
-        <text x="282" y="275" fill="#ffffff" fontSize="10" fontWeight="bold" fontFamily="monospace" textAnchor="middle">
-          BRAHMAGIRI
-        </text>
-
-        {/* Historical Fani Track Line (Pink/Red dotted trajectory from Bay of Bengal into Puri) */}
-        <path
-          d="M 120,380 L 175,345 L 215,315 L 250,285 L 295,245 L 345,190 L 390,135"
-          fill="none"
-          stroke="#f43f5e"
-          strokeWidth="2.5"
-          strokeDasharray="4 3"
-        />
-
-        {/* Historical Track Observation Nodes */}
-        {[
-          { x: 120, y: 380, label: '01 May' },
-          { x: 175, y: 345, label: '02 May' },
-          { x: 215, y: 315, label: '03 May 00:00' },
-          { x: 295, y: 245, label: 'Inland' },
-          { x: 345, y: 190, label: 'Cuttack pass' },
-        ].map((pt, i) => (
-          <circle key={i} cx={pt.x} cy={pt.y} r="3" fill="#fda4af" stroke="#9f1239" strokeWidth="1" />
-        ))}
-
-        {/* Eye Landfall Center (Brahmagiri / Puri coast) */}
-        <g transform="translate(250, 285)" className="cursor-pointer">
-          {/* Pulsing ring */}
-          <circle r="14" fill="#ef4444" fillOpacity="0.25">
-            <animate attributeName="r" values="8;18;8" dur="2.5s" repeatCount="indefinite" />
-            <animate attributeName="opacity" values="0.6;0.1;0.6" dur="2.5s" repeatCount="indefinite" />
-          </circle>
-          {/* Eye inner */}
-          <circle r="6" fill="#f43f5e" stroke="#ffffff" strokeWidth="2" />
-          <circle r="2" fill="#ffffff" />
-          {/* Label */}
-          <text x="14" y="4" fill="#fca5a5" fontSize="10" fontWeight="bold" fontFamily="monospace">
-            EYE (LANDFALL)
-          </text>
-        </g>
-      </svg>
     </div>
   );
 }
