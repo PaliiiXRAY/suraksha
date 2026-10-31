@@ -132,11 +132,11 @@ export default function AuthPortal({
 
   const isDark = theme === 'dark';
   const heroBackgroundImage = isDark
-    ? "linear-gradient(to top, rgba(6, 9, 15, 0.96) 0%, rgba(6, 9, 15, 0.65) 30%, rgba(6, 9, 15, 0.15) 55%, rgba(6, 9, 15, 0.80) 100%), url('/media/globe_landing_dark.jpg')"
+    ? "linear-gradient(to top, rgba(5, 8, 22, 0.95) 0%, rgba(5, 8, 22, 0.50) 25%, rgba(5, 8, 22, 0) 50%, rgba(5, 8, 22, 0.65) 100%), url('/media/globe_landing_dark.jpg')"
     : "linear-gradient(to top, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.50) 28%, rgba(0, 0, 0, 0) 55%, rgba(15, 23, 42, 0.65) 100%), url('/media/globe_landing_light.jpg')";
 
   return (
-    <div className="min-h-screen w-full flex flex-col lg:flex-row bg-[#f4f7fb] dark:bg-[#080b11] text-slate-900 dark:text-white relative transition-colors duration-300">
+    <div className="min-h-screen w-full flex flex-col lg:flex-row bg-[#f4f7fb] dark:bg-[#050816] text-slate-900 dark:text-white relative transition-colors duration-300">
       {/* ─────────────────────────────────────────────────────────────────────────
           LEFT COLUMN (50%): 3D Globe with Atmosphere & Dual Theme Imagery
           ───────────────────────────────────────────────────────────────────────── */}
@@ -156,6 +156,9 @@ export default function AuthPortal({
           <div className="flex flex-col">
             <span className="font-extrabold text-base tracking-wider text-white uppercase leading-none">
               SURAKSHA
+            </span>
+            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 mt-0.5">
+              DECISION INTELLIGENCE
             </span>
           </div>
         </div>
@@ -179,12 +182,12 @@ export default function AuthPortal({
       {/* ─────────────────────────────────────────────────────────────────────────
           RIGHT COLUMN (50%): Clean Authorized Access RBAC Gateway Form
           ───────────────────────────────────────────────────────────────────────── */}
-      <div className="lg:w-1/2 flex-1 flex flex-col justify-center items-center p-6 sm:p-12 bg-[#f4f7fb] dark:bg-[#0c1017] transition-colors relative">
+      <div className="lg:w-1/2 flex-1 flex flex-col justify-center items-center p-6 sm:p-12 bg-[#f4f7fb] dark:bg-[#050816] transition-colors relative">
         {/* Top-Right Theme Toggle Button matching Target */}
         {onToggleTheme && (
           <button
             onClick={onToggleTheme}
-            className="absolute top-6 right-6 w-9 h-9 rounded-full bg-white dark:bg-[#151a26] border border-slate-200 dark:border-white/10 shadow-sm flex items-center justify-center text-slate-700 dark:text-slate-300 hover:scale-105 transition-all"
+            className="absolute top-6 right-6 w-9 h-9 rounded-full bg-white dark:bg-[#0d1424] border border-slate-200 dark:border-white/10 shadow-sm flex items-center justify-center text-slate-700 dark:text-slate-300 hover:scale-105 transition-all"
             title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
           >
             {theme === 'dark' ? <Sun size={15} className="text-amber-400" /> : <Moon size={15} />}
@@ -204,12 +207,12 @@ export default function AuthPortal({
                   SURAKSHA
                 </span>
                 <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                  OPERATION INTELLIGENCE
+                  DECISION INTELLIGENCE
                 </span>
               </div>
             </div>
 
-            <span className="px-2.5 py-1 rounded text-[11px] font-mono font-bold tracking-wider bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-white/15 uppercase shadow-xs">
+            <span className="px-2.5 py-1 rounded text-[11px] font-mono font-bold tracking-wider bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-[#232d46] uppercase shadow-xs">
               RBAC GATEWAY
             </span>
           </div>
@@ -244,7 +247,7 @@ export default function AuthPortal({
                     className={`py-1.5 px-2 rounded-lg text-[11px] font-mono font-bold transition-all border text-center truncate ${
                       isSelected
                         ? 'bg-blue-600 text-white border-blue-600 shadow-xs'
-                        : 'bg-white dark:bg-[#121622] border-slate-300 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-slate-400'
+                        : 'bg-white dark:bg-[#141b2d] border-slate-300 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-slate-400'
                     }`}
                     title={cfg.dropdownLabel}
                   >
@@ -268,7 +271,7 @@ export default function AuthPortal({
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 placeholder="analyst@suraksha.gov.in"
-                className="w-full bg-white dark:bg-[#121622] border border-slate-300 dark:border-white/15 rounded-lg px-3.5 py-2.5 text-xs font-mono text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-[#f4511e] focus:ring-1 focus:ring-[#f4511e] shadow-xs transition-colors"
+                className="w-full bg-white dark:bg-[#141b2d] border border-slate-300 dark:border-[#232d46] rounded-lg px-3.5 py-2.5 text-xs font-mono text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-[#f4511e] focus:ring-1 focus:ring-[#f4511e] shadow-xs transition-colors"
               />
             </div>
 
@@ -282,7 +285,7 @@ export default function AuthPortal({
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 placeholder="Enter demo password"
-                className="w-full bg-white dark:bg-[#121622] border border-slate-300 dark:border-white/15 rounded-lg px-3.5 py-2.5 text-xs font-mono text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-[#f4511e] focus:ring-1 focus:ring-[#f4511e] shadow-xs transition-colors"
+                className="w-full bg-white dark:bg-[#141b2d] border border-slate-300 dark:border-[#232d46] rounded-lg px-3.5 py-2.5 text-xs font-mono text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-[#f4511e] focus:ring-1 focus:ring-[#f4511e] shadow-xs transition-colors"
               />
             </div>
 
@@ -294,7 +297,7 @@ export default function AuthPortal({
               <select
                 value={selectedRoleKey}
                 onChange={e => handleRoleChange(e.target.value)}
-                className="w-full bg-white dark:bg-[#121622] border border-slate-300 dark:border-white/15 rounded-lg px-3.5 py-2.5 text-xs font-mono text-slate-900 dark:text-white focus:outline-none focus:border-[#f4511e] focus:ring-1 focus:ring-[#f4511e] shadow-xs transition-colors cursor-pointer"
+                className="w-full bg-white dark:bg-[#141b2d] border border-slate-300 dark:border-[#232d46] rounded-lg px-3.5 py-2.5 text-xs font-mono text-slate-900 dark:text-white focus:outline-none focus:border-[#f4511e] focus:ring-1 focus:ring-[#f4511e] shadow-xs transition-colors cursor-pointer"
               >
                 {Object.entries(ROLES).map(([k, cfg]) => (
                   <option key={k} value={k}>
