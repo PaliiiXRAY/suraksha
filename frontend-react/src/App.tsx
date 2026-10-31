@@ -4,7 +4,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import React, { useState, useEffect } from 'react';
 import type { DataMode, AuthUser, ViewId } from './types';
-import { ROLE_PERMISSIONS } from './types';
+import { ROLE_PERMISSIONS, getAuthorizedRoleForEmail } from './types';
 import AuthPortal from './pages/AuthPortal';
 import TopBar from './components/layout/TopBar';
 import ToastContainer, { ToastMessage } from './components/ui/Toast';
@@ -23,7 +23,15 @@ export default function App() {
   const [user, setUser] = useState<AuthUser | null>(() => {
     try {
       const saved = localStorage.getItem('suraksha_auth_user');
-      return saved ? JSON.parse(saved) : null;
+      if (!saved) return null;
+      const parsed = JSON.parse(saved);
+      // Hard Gate: Immediately purge any stale or unauthorized session
+      const check = getAuthorizedRoleForEmail(parsed?.email || '');
+      if (!check.authorized) {
+        localStorage.removeItem('suraksha_auth_user');
+        return null;
+      }
+      return parsed;
     } catch {
       return null;
     }
@@ -52,9 +60,14 @@ export default function App() {
     } catch {}
   }, [theme]);
 
-  // Strict RBAC Guard: If active view is not authorized for current user role, redirect immediately
+  // Strict RBAC Guard: Verify both email authorization and view permissions
   useEffect(() => {
     if (user) {
+      const check = getAuthorizedRoleForEmail(user.email);
+      if (!check.authorized) {
+        handleSignOut();
+        return;
+      }
       const allowed = ROLE_PERMISSIONS[user.role] || ['citizen'];
       if (!allowed.includes(activeView)) {
         setActiveView(allowed[0]);

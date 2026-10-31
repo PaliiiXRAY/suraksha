@@ -58,6 +58,109 @@ export interface AuthUser {
   token?: string;
 }
 
+export interface EmailAuthCheck {
+  authorized: boolean;
+  role?: UserRole;
+  view?: ViewId;
+  roleKey?: 'intelligence' | 'command' | 'operations' | 'public';
+  name?: string;
+  org?: string;
+  error?: string;
+}
+
+/**
+ * Authoritative Email-to-Role & Portal Validator.
+ * ONLY the following domains/emails are authorized to authenticate:
+ * - 3amcommits.admin.in           -> Hazard Intelligence (Analyst)
+ * - mosac.gov.in / virms.gov.in  -> Government Portal (Authority)
+ * - responder@ndrf.gov.in         -> Response Portal (Responder)
+ * - citizen@suraksha.public       -> Public Portal (Civilian)
+ * Any other email is strictly rejected and cannot authenticate.
+ */
+export function getAuthorizedRoleForEmail(rawEmail: string): EmailAuthCheck {
+  const norm = (rawEmail || '').trim().toLowerCase();
+  if (!norm) {
+    return { authorized: false, error: 'Please enter your authorized email identifier.' };
+  }
+
+  // 1. Hazard Intelligence (Strictly 3amcommits.admin.in)
+  if (
+    norm === '3amcommits.admin.in' ||
+    norm.endsWith('@3amcommits.admin.in') ||
+    norm.includes('3amcommits.admin.in')
+  ) {
+    return {
+      authorized: true,
+      role: 'analyst',
+      view: 'intelligence',
+      roleKey: 'intelligence',
+      name: 'Lead Intel Analyst (3amcommits)',
+      org: 'NDMA / 3amcommits Earth Observation Division',
+    };
+  }
+
+  // 2. Government Command (Strictly mosac.gov.in or virms.gov.in)
+  if (
+    norm === 'mosac.gov.in' ||
+    norm === 'virms.gov.in' ||
+    norm.endsWith('@mosac.gov.in') ||
+    norm.endsWith('@virms.gov.in') ||
+    norm.endsWith('@mosdac.gov.in') ||
+    norm.includes('mosac.gov.in') ||
+    norm.includes('virms.gov.in') ||
+    norm.includes('mosdac.gov.in')
+  ) {
+    return {
+      authorized: true,
+      role: 'authority',
+      view: 'command',
+      roleKey: 'command',
+      name: 'State Disaster Authority (MOSAC / VIRMS)',
+      org: 'State Emergency Operations Center (SEOC)',
+    };
+  }
+
+  // 3. Response Operations (Strictly responder@ndrf.gov.in)
+  if (
+    norm === 'responder@ndrf.gov.in' ||
+    norm.endsWith('@ndrf.gov.in') ||
+    norm.includes('ndrf.gov.in')
+  ) {
+    return {
+      authorized: true,
+      role: 'responder',
+      view: 'responder',
+      roleKey: 'operations',
+      name: 'Insp. Rajesh Nayak (NDRF Bn 03)',
+      org: 'NDRF 03 Battalion Mundali',
+    };
+  }
+
+  // 4. Public Portal (Strictly official civilian emergency access)
+  if (
+    norm === 'citizen@suraksha.public' ||
+    norm.endsWith('@suraksha.public') ||
+    norm === 'public@suraksha.gov.in' ||
+    norm === 'citizen.odisha.gov.in' ||
+    norm === 'public.odisha.gov.in'
+  ) {
+    return {
+      authorized: true,
+      role: 'civilian',
+      view: 'citizen',
+      roleKey: 'public',
+      name: 'Civilian Resident (Public Safety)',
+      org: 'Public Safety & Evacuation Portal',
+    };
+  }
+
+  // ANY OTHER EMAIL IS STRICTLY REJECTED
+  return {
+    authorized: false,
+    error: `Access Denied: '${norm}' is not an authorized credential. Only official disaster response emails (3amcommits.admin.in, mosac.gov.in, virms.gov.in, responder@ndrf.gov.in, citizen@suraksha.public) can authenticate.`,
+  };
+}
+
 // ─── Cyclone / Hazard ────────────────────────────────────────────────────────
 
 export interface CycloneTrackPoint {

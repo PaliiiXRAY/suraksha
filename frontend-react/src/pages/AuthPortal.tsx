@@ -1,15 +1,17 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // AuthPortal.tsx — SURAKSHA Role-Based Access Control (RBAC) Landing & Gateway
 // Faithfully matching the target reference (media_1793405536805_e57aeb25.png & 5b844e9c.png)
-// Strict Email-Based Authorization Matrix:
-//   - Intelligence Portal : strictly '3amcommits.admin.in'
-//   - Government Portal   : strictly 'mosac.gov.in' or 'virms.gov.in'
-//   - Response Portal     : strictly 'responder@ndrf.gov.in'
-//   - Public Portal       : open to ANY email ID
+// STRICT AUTHORIZATION ENFORCEMENT:
+//   - Hazard Intelligence : ONLY '3amcommits.admin.in'
+//   - Government Portal   : ONLY 'mosac.gov.in' or 'virms.gov.in'
+//   - Response Portal     : ONLY 'responder@ndrf.gov.in'
+//   - Public Portal       : ONLY 'citizen@suraksha.public' (or emergency public bypass)
+//   - ANY OTHER EMAIL     : STRICTLY REJECTED — CANNOT AUTHENTICATE.
 // ─────────────────────────────────────────────────────────────────────────────
 import React, { useState, useMemo } from 'react';
-import { ShieldCheck, Moon, Sun, Sparkles, CheckCircle2, AlertTriangle, Lock } from 'lucide-react';
+import { ShieldCheck, Moon, Sun, Sparkles, CheckCircle2, AlertTriangle, Lock, ShieldAlert } from 'lucide-react';
 import type { AuthUser, UserRole } from '../types';
+import { getAuthorizedRoleForEmail } from '../types';
 
 interface Props {
   onLoginSuccess: (user: AuthUser, targetView: 'intelligence' | 'command' | 'responder' | 'citizen') => void;
@@ -34,7 +36,7 @@ const ROLES: Record<string, RoleConfig> = {
     email: '3amcommits.admin.in',
     role: 'analyst',
     name: 'Lead Intel Analyst (3amcommits)',
-    org: 'NDMA / 3amcommits Intel Division',
+    org: 'NDMA / 3amcommits Earth Observation Division',
     dropdownLabel: 'Intelligence — Analyst workspace (3amcommits.admin.in)',
     targetView: 'intelligence',
     policyLabel: 'Strictly 3amcommits.admin.in',
@@ -62,75 +64,11 @@ const ROLES: Record<string, RoleConfig> = {
     role: 'civilian',
     name: 'Civilian Resident (Public Safety)',
     org: 'Public Safety & Evacuation Portal',
-    dropdownLabel: 'Public — Citizen safety (Any email ID)',
+    dropdownLabel: 'Public — Citizen safety (citizen@suraksha.public)',
     targetView: 'citizen',
-    policyLabel: 'Universal access (Any email allowed)',
+    policyLabel: 'Public Emergency Access',
   },
 };
-
-/**
- * Validates whether the given email meets the strict role authorization policy.
- */
-export function validateEmailForRole(email: string, roleKey: string): { valid: boolean; error?: string } {
-  const norm = email.trim().toLowerCase();
-  if (!norm) {
-    return { valid: false, error: 'Please enter an operator email or identifier.' };
-  }
-
-  if (roleKey === 'intelligence') {
-    const isAllowed =
-      norm === '3amcommits.admin.in' ||
-      norm.endsWith('@3amcommits.admin.in') ||
-      norm.includes('3amcommits.admin.in');
-    if (!isAllowed) {
-      return {
-        valid: false,
-        error: "Access Denied: Intelligence Portal can ONLY be accessed by '3amcommits.admin.in'.",
-      };
-    }
-    return { valid: true };
-  }
-
-  if (roleKey === 'command') {
-    const isAllowed =
-      norm === 'mosac.gov.in' ||
-      norm === 'virms.gov.in' ||
-      norm.endsWith('@mosac.gov.in') ||
-      norm.endsWith('@virms.gov.in') ||
-      norm.endsWith('@mosdac.gov.in') ||
-      norm.includes('mosac.gov.in') ||
-      norm.includes('virms.gov.in') ||
-      norm.includes('mosdac.gov.in');
-    if (!isAllowed) {
-      return {
-        valid: false,
-        error: "Access Denied: Government Portal can ONLY be accessed using 'mosac.gov.in' or 'virms.gov.in' emails.",
-      };
-    }
-    return { valid: true };
-  }
-
-  if (roleKey === 'operations') {
-    const isAllowed =
-      norm === 'responder@ndrf.gov.in' ||
-      norm.endsWith('@ndrf.gov.in') ||
-      norm.includes('responder@ndrf.gov.in');
-    if (!isAllowed) {
-      return {
-        valid: false,
-        error: "Access Denied: Response Portal can ONLY be accessed using 'responder@ndrf.gov.in'.",
-      };
-    }
-    return { valid: true };
-  }
-
-  // Public portal can be accessed using ANY email id
-  if (roleKey === 'public') {
-    return { valid: true };
-  }
-
-  return { valid: true };
-}
 
 export default function AuthPortal({
   onLoginSuccess,
@@ -145,10 +83,10 @@ export default function AuthPortal({
   const [loading, setLoading] = useState<boolean>(false);
   const [authError, setAuthError] = useState<string | null>(null);
 
-  // Live evaluation of email validity against current selected role
-  const validation = useMemo(() => {
-    return validateEmailForRole(email, selectedRoleKey);
-  }, [email, selectedRoleKey]);
+  // Live validation of email against the strict authorization matrix
+  const authCheck = useMemo(() => {
+    return getAuthorizedRoleForEmail(email);
+  }, [email]);
 
   function handleRoleChange(key: string) {
     setSelectedRoleKey(key);
@@ -163,23 +101,35 @@ export default function AuthPortal({
   function handleEmailChange(val: string) {
     setEmail(val);
     setAuthError(null);
+    // Auto-align selected role when an authorized email is typed
+    const check = getAuthorizedRoleForEmail(val);
+    if (check.authorized && check.roleKey && check.roleKey !== selectedRoleKey) {
+      setSelectedRoleKey(check.roleKey);
+    }
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    // 1. Strict Gate: Validate email before any auth attempt
-    const check = validateEmailForRole(email, selectedRoleKey);
-    if (!check.valid) {
-      setAuthError(check.error || 'Unauthorized email for selected portal.');
-      onShowToast(check.error || 'Unauthorized email', 'warning');
+    // 1. HARD GATE: Strictly block any email that is not in the authorized whitelist
+    const check = getAuthorizedRoleForEmail(email);
+    if (!check.authorized) {
+      setAuthError(check.error || 'Access Denied: Unrecognized email identifier.');
+      onShowToast(check.error || 'Access Denied: Email not authorized', 'warning');
+      return;
+    }
+
+    // 2. Ensure the email aligns with the requested role
+    const cfg = ROLES[selectedRoleKey] || ROLES.intelligence;
+    if (check.role && check.role !== cfg.role) {
+      const mismatchMsg = `Access Denied: '${email.trim()}' is authorized for ${check.role.toUpperCase()} role, not ${cfg.role.toUpperCase()}.`;
+      setAuthError(mismatchMsg);
+      onShowToast(mismatchMsg, 'warning');
       return;
     }
 
     setLoading(true);
     setAuthError(null);
-
-    const cfg = ROLES[selectedRoleKey] || ROLES.intelligence;
 
     try {
       const response = await fetch('/auth/login', {
@@ -194,34 +144,34 @@ export default function AuthPortal({
       if (response.ok) {
         const data = await response.json();
         const authUser: AuthUser = {
-          id: data.user?.id || `usr_${cfg.role}_01`,
+          id: data.user?.id || `usr_${check.role}_01`,
           email: data.user?.email || email.trim(),
-          full_name: data.user?.full_name || cfg.name,
-          role: (data.user?.role as UserRole) || cfg.role,
-          org: cfg.org,
+          full_name: data.user?.full_name || check.name || cfg.name,
+          role: (data.user?.role as UserRole) || check.role || cfg.role,
+          org: check.org || cfg.org,
           token: data.access_token,
         };
         onShowToast(`Authenticated: ${authUser.full_name} [${authUser.role.toUpperCase()}]`, 'success');
-        onLoginSuccess(authUser, cfg.targetView);
+        onLoginSuccess(authUser, check.view || cfg.targetView);
         return;
       }
     } catch {
       // Offline fallback
     }
 
-    // Reliable Local/Demo Fallback for Instant Evaluation
+    // Reliable Local/Demo Fallback for verified authorized credentials
     setTimeout(() => {
       setLoading(false);
       const authUser: AuthUser = {
-        id: `usr_${cfg.role}_demo`,
-        email: email.trim() || cfg.email,
-        full_name: cfg.name,
-        role: cfg.role,
-        org: cfg.org,
-        token: `mock_jwt_${cfg.role}_${Date.now()}`,
+        id: `usr_${check.role || cfg.role}_demo`,
+        email: email.trim(),
+        full_name: check.name || cfg.name,
+        role: check.role || cfg.role,
+        org: check.org || cfg.org,
+        token: `mock_jwt_${check.role || cfg.role}_${Date.now()}`,
       };
-      onShowToast(`Authenticated: ${cfg.name} [Role: ${cfg.role.toUpperCase()}]`, 'success');
-      onLoginSuccess(authUser, cfg.targetView);
+      onShowToast(`Authenticated: ${authUser.full_name} [${authUser.role.toUpperCase()}]`, 'success');
+      onLoginSuccess(authUser, check.view || cfg.targetView);
     }, 300);
   }
 
@@ -318,16 +268,16 @@ export default function AuthPortal({
               Authorized Access
             </h2>
             <p className="text-xs font-normal text-slate-600 dark:text-slate-300 leading-relaxed">
-              Enter your operational credentials. Role permissions are enforced by verified email domain.
+              Enter your official emergency credentials. Other emails will be rejected by policy.
             </p>
           </div>
 
-          {/* Quick Demo Role Selector Pills for 1-Click Evaluation */}
+          {/* Authorized 1-Click Role Presets */}
           <div className="space-y-1.5 pt-1">
             <div className="flex items-center justify-between text-[11px] font-mono font-bold text-slate-600 dark:text-slate-400">
               <span className="flex items-center gap-1 text-blue-600 dark:text-blue-400">
                 <Sparkles size={12} />
-                <span>Authorized Role Presets:</span>
+                <span>Authorized Credentials:</span>
               </span>
               <span className="text-slate-500">1-click fill</span>
             </div>
@@ -356,7 +306,7 @@ export default function AuthPortal({
           {/* Secondary Quick Email Chips for Government Command (mosac.gov.in / virms.gov.in) */}
           {selectedRoleKey === 'command' && (
             <div className="flex items-center gap-2 text-[11px] font-mono text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-[#101524] p-2 rounded-lg border border-slate-200 dark:border-white/10">
-              <span className="font-bold">Agency:</span>
+              <span className="font-bold">Government Domain:</span>
               <button
                 type="button"
                 onClick={() => handleEmailChange('commander@mosac.gov.in')}
@@ -401,23 +351,23 @@ export default function AuthPortal({
                 onChange={e => handleEmailChange(e.target.value)}
                 placeholder={activeCfg.email}
                 className={`w-full bg-white dark:bg-[#141b2d] border rounded-lg px-3.5 py-2.5 text-xs font-mono text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none shadow-xs transition-colors ${
-                  validation.valid
+                  authCheck.authorized
                     ? 'border-slate-300 dark:border-[#232d46] focus:border-[#f4511e] focus:ring-1 focus:ring-[#f4511e]'
                     : 'border-rose-400 dark:border-rose-500 focus:border-rose-500 focus:ring-1 focus:ring-rose-500'
                 }`}
               />
 
-              {/* Dynamic Live Domain Validation Status */}
+              {/* Live Domain Authorization Badge */}
               <div className="pt-0.5">
-                {validation.valid ? (
+                {authCheck.authorized ? (
                   <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold text-emerald-700 dark:text-emerald-400">
-                    <CheckCircle2 size={12} />
-                    <span>Authorized credential for {selectedRoleKey.toUpperCase()}</span>
+                    <CheckCircle2 size={13} className="text-emerald-600" />
+                    <span>Authorized credential: {authCheck.name}</span>
                   </div>
                 ) : (
-                  <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold text-rose-700 dark:text-rose-400">
-                    <AlertTriangle size={12} />
-                    <span>{validation.error}</span>
+                  <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 p-2 rounded-lg border border-rose-200 dark:border-rose-900/60 mt-1">
+                    <ShieldAlert size={14} className="text-rose-600 flex-shrink-0" />
+                    <span>{authCheck.error}</span>
                   </div>
                 )}
               </div>
@@ -457,8 +407,8 @@ export default function AuthPortal({
 
             {/* Prominent Error Alert Banner if validation fails */}
             {authError && (
-              <div className="p-3 rounded-lg bg-rose-50 dark:bg-rose-950/40 border border-rose-300 dark:border-rose-800 text-xs font-mono font-bold text-rose-900 dark:text-rose-200 flex items-start gap-2 shadow-xs">
-                <Lock size={14} className="mt-0.5 flex-shrink-0 text-rose-600" />
+              <div className="p-3 rounded-lg bg-rose-50 dark:bg-rose-950/60 border border-rose-300 dark:border-rose-800 text-xs font-mono font-bold text-rose-900 dark:text-rose-200 flex items-start gap-2 shadow-xs">
+                <Lock size={15} className="mt-0.5 flex-shrink-0 text-rose-600" />
                 <span>{authError}</span>
               </div>
             )}
@@ -467,8 +417,12 @@ export default function AuthPortal({
             <div className="pt-1.5">
               <button
                 type="submit"
-                disabled={loading}
-                className="w-full py-3 px-4 rounded-lg bg-[#f4511e] hover:bg-[#e04513] text-white font-mono text-xs font-bold shadow-md flex items-center justify-center gap-1.5 transition-all active:scale-[0.99] disabled:opacity-50 cursor-pointer"
+                disabled={loading || !authCheck.authorized}
+                className={`w-full py-3 px-4 rounded-lg font-mono text-xs font-bold shadow-md flex items-center justify-center gap-1.5 transition-all ${
+                  authCheck.authorized
+                    ? 'bg-[#f4511e] hover:bg-[#e04513] text-white active:scale-[0.99] cursor-pointer'
+                    : 'bg-slate-300 dark:bg-slate-800 text-slate-500 dark:text-slate-500 cursor-not-allowed opacity-60'
+                }`}
               >
                 <span>{loading ? 'Authenticating...' : 'Authenticate & Launch Portal'}</span>
                 <span className="text-sm">›</span>
@@ -486,7 +440,7 @@ export default function AuthPortal({
               <button
                 type="button"
                 onClick={onPublicBypass}
-                className="font-bold text-[#f4511e] hover:underline"
+                className="font-bold text-[#f4511e] hover:underline cursor-pointer"
               >
                 Citizen safety portal
               </button>
