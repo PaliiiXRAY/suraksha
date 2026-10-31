@@ -16,6 +16,18 @@
       "dest": "/static/$1"
     },
     {
+      "src": "/assets/(.*)",
+      "dest": "/static/assets/$1"
+    },
+    {
+      "src": "/media/(.*)",
+      "dest": "/static/media/$1"
+    },
+    {
+      "src": "/landing",
+      "dest": "/static/landing.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "/api/index.py"
     }
